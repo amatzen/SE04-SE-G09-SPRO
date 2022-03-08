@@ -6,11 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="SE04-SE-G09-SPRO" />
+        <module name="Core" />
+        <module name="Common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Common" target="1.5" />
       <module name="Core" target="1.5" />
+      <module name="SE04-SE-G09-SPRO" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
