@@ -48,6 +48,7 @@
     <module>poms</module>
     <module>provision</module>
     <module>Core</module>
+    <module>Common</module>
   </modules>
 
   <build>
