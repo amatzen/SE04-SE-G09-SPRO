@@ -1,0 +1,3 @@
+[submodule "demos/pathfindings"]
+	path = demos/pathfindings
+	url = git@github.com:amatzen/SE04-SE-G09-SPRO-PFDEMO.git
