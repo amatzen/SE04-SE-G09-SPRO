@@ -11,7 +11,6 @@ public class Game implements ApplicationListener {
     }
 
     public void init() {
-        System.out.println("Game.init()");
         LwjglApplicationConfiguration cfg =
                 new LwjglApplicationConfiguration();
         cfg.title = "GTG";
