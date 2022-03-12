@@ -22,4 +22,15 @@
    | with <optional>true</optional>
   -->
 
+  <!--
+   | The following dependency is responsible for automatically generating component and metadata descriptors
+  -->
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.scr</artifactId>
+      <version>1.8.0</version>
+    </dependency>
+  </dependencies>
+
 </project>

@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>dk.sdu.swe.gtg.build</groupId>
-        <artifactId>wrapper-bundle-settings</artifactId>
+        <artifactId>shared-plugin-settings</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
