@@ -1,6 +1,6 @@
 
 # IntelliJ
-.idea
+.idea/
 out/
 
 ### Java ###
@@ -29,4 +29,5 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-/gtg/runner
+# OSGi bundle build folder
+/gtg/runner/

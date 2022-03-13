@@ -1,10 +1,10 @@
-package dk.sdu.mmi.swe.gtg.common.internal;
+package dk.sdu.mmmi.swe.gtg.common.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import dk.sdu.mmi.swe.gtg.common.ExampleService;
+import dk.sdu.mmmi.swe.gtg.common.ExampleService;
 
 /**
  * Internal implementation of our example OSGi service

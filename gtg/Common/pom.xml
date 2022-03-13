@@ -9,8 +9,8 @@
   </parent>
 
   <properties>
-    <bundle.symbolicName>dk.sdu.mmi.swe.gtg.common</bundle.symbolicName>
-    <bundle.namespace>dk.sdu.mmi.swe.gtg.common</bundle.namespace>
+    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.common</bundle.symbolicName>
+    <bundle.namespace>dk.sdu.mmmi.swe.gtg.common</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>

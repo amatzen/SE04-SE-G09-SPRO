@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>dk.sdu.swe.gtg.build</groupId>
+        <artifactId>wrapper-bundle-settings</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>libgdxwrapper-bundle-settings</artifactId>
+
+    <name>LibGDX wrapper</name>
+
+    <packaging>pom</packaging>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!--
+             | example additional resource entries, useful when building Eclipse RCP applications
+            -->
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Export-Package>com.badlogic.gdx.*</Export-Package>
+                        <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,*</Import-Package>
+                        <Embed-Dependency>*</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <_include>osgi.bnd</_include>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

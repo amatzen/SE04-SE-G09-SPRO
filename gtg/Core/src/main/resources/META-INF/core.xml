@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.swe.gtg.core.internal.main.Game">
+    <implementation class="dk.sdu.mmmi.swe.gtg.core.internal.main.Game"/>
+</component>

@@ -1,4 +1,4 @@
-package dk.sdu.mmi.swe.gtg.core;
+package dk.sdu.mmmi.swe.gtg.common;
 
 /**
  * Public API representing an example OSGi service
