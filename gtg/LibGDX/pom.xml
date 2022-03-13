@@ -12,6 +12,7 @@
     <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.libgdx</bundle.symbolicName>
     <bundle.namespace>dk.sdu.mmmi.swe.gtg.libgdx</bundle.namespace>
     <libGDX.version>1.10.0</libGDX.version>
+    <wrapped.version>${libGDX.version}</wrapped.version>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
