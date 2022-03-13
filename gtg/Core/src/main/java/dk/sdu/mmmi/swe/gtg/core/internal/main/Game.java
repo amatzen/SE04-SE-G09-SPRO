@@ -99,7 +99,7 @@ public class Game implements ApplicationListener {
         entityProcessors.forEach(entityProcessor -> {
             entityProcessor.beforeProcessing(gameData, world);
 
-            Class<? extends Entity> entityType = (Class<? extends Entity>) ((ParameterizedType) entityProcessor.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<? extends Entity> entityType = entityProcessor.getEntityType();
 
             Collection<Entity> entities;
             if (entityType.equals(Entity.class)) {
