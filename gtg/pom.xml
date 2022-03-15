@@ -50,6 +50,7 @@
     <module>Core</module>
     <module>Common</module>
     <module>LibGDX</module>
+    <module>Vehicle</module>
   </modules>
 
   <build>
