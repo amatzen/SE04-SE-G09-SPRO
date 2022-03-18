@@ -40,9 +40,9 @@ public class Game implements ApplicationListener {
     public void init() {
         LwjglApplicationConfiguration cfg =
                 new LwjglApplicationConfiguration();
-        cfg.title = "GTG";
-        cfg.width = 500;
-        cfg.height = 400;
+        cfg.title = "Grand Theft Gørding";
+        cfg.width = 1600;
+        cfg.height = 900;
         cfg.resizable = false;
 
         new LwjglApplication(this, cfg);
