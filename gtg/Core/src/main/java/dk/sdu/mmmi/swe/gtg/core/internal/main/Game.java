@@ -97,28 +97,11 @@ public class Game implements ApplicationListener {
 
     private void update() {
         entityProcessors.forEach(entityProcessor -> {
-            entityProcessor.beforeProcessing(gameData, world);
-
-            Class<? extends Entity> entityType = entityProcessor.getEntityType();
-
-            Collection<Entity> entities;
-            if (entityType.equals(Entity.class)) {
-                entities = world.getEntities();
-            } else {
-                entities = world.getEntities(entityType);
-            }
-
-            entities.forEach(entity -> {
-                entityProcessor.processEntity(entity, gameData.getDelta());
-            });
-
-            entityProcessor.afterProcessing(gameData, world);
+            entityProcessor.process(gameData, world);
         });
 
         entityPostProcessors.forEach(entityPostProcessor -> {
-            world.getEntities().forEach(entity -> {
-                entityPostProcessor.processEntity(entity, gameData.getDelta());
-            });
+            entityPostProcessor.process(gameData, world);
         });
     }
 
