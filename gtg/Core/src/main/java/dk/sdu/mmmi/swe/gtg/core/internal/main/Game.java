@@ -15,7 +15,6 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -96,11 +95,11 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
-        entityProcessors.forEach(entityProcessor -> {
+        getEntityProcessingServices().forEach(entityProcessor -> {
             entityProcessor.process(gameData, world);
         });
 
-        entityPostProcessors.forEach(entityPostProcessor -> {
+        getPostEntityProcessingServices().forEach(entityPostProcessor -> {
             entityPostProcessor.process(gameData, world);
         });
     }
