@@ -44,7 +44,7 @@
 
   <packaging>pom</packaging>
 
-  <modules>
+ <modules>
     <module>poms</module>
     <module>provision</module>
     <module>Core</module>
@@ -52,6 +52,7 @@
     <module>LibGDX</module>
     <module>Vehicle</module>
     <module>WorldManager</module>
+    <module>CommonShapeFactory</module>
   </modules>
 
   <build>
