@@ -51,7 +51,6 @@
     <module>Common</module>
     <module>LibGDX</module>
     <module>Vehicle</module>
-      <module>Collision</module>
   </modules>
 
   <build>
