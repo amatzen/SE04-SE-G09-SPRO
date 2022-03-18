@@ -2,11 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <parent>
-    <relativePath>../poms/compiled/</relativePath>
+    <relativePath>../poms/compiled/pom.xml</relativePath>
     <groupId>dk.sdu.swe.gtg.build</groupId>
     <artifactId>compiled-bundle-settings</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
   <properties>
     <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.collision</bundle.symbolicName>
