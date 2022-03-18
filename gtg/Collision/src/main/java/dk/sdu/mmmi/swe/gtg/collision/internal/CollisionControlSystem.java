@@ -7,18 +7,22 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 
 public class CollisionControlSystem implements IEntityProcessingService {
 
+    @Override
     public void afterProcessing(GameData gameData, World world) {
 
     }
 
+    @Override
     public void beforeProcessing(GameData gameData, World world) {
 
     }
 
-    public Class getEntityType() {
-        return null;
+    @Override
+    public Class<Collision> getEntityType() {
+        return Collision.class;
     }
 
+    @Override
     public void processEntity(Entity entity, float deltaTime) {
 
     }

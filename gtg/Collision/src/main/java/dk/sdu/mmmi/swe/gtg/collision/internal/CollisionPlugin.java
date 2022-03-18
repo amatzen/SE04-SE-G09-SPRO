@@ -6,10 +6,12 @@ import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 
 public class CollisionPlugin implements IGamePluginService {
 
+    @Override
     public void start(GameData gameData, World world) {
 
     }
 
+    @Override
     public void stop(GameData gameData, World world) {
 
     }
