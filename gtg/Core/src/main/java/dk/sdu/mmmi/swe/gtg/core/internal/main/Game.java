@@ -99,12 +99,12 @@ public class Game implements ApplicationListener {
 
     public void addGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.add(plugin);
-        plugin.start(gameData);
+        plugin.start(engine, gameData);
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.remove(plugin);
-        plugin.stop(gameData);
+        plugin.stop(engine, gameData);
     }
 
     public void setEngine(IEngine engine) {
