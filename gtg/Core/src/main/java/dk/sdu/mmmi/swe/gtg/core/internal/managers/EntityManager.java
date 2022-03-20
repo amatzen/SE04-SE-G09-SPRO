@@ -29,17 +29,21 @@ public class EntityManager implements IEntityManager {
     @Override
     public String addEntity(Entity entity) {
         entityMap.put(entity.getID(), entity);
-        return entity.getID();
-    }
 
-    @Override
-    public void removeEntity(String entityID) {
-        entityMap.remove(entityID);
+        listeners.forEach((listener) -> {
+            listener.onEntityAdded(entity);
+        });
+
+        return entity.getID();
     }
 
     @Override
     public void removeEntity(Entity entity) {
         entityMap.remove(entity.getID());
+
+        listeners.forEach((listener) -> {
+            listener.onEntityRemoved(entity);
+        });
     }
 
     @Override

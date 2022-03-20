@@ -48,12 +48,7 @@ public class Engine implements IEngine {
     @Override
     public void removeEntity(String entityID) {
         Entity entity = entityManager.getEntity(entityID);
-        entityManager.removeEntity(entityID);
-
-        familyManager.updateFamilyMembership(entity, true);
-
-        entity.onPartRemoved.remove(onPartAdded);
-        entity.onPartRemoved.remove(onPartAdded);
+        removeEntity(entity);
     }
 
     @Override

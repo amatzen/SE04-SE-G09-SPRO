@@ -12,8 +12,6 @@ public interface IEntityManager {
 
     String addEntity(Entity entity);
 
-    void removeEntity(String entityID);
-
     void removeEntity(Entity entity);
 
     Entity getEntity(String ID);
