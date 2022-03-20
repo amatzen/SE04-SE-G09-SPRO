@@ -43,7 +43,7 @@ public class ShapeFactory implements ShapeFactorySPI {
         this.worldManager = worldManager;
     }
 
-    public void removeWorldManager() {
+    public void removeWorldManager(IWorldManager worldManager) {
         this.worldManager = null;
     }
 }
