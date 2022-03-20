@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.services.plugin;
 
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
 public interface IGamePluginService {
     /** Start
@@ -12,7 +13,7 @@ public interface IGamePluginService {
      * @pre The application has been started.
      * @post The entity plugin has been initialized.
      */
-    void start(GameData gameData);
+    void start(IEngine engine, GameData gameData);
 
     /** Stop
      *
@@ -22,5 +23,5 @@ public interface IGamePluginService {
      * @pre The plugin has been started.
      * @post The entity plugin has been taken down.
      */
-    void stop(GameData gameData);
+    void stop(IEngine engine, GameData gameData);
 }
