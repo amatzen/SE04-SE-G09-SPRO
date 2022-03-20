@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.CommonShapeFactory;
+package dk.sdu.mmmi.swe.gtg.shapefactorycommon.services;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
