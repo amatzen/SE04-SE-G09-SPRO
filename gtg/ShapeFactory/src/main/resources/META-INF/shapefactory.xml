@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<component xmlns="http://www.osgi.org/xmlns/scr/v1.0.0" name="dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory">
+    <implementation class="dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory"/>
+    <service>
+        <provide interface="dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI"/>
+    </service>
+</component>
