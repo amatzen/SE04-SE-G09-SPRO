@@ -4,9 +4,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -49,6 +47,11 @@ public class EntityManager implements IEntityManager {
     @Override
     public Entity getEntity(String ID) {
         return entityMap.get(ID);
+    }
+
+    @Override
+    public Collection<Entity> getEntities() {
+        return Collections.unmodifiableCollection(entityMap.values());
     }
 
     @Override
