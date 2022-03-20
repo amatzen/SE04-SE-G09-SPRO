@@ -22,6 +22,8 @@ public interface IEngine {
 
     List<Entity> getEntitiesFor(IFamily family);
 
+    <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes);
+
     void addEntityProcessingService(IEntityProcessingService service);
 
     void removeEntityProcessingService(IEntityProcessingService service);

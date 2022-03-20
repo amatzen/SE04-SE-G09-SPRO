@@ -71,6 +71,11 @@ public class Engine implements IEngine {
         return familyManager.getEntitiesFor(family);
     }
 
+    @Override
+    public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {
+        return entityManager.getEntities(entityTypes);
+    }
+
     public void setEntityManager(IEntityManager entityManager) {
         this.entityManager = entityManager;
     }
