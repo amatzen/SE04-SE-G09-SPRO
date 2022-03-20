@@ -1,4 +1,4 @@
 package dk.sdu.mmmi.swe.gtg.common.services.entity;
 
-public interface IPostEntityProcessingService extends IEntityProcess {
+public interface IPostEntityProcessingService extends IEntitySystem {
 }
