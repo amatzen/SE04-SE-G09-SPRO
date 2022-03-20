@@ -2,9 +2,7 @@ package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.MovingPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.swe.gtg.common.family.FamilyBuilder;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
@@ -23,7 +21,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
         this.engine = engine;
 
         vehicleList = engine.getEntitiesFor(
-                new FamilyBuilder().forEntities(Vehicle.class).get()
+                Family.builder().forEntities(Vehicle.class).get()
         );
 
     }

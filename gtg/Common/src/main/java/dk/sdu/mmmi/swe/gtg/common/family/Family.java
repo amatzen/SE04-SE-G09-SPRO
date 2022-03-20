@@ -57,6 +57,10 @@ public class Family implements IFamily{
         return Objects.equals(entities, family.entities) && Objects.equals(parts, family.parts);
     }
 
+    public static IFamilyBuilder builder() {
+        return new FamilyBuilder();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(entities, parts);
