@@ -5,13 +5,5 @@
  */
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-
-/**
- *
- * @author Alexander
- */
 public interface EntityPart {
-    void processEntity(GameData gameData, Entity entity);
 }
