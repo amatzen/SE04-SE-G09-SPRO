@@ -38,6 +38,10 @@ public class FamilyManager implements IFamilyManager {
                 } else {
                     entity.removeFromFamily(family);
                     familyEntities.remove(entity);
+
+                    if (familyEntities.isEmpty()) {
+                        families.remove(family);
+                    }
                 }
             }
         }
