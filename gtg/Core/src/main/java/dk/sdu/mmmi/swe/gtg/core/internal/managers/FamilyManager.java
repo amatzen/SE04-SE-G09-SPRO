@@ -1,15 +1,18 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FamilyManager implements IFamilyManager {
 
-    private Map<Family, List<Entity>> families;
+    private Map<IFamily, List<Entity>> families;
 
     public FamilyManager() {
         families = new ConcurrentHashMap<>();
@@ -22,7 +25,7 @@ public class FamilyManager implements IFamilyManager {
 
     @Override
     public void updateFamilyMembership(Entity entity, boolean remove) {
-        for (Family family : families.keySet()) {
+        for (IFamily family : families.keySet()) {
             final List<Entity> familyEntities = families.get(family);
 
             boolean isMember = entity.isMember(family);
@@ -41,12 +44,12 @@ public class FamilyManager implements IFamilyManager {
     }
 
     @Override
-    public List<Entity> getEntitiesFor(Family family) {
+    public List<Entity> getEntitiesFor(IFamily family) {
         return registerFamily(family);
     }
 
     @Override
-    public List<Entity> registerFamily(Family family) {
+    public List<Entity> registerFamily(IFamily family) {
         List<Entity> entities = families.get(family);
 
         if (entities == null) {

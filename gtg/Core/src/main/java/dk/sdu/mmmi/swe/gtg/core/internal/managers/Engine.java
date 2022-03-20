@@ -2,7 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
@@ -67,7 +67,7 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public List<Entity> getEntitiesFor(Family family) {
+    public List<Entity> getEntitiesFor(IFamily family) {
         return familyManager.getEntitiesFor(family);
     }
 

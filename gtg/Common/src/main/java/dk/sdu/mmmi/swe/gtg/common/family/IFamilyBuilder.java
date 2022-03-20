@@ -9,6 +9,6 @@ public interface IFamilyBuilder {
 
     IFamilyBuilder with(Class<? extends EntityPart> ... parts);
 
-    Family get();
+    IFamily get();
 
 }

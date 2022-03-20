@@ -2,7 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 
@@ -20,7 +20,7 @@ public interface IEngine {
 
     Entity getEntity(String ID);
 
-    List<Entity> getEntitiesFor(Family family);
+    List<Entity> getEntitiesFor(IFamily family);
 
     void addEntityProcessingService(IEntityProcessingService service);
 

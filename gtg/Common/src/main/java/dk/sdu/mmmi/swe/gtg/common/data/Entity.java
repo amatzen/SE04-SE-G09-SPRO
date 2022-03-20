@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.data;
 
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Entity implements Serializable {
     private final UUID ID;
 
-    private Set<Family> families;
+    private Set<IFamily> families;
 
     private Map<Class, EntityPart> parts;
 
@@ -52,15 +53,15 @@ public class Entity implements Serializable {
         return ID.toString();
     }
 
-    public void addFamily(Family family) {
+    public void addFamily(IFamily family) {
         this.families.add(family);
     }
 
-    public void removeFromFamily(Family family) {
+    public void removeFromFamily(IFamily family) {
         this.families.remove(family);
     }
 
-    public boolean isMember(Family family) {
+    public boolean isMember(IFamily family) {
         return families.contains(family);
     }
 
