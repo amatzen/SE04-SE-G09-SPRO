@@ -20,7 +20,7 @@ public interface IEngine {
 
     Entity getEntity(String ID);
 
-    List<Entity> getEntitiesFor(IFamily family);
+    List<? extends Entity> getEntitiesFor(IFamily family);
 
     <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes);
 

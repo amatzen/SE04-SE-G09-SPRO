@@ -9,4 +9,8 @@
     <reference bind="addGamePluginService" cardinality="0..n"
                interface="dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService"
                name="IGamePluginService" policy="dynamic" unbind="removeGamePluginService"/>
+
+    <reference bind="setWorldManager" cardinality="1..1"
+               interface="dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager"
+               name="IWorldManager" policy="dynamic" unbind="removeWorldManager"/>
 </component>

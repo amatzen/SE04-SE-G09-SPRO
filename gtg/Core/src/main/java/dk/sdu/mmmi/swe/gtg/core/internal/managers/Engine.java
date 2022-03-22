@@ -67,7 +67,7 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public List<Entity> getEntitiesFor(IFamily family) {
+    public List<? extends Entity> getEntitiesFor(IFamily family) {
         return familyManager.getEntitiesFor(family);
     }
 
