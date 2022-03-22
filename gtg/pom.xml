@@ -54,6 +54,7 @@
     <module>WorldManager</module>
     <module>ShapeFactoryCommon</module>
     <module>ShapeFactory</module>
+    <module>CommonBullet</module>
   </modules>
 
   <build>
