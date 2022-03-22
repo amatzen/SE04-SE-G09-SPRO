@@ -51,6 +51,9 @@
     <module>Common</module>
     <module>LibGDX</module>
     <module>Vehicle</module>
+    <module>WorldManager</module>
+    <module>ShapeFactoryCommon</module>
+    <module>ShapeFactory</module>
   </modules>
 
   <build>
