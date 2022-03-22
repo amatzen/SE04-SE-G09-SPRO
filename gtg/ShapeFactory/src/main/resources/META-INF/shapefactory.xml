@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<component xmlns="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory">
+    <implementation class="dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory"/>
+    <service>
+        <provide interface="dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI"/>
+    </service>
+
+    <reference interface="dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager"
+               name="IWorldManager"
+               cardinality="1..1"
+               policy="dynamic"
+               bind="setWorldManager"
+               unbind="removeWorldManager"/>
+</component>

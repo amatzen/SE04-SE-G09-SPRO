@@ -52,6 +52,9 @@
     <module>LibGDX</module>
     <module>Vehicle</module>
     <module>Collision</module>
+    <module>WorldManager</module>
+    <module>ShapeFactoryCommon</module>
+    <module>ShapeFactory</module>
   </modules>
 
   <build>
