@@ -21,4 +21,8 @@ public class Wheel {
     public void setAngle(float angle) {
         body.setTransform(body.getPosition(), angle);
     }
+
+    public boolean isPowered() {
+        return powered;
+    }
 }
