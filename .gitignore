@@ -17,6 +17,10 @@ out/
 *.rar
 *.iml
 
+# Gradle
+.gradle
+
+
 ### Maven ###
 target/
 pom.xml.tag
