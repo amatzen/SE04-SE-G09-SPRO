@@ -4,4 +4,10 @@
     <service>
         <provide interface="dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService"/>
     </service>
+    <reference interface="dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI"
+               name="ShapeFactorySPI"
+               cardinality="1..1"
+               policy="dynamic"
+               bind="setShapeFactory"
+               unbind="removeShapeFactory"/>
 </component>
