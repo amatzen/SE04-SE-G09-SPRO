@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
 import com.badlogic.gdx.physics.box2d.Body;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 public class Wheel {
 

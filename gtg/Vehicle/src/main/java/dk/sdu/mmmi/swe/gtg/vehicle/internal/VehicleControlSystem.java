@@ -8,6 +8,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 import java.util.List;
 
