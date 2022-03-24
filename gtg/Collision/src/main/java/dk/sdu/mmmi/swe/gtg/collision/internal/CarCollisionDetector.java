@@ -4,7 +4,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.vehicle.internal.Vehicle;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 import java.util.List;
 

@@ -9,6 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 
 public class VehiclePlugin implements IGamePluginService {
