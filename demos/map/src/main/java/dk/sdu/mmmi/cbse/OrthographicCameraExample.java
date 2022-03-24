@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,12 +20,10 @@ public class OrthographicCameraExample implements ApplicationListener {
     private SpriteBatch batch;
 
     private Sprite mapSprite;
-    private float rotationSpeed;
+    private Music music;
 
     @Override
     public void create() {
-        rotationSpeed = 0.5f;
-
         mapSprite = new Sprite(new Texture(Gdx.files.internal("Map.png")));
         mapSprite.setPosition(0, 0);
         mapSprite.setSize(WORLD_WIDTH, WORLD_HEIGHT);
@@ -32,14 +31,19 @@ public class OrthographicCameraExample implements ApplicationListener {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-        // Constructs a new OrthographicCamera, using the given viewport width and height
-        // Height is multiplied by aspect ratio.
+
         cam = new OrthographicCamera(30, 30 * (h / w));
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
 
         batch = new SpriteBatch();
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("data/gtasa.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.5f);
+        music.play();
+
     }
 
     @Override
@@ -50,29 +54,23 @@ public class OrthographicCameraExample implements ApplicationListener {
     }
 
     private void handleInput() {
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            cam.zoom += 0.02;
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            cam.zoom += 0.01;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            cam.zoom -= 0.02;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            cam.zoom -= 0.01;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            cam.translate(-3, 0, 0);
+            cam.translate(-.5f, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            cam.translate(3, 0, 0);
+            cam.translate(.5f, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            cam.translate(0, -3, 0);
+            cam.translate(0, -.5f, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            cam.translate(0, 3, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            cam.rotate(-rotationSpeed, 0, 0, 1);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
-            cam.rotate(rotationSpeed, 0, 0, 1);
+            cam.translate(0, .5f, 0);
         }
 
         cam.zoom = MathUtils.clamp(cam.zoom, 0.1f, 100 / cam.viewportWidth);
@@ -111,5 +109,7 @@ public class OrthographicCameraExample implements ApplicationListener {
     public void dispose() {
         mapSprite.getTexture().dispose();
         batch.dispose();
+        music.dispose();
+
     }
 }

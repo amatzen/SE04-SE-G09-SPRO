@@ -8,11 +8,11 @@ public class Main {
 	public static void main(String[] args) {
 		Lwjgl3ApplicationConfiguration cfg =
 			new Lwjgl3ApplicationConfiguration();
-		cfg.setTitle("Asteroids");
+		cfg.setTitle("Grand Theft Gørding");
 		cfg.setWindowedMode(1280, 720);
 		cfg.setResizable(true);
 		
-		new Lwjgl3Application(new OrthographicCameraExample(), cfg);
+		new Lwjgl3Application(new Demo(), cfg);
 		
 	}
 	
