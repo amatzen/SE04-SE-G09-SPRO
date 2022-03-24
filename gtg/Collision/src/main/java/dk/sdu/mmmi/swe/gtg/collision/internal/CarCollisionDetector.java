@@ -1,5 +1,4 @@
 package dk.sdu.mmmi.swe.gtg.collision.internal;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -9,7 +8,7 @@ import dk.sdu.mmmi.swe.gtg.vehicle.internal.Vehicle;
 
 import java.util.List;
 
-public class CollisionDetector implements IPostEntityProcessingService {
+public class CarCollisionDetector implements IPostEntityProcessingService {
 
     private IEngine engine;
     private List<Vehicle> vehicleList;
