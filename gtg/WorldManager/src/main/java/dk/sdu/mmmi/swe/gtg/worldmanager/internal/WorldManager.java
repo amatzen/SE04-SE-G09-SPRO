@@ -11,6 +11,9 @@ public class WorldManager implements IWorldManager {
 
     private Vector2 gravity;
 
+    private float accumulator = 0;
+    private final float timeStep = 1 / 60f;
+
     public WorldManager() {
         gravity = new Vector2(0, 0);
         world = new World(gravity, true);
@@ -26,7 +29,16 @@ public class WorldManager implements IWorldManager {
 
     @Override
     public void update(float delta) {
-        world.step(delta, 8, 3);
+        /*
+         * Using a constant step time apparently performs better.
+         * https://stackoverflow.com/questions/20848442/libgdx-speeding-up-a-whole-game-using-box2d
+         */
+        float frameTime = Math.min(delta, 0.25f);
+        accumulator += frameTime;
+        while (accumulator >= timeStep) {
+            world.step(timeStep, 8, 3);
+            accumulator -= timeStep;
+        }
     }
 
     public Body createBody(BodyDef def) {
