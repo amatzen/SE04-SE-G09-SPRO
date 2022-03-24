@@ -15,4 +15,8 @@ public class CollisionControlSystem implements IEntityProcessingService {
     public void process(GameData gameData) {
 
     }
+
+    private void proximityDetection() {
+
+    }
 }
