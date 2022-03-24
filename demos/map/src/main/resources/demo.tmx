@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="9">
+ <tileset firstgid="1" source="Grass.tsx"/>
+ <tileset firstgid="9" source="Roads.tsx"/>
+ <tileset firstgid="41" source="Roof.tsx"/>
+ <layer id="1" name="Grass" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHj+4ceLIeCq6aqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv4DIkZOIQ==
+  </data>
+ </layer>
+ <layer id="2" name="Roads" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJwCAURMHfSg5CykppKSWlRbAFwTWZgcWr+qoAAAAAAAAAAAAAAAAAAAAAAP7r6GtV96ytfs/u+h/WOc5rxhY/Z3tt7Fl9DwY9suiRRY8semTRI4seWfTIokcWPbLokUWPLHpk0QMAAAAAAAAAAAAAAAAAAICveQHuMib0
+  </data>
+ </layer>
+ <layer id="3" name="Buildings" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJgEAMAMGryY/9dyY+/Ih+BLnlmIE0kIVkDAAAAAAAAAAAAAAAAAAAAABWtf00fHPubv9h+ObqQYMeLfce7tVcTz3883neejCHHi16tOjRokeLHi16tOjRokeLHi16tOgBAAAAAAAAAAAAAAAAAADAqg7qnRvl
+  </data>
+ </layer>
+ <objectgroup id="4" name="walls">
+  <object id="3" x="3264" y="2944" width="1152" height="128"/>
+  <object id="6" x="3136" y="2688" width="1280" height="128"/>
+  <object id="4" x="3264" y="3072" width="128" height="768"/>
+  <object id="5" x="3008" y="2688" width="128" height="1152"/>
+ </objectgroup>
+ <objectgroup id="6" name="player">
+  <object id="8" x="3188" y="3757" width="30" height="45"/>
+ </objectgroup>
+</map>
