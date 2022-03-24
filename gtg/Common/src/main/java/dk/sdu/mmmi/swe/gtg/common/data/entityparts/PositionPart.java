@@ -5,13 +5,6 @@
  */
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-
-/**
- *
- * @author Alexander
- */
 public class PositionPart implements EntityPart {
 
     private float x;
@@ -53,11 +46,4 @@ public class PositionPart implements EntityPart {
         this.radians = radians;
     }
 
-    @Override
-    public void processEntity(GameData gameData, Entity entity) {
-    }
-    
-    
-    
-    
 }
