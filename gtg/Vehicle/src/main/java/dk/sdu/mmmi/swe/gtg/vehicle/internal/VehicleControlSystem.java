@@ -13,7 +13,6 @@ import java.util.List;
 
 public class VehicleControlSystem implements IEntityProcessingService {
 
-    private final float DRIFT_OFFSET = 1.0f;
     private IEngine engine;
 
     private List<Vehicle> vehicleList;
@@ -34,12 +33,10 @@ public class VehicleControlSystem implements IEntityProcessingService {
         vehicleList = (List<Vehicle>) engine.getEntitiesFor(
                 Family.builder().forEntities(Vehicle.class).get()
         );
-
     }
 
     @Override
     public void process(GameData gameData) {
-
         for (Vehicle vehicle : vehicleList) {
 
             processInput(vehicle, gameData);
@@ -49,7 +46,6 @@ public class VehicleControlSystem implements IEntityProcessingService {
             }
 
         }
-
     }
 
     private void processInput(Vehicle vehicle, GameData gameData) {
