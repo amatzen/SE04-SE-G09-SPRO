@@ -21,6 +21,8 @@ public class Entity implements Serializable {
     public final Signal<Entity> onPartAdded;
     public final Signal<Entity> onPartRemoved;
 
+    private float radius;
+
     public Entity() {
         ID = UUID.randomUUID();
         parts = new ConcurrentHashMap<>();
@@ -80,6 +82,14 @@ public class Entity implements Serializable {
         }
 
         return false;
+    }
+
+    public void setRadius(float r) {
+        this.radius = r;
+    }
+
+    public float getRadius() {
+        return radius;
     }
 
     @Override
