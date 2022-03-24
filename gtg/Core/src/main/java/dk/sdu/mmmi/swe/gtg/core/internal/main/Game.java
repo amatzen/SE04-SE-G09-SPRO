@@ -2,11 +2,14 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.TimeUtils;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.World;
@@ -20,10 +23,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Game implements ApplicationListener {
+public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
+
+    private final AssetManager assetManager = new AssetManager(new ClasspathFileHandleResolver());
 
     private final GameData gameData = new GameData();
 
@@ -62,10 +67,12 @@ public class Game implements ApplicationListener {
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );
+        setScreen(new Splash(assetManager));
     }
 
     @Override
     public void render() {
+/*
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -73,7 +80,7 @@ public class Game implements ApplicationListener {
 
         update();
 
-        draw();
+        draw();*/
 
         gameData.getKeys().update();
     }
