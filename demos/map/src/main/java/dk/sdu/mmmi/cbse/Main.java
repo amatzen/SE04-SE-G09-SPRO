@@ -9,7 +9,7 @@ public class Main {
 		Lwjgl3ApplicationConfiguration cfg =
 			new Lwjgl3ApplicationConfiguration();
 		cfg.setTitle("Grand Theft Gørding");
-		cfg.setWindowedMode(1280, 720);
+		cfg.setWindowedMode(800, 800);
 		cfg.setResizable(true);
 		
 		new Lwjgl3Application(new Demo(), cfg);
