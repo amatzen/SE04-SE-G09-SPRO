@@ -37,23 +37,26 @@ public class Demo implements ApplicationListener {
     }
 
     private void handleInput() {
+        float zoom = 0.001f;
+        float movement = 0.25f;
+
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            camera.zoom += 0.01;
+            camera.zoom += zoom;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            camera.zoom -= 0.01;
+            camera.zoom -= zoom;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            camera.translate(-.5f, 0, 0);
+            camera.translate(-movement, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            camera.translate(.5f, 0, 0);
+            camera.translate(movement, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            camera.translate(0, -.5f, 0);
+            camera.translate(0, -movement, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            camera.translate(0, .5f, 0);
+            camera.translate(0, movement, 0);
         }
 
         camera.zoom = MathUtils.clamp(camera.zoom, 0.1f, 100 / camera.viewportWidth);
