@@ -10,12 +10,15 @@ import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
 
 
 public class SplashScreen implements Screen {
+    private final Game game;
+
     private final SpriteBatch batch;
     private final Texture splashTexture;
     private final Sprite sprite;
 
     public SplashScreen(Game game) {
         super();
+        this.game = game;
         this.batch = new SpriteBatch();
         this.splashTexture = new Texture("assets/splash_screen.png");
         this.sprite = new Sprite(splashTexture);
