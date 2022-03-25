@@ -6,18 +6,13 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.TimeUtils;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.core.internal.screens.GameScreen;
+import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 
 import java.util.Collection;
@@ -25,17 +20,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
-
-    private OrthographicCamera cam;
-    private Box2DDebugRenderer mB2dr;
-    private IWorldManager worldManager;
-
-    private final AssetManager assetManager = new AssetManager(new ClasspathFileHandleResolver());
-
-    private final GameData gameData = new GameData();
-    private float PPM = 20;
-
-    private final GameData gameData = new GameData();
+    public final GameData gameData = new GameData();
 
     private List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
 
@@ -61,15 +46,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        mB2dr = new Box2DDebugRenderer();
-        cam = new OrthographicCamera(gameData.getDisplayWidth() / PPM, gameData.getDisplayHeight() / PPM);
-        cam.position.set(0, 0, 0);
-        cam.update();
-
+        /*
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
-        );
-        setScreen(new Splash(assetManager));
+        );*/
+        setScreen(new SplashScreen(this));
+
     }
 
     @Override
@@ -83,6 +65,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         update();
 
         draw();*/
+
+        super.render();
 
         gameData.getKeys().update();
     }
@@ -107,11 +91,11 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private void update() {
         engine.update(gameData);
 
-        worldManager.update(gameData.getDelta());
+        //worldManager.update(gameData.getDelta());
     }
 
     private void draw() {
-        worldManager.render(mB2dr, cam.combined);
+        //worldManager.render(mB2dr, cam.combined);
     }
 
     private Collection<? extends IGamePluginService> getPluginServices() {
@@ -134,13 +118,5 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     public void removeEngine(IEngine systemManager) {
         this.engine = null;
-    }
-
-    public void setWorldManager(IWorldManager worldManager) {
-        this.worldManager = worldManager;
-    }
-
-    public void removeWorldManager(IWorldManager worldManager) {
-        this.worldManager = null;
     }
 }
