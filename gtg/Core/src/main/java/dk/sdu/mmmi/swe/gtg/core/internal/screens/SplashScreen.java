@@ -1,20 +1,20 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.main;
+package dk.sdu.mmmi.swe.gtg.core.internal.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
 
 
-public class Splash implements Screen {
+public class SplashScreen implements Screen {
     private final SpriteBatch batch;
     private final Texture splashTexture;
     private final Sprite sprite;
 
-    public Splash(Game game) {
+    public SplashScreen(Game game) {
         super();
         this.batch = new SpriteBatch();
         this.splashTexture = new Texture("assets/splash_screen.png");
