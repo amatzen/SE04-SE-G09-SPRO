@@ -34,6 +34,7 @@ public class SplashScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sprite.draw(batch);
         batch.end();
 
