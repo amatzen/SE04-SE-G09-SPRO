@@ -4,7 +4,7 @@ import com.badlogic.gdx.Screen;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
 
 public class GameScreen implements Screen {
-    private Game game;
+    private final Game game;
 
     public GameScreen(Game game) {
         this.game = game;
