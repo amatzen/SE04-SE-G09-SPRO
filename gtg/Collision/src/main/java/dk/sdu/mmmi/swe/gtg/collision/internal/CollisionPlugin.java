@@ -7,10 +7,15 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
+@Component
 public class CollisionPlugin implements IGamePluginService {
 
+    @Reference
     private ShapeFactorySPI shapeFactory;
+
     private Collision collision;
 
     @Override
@@ -37,13 +42,5 @@ public class CollisionPlugin implements IGamePluginService {
     @Override
     public void stop(IEngine engine, GameData gameData) {
         engine.removeEntity(collision);
-    }
-
-    public void setShapeFactory(ShapeFactorySPI shapeFactory) {
-        this.shapeFactory = shapeFactory;
-    }
-
-    public void removeShapeFactory(ShapeFactorySPI shapeFactory) {
-        this.shapeFactory = null;
     }
 }
