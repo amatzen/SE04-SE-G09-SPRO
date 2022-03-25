@@ -99,8 +99,8 @@ public class VehiclePlugin implements IGamePluginService {
                         0.4f,
                         true
                     ),
-                    vehicle,
-                    powered
+                    powered,
+                    true
             );
 
             if (i < 2) {

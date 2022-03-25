@@ -5,12 +5,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class Wheel {
 
     private Body body;
-    private Vehicle vehicle;
     private boolean powered;
+    private boolean turnDirection;
 
-    public Wheel(Body body, Vehicle vehicle, boolean powered) {
+    public Wheel(Body body, boolean powered, boolean turnDirection) {
         this.body = body;
-        this.vehicle = vehicle;
         this.powered = powered;
     }
 
@@ -19,6 +18,10 @@ public class Wheel {
     }
 
     public void setAngle(float angle) {
+        if (!turnDirection) {
+            angle *= -1;
+        }
+
         body.setTransform(body.getPosition(), angle);
     }
 
