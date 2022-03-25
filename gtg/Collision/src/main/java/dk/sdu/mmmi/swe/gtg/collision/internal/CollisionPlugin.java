@@ -26,17 +26,25 @@ public class CollisionPlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        Vector2 position = new Vector2(5, 0);
-        Vector2 size = new Vector2(1.0f, 1.0f);
+        Vector2 position1 = new Vector2(10, 0);
+        Vector2 size1 = new Vector2(1, 1);
+        Vector2 position2 = new Vector2(10, 0);
+        Vector2 size2 = new Vector2(8, 8);
+
+        BodyPart body1 = new BodyPart(shapeFactory.createRectangle(
+                position1, size1, BodyDef.BodyType.StaticBody,
+                1,
+                false));
+
+        BodyPart body2 = new BodyPart(shapeFactory.createRectangle(
+                position2, size2, BodyDef.BodyType.StaticBody,
+                1,
+                true));
 
         collision = new Collision();
 
-        BodyPart body = new BodyPart(shapeFactory.createRectangle(
-                position, size, BodyDef.BodyType.StaticBody,
-                0.5f,
-                false));
-
-        collision.addPart(body);
+        collision.addPart(body1);
+        collision.addPart(body2);
 
         engine.addEntity(collision);
 
