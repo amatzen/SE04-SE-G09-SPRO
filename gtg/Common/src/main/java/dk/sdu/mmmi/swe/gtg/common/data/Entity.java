@@ -1,14 +1,11 @@
 package dk.sdu.mmmi.swe.gtg.common.data;
 
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.EntityPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Entity implements Serializable {
@@ -16,7 +13,7 @@ public class Entity implements Serializable {
 
     private Set<IFamily> families;
 
-    private Map<Class, EntityPart> parts;
+    private Map<Class, IEntityPart> parts;
 
     public final Signal<Entity> onPartAdded;
     public final Signal<Entity> onPartRemoved;
@@ -30,7 +27,7 @@ public class Entity implements Serializable {
         onPartRemoved = new Signal<>();
     }
     
-    public void addPart(EntityPart part) {
+    public void addPart(IEntityPart part) {
         parts.put(part.getClass(), part);
         onPartAdded.fire(this);
     }
@@ -40,8 +37,12 @@ public class Entity implements Serializable {
         onPartRemoved.fire(this);
     }
     
-    public <E extends EntityPart> E getPart(Class<E> partClass) {
+    public <E extends IEntityPart> E getPart(Class<E> partClass) {
         return (E) parts.get(partClass);
+    }
+
+    public Collection<? extends IEntityPart> getParts() {
+        return parts.values();
     }
 
     public boolean hasPart(Class partClass) {

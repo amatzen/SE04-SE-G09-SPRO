@@ -5,7 +5,7 @@
  */
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-public class MovingPart implements EntityPart {
+public class MovingPart implements IEntityPart {
 
     private float dx, dy;
     private float deceleration, acceleration;
@@ -64,4 +64,8 @@ public class MovingPart implements EntityPart {
         return (float) Math.sqrt(this.dx * this.dx + this.dy * this.dy);
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }

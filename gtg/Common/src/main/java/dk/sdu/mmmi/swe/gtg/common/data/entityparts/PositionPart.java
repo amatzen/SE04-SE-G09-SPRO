@@ -5,7 +5,7 @@
  */
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-public class PositionPart implements EntityPart {
+public class PositionPart implements IEntityPart {
 
     private float x;
     private float y;
@@ -46,4 +46,8 @@ public class PositionPart implements EntityPart {
         this.radians = radians;
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }
