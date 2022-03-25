@@ -8,6 +8,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -16,6 +17,9 @@ public class CollisionPlugin implements IGamePluginService {
 
     @Reference
     private ShapeFactorySPI shapeFactory;
+
+    @Reference
+    private IWorldManager worldManager;
 
     private Collision collision;
 
@@ -35,6 +39,8 @@ public class CollisionPlugin implements IGamePluginService {
         collision.addPart(body);
 
         engine.addEntity(collision);
+
+        worldManager.setContactLister(new ContactListener());
 
         System.out.println("CollisionPlugin started");
 

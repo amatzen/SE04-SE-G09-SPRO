@@ -42,4 +42,8 @@ public class WorldManager implements IWorldManager {
         renderer.render(world, projectionMatrix);
     }
 
+    @Override
+    public void setContactLister(ContactListener contactLister) {
+        this.world.setContactListener(contactLister);
+    }
 }
