@@ -16,6 +16,9 @@ public class SplashScreen implements Screen {
     private final Texture splashTexture;
     private final Sprite sprite;
 
+    private float count = 0.0f;
+    private final float MAX_COUNT = 5f; // Seconds to display splash
+
     public SplashScreen(Game game) {
         super();
         this.game = game;
@@ -32,6 +35,13 @@ public class SplashScreen implements Screen {
     public void render(float v) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        count = count + v;
+        System.out.println(count);
+        if (count > MAX_COUNT) {
+            this.game.setScreen(new GameScreen(this.game));
+            return;
+        }
 
         batch.begin();
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
