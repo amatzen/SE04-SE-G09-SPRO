@@ -16,6 +16,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component
 public class VehiclePlugin implements IGamePluginService {
 
+    hest
+
     @Reference
     private ShapeFactorySPI shapeFactory;
 
