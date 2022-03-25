@@ -11,10 +11,16 @@ import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
+@Component
 public class VehiclePlugin implements IGamePluginService {
 
+    @Reference
     private ShapeFactorySPI shapeFactory;
+
+    @Reference
     private IWorldManager worldManager;
 
     private Vehicle vehicle;

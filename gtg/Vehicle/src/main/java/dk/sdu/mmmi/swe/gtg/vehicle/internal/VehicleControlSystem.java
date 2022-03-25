@@ -9,9 +9,11 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
+@Component
 public class VehicleControlSystem implements IEntityProcessingService {
 
     private final float DRIFT_OFFSET = 1.0f;
