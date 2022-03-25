@@ -5,20 +5,20 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class Splash implements Screen {
-    private final AssetManager assetManager;
-
-    private final SpriteBatch spriteBatch;
+    private final SpriteBatch batch;
     private final Texture splashTexture;
+    private final Sprite sprite;
 
-    public Splash(AssetManager assetManager) {
+    public Splash(Game game) {
         super();
-        this.assetManager = assetManager;
-        this.splashTexture = this.assetManager.get("splash_screen.png", Texture.class);
-        this.spriteBatch = new SpriteBatch();
+        this.batch = new SpriteBatch();
+        this.splashTexture = new Texture("assets/splash_screen.png");
+        this.sprite = new Sprite(splashTexture);
     }
 
     @Override
@@ -27,12 +27,12 @@ public class Splash implements Screen {
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        spriteBatch.begin();
-        spriteBatch.draw(splashTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        spriteBatch.end();
+        batch.begin();
+        sprite.draw(batch);
+        batch.end();
 
     }
 
@@ -58,7 +58,7 @@ public class Splash implements Screen {
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
+        batch.dispose();
         splashTexture.dispose();
     }
 }
