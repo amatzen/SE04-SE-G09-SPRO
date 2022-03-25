@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="Grass.tsx"/>
+ <tileset firstgid="9" source="Roads.tsx"/>
+ <tileset firstgid="41" source="Water.tsx"/>
+ <tileset firstgid="57" source="Roof.tsx"/>
+ <tileset firstgid="89" source="Floor.tsx"/>
+ <layer id="1" name="Grass" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHj+4dejoGCq6aqqqqqqqqqqqrPH9yzE4k=
+  </data>
+ </layer>
+ <layer id="2" name="Roads" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJwDAMBEE1Y3BZLi2lpLQIVEEeZ/axA3ofi3FV1pp7wzNxdrDYwWIHix0sdrDYwWIHix0sdrDYwWIHy62O3niSt7uh76R31mzEbk9LpXcuvLf/A8QOFjtY7GCxg8UOFjtY7GCxg8UOFjtY7PjnAyn2ciE=
+  </data>
+ </layer>
+ <layer id="3" name="Water" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztz7EJADAMA0EXWSb7L5gqI8jYcAdfC1UBAAAAAAAAACdc184N96V3/PBjY37Myo9Zdf14j0dF8Q==
+  </data>
+ </layer>
+ <layer id="5" name="Houses" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKgDAMBdCezMFF738i6eBSEWqh8KnvQRZByCdpSgEA+J/zY6Wqve2dJcd8cuQ4BitN7al3FnfVf9JuWZtjK8++229v2ZNy9M5DjjlG9yr9ffTOI80qd5cso3uVtn8j7zzxHqwyDwAAAGB9F717SSk=
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAMRFHXdP9FXEAbJXCG9yBlit/cGABAtflwSTp13PzoqKEjy0vHb1uw06XjREcWHVl+6+iyV106AAAAAIAcC/QrJCk=
+  </data>
+ </layer>
+</map>

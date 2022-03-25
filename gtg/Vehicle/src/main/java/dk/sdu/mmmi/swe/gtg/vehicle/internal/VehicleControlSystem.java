@@ -8,9 +8,11 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
+@Component
 public class VehicleControlSystem implements IEntityProcessingService {
 
     private IEngine engine;
