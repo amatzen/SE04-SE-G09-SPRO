@@ -11,6 +11,7 @@ public class Wheel {
     public Wheel(Body body, boolean powered, boolean turnDirection) {
         this.body = body;
         this.powered = powered;
+        this.turnDirection = turnDirection;
     }
 
     public Body getBody() {
