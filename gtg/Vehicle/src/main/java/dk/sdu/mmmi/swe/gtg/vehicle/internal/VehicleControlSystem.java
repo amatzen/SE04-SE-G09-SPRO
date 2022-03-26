@@ -8,7 +8,9 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
     private final float DRIFT_OFFSET = 1.0f;
     private IEngine engine;
+
+    private BulletSPI bulletSPI;
 
     private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
@@ -57,7 +61,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private void processInput(Vehicle vehicle, GameData gameData) {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
-
+        
 
 
         if (gameData.getKeys().isDown(GameKeys.LEFT)) {
