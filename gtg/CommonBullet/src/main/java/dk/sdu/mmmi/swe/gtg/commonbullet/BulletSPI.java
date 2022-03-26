@@ -9,6 +9,6 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 public interface BulletSPI
 {
     // public methods go here...
-    Entity createBullet(Entity vehicleEntity, GameData gameData); // might change to
+    Entity createBullet(); // might change to
 }
 

@@ -5,7 +5,7 @@ import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 
 public class BulletCreator implements BulletSPI {
     @Override
-    public Entity createBullet(Entity vehicleEntity, GameData gameData) {
+    public Entity createBullet() {
         return null;
     }
 }
