@@ -58,6 +58,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
 
+
+
         if (gameData.getKeys().isDown(GameKeys.LEFT)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
