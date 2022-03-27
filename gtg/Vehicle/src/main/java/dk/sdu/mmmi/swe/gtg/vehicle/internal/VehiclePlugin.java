@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
@@ -49,6 +50,7 @@ public class VehiclePlugin implements IGamePluginService {
         body.getBody().getFixtureList().get(0).setRestitution(0.2f);
 
         vehicle.addPart(body);
+        vehicle.addPart(new TransformPart());
 
         createWheels(vehicle, 4);
 

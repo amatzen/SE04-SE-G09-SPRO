@@ -18,13 +18,13 @@
   </build>
 
   <properties>
-    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.vehicle</bundle.symbolicName>
-    <bundle.namespace>dk.sdu.mmmi.swe.gtg.vehicle</bundle.namespace>
+    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.renderingsystem</bundle.symbolicName>
+    <bundle.namespace>dk.sdu.mmmi.swe.gtg.renderingsystem</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.sdu.swe.gtg</groupId>
-  <artifactId>Vehicle</artifactId>
+  <artifactId>dk.sdu.mmmi.swe.gtg.renderingsystem</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>${bundle.symbolicName}</name>
@@ -42,27 +42,14 @@
     </dependency>
     -->
     <dependency>
-      <groupId>dk.sdu.swe.gtg</groupId>
-      <artifactId>Common</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>osgi.core</artifactId>
       <optional>true</optional>
-      <scope>provided</scope>
     </dependency>
     <dependency>
-        <groupId>dk.sdu.swe.gtg</groupId>
-        <artifactId>ShapeFactoryCommon</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>dk.sdu.swe.gtg</groupId>
-        <artifactId>dk.sdu.mmmi.swe.gtg.worldmanager</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <scope>compile</scope>
+      <groupId>dk.sdu.swe.gtg</groupId>
+      <artifactId>Common</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
