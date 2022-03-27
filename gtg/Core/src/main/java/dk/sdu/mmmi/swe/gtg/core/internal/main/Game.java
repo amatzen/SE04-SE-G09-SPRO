@@ -96,8 +96,6 @@ public class Game implements ApplicationListener {
 
     private void update() {
         engine.update(gameData);
-
-        worldManager.update(gameData.getDelta());
     }
 
     private void draw() {
