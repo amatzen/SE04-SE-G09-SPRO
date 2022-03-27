@@ -58,6 +58,8 @@ public class Game implements ApplicationListener {
         cam.position.set(0, 0, 0);
         cam.update();
 
+        gameData.setCamera(cam);
+
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );

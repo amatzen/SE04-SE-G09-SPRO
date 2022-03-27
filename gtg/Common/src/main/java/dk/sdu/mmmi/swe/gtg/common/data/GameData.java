@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.common.data;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import dk.sdu.mmmi.swe.gtg.common.events.Event;
 
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameData {
+
+    private OrthographicCamera camera;
 
     private float delta;
     private int displayWidth;
@@ -52,6 +55,14 @@ public class GameData {
 
     public int getDisplayHeight() {
         return displayHeight;
+    }
+
+    public void setCamera(OrthographicCamera camera) {
+        this.camera = camera;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 
     public <E extends Event> List<Event> getEvents(Class<E> type, String sourceID) {
