@@ -20,6 +20,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private final float DRIFT_OFFSET = 1.0f;
     private IEngine engine;
 
+    @Reference(service = BulletSPI.class)
     private BulletSPI bulletSPI;
 
     private List<Vehicle> vehicleList;
@@ -61,10 +62,12 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private void processInput(Vehicle vehicle, GameData gameData) {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
-        
 
+        if (gameData.getKeys().isDown(GameKeys.DOWN)) {
+           bulletSPI.createBullet();
+            }
 
-        if (gameData.getKeys().isDown(GameKeys.LEFT)) {
+            if (gameData.getKeys().isDown(GameKeys.LEFT)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
             }
