@@ -32,14 +32,14 @@ public class Family implements IFamily{
     }
 
     public boolean matches(Entity entity) {
-        if (entities != null) {
+        if (this.entities != null) {
             if (!this.entities.contains(entity.getClass())) {
                 return false;
             }
         }
 
-        if (parts != null) {
-            for (Class<? extends IEntityPart> part : parts) {
+        if (this.parts != null) {
+            for (Class<? extends IEntityPart> part : this.parts) {
                 if (!entity.hasPart(part)) {
                     return false;
                 }
