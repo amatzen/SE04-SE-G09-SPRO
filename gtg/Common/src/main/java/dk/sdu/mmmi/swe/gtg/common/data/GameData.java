@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.common.data;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.common.events.Event;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class GameData {
 
     private OrthographicCamera camera;
+    private SpriteBatch spriteBatch;
 
     private float delta;
     private int displayWidth;
@@ -59,6 +61,14 @@ public class GameData {
 
     public void setCamera(OrthographicCamera camera) {
         this.camera = camera;
+    }
+
+    public SpriteBatch getSpriteBatch() {
+        return spriteBatch;
+    }
+
+    public void setSpriteBatch(SpriteBatch spriteBatch) {
+        this.spriteBatch = spriteBatch;
     }
 
     public OrthographicCamera getCamera() {
