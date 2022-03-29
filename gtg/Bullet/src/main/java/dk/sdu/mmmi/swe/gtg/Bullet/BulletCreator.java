@@ -3,6 +3,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
+import dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -24,7 +25,7 @@ public class BulletCreator implements BulletSPI {
         bulletBodyDef.fixedRotation=true;
         pBody = worldManager.createBody(bulletBodyDef);
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(32/2,32/2);
+        polygonShape.setAsBox(0.2f / 2.0f, 0.01f /2.0f);
         pBody.createFixture(polygonShape,1.0f);
         polygonShape.dispose();
                return pBody ;
