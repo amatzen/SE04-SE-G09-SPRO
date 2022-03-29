@@ -10,10 +10,12 @@ public class DriveTrain implements IEntityPart {
         this.wheels = wheels;
     }
 
+    public Wheel[] getWheels() {
+        return wheels;
+    }
+
     @Override
     public void destroy() {
-        for (Wheel wheel : wheels) {
-            wheel.getBody().getWorld().destroyBody(wheel.getBody());
-        }
+
     }
 }
