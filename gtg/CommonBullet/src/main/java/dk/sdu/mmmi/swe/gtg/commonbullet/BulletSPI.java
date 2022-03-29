@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.commonbullet;
 
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import com.badlogic.gdx.physics.box2d.Body;
 
 /**
  * Public API representing an example OSGi service
@@ -9,6 +8,6 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 public interface BulletSPI
 {
     // public methods go here...
-    Entity createBullet(); // might change to
+    Body createBullet(); // might change to
 }
 
