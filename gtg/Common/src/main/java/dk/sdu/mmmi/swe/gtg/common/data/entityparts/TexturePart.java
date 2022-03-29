@@ -15,6 +15,10 @@ public class TexturePart implements IEntityPart{
         return this;
     }
 
+    public TextureRegion getTexture() {
+        return texture;
+    }
+
     @Override
     public void destroy() {
 
