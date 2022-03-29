@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.worldmanager.internal;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -68,7 +69,7 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
          */
         float frameTime = Math.min(gameData.getDelta(), 0.25f);
         accumulator += frameTime;
-        while (accumulator >= timeStep) {
+        if (accumulator >= timeStep) {
             world.step(timeStep, 6, 2);
             accumulator -= timeStep;
         }
@@ -77,7 +78,7 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
             BodyPart bodyPart = entity.getPart(BodyPart.class);
             TransformPart transformPart = entity.getPart(TransformPart.class);
 
-            Vector2 transformPosition = bodyPart.getBody().getPosition();
+            Vector3 transformPosition = transformPart.getPosition();
             Vector2 bodyPosition = bodyPart.getBody().getPosition();
 
             transformPosition.x = bodyPosition.x;
