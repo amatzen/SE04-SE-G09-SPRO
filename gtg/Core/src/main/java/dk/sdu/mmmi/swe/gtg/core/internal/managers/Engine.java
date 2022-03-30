@@ -5,18 +5,28 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
-import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
+import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.List;
 
+@Component
 public class Engine implements IEngine {
 
+    @Reference
     private ISystemManager systemManager;
+
+    @Reference
     private IEntityManager entityManager;
+
+    @Reference
     private IFamilyManager familyManager;
 
     private ISignalListener<Entity> onPartRemoved;
@@ -76,31 +86,8 @@ public class Engine implements IEngine {
         return entityManager.getEntities(entityTypes);
     }
 
-    public void setEntityManager(IEntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public void removeEntityManager(IEntityManager entityManager) {
-        this.entityManager = null;
-    }
-
-    public void setSystemManager(ISystemManager systemManager) {
-        this.systemManager = systemManager;
-    }
-
-    public void removeSystemManager(ISystemManager systemManager) {
-        this.systemManager = null;
-    }
-
-    public void setFamilyManager(IFamilyManager familyManager) {
-        this.familyManager = familyManager;
-    }
-
-    public void removeFamilyManager(IFamilyManager familyManager) {
-        this.familyManager = null;
-    }
-
     @Override
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addEntityProcessingService(IEntityProcessingService service) {
         this.systemManager.addEntityProcessingService(service);
         service.addedToEngine(this);
@@ -112,6 +99,7 @@ public class Engine implements IEngine {
     }
 
     @Override
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addPostEntityProcessingService(IPostEntityProcessingService service) {
         this.systemManager.addPostEntityProcessingService(service);
         service.addedToEngine(this);

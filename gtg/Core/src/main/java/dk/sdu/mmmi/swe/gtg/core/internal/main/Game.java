@@ -13,16 +13,26 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component(immediate = true)
 public class Game implements ApplicationListener {
 
     private OrthographicCamera cam;
     private Box2DDebugRenderer mB2dr;
+
+    @Reference
     private IWorldManager worldManager;
+
+    @Reference
+    private IEngine engine;
 
     private float PPM = 20;
 
@@ -32,10 +42,8 @@ public class Game implements ApplicationListener {
     private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
-
-    private IEngine engine;
-
     public Game() {
+        System.out.println("Game created");
         init();
     }
 
@@ -117,6 +125,7 @@ public class Game implements ApplicationListener {
         return entityPlugins;
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.add(plugin);
         this.pluginsToBeStarted.add(plugin);
@@ -125,21 +134,5 @@ public class Game implements ApplicationListener {
     public void removeGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.remove(plugin);
         this.pluginsToBeStopped.add(plugin);
-    }
-
-    public void setEngine(IEngine engine) {
-        this.engine = engine;
-    }
-
-    public void removeEngine(IEngine systemManager) {
-        this.engine = null;
-    }
-
-    public void setWorldManager(IWorldManager worldManager) {
-        this.worldManager = worldManager;
-    }
-
-    public void removeWorldManager(IWorldManager worldManager) {
-        this.worldManager = null;
     }
 }
