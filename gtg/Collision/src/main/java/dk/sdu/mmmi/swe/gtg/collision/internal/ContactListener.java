@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import dk.sdu.mmmi.swe.gtg.collision.Collision;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
@@ -14,7 +15,15 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
-        System.out.println("Collision occurred!");
+        // System.out.println("Collision occurred!");
+
+        if (carAtmCollision(fixtureA, fixtureB)) {
+            Vehicle car = (Vehicle) fixtureA.getUserData();
+            Collision atm = (Collision) fixtureB.getUserData();
+            System.out.println("Collision with car and ATM");
+        } else {
+            System.out.println("Collision, but not with car and ATM");
+        }
 
     }
 
@@ -37,4 +46,14 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
     }
+
+    private boolean carAtmCollision(Fixture a, Fixture b) {
+        if (a.getUserData() instanceof Vehicle || b.getUserData() instanceof Vehicle) {
+            if (a.getUserData() instanceof Collision || b.getUserData() instanceof Collision) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
