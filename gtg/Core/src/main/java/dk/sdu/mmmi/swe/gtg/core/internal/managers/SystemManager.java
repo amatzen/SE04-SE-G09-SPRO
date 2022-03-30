@@ -4,20 +4,14 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
-import org.osgi.service.component.annotations.Component;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Component
 public class SystemManager implements ISystemManager {
     private List<IEntityProcessingService> entityProcessors = new CopyOnWriteArrayList<>();
     private List<IPostEntityProcessingService> entityPostProcessors = new CopyOnWriteArrayList<>();
-
-    public SystemManager() {
-
-    }
 
     @Override
     public void addEntityProcessingService(IEntityProcessingService service) {
