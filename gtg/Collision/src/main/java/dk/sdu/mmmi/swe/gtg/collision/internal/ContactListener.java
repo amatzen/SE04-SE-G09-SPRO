@@ -16,9 +16,6 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
         System.out.println("Collision occurred!");
 
-        if (fixtureA.getUserData() == null || fixtureB.getUserData() == null) {
-            return;
-        }
     }
 
     @Override
@@ -29,9 +26,6 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
         System.out.println("Collision stopped!");
 
-        if (fixtureA.getUserData() == null || fixtureB.getUserData() == null) {
-            return;
-        }
     }
 
     @Override
