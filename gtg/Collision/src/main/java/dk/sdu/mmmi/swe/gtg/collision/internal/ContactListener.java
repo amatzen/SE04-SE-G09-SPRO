@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
 
