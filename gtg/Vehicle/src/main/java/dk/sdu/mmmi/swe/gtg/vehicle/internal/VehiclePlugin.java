@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
@@ -22,8 +21,6 @@ import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.util.List;
-
 @Component
 public class VehiclePlugin implements IGamePluginService {
 
@@ -33,61 +30,76 @@ public class VehiclePlugin implements IGamePluginService {
     @Reference
     private IWorldManager worldManager;
 
-    private Vehicle vehicle;
-
     private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
     private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.45f;
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
-        engine.getEntitiesFor(Family.builder().forEntities(Vehicle.class, Wheel.class).get());
-        Vector2 position = new Vector2(0, 0);
-        Vector2 size = new Vector2(1.7f, 4.0f);
 
-        vehicle = new Vehicle();
+        createVehicle(engine);
+
+    }
+
+    public Vehicle createVehicle(IEngine engine) {
+        Vehicle vehicle = createVehicleBody(
+                new Vector2(0, 0), new Vector2(1.7f, 4.0f),
+                0.15f, 0.2f, 260f
+        );
+
+        vehicle.addPart(getBodyTexture());
+
+        Wheel[] wheels = createWheels(vehicle);
+
+        DriveTrain driveTrain = createDriveTrain(wheels, engine);
+        vehicle.addPart(driveTrain);
+
+        engine.addEntity(vehicle);
+
+        return vehicle;
+    }
+
+    private DriveTrain createDriveTrain(Wheel[] wheels, IEngine engine) {
+        DriveTrain driveTrain = new DriveTrain(wheels);
+
+        for (Wheel wheel : wheels) {
+            engine.addEntity(wheel);
+        }
+
+        return driveTrain;
+    }
+
+    private Vehicle createVehicleBody(final Vector2 position, final Vector2 size, final float drag,
+                                      final float restitution, final float density) {;
+        Vehicle vehicle = new Vehicle();
         BodyPart vehicleBody = new BodyPart(
             shapeFactory.createRectangle(
                 position,
                 size,
                 BodyDef.BodyType.DynamicBody,
-                260f,
+                density,
                 false
             )
         );
 
-        vehicleBody.getBody().setLinearDamping(0.15f);
-        vehicleBody.getBody().getFixtureList().get(0).setRestitution(0.2f);
+        vehicleBody.getBody().setLinearDamping(drag);
+        vehicleBody.getBody().getFixtureList().get(0).setRestitution(restitution);
 
         vehicle.addPart(vehicleBody);
         vehicle.addPart(new TransformPart());
 
+        return vehicle;
+    }
+
+    private TexturePart getBodyTexture() {
         final TexturePart texturePart = new TexturePart();
-
-
-        //System.out.println(Gdx.files.internal("assets/taxi.png").exists());
-        //System.out.println(Gdx.files.internal("assets/taxi.png").path());
-
-        AssetManager assetManager = new AssetManager();
-        
         FileHandle file = Gdx.files.internal("assets/taxi.png");
         Texture texture = new Texture(file);
         TextureRegion textureRegion = new TextureRegion(texture);
 
         texturePart.setRegion(textureRegion);
-        vehicle.addPart(texturePart);
 
-        Wheel[] wheels = createWheels(vehicle);
-
-        DriveTrain driveTrain = new DriveTrain(wheels);
-        vehicle.addPart(driveTrain);
-
-        for (Wheel wheel : wheels) {
-            engine.addEntity(wheel);
-        }
-        engine.addEntity(vehicle);
-
-        System.out.println("VehiclePlugin started");
+        return texturePart;
     }
 
     private Wheel[] createWheels(Vehicle vehicle) {
