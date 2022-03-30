@@ -49,9 +49,7 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
     private boolean carAtmCollision(Fixture a, Fixture b) {
         if (a.getUserData() instanceof Vehicle || b.getUserData() instanceof Vehicle) {
-            if (a.getUserData() instanceof Collision || b.getUserData() instanceof Collision) {
-                return true;
-            }
+            return a.getUserData() instanceof Collision || b.getUserData() instanceof Collision;
         }
         return false;
     }
