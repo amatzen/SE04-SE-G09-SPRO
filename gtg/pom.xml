@@ -60,7 +60,9 @@
     <module>Bullet</module>
     <module>MainMenu</module>
     <module>Map</module>
+    <module>Music</module>
   </modules>
+
   <build>
     <plugins>
       <plugin>
