@@ -93,9 +93,9 @@ public class VehicleControlSystem implements IEntityProcessingService {
             }
         }
 
-        /*gameData.getCamera().position.x = vehicleBody.getPosition().x;
+        gameData.getCamera().position.x = vehicleBody.getPosition().x;
         gameData.getCamera().position.y = vehicleBody.getPosition().y;
-        gameData.getCamera().update();*/
+        gameData.getCamera().update();
     }
 
     public int direction(Body body) {
