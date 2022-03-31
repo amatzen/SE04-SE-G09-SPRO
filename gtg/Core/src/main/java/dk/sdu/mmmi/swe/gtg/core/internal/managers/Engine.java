@@ -114,7 +114,7 @@ public class Engine implements IEngine {
     @Override
     public void addEntityProcessingService(IEntityProcessingService service) {
         this.systemManager.addEntityProcessingService(service);
-        service.addedToEngine(this);
+        this.systemsToBeStarted.add(service);
     }
 
     @Override
