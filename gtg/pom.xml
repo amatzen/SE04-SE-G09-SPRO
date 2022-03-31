@@ -58,7 +58,7 @@
     <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
-    <module>dk.sdu.mmmi.swe.gtg.mainmenu</module>
+    <module>MainMenu</module>
   </modules>
 
   <build>
