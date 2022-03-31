@@ -18,7 +18,6 @@ public class BulletCreator implements BulletSPI {
 
     @Override
     public Body createBullet() {
-        System.out.println("skrr");
         BodyDef bulletBodyDef = new BodyDef();
         bulletBodyDef.bullet=true;
         bulletBodyDef.type=BodyDef.BodyType.DynamicBody;
