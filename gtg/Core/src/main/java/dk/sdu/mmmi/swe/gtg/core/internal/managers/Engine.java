@@ -4,6 +4,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -12,6 +13,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Engine implements IEngine {
 
@@ -22,7 +24,11 @@ public class Engine implements IEngine {
     private ISignalListener<Entity> onPartRemoved;
     private ISignalListener<Entity> onPartAdded;
 
+    private List<IEntitySystem> systemsToBeStarted;
+
     public Engine() {
+        systemsToBeStarted = new CopyOnWriteArrayList<>();
+
         onPartRemoved = onPartAdded = (signal, entity) -> {
             familyManager.updateFamilyMembership(entity);
         };
@@ -30,6 +36,11 @@ public class Engine implements IEngine {
 
     @Override
     public void update(GameData gameData) {
+        for (IEntitySystem system : systemsToBeStarted) {
+            system.addedToEngine(this);
+        }
+        systemsToBeStarted.clear();
+
         systemManager.update(gameData);
     }
 
@@ -114,7 +125,7 @@ public class Engine implements IEngine {
     @Override
     public void addPostEntityProcessingService(IPostEntityProcessingService service) {
         this.systemManager.addPostEntityProcessingService(service);
-        service.addedToEngine(this);
+        this.systemsToBeStarted.add(service);
     }
 
     @Override
