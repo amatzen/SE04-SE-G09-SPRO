@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.libgdxCommonBullet;
+package dk.sdu.mmmi.swe.gtg.CommonBullet;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
