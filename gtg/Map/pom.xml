@@ -13,6 +13,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
       </plugin>
     </plugins>
   </build>
@@ -57,11 +58,6 @@
       <artifactId>gdx-platform</artifactId>
       <version>1.10.0</version>
       <classifier>natives-desktop</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.badlogicgames.gdx</groupId>
-      <artifactId>gdx-backend-lwjgl3</artifactId>
-      <version>1.10.0</version>
     </dependency>
     <dependency>
       <groupId>com.badlogicgames.gdx</groupId>
