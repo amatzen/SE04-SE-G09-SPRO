@@ -45,6 +45,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         cfg.width = 1600;
         cfg.height = 900;
         cfg.resizable = false;
+        cfg.x = (int) (Math.random() * 1040);
+        cfg.y = (int) (Math.random() * 680);
 
         new LwjglApplication(this, cfg);
     }
@@ -54,9 +56,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        Gdx.input.setInputProcessor(
-                new GameInputProcessor(gameData)
-        );
         setScreen(new SplashScreen(this));
 
     }
