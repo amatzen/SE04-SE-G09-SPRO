@@ -1,10 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.shapefactory.internal;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -21,7 +18,6 @@ public class ShapeFactory implements ShapeFactorySPI {
 
     @Override
     public Body createRectangle(Vector2 position, Vector2 size, BodyDef.BodyType bodyType, float density, boolean sensor) {
-
         final BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(position);
         bodyDef.type = bodyType;
@@ -44,6 +40,28 @@ public class ShapeFactory implements ShapeFactorySPI {
     @Override
     public Body createEllipse() {
         return null;
+    }
+
+    @Override
+    public Body createCircle(Vector2 position, float radius, BodyDef.BodyType bodyType, float density, boolean sensor) {
+
+        final BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(position);
+        bodyDef.type = bodyType;
+        final Body body = worldManager.createBody(bodyDef);
+
+        final CircleShape shape = new CircleShape();
+        shape.setRadius(radius);
+
+        final FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = density;
+        fixtureDef.isSensor = sensor;
+
+        body.createFixture(fixtureDef);
+        shape.dispose();
+
+        return body;
     }
 
     public void setWorldManager(IWorldManager worldManager) {
