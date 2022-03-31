@@ -1,10 +1,10 @@
-package dk.sdu.mmmi.swe.gtg.collision.internal;
+package dk.sdu.mmmi.swe.gtg.atm.internal;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import dk.sdu.mmmi.swe.gtg.collision.Collision;
+import dk.sdu.mmmi.swe.gtg.atm.ATM;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 
 public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
@@ -45,7 +45,7 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
 
     private boolean carAtmCollision(Fixture a, Fixture b) {
         if (a.getBody().getUserData() instanceof Vehicle || b.getBody().getUserData() instanceof Vehicle) {
-            return a.getBody().getUserData() instanceof Collision || b.getBody().getUserData() instanceof Collision;
+            return a.getBody().getUserData() instanceof ATM || b.getBody().getUserData() instanceof ATM;
         }
         return false;
     }
