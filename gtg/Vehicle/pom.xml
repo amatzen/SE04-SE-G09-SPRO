@@ -7,6 +7,7 @@
     <artifactId>compiled-bundle-settings</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <build>
     <plugins>
       <plugin>
@@ -47,12 +48,26 @@
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
-      <artifactId>osgi_R4_core</artifactId>
+      <artifactId>osgi.core</artifactId>
       <optional>true</optional>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>dk.sdu.swe.gtg</groupId>
+        <artifactId>ShapeFactoryCommon</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>dk.sdu.swe.gtg</groupId>
+        <artifactId>dk.sdu.mmmi.swe.gtg.worldmanager</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
-      <artifactId>osgi_R4_compendium</artifactId>
+      <artifactId>org.osgi.service.component.annotations</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
   </dependencies>

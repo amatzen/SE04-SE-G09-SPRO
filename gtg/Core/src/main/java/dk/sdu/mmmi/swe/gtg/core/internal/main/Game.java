@@ -6,34 +6,44 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.World;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
+import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component(immediate = true)
 public class Game implements ApplicationListener {
 
-    private static OrthographicCamera cam;
-    private ShapeRenderer sr;
+    private OrthographicCamera cam;
+    private Box2DDebugRenderer mB2dr;
+
+    @Reference
+    private IWorldManager worldManager;
+
+    @Reference
+    private IEngine engine;
+
+    private float PPM = 20;
 
     private final GameData gameData = new GameData();
 
-    private World world = new World();
-
-    private List<IEntityProcessingService> entityProcessors = new CopyOnWriteArrayList<>();
-    private List<IPostEntityProcessingService> entityPostProcessors = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
     public Game() {
+        System.out.println("Game created");
         init();
     }
 
@@ -53,11 +63,13 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
+        mB2dr = new Box2DDebugRenderer();
+        cam = new OrthographicCamera(gameData.getDisplayWidth() / PPM, gameData.getDisplayHeight() / PPM);
+        cam.position.set(0, 0, 0);
         cam.update();
 
-        sr = new ShapeRenderer();
+        gameData.setCamera(cam);
+        gameData.setSpriteBatch(new SpriteBatch());
 
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
@@ -66,6 +78,9 @@ public class Game implements ApplicationListener {
 
     @Override
     public void render() {
+        pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
+        pluginsToBeStarted.clear();
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -76,6 +91,9 @@ public class Game implements ApplicationListener {
         draw();
 
         gameData.getKeys().update();
+
+        pluginsToBeStopped.forEach(plugin -> plugin.stop(engine, gameData));
+        pluginsToBeStopped.clear();
     }
 
     @Override
@@ -96,89 +114,25 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
-        entityProcessors.forEach(entityProcessor -> {
-            entityProcessor.beforeProcessing(gameData, world);
-
-            Class<? extends Entity> entityType = entityProcessor.getEntityType();
-
-            Collection<Entity> entities;
-            if (entityType.equals(Entity.class)) {
-                entities = world.getEntities();
-            } else {
-                entities = world.getEntities(entityType);
-            }
-
-            entities.forEach(entity -> {
-                entityProcessor.processEntity(entity, gameData.getDelta());
-            });
-
-            entityProcessor.afterProcessing(gameData, world);
-        });
-
-        entityPostProcessors.forEach(entityPostProcessor -> {
-            world.getEntities().forEach(entity -> {
-                entityPostProcessor.processEntity(entity, gameData.getDelta());
-            });
-        });
+        engine.update(gameData);
     }
 
     private void draw() {
-        for (Entity entity : world.getEntities()) {
-
-            sr.setColor(1, 1, 1, 1);
-
-            sr.begin(ShapeRenderer.ShapeType.Filled);
-
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
-
-            for (int i = 0, j = shapex.length - 1;
-                 i < shapex.length;
-                 j = i++) {
-
-                sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
-            }
-
-            sr.end();
-        }
+        worldManager.render(mB2dr, cam.combined);
     }
 
     private Collection<? extends IGamePluginService> getPluginServices() {
         return entityPlugins;
     }
 
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return entityProcessors;
-    }
-
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return entityPostProcessors;
-    }
-
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.add(plugin);
-        plugin.start(gameData, world);
+        this.pluginsToBeStarted.add(plugin);
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.remove(plugin);
-        plugin.stop(gameData, world);
+        this.pluginsToBeStopped.add(plugin);
     }
-
-    public void addEntityProcessingService(IEntityProcessingService service) {
-        this.entityProcessors.add(service);
-    }
-
-    public void removeEntityProcessingService(IEntityProcessingService service) {
-        this.entityProcessors.remove(service);
-    }
-
-    public void addPostEntityProcessingService(IPostEntityProcessingService service) {
-        this.entityPostProcessors.add(service);
-    }
-
-    public void removePostEntityProcessingService(IPostEntityProcessingService service) {
-        this.entityPostProcessors.remove(service);
-    }
-
 }

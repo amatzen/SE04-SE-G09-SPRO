@@ -51,6 +51,12 @@
     <module>Common</module>
     <module>LibGDX</module>
     <module>Vehicle</module>
+    <module>WorldManager</module>
+    <module>ShapeFactoryCommon</module>
+    <module>ShapeFactory</module>
+    <module>CommonBullet</module>
+    <module>dk.sdu.mmmi.swe.gtg.pathfindings</module>
+    <module>dk.sdu.mmmi.swe.gtg.renderingsystem</module>
   </modules>
 
   <build>

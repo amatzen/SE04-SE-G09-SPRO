@@ -71,9 +71,9 @@
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
-      <artifactId>osgi_R4_core</artifactId>
-      <scope>provided</scope>
+      <artifactId>osgi.core</artifactId>
       <optional>true</optional>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.diffplug.osgi</groupId>

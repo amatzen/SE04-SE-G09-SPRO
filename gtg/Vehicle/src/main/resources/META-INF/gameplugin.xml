@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<component xmlns="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.swe.gtg.vehicle.internal.VehiclePlugin">
-    <implementation class="dk.sdu.mmmi.swe.gtg.vehicle.internal.VehiclePlugin"/>
-    <service>
-        <provide interface="dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService"/>
-    </service>
-</component>

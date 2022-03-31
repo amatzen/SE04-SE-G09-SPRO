@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.swe.gtg.core.internal.managers.EntityManager">
+    <implementation class="dk.sdu.mmmi.swe.gtg.core.internal.managers.EntityManager"/>
+
+    <service>
+        <provide interface="dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager"/>
+    </service>
+</component>
