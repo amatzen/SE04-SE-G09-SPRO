@@ -15,23 +15,14 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
-        // System.out.println("Collision occurred!");
-
         if (carAtmCollision(fixtureA, fixtureB)) {
-            Vehicle car = (Vehicle) fixtureA.getUserData();
-            Collision atm = (Collision) fixtureB.getUserData();
             System.out.println("Collision with car and ATM");
-        } else {
-            System.out.println("Collision, but not with car and ATM");
         }
 
     }
 
     @Override
     public void endContact(Contact contact) {
-
-        Fixture fixtureA = contact.getFixtureA();
-        Fixture fixtureB = contact.getFixtureB();
 
         System.out.println("Collision stopped!");
 
@@ -48,8 +39,8 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
     }
 
     private boolean carAtmCollision(Fixture a, Fixture b) {
-        if (a.getUserData() instanceof Vehicle || b.getUserData() instanceof Vehicle) {
-            return a.getUserData() instanceof Collision || b.getUserData() instanceof Collision;
+        if (a.getBody().getUserData() instanceof Vehicle || b.getBody().getUserData() instanceof Vehicle) {
+            return a.getBody().getUserData() instanceof Collision || b.getBody().getUserData() instanceof Collision;
         }
         return false;
     }
