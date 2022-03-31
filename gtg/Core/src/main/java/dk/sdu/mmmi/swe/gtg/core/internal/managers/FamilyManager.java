@@ -2,17 +2,25 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class FamilyManager implements IFamilyManager {
 
     private Map<IFamily, List<Entity>> families;
+
+    @Reference
+    private IEntityManager entityManager;
 
     public FamilyManager() {
         families = new ConcurrentHashMap<>();
@@ -38,10 +46,6 @@ public class FamilyManager implements IFamilyManager {
                 } else {
                     entity.removeFromFamily(family);
                     familyEntities.remove(entity);
-
-                    if (familyEntities.isEmpty()) {
-                        families.remove(family);
-                    }
                 }
             }
         }
@@ -57,13 +61,13 @@ public class FamilyManager implements IFamilyManager {
         List<Entity> entities = families.get(family);
 
         if (entities == null) {
-            entities = new ArrayList<>();
+            entities = new CopyOnWriteArrayList<>();
             families.put(family, entities);
-        }
 
-        entities.forEach(entity -> {
-            updateFamilyMembership(entity);
-        });
+            entityManager.getEntities().forEach(entity -> {
+                updateFamilyMembership(entity);
+            });
+        }
 
         return Collections.unmodifiableList(entities);
     }

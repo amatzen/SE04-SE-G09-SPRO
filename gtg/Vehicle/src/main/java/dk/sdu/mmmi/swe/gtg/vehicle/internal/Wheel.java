@@ -2,25 +2,30 @@ package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
-public class Wheel {
+public class Wheel extends Entity {
 
-    private Body body;
-    private Vehicle vehicle;
     private boolean powered;
+    private boolean turnDirection;
+    private float maxTurningAngle;
 
-    public Wheel(Body body, Vehicle vehicle, boolean powered) {
-        this.body = body;
-        this.vehicle = vehicle;
+    public Wheel(boolean powered, float maxTurningAngle, boolean turnDirection) {
         this.powered = powered;
+        this.maxTurningAngle = maxTurningAngle;
+        this.turnDirection = turnDirection;
     }
 
-    public Body getBody() {
-        return body;
+    public Wheel(boolean powered) {
+        this(powered, 0, false);
     }
 
-    public void setAngle(float angle) {
-        body.setTransform(body.getPosition(), angle);
+    public float getMaxAngle() {
+        return maxTurningAngle;
+    }
+
+    public boolean getTurnDirection() {
+        return turnDirection;
     }
 
     public boolean isPowered() {

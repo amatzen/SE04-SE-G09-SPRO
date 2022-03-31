@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.common.family;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.EntityPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 
 import java.util.Objects;
 import java.util.Set;
@@ -10,7 +10,7 @@ public class Family implements IFamily{
 
     private Set<Class<? extends Entity>> entities;
 
-    private Set<Class<? extends EntityPart>> parts;
+    private Set<Class<? extends IEntityPart>> parts;
 
     public Family() {
     }
@@ -23,23 +23,23 @@ public class Family implements IFamily{
         this.entities = entities;
     }
 
-    public Set<Class<? extends EntityPart>> getParts() {
+    public Set<Class<? extends IEntityPart>> getParts() {
         return parts;
     }
 
-    protected void setParts(Set<Class<? extends EntityPart>> parts) {
+    protected void setParts(Set<Class<? extends IEntityPart>> parts) {
         this.parts = parts;
     }
 
     public boolean matches(Entity entity) {
-        if (entities != null) {
+        if (this.entities != null) {
             if (!this.entities.contains(entity.getClass())) {
                 return false;
             }
         }
 
-        if (parts != null) {
-            for (Class<? extends EntityPart> part : parts) {
+        if (this.parts != null) {
+            for (Class<? extends IEntityPart> part : this.parts) {
                 if (!entity.hasPart(part)) {
                     return false;
                 }
