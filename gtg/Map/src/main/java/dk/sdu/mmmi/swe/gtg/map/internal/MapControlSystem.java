@@ -19,26 +19,19 @@ public class MapControlSystem implements IPostEntityProcessingService {
     private OrthogonalTiledMapRenderer renderer;
     private TiledMap map;
     //float unitScale = 1 / 32f;
-    private OrthographicCamera camera;
     private List<? extends Entity> entities;
 
     @Override
     public void addedToEngine(IEngine engine) {
         entities = engine.getEntitiesFor(Family.builder().with(CameraPart.class).get());
-        map = new TmxMapLoader().load("GTG-Map1.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
     }
 
     @Override
     public void process(GameData gameData) {
 
-        if (!entities.isEmpty()) {
-            camera = entities.get(0).getPart(CameraPart.class).getCamera();
-        }
-
-        if (camera != null) {
-            renderer.setView(camera);
-            renderer.render();
-        }
+        renderer.setView(gameData.getCamera());
+        renderer.render();
     }
 }
