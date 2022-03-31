@@ -7,6 +7,7 @@
     <artifactId>compiled-bundle-settings</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+
   <build>
     <plugins>
       <plugin>
@@ -17,13 +18,13 @@
   </build>
 
   <properties>
-    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.core</bundle.symbolicName>
-    <bundle.namespace>dk.sdu.mmmi.swe.gtg.core</bundle.namespace>
+    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.renderingsystem</bundle.symbolicName>
+    <bundle.namespace>dk.sdu.mmmi.swe.gtg.renderingsystem</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.sdu.swe.gtg</groupId>
-  <artifactId>Core</artifactId>
+  <artifactId>dk.sdu.mmmi.swe.gtg.renderingsystem</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>${bundle.symbolicName}</name>
@@ -31,33 +32,30 @@
   <packaging>bundle</packaging>
 
   <dependencies>
+    <!--
+     | uncomment to add all imported (non-local) bundles to your compilation classpath
+    <dependency>
+      <type>pom</type>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>provision</artifactId>
+      <optional>true</optional>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.core</artifactId>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <groupId>dk.sdu.swe.gtg</groupId>
       <artifactId>Common</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.swe.gtg</groupId>
-      <artifactId>LibGDX</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi.core</artifactId>
-      <optional>true</optional>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.service.component.annotations</artifactId>
       <scope>provided</scope>
       <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>dk.sdu.swe.gtg</groupId>
-        <artifactId>dk.sdu.mmmi.swe.gtg.worldmanager</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <scope>compile</scope>
     </dependency>
   </dependencies>
 

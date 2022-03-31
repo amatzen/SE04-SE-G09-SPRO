@@ -39,6 +39,10 @@ public class EntityManager implements IEntityManager {
     public void removeEntity(Entity entity) {
         entityMap.remove(entity.getID());
 
+        entity.getParts().forEach((part) -> {
+            part.destroy();
+        });
+
         listeners.forEach((listener) -> {
             listener.onEntityRemoved(entity);
         });

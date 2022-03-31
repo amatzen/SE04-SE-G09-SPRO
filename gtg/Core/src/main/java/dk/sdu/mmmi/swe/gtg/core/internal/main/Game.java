@@ -6,34 +6,44 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component(immediate = true)
 public class Game implements ApplicationListener {
 
     private OrthographicCamera cam;
     private Box2DDebugRenderer mB2dr;
+
+    @Reference
     private IWorldManager worldManager;
+
+    @Reference
+    private IEngine engine;
 
     private float PPM = 20;
 
     private final GameData gameData = new GameData();
 
     private List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
-
-    private IEngine engine;
+    private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
     public Game() {
+        System.out.println("Game created");
         init();
     }
 
@@ -58,6 +68,9 @@ public class Game implements ApplicationListener {
         cam.position.set(0, 0, 0);
         cam.update();
 
+        gameData.setCamera(cam);
+        gameData.setSpriteBatch(new SpriteBatch());
+
         Gdx.input.setInputProcessor(
                 new GameInputProcessor(gameData)
         );
@@ -65,6 +78,9 @@ public class Game implements ApplicationListener {
 
     @Override
     public void render() {
+        pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
+        pluginsToBeStarted.clear();
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -75,6 +91,9 @@ public class Game implements ApplicationListener {
         draw();
 
         gameData.getKeys().update();
+
+        pluginsToBeStopped.forEach(plugin -> plugin.stop(engine, gameData));
+        pluginsToBeStopped.clear();
     }
 
     @Override
@@ -96,8 +115,6 @@ public class Game implements ApplicationListener {
 
     private void update() {
         engine.update(gameData);
-
-        worldManager.update(gameData.getDelta());
     }
 
     private void draw() {
@@ -108,29 +125,14 @@ public class Game implements ApplicationListener {
         return entityPlugins;
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.add(plugin);
-        plugin.start(engine, gameData);
+        this.pluginsToBeStarted.add(plugin);
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.remove(plugin);
-        plugin.stop(engine, gameData);
-    }
-
-    public void setEngine(IEngine engine) {
-        this.engine = engine;
-    }
-
-    public void removeEngine(IEngine systemManager) {
-        this.engine = null;
-    }
-
-    public void setWorldManager(IWorldManager worldManager) {
-        this.worldManager = worldManager;
-    }
-
-    public void removeWorldManager(IWorldManager worldManager) {
-        this.worldManager = null;
+        this.pluginsToBeStopped.add(plugin);
     }
 }
