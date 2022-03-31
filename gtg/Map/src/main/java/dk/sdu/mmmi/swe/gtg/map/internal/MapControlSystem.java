@@ -7,6 +7,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.CameraPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import org.osgi.service.component.annotations.Component;
@@ -14,7 +15,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.List;
 
 @Component
-public class MapControlSystem implements IPostEntityProcessingService {
+public class MapControlSystem implements IEntityProcessingService {
     private OrthogonalTiledMapRenderer renderer;
     private TiledMap map;
     private float unitScale = 1 / 16f;
