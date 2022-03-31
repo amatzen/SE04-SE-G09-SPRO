@@ -42,7 +42,6 @@
               <!--
                | export wrapped contents: don't use Export-Package:* as this bundles everything on the classpath
               -->
-              <_exportcontents>*</_exportcontents>
               <Private-Package>!*</Private-Package>
               <!--
                | each module can override these defaults in their osgi.bnd file

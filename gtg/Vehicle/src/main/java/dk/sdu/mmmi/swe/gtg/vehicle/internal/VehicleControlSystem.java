@@ -15,19 +15,16 @@ import java.util.List;
 @Component
 public class VehicleControlSystem implements IEntityProcessingService {
 
-    private final float DRIFT_OFFSET = 1.0f;
     private IEngine engine;
 
     private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
-    private final float BREAK_POWER = 1.3f;
-    private final float MAX_SPEED = 35.5f;
+    private final float BREAK_POWER = 1.5f;
     private float drift = 0.5f;
 
     private float wheelAngle = 0;
-    private final float WHEEL_TURN_INCREMENT = 0.017f;
-    private final float MAX_WHEEL_ANGLE = 0.35f;
-    private float acceleration = 80f;
+    private final float WHEEL_TURN_INCREMENT = 0.010f;
+    private float acceleration = 7200f;
 
     @Override
     public void addedToEngine(IEngine engine) {
@@ -36,44 +33,45 @@ public class VehicleControlSystem implements IEntityProcessingService {
         vehicleList = (List<Vehicle>) engine.getEntitiesFor(
                 Family.builder().forEntities(Vehicle.class).get()
         );
-
     }
 
     @Override
     public void process(GameData gameData) {
-
         for (Vehicle vehicle : vehicleList) {
 
             processInput(vehicle, gameData);
 
-            for (Wheel wheel : vehicle.getAllWheels()) {
-                updateBody(wheel.getBody(), gameData.getDelta());
+            DriveTrain driveTrain = vehicle.getPart(DriveTrain.class);
+
+            for (Wheel wheel : driveTrain.getWheels()) {
+                Body wheelBody = wheel.getPart(BodyPart.class).getBody();
+                updateBody(wheelBody, vehicle);
             }
 
         }
-
     }
 
     private void processInput(Vehicle vehicle, GameData gameData) {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
+        DriveTrain driveTrain = vehicle.getPart(DriveTrain.class);
 
         if (gameData.getKeys().isDown(GameKeys.LEFT)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
             }
-            wheelAngle = Math.min(wheelAngle += WHEEL_TURN_INCREMENT, MAX_WHEEL_ANGLE);
+            wheelAngle += WHEEL_TURN_INCREMENT;
         } else if (gameData.getKeys().isDown(GameKeys.RIGHT)) {
             if (wheelAngle > 0) {
                 wheelAngle = 0;
             }
-            wheelAngle = Math.max(wheelAngle -= WHEEL_TURN_INCREMENT, -MAX_WHEEL_ANGLE);
+            wheelAngle -= WHEEL_TURN_INCREMENT;
         } else {
             wheelAngle = 0;
         }
 
-        for (final Wheel wheel : vehicle.getRevolvingWheels()) {
-            wheel.setAngle(vehicleBody.getAngle() + wheelAngle);
+        for (Wheel wheel : driveTrain.getWheels()) {
+            turnWheel(wheelAngle, wheel, vehicleBody);
         }
 
         if (gameData.getKeys().isDown(GameKeys.UP)) {
@@ -84,36 +82,43 @@ public class VehicleControlSystem implements IEntityProcessingService {
             } else if (direction(vehicleBody) == 1) {
                 baseVector.set(0, -acceleration * BREAK_POWER);
             } else {
-                baseVector.set(0, -acceleration);
+                baseVector.set(0, -acceleration * REVERSE_POWER);
             }
         }
 
-        if (vehicle.getPart(BodyPart.class).getBody().getLinearVelocity().len() < MAX_SPEED) {
-            for (final Wheel wheel : vehicle.getAllWheels()) {
-                if (wheel.isPowered()) {
-                    wheel.getBody().applyForceToCenter(wheel.getBody().getWorldVector(baseVector), true);
-                }
+        for (final Wheel wheel : driveTrain.getWheels()) {
+            if (wheel.isPowered()) {
+                Body wheelBody = wheel.getPart(BodyPart.class).getBody();
+                wheelBody.applyForceToCenter(wheelBody.getWorldVector(baseVector), true);
             }
         }
+
+        /*gameData.getCamera().position.x = vehicleBody.getPosition().x;
+        gameData.getCamera().position.y = vehicleBody.getPosition().y;
+        gameData.getCamera().update();*/
     }
 
     public int direction(Body body) {
         final float tolerance = 0.2f;
-        if (body.getLinearVelocity().y < -tolerance) {
+        if (body.getLocalVector(getForwardVelocity(body)).y < -tolerance) {
             return 0;
-        } else if (body.getLinearVelocity().y > tolerance) {
+        } else if (body.getLocalVector(getForwardVelocity(body)).y > tolerance) {
             return 1;
         } else {
             return 2;
         }
     }
 
-    public void updateBody(Body body, final float delta) {
+    public void updateBody(Body wheelBody, Vehicle vehicle) {
         if (drift < 1) {
-            Vector2 forwardSpeed = getForwardVelocity(body);
-            Vector2 lateralSpeed = getLateralVelocity(body);
+            Vector2 forwardSpeed = getForwardVelocity(wheelBody);
+            Vector2 lateralSpeed = getLateralVelocity(wheelBody);
 
-            body.setLinearVelocity(forwardSpeed);
+            //body.setLinearVelocity(forwardSpeed);
+            wheelBody.applyLinearImpulse(
+                    lateralSpeed.scl(-(wheelBody.getMass() + vehicle.getPart(BodyPart.class).getBody().getMass()/4)),
+                    wheelBody.getWorldCenter(),
+                    true);
         }
     }
 
@@ -127,6 +132,21 @@ public class VehicleControlSystem implements IEntityProcessingService {
         final Vector2 currentNormal = body.getWorldVector(new Vector2(1, 0));
         final float dotProduct = currentNormal.dot(body.getLinearVelocity());
         return new Vector2(currentNormal).scl(dotProduct);
+    }
+
+    private void turnWheel(float angle, Wheel wheel, Body vehicleBody) {
+        if (angle < 0) {
+            angle = Math.max(angle, -wheel.getMaxAngle());
+        } else {
+            angle = Math.min(angle, wheel.getMaxAngle());
+        }
+
+        if (!wheel.getTurnDirection()) {
+            angle *= -1;
+        }
+
+        Body wheelBody = wheel.getPart(BodyPart.class).getBody();
+        wheelBody.setTransform(wheelBody.getPosition(), angle + vehicleBody.getAngle());
     }
 
 }
