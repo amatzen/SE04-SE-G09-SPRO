@@ -2,18 +2,12 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
-import dk.sdu.mmmi.swe.gtg.core.internal.screens.GameScreen;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
