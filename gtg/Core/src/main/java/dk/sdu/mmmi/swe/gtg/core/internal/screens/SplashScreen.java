@@ -33,12 +33,12 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         count = count + v;
         if (count > MAX_COUNT) {
-            this.game.setScreen(new GameScreen(this.game));
+            this.game.setScreen(new MainMenuScreen(this.game));
             return;
         }
 
