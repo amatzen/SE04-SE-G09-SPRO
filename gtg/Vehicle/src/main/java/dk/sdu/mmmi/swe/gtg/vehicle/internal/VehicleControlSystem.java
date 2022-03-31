@@ -13,7 +13,9 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -21,6 +23,9 @@ import java.util.List;
 public class VehicleControlSystem implements IEntityProcessingService {
 
     private IEngine engine;
+
+    @Reference(service = BulletSPI.class)
+    private BulletSPI bulletSPI;
 
     private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
@@ -64,7 +69,11 @@ public class VehicleControlSystem implements IEntityProcessingService {
         TransformPart position = vehicle.getPart(TransformPart.class);
 
 
-        if (gameData.getKeys().isDown(GameKeys.LEFT)) {
+        if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+           bulletSPI.createBullet();
+            }
+
+            if (gameData.getKeys().isDown(GameKeys.LEFT)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
             }

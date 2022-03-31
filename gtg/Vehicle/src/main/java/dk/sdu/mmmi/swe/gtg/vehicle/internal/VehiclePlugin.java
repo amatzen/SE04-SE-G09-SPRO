@@ -176,20 +176,4 @@ public class VehiclePlugin implements IGamePluginService {
             engine.removeEntity(entity);
         });
     }
-
-    public void setShapeFactory(ShapeFactorySPI shapeFactory) {
-        this.shapeFactory = shapeFactory;
-    }
-
-    public void removeShapeFactory(ShapeFactorySPI shapeFactory) {
-        this.shapeFactory = null;
-    }
-
-    public void setWorldManager(IWorldManager worldManager) {
-        this.worldManager = worldManager;
-    }
-
-    public void removeWorldManager(IWorldManager worldManager) {
-        this.worldManager = null;
-    }
 }

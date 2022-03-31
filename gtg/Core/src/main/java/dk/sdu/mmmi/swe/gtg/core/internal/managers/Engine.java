@@ -6,11 +6,11 @@ import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
-import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
+import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

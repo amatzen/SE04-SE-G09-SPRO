@@ -8,23 +8,14 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
   <properties>
-    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.pathfindings</bundle.symbolicName>
-    <bundle.namespace>dk.sdu.mmmi.swe.gtg.pathfindings</bundle.namespace>
+    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.mainmenu</bundle.symbolicName>
+    <bundle.namespace>dk.sdu.mmmi.swe.gtg.mainmenu</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.sdu.swe.gtg</groupId>
-  <artifactId>Pathfindings</artifactId>
+  <artifactId>MainMenu</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>${bundle.symbolicName}</name>
@@ -45,14 +36,24 @@
       <groupId>org.osgi</groupId>
       <artifactId>osgi.core</artifactId>
       <optional>true</optional>
-      <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>dk.sdu.swe.gtg</groupId>
-      <artifactId>Common</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
+      <dependency>
+          <groupId>com.badlogicgames.gdx</groupId>
+          <artifactId>gdx</artifactId>
+          <version>1.10.0</version>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>dk.sdu.swe.gtg</groupId>
+          <artifactId>Common</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.osgi</groupId>
+          <artifactId>org.osgi.service.component.annotations</artifactId>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
 
 </project>
