@@ -60,6 +60,7 @@
     <module>RenderingSystem</module>
     <module>Bullet</module>
     <module>MainMenu</module>
+    <module>ATM</module>
   </modules>
 
   <build>
