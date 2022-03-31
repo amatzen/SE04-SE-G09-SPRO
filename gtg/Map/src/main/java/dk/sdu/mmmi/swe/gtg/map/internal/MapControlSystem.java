@@ -18,14 +18,14 @@ import java.util.List;
 public class MapControlSystem implements IPostEntityProcessingService {
     private OrthogonalTiledMapRenderer renderer;
     private TiledMap map;
-    //float unitScale = 1 / 32f;
+    private float unitScale = 1 / 32f;
     private List<? extends Entity> entities;
 
     @Override
     public void addedToEngine(IEngine engine) {
         entities = engine.getEntitiesFor(Family.builder().with(CameraPart.class).get());
         map = new TmxMapLoader().load("maps/GTG-Map1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, unitScale);
     }
 
     @Override
