@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import dk.sdu.mmmi.swe.gtg.worldmanager.internal.WorldManager;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 
 public class GameScreen extends ScreenAdapter implements Screen {
