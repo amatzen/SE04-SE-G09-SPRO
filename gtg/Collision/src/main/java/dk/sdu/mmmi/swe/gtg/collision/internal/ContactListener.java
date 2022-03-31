@@ -24,7 +24,12 @@ public class ContactListener implements com.badlogic.gdx.physics.box2d.ContactLi
     @Override
     public void endContact(Contact contact) {
 
-        System.out.println("Collision stopped!");
+        Fixture fixtureA = contact.getFixtureA();
+        Fixture fixtureB = contact.getFixtureB();
+
+        if (carAtmCollision(fixtureA, fixtureB)) {
+            System.out.println("Collision with car and ATM stopped");
+        }
 
     }
 
