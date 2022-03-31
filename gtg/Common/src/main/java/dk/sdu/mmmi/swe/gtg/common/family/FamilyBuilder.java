@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.common.family;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.EntityPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -24,8 +24,8 @@ public class FamilyBuilder implements IFamilyBuilder {
     }
 
     @Override
-    public IFamilyBuilder with(Class<? extends EntityPart> ... parts) {
-        Set<Class<? extends EntityPart>> partSet = ConcurrentHashMap.newKeySet();
+    public IFamilyBuilder with(Class<? extends IEntityPart> ... parts) {
+        Set<Class<? extends IEntityPart>> partSet = ConcurrentHashMap.newKeySet();
         partSet.addAll(Arrays.asList(parts));
         family.setParts(partSet);
         return this;

@@ -7,9 +7,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
+@Component
 public class ShapeFactory implements ShapeFactorySPI {
 
+    public ShapeFactory() {
+    }
+
+    @Reference
     private IWorldManager worldManager;
 
     @Override
@@ -21,7 +28,7 @@ public class ShapeFactory implements ShapeFactorySPI {
         final Body body = worldManager.createBody(bodyDef);
 
         final PolygonShape shape = new PolygonShape();
-        shape.setAsBox(size.x, size.y);
+        shape.setAsBox(size.x * 0.5f, size.y * 0.5f);
 
         final FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
