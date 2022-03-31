@@ -25,8 +25,8 @@ public class BulletCreator implements BulletSPI {
         bulletBodyDef.fixedRotation=true;
         pBody = worldManager.createBody(bulletBodyDef);
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.2f / 2.0f, 0.01f /2.0f);
-        pBody.createFixture(polygonShape,1.0f);
+        polygonShape.setAsBox(0.2f / 2.0f, 0.2f /2.0f);
+        pBody.createFixture(polygonShape,10.0f);
         polygonShape.dispose();
                return pBody ;
     }
