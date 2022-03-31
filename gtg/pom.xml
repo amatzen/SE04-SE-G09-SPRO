@@ -57,6 +57,7 @@
     <module>CommonBullet</module>
     <module>dk.sdu.mmmi.swe.gtg.pathfindings</module>
     <module>dk.sdu.mmmi.swe.gtg.renderingsystem</module>
+     <module>Bullet</module>
   </modules>
 
   <build>
@@ -71,6 +72,7 @@
           -->
           <provision>
             <param>--platform=felix</param>
+<!--            <param>&#45;&#45;vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>-->
           </provision>
         </configuration>
         <executions>
