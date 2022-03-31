@@ -89,6 +89,8 @@ public class VehiclePlugin implements IGamePluginService {
         vehicle.addPart(vehicleBody);
         vehicle.addPart(new TransformPart());
 
+        vehicleBody.getBody().setUserData(vehicle);
+
         return vehicle;
     }
 

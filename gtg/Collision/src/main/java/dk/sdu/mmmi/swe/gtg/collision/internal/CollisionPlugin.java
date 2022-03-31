@@ -50,7 +50,7 @@ public class CollisionPlugin implements IGamePluginService {
 
         worldManager.setContactLister(new ContactListener());
 
-        System.out.println("CollisionPlugin started");
+        body2.getBody().setUserData(collision);
 
     }
 
