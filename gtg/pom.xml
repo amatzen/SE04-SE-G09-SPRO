@@ -60,6 +60,7 @@
         <module>Pathfindings</module>
         <module>RenderingSystem</module>
         <module>Bullet</module>
+        <module>Collision</module>
     </modules>
 
     <build>
