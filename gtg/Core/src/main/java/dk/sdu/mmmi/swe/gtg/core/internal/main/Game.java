@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.ClasspathFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -15,20 +16,28 @@ import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.GameScreen;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public final GameData gameData = new GameData();
 
     private List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
     private IEngine engine;
     private IWorldManager worldManager;
 
     public Game() {
+        System.out.println("Game created");
         init();
     }
 
@@ -58,6 +67,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Override
     public void render() {
         super.render();
+        
+        pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
+        pluginsToBeStarted.clear();
+
+        pluginsToBeStopped.forEach(plugin -> plugin.stop(engine, gameData));
+        pluginsToBeStopped.clear();
     }
 
     @Override
@@ -81,14 +96,15 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         return entityPlugins;
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.add(plugin);
-        plugin.start(engine, gameData);
+        this.pluginsToBeStarted.add(plugin);
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.entityPlugins.remove(plugin);
-        plugin.stop(engine, gameData);
+        this.pluginsToBeStopped.add(plugin);
     }
 
     public IEngine getEngine() {

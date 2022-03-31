@@ -9,8 +9,6 @@ public interface IWorldManager
 
     void clearWorld();
 
-    void update(float delta);
-
     Body createBody(BodyDef def);
 
     Joint createJoint(JointDef def);
