@@ -1,10 +1,15 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.CameraPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -25,6 +30,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private float wheelAngle = 0;
     private final float WHEEL_TURN_INCREMENT = 0.010f;
     private float acceleration = 7200f;
+    private List<? extends Entity> position;
+
 
     @Override
     public void addedToEngine(IEngine engine) {
@@ -46,15 +53,16 @@ public class VehicleControlSystem implements IEntityProcessingService {
             for (Wheel wheel : driveTrain.getWheels()) {
                 Body wheelBody = wheel.getPart(BodyPart.class).getBody();
                 updateBody(wheelBody, vehicle);
+                }
             }
-
         }
-    }
 
     private void processInput(Vehicle vehicle, GameData gameData) {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
         DriveTrain driveTrain = vehicle.getPart(DriveTrain.class);
+        TransformPart position = vehicle.getPart(TransformPart.class);
+
 
         if (gameData.getKeys().isDown(GameKeys.LEFT)) {
             if (wheelAngle < 0) {
@@ -84,6 +92,10 @@ public class VehicleControlSystem implements IEntityProcessingService {
             } else {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
             }
+        }
+
+        if (gameData.getKeys().isPressed(GameKeys.ENTER)) {
+            System.out.println(position.getPosition());
         }
 
         for (final Wheel wheel : driveTrain.getWheels()) {
