@@ -42,7 +42,7 @@ public class VehiclePlugin implements IGamePluginService {
 
     public Vehicle createVehicle(IEngine engine) {
         Vehicle vehicle = createVehicleBody(
-                new Vector2(0, 0), new Vector2(1.7f, 4.0f),
+                new Vector2(102,47), new Vector2(1.7f, 4.0f),
                 0.15f, 0.2f, 260f
         );
 
