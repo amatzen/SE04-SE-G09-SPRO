@@ -11,5 +11,7 @@ public interface ShapeFactorySPI {
     Body createRectangle(final Vector2 position, final Vector2 size, final BodyDef.BodyType bodyType, float density, final boolean sensor);
 
     Body createEllipse();
+
+    Body createCircle(final Vector2 position, final float radius, final BodyDef.BodyType bodyType, float density, final boolean sensor);
 }
 
