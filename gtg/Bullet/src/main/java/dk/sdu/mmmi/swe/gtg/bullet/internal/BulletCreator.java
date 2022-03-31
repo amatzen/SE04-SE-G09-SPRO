@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.bullet;
+package dk.sdu.mmmi.swe.gtg.bullet.internal;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
