@@ -18,7 +18,7 @@ import java.util.List;
 public class MapControlSystem implements IPostEntityProcessingService {
     private OrthogonalTiledMapRenderer renderer;
     private TiledMap map;
-    private float unitScale = 1 / 32f;
+    private float unitScale = 1 / 16f;
     private List<? extends Entity> entities;
 
     @Override
