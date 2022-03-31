@@ -4,14 +4,10 @@
  <tileset firstgid="9" source="Roads.tsx"/>
  <tileset firstgid="41" source="Roof.tsx"/>
  <tileset firstgid="73" source="Floor.tsx"/>
+ <tileset firstgid="105" source="Water.tsx"/>
  <layer id="1" name="Grass" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1lsKwjAUhOGTaLJOl9aluDRbRBlCIkcinRych++lF/hzoU02swwqyB94njkbNtWB3r1VuiPO+atr5v1idlc/r/9wMbuhfUxb2kXo781/OXFd/q2/PPfHW1qg3zsGbxOj3zOG6P2o/eYcGP3f7qHV5n9mDVbob89ljratB/9XrP3vnf/es9jL+n56z6C1ucbsH3V51grfYfb/YqxR+kcY/e1ZZgaeg9LgXCQiIiIiIiLCcA2OPX8iIlE9ABf9O0c=
-  </data>
- </layer>
- <layer id="3" name="Water" width="48" height="48">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztllEKwyAMQKObnnNH61F6tLWMlSBasjkaZS/wfqrCSyI2UUSiIiviCZY9V6OdcoPa2ijeM9b87dVzPoms+Pv579xEHpotpyVszOBfq3+6sC//5p9e9+MgDOBvzcHq5OFvyWF2f0355ux4+H96h0arf08PRvAv5zKD21JD/6+87r+1/rW92tfr/bTOoLn45unf8rL0Sp/x9P9FrrP4t/DwL2eZHvQcFBpzEQAAAAAAAIAH98khCIIgvosnLlQ4pw==
   </data>
  </layer>
  <layer id="2" name="Roads" width="48" height="48">
@@ -29,7 +25,12 @@
    eJztmEEOwyAMBHlRD72Q/7+szSGSZZFmAZs1qkfiRJVMFuOUlGLD8R1vNQ4xX52GFYi/np8d1v6tIf2982ev4Swja7yj/6vs7T+aP1qLVvWvPWfr/ymfCv4Oya7lP4tl/oh/9D6DOkVyP0H9o/b7Hv+IvZ6V/8r9q+9rwer+aV373u8vfa/I/3WeiNp7etnV+2J3f0ss9y8Dq/7J9GfnH2Ed7/j1/eBEvrvlmUbOMZ9Nf8Np+aM1y/S/zue7+nvl771/kfqf9Wf2z+j5e/uzufPXfZXlj6wbci5i+qN+0fx78x3x996/K/w9+yfy3FVcozcjdv/U106SJEmS5D/5ACrvlXg=
   </data>
  </layer>
- <objectgroup id="6" name="Walls" visible="0" locked="1">
+ <layer id="3" name="Water" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztw6ENAAAMAjAO5n/NDzMzbdIEAAAAAAAAAP5V1dMBbVuNwQ==
+  </data>
+ </layer>
+ <objectgroup id="6" name="Walls" locked="1">
   <object id="1" x="1152" y="1536" width="320" height="832"/>
   <object id="2" x="704" y="1984" width="448" height="384"/>
   <object id="3" x="768" y="2368" width="192" height="64"/>
