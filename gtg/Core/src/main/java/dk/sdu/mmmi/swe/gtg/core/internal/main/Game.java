@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Component
+@Component(immediate = true)
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public final GameData gameData = new GameData();
 
@@ -33,7 +33,10 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
+    @Reference
     private IEngine engine;
+
+    @Reference
     private IWorldManager worldManager;
 
     public Game() {

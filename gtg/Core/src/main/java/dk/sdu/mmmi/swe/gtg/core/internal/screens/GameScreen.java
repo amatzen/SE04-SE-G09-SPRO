@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
@@ -40,8 +41,6 @@ public class GameScreen extends ScreenAdapter implements Screen {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
 
         this.game.getEngine().update(this.gameData);
-
-        this.game.getWorldManager().update(this.gameData.getDelta());
         this.game.getWorldManager().render(mB2dr, cam.combined);
 
         this.gameData.getKeys().update();
@@ -58,6 +57,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
         cam.position.set(0, 0, 0);
         cam.update();
+        this.game.gameData.setCamera(cam);
+        this.game.gameData.setSpriteBatch(new SpriteBatch());
 
     }
 
