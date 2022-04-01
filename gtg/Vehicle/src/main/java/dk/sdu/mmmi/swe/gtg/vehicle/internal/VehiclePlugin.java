@@ -31,7 +31,7 @@ public class VehiclePlugin implements IGamePluginService {
     private IWorldManager worldManager;
 
     private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
-    private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.45f;
+    private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.40f;
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
 
     @Override
@@ -86,22 +86,32 @@ public class VehiclePlugin implements IGamePluginService {
         vehicleBody.getBody().getFixtureList().get(0).setRestitution(restitution);
 
         vehicle.addPart(vehicleBody);
-        vehicle.addPart(new TransformPart());
+        TransformPart transformPart = new TransformPart();
+        transformPart.getPosition().z = -1;
+        vehicle.addPart(transformPart);
 
         vehicleBody.getBody().setUserData(vehicle);
 
         return vehicle;
     }
 
-    private TexturePart getBodyTexture() {
+    private TexturePart getTexture(String path) {
         final TexturePart texturePart = new TexturePart();
-        FileHandle file = Gdx.files.internal("assets/taxi.png");
+        FileHandle file = Gdx.files.internal(path);
         Texture texture = new Texture(file);
         TextureRegion textureRegion = new TextureRegion(texture);
 
         texturePart.setRegion(textureRegion);
 
         return texturePart;
+    }
+
+    private TexturePart getBodyTexture() {
+        return getTexture("assets/taxi.png");
+    }
+
+    private TexturePart getWheelTexture() {
+        return getTexture("assets/tire.png");
     }
 
     private Wheel[] createWheels(Vehicle vehicle) {
@@ -151,6 +161,12 @@ public class VehiclePlugin implements IGamePluginService {
                     60f,
                     true
             ));
+
+            TransformPart wheelTransform = new TransformPart();
+            wheelTransform.setScale(0.04f, 0.04f);
+
+            wheel.addPart(wheelTransform);
+            wheel.addPart(getWheelTexture());
 
             wheel.addPart(wheelBody);
 
