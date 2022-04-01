@@ -74,12 +74,12 @@ public class VehicleControlSystem implements IEntityProcessingService {
            bulletSPI.createBullet();
             }
 
-            if (gameData.getKeys().isDown(GameKeys.LEFT)) {
+            if (gameData.getKeys().isDown(GameKeys.LEFT)|| gameData.getKeys().isDown(GameKeys.A)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
             }
             wheelAngle += WHEEL_TURN_INCREMENT;
-        } else if (gameData.getKeys().isDown(GameKeys.RIGHT)) {
+        } else if (gameData.getKeys().isDown(GameKeys.RIGHT) || gameData.getKeys().isDown(GameKeys.D)) {
             if (wheelAngle > 0) {
                 wheelAngle = 0;
             }
@@ -92,9 +92,9 @@ public class VehicleControlSystem implements IEntityProcessingService {
             turnWheel(wheelAngle, wheel, vehicleBody);
         }
 
-        if (gameData.getKeys().isDown(GameKeys.UP)) {
+        if (gameData.getKeys().isDown(GameKeys.UP) || gameData.getKeys().isDown(GameKeys.W)) {
             baseVector.set(0, acceleration);
-        } else if (gameData.getKeys().isDown(GameKeys.DOWN)) {
+        } else if (gameData.getKeys().isDown(GameKeys.DOWN)|| gameData.getKeys().isDown(GameKeys.S)) {
             if (direction(vehicle.getPart(BodyPart.class).getBody()) == 0) {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
             } else if (direction(vehicleBody) == 1) {
