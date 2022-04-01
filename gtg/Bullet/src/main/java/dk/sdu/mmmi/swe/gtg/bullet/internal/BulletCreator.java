@@ -47,7 +47,7 @@ public class BulletCreator implements BulletSPI {
         TransformPart transformPart = new TransformPart();
         BodyPart bulletBody = new BodyPart(pBody);
 
-        transformPart.setScale(1f/56f, 1f/56f);
+        transformPart.setScale(1f/1890f, 1f/1890f);
         bullet.addPart(getBulletTexture());
         bullet.addPart(transformPart);
         bullet.addPart(bulletBody);
