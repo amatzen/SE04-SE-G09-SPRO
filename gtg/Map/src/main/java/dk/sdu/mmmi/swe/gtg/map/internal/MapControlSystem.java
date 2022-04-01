@@ -18,11 +18,11 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class MapControlSystem implements IEntityProcessingService {
-    private OrthogonalTiledMapRenderer renderer;
-    private TiledMap map;
-    private final float unitScale = 1 / 16f;
     private static final String MAP_WALL = "Walls";
     private static final float OBJECT_DENSITY = 1f;
+    private final float unitScale = 1 / 16f;
+    private OrthogonalTiledMapRenderer renderer;
+    private TiledMap map;
     private BodyPart collision;
 
     @Reference

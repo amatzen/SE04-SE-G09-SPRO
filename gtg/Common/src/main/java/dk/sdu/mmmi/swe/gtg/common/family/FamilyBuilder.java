@@ -16,7 +16,7 @@ public class FamilyBuilder implements IFamilyBuilder {
     }
 
     @Override
-    public IFamilyBuilder forEntities(Class<? extends Entity> ... entities) {
+    public IFamilyBuilder forEntities(Class<? extends Entity>... entities) {
         Set<Class<? extends Entity>> entitySet = ConcurrentHashMap.newKeySet();
         entitySet.addAll(Arrays.asList(entities));
         family.setEntities(entitySet);
@@ -24,7 +24,7 @@ public class FamilyBuilder implements IFamilyBuilder {
     }
 
     @Override
-    public IFamilyBuilder with(Class<? extends IEntityPart> ... parts) {
+    public IFamilyBuilder with(Class<? extends IEntityPart>... parts) {
         Set<Class<? extends IEntityPart>> partSet = ConcurrentHashMap.newKeySet();
         partSet.addAll(Arrays.asList(parts));
         family.setParts(partSet);

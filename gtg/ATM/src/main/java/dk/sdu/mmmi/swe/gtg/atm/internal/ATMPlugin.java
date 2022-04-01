@@ -53,7 +53,7 @@ public class ATMPlugin implements IGamePluginService {
         this.atm.addPart(sensorPart);
 
         TransformPart transformPart = new TransformPart();
-        transformPart.setScale(1f/184f, 1.5f/423f);
+        transformPart.setScale(1f / 184f, 1.5f / 423f);
         this.atm.addPart(transformPart);
         this.atm.addPart(getBodyTexture());
 

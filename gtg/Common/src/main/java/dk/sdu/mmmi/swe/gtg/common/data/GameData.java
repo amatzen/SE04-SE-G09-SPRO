@@ -10,14 +10,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameData {
 
+    private final GameKeys keys = new GameKeys();
+    private final List<Event> events = new CopyOnWriteArrayList<>();
     private OrthographicCamera camera;
     private SpriteBatch spriteBatch;
-
     private float delta;
     private int displayWidth;
     private int displayHeight;
-    private final GameKeys keys = new GameKeys();
-    private final List<Event> events = new CopyOnWriteArrayList<>();
 
     public void addEvent(Event e) {
         events.add(e);
@@ -35,32 +34,28 @@ public class GameData {
         return keys;
     }
 
-    public void setDelta(float delta) {
-        this.delta = delta;
-    }
-
     public float getDelta() {
         return delta;
     }
 
-    public void setDisplayWidth(int width) {
-        this.displayWidth = width;
+    public void setDelta(float delta) {
+        this.delta = delta;
     }
 
     public int getDisplayWidth() {
         return displayWidth;
     }
 
-    public void setDisplayHeight(int height) {
-        this.displayHeight = height;
+    public void setDisplayWidth(int width) {
+        this.displayWidth = width;
     }
 
     public int getDisplayHeight() {
         return displayHeight;
     }
 
-    public void setCamera(OrthographicCamera camera) {
-        this.camera = camera;
+    public void setDisplayHeight(int height) {
+        this.displayHeight = height;
     }
 
     public SpriteBatch getSpriteBatch() {
@@ -73,6 +68,10 @@ public class GameData {
 
     public OrthographicCamera getCamera() {
         return camera;
+    }
+
+    public void setCamera(OrthographicCamera camera) {
+        this.camera = camera;
     }
 
     public <E extends Event> List<Event> getEvents(Class<E> type, String sourceID) {

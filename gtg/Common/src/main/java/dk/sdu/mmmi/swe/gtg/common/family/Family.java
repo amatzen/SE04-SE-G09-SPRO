@@ -6,13 +6,17 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 import java.util.Objects;
 import java.util.Set;
 
-public class Family implements IFamily{
+public class Family implements IFamily {
 
     private Set<Class<? extends Entity>> entities;
 
     private Set<Class<? extends IEntityPart>> parts;
 
     public Family() {
+    }
+
+    public static IFamilyBuilder builder() {
+        return new FamilyBuilder();
     }
 
     public Set<Class<? extends Entity>> getEntities() {
@@ -55,10 +59,6 @@ public class Family implements IFamily{
         if (object == null || getClass() != object.getClass()) return false;
         Family family = (Family) object;
         return Objects.equals(entities, family.entities) && Objects.equals(parts, family.parts);
-    }
-
-    public static IFamilyBuilder builder() {
-        return new FamilyBuilder();
     }
 
     @Override

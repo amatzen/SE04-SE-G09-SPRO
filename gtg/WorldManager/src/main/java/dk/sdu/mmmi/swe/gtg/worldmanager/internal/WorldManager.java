@@ -19,13 +19,10 @@ import java.util.List;
 @Component(service = {IWorldManager.class, IEntityProcessingService.class})
 public class WorldManager implements IWorldManager, IEntityProcessingService {
 
-    private World world;
-
     private final Vector2 gravity;
-
-    private float accumulator = 0f;
     private final float timeStep = 1 / 60f;
-
+    private World world;
+    private float accumulator = 0f;
     private List<? extends Entity> entities;
 
     public WorldManager() {
@@ -61,6 +58,7 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
     public void setContactLister(ContactListener contactLister) {
         this.world.setContactListener(contactLister);
     }
+
     @Override
     public void addedToEngine(IEngine engine) {
         entities = engine.getEntitiesFor(

@@ -5,21 +5,25 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
 public interface IGamePluginService {
-    /** Start
-     *
+    /**
+     * Start
+     * <p>
      * Called when the plugin is first created.
+     *
      * @param gameData Game data.
-     * @param world World data.
+     * @param world    World data.
      * @pre The application has been started.
      * @post The entity plugin has been initialized.
      */
     void start(IEngine engine, GameData gameData);
 
-    /** Stop
-     *
+    /**
+     * Stop
+     * <p>
      * Called when the application is stopped.
+     *
      * @param gameData Game data.
-     * @param world World data.
+     * @param world    World data.
      * @pre The plugin has been started.
      * @post The entity plugin has been taken down.
      */

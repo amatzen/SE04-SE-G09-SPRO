@@ -17,14 +17,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Engine implements IEngine {
 
+    private final ISignalListener<Entity> onPartRemoved;
+    private final ISignalListener<Entity> onPartAdded;
+    private final List<IEntitySystem> systemsToBeStarted;
     private ISystemManager systemManager;
     private IEntityManager entityManager;
     private IFamilyManager familyManager;
-
-    private final ISignalListener<Entity> onPartRemoved;
-    private final ISignalListener<Entity> onPartAdded;
-
-    private final List<IEntitySystem> systemsToBeStarted;
 
     public Engine() {
         systemsToBeStarted = new CopyOnWriteArrayList<>();

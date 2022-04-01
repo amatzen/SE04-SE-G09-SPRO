@@ -60,7 +60,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Override
     public void render() {
         super.render();
-        
+
         pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
         pluginsToBeStarted.clear();
 

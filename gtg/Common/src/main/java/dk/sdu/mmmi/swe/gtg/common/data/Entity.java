@@ -9,14 +9,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Entity implements Serializable {
-    private final UUID ID;
-
-    private final Set<IFamily> families;
-
-    private final Map<Class, IEntityPart> parts;
-
     public final Signal<Entity> onPartAdded;
     public final Signal<Entity> onPartRemoved;
+    private final UUID ID;
+    private final Set<IFamily> families;
+    private final Map<Class, IEntityPart> parts;
 
     public Entity() {
         ID = UUID.randomUUID();
@@ -26,7 +23,7 @@ public class Entity implements Serializable {
         onPartAdded = new Signal<>();
         onPartRemoved = new Signal<>();
     }
-    
+
     public void addPart(IEntityPart part) {
         parts.put(part.getClass(), part);
         onPartAdded.fire(this);
@@ -36,7 +33,7 @@ public class Entity implements Serializable {
         parts.remove(partClass);
         onPartRemoved.fire(this);
     }
-    
+
     public <E extends IEntityPart> E getPart(Class<E> partClass) {
         return (E) parts.get(partClass);
     }
