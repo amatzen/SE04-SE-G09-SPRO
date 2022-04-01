@@ -1,12 +1,11 @@
 package dk.sdu.mmmi.swe.gtg.bullet.internal;
+
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
-import org.lwjgl.util.vector.Vector2f;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 

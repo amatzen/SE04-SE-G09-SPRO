@@ -1,7 +1,5 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
-import com.badlogic.gdx.physics.box2d.Body;
-import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
 public class Wheel extends Entity {
