@@ -12,7 +12,7 @@ public class EntityManager implements IEntityManager {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
 
-    private List<IEntityListener> listeners = new CopyOnWriteArrayList<>();
+    private final List<IEntityListener> listeners = new CopyOnWriteArrayList<>();
 
     @Override
     public void addEntityListener(IEntityListener listener) {

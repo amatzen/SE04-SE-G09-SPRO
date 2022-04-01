@@ -21,7 +21,7 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
 
     private World world;
 
-    private Vector2 gravity;
+    private final Vector2 gravity;
 
     private float accumulator = 0f;
     private final float timeStep = 1 / 60f;

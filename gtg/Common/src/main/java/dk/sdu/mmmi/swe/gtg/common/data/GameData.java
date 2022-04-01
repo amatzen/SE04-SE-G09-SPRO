@@ -17,7 +17,7 @@ public class GameData {
     private int displayWidth;
     private int displayHeight;
     private final GameKeys keys = new GameKeys();
-    private List<Event> events = new CopyOnWriteArrayList<>();
+    private final List<Event> events = new CopyOnWriteArrayList<>();
 
     public void addEvent(Event e) {
         events.add(e);

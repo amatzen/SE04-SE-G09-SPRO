@@ -23,9 +23,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public final GameData gameData = new GameData();
 
-    private List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
-    private List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
-    private List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
+    private final List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
+    private final List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
+    private final List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
 
     @Reference
     private IEngine engine;

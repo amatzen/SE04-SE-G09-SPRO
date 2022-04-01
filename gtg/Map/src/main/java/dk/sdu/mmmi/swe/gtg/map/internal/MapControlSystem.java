@@ -26,7 +26,7 @@ import java.util.List;
 public class MapControlSystem implements IEntityProcessingService {
     private OrthogonalTiledMapRenderer renderer;
     private TiledMap map;
-    private float unitScale = 1 / 16f;
+    private final float unitScale = 1 / 16f;
     private static final String MAP_WALL = "Walls";
     private static final float OBJECT_DENSITY = 1f;
     private BodyPart collision;

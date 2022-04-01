@@ -31,11 +31,11 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
     private final float BREAK_POWER = 1.5f;
-    private float drift = 0.5f;
+    private final float drift = 0.5f;
 
     private float wheelAngle = 0;
     private final float WHEEL_TURN_INCREMENT = 0.010f;
-    private float acceleration = 7200f;
+    private final float acceleration = 7200f;
     private List<? extends Entity> position;
 
 

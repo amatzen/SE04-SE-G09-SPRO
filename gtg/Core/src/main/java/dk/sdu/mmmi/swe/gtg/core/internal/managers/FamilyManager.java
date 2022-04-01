@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class FamilyManager implements IFamilyManager {
 
-    private Map<IFamily, List<Entity>> families;
+    private final Map<IFamily, List<Entity>> families;
 
     @Reference
     private IEntityManager entityManager;

@@ -11,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Entity implements Serializable {
     private final UUID ID;
 
-    private Set<IFamily> families;
+    private final Set<IFamily> families;
 
-    private Map<Class, IEntityPart> parts;
+    private final Map<Class, IEntityPart> parts;
 
     public final Signal<Entity> onPartAdded;
     public final Signal<Entity> onPartRemoved;
@@ -76,11 +76,7 @@ public class Entity implements Serializable {
         }
 
         Entity entity = (Entity) object;
-        if (entity.getID().equals(getID())) {
-            return true;
-        }
-
-        return false;
+        return entity.getID().equals(getID());
     }
 
     @Override
