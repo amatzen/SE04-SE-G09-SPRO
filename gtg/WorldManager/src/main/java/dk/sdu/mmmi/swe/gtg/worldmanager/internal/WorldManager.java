@@ -51,9 +51,16 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
 
     @Override
     public void render(Box2DDebugRenderer renderer, Matrix4 projectionMatrix) {
+        /*
+         * Comment out for debugging of entities
+         */
         //renderer.render(world, projectionMatrix);
     }
 
+    @Override
+    public void setContactLister(ContactListener contactLister) {
+        this.world.setContactListener(contactLister);
+    }
     @Override
     public void addedToEngine(IEngine engine) {
         entities = engine.getEntitiesFor(
