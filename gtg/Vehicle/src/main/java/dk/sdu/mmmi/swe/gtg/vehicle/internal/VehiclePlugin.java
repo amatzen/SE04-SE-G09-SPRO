@@ -86,6 +86,7 @@ public class VehiclePlugin implements IGamePluginService {
 
         vehicle.addPart(vehicleBody);
         TransformPart transformPart = new TransformPart();
+        transformPart.setScale(1f/56f, 1f/56f);
         transformPart.getPosition().z = -1;
         vehicle.addPart(transformPart);
 
@@ -160,7 +161,7 @@ public class VehiclePlugin implements IGamePluginService {
             ));
 
             TransformPart wheelTransform = new TransformPart();
-            wheelTransform.setScale(0.04f, 0.04f);
+            wheelTransform.setScale(0.04f / 56f, 0.04f / 56f);
 
             wheel.addPart(wheelTransform);
             wheel.addPart(getWheelTexture());
