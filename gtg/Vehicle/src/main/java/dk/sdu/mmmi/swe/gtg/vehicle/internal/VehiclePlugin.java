@@ -16,6 +16,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -88,6 +89,8 @@ public class VehiclePlugin implements IGamePluginService {
         TransformPart transformPart = new TransformPart();
         transformPart.getPosition().z = -1;
         vehicle.addPart(transformPart);
+
+        vehicleBody.getBody().setUserData(vehicle);
 
         return vehicle;
     }

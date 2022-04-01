@@ -55,6 +55,10 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
     }
 
     @Override
+    public void setContactLister(ContactListener contactLister) {
+        this.world.setContactListener(contactLister);
+    }
+    @Override
     public void addedToEngine(IEngine engine) {
         entities = engine.getEntitiesFor(
                 Family.builder().with(BodyPart.class, TransformPart.class).get()
