@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.commonbullet;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 
 /**
@@ -8,5 +10,5 @@ import com.badlogic.gdx.physics.box2d.Body;
 public interface BulletSPI
 {
     // public methods go here...
-    Body createBullet(); // might change to
+    Body createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed); // might change to
 }

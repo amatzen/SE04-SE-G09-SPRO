@@ -48,8 +48,8 @@ public class RenderingSystem implements IPostEntityProcessingService {
             }
 
 
-            final float width = texturePart.getTexture().getRegionWidth() / 56f;
-            final float height = texturePart.getTexture().getRegionHeight() / 56f;
+            final float width = texturePart.getTexture().getRegionWidth();
+            final float height = texturePart.getTexture().getRegionHeight();
 
             final float originX = transformPart.getOrigin().x + width * 0.5f;
             final float originY = transformPart.getOrigin().y + height * 0.5f;
