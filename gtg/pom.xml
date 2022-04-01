@@ -61,8 +61,8 @@
     <module>Bullet</module>
     <module>MainMenu</module>
     <module>ATM</module>
+    <module>Map</module>
   </modules>
-
   <build>
     <plugins>
       <plugin>

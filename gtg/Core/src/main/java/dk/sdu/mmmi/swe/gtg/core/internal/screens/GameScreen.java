@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 
 public class GameScreen extends ScreenAdapter implements Screen {
@@ -24,6 +25,10 @@ public class GameScreen extends ScreenAdapter implements Screen {
     public GameScreen(Game game) {
         this.game = game;
         this.gameData = game.gameData;
+
+        Gdx.input.setInputProcessor(
+                new GameInputProcessor(gameData)
+        );
 
         this.mB2dr = new Box2DDebugRenderer();
         this.cam = new OrthographicCamera(gameData.getDisplayWidth() / PPM, gameData.getDisplayHeight() / PPM);

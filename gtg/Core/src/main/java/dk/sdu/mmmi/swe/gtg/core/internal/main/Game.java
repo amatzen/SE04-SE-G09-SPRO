@@ -54,9 +54,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        Gdx.input.setInputProcessor(
-                new GameInputProcessor(gameData)
-        );
         setScreen(new SplashScreen(this));
 
     }
