@@ -115,7 +115,7 @@ public class VehiclePlugin implements IGamePluginService {
         return getTexture("assets/tire.png");
     }
     private TexturePart getBulletTexture() {
-        return getTexture("assets/tire.png");
+        return getTexture("assets/bullet.png");
     }
     private Wheel[] createWheels(Vehicle vehicle) {
         Wheel[] wheels = new Wheel[4];
