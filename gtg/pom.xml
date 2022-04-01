@@ -58,7 +58,6 @@
     <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
-    <module>MainMenu</module>
     <module>Map</module>
   </modules>
   <build>
