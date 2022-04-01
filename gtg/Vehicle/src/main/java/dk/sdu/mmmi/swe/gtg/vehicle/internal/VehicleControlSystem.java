@@ -71,8 +71,18 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
 
         if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-           bulletSPI.createBullet();
-            }
+            Vector2 vehiclePosition = new Vector2(vehicleBody.getPosition());
+            Vector2 norm = vehicleBody.getWorldVector (new Vector2( 0, 1));
+            norm.scl(2.5f);
+            vehiclePosition.add(norm);
+
+            Vector2 vehicleDirection = new Vector2(getForwardVelocity(vehicleBody));
+
+            bulletSPI.createBullet(vehiclePosition,new Vector2(vehicleDirection));
+
+
+
+        }
 
             if (gameData.getKeys().isDown(GameKeys.LEFT)|| gameData.getKeys().isDown(GameKeys.A)) {
             if (wheelAngle < 0) {
@@ -106,6 +116,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
         if (gameData.getKeys().isPressed(GameKeys.ENTER)) {
             System.out.println(position.getPosition());
+            System.out.println(position.getPosition().getClass());
+
         }
 
         for (final Wheel wheel : driveTrain.getWheels()) {
