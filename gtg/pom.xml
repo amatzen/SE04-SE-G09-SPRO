@@ -51,6 +51,7 @@
     <module>Common</module>
     <module>LibGDX</module>
     <module>Vehicle</module>
+    <module>Collision</module>
     <module>WorldManager</module>
     <module>ShapeFactoryCommon</module>
     <module>ShapeFactory</module>
@@ -58,9 +59,11 @@
     <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
-    <module>MainMenu</module>
+    <module>ATM</module>
     <module>Map</module>
+    <module>Music</module>
   </modules>
+
   <build>
     <plugins>
       <plugin>

@@ -16,7 +16,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
     private final Game game;
     private final GameData gameData;
 
-    private final float PPM = 20;
+    private final float PPM = 40;
 
     private OrthographicCamera cam;
     private Box2DDebugRenderer mB2dr;

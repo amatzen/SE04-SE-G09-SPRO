@@ -14,5 +14,6 @@ public interface IWorldManager
     Joint createJoint(JointDef def);
 
     void render(Box2DDebugRenderer renderer, Matrix4 projectionMatrix);
-}
 
+    void setContactLister(ContactListener contactLister);
+}
