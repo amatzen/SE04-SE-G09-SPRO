@@ -36,7 +36,7 @@ public class MapControlSystem implements IEntityProcessingService {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        map = new TmxMapLoader().load("maps/GTG-Map1_new.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map1_v3.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);
