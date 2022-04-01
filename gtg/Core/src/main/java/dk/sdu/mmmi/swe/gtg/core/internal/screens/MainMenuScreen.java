@@ -2,15 +2,19 @@ package dk.sdu.mmmi.swe.gtg.core.internal.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
+import org.osgi.service.component.annotations.Reference;
 
 public class MainMenuScreen implements Screen {
 
@@ -30,10 +34,11 @@ public class MainMenuScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
+        Image logo = new Image(new Texture(Gdx.files.internal("assets/logo.png")));
+        table.add(logo).pad(10);
+
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
-
         TextButton btnStart = new TextButton("Start", skinBtn);
-
         table.add(btnStart).fillX().uniformX().pad(10);
 
         btnStart.addListener(new ChangeListener() {
