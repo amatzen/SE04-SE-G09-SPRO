@@ -21,10 +21,10 @@ public class Engine implements IEngine {
     private IEntityManager entityManager;
     private IFamilyManager familyManager;
 
-    private ISignalListener<Entity> onPartRemoved;
-    private ISignalListener<Entity> onPartAdded;
+    private final ISignalListener<Entity> onPartRemoved;
+    private final ISignalListener<Entity> onPartAdded;
 
-    private List<IEntitySystem> systemsToBeStarted;
+    private final List<IEntitySystem> systemsToBeStarted;
 
     public Engine() {
         systemsToBeStarted = new CopyOnWriteArrayList<>();

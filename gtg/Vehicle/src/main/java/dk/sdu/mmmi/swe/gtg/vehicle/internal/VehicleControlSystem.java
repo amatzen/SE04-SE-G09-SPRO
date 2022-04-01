@@ -1,20 +1,17 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.CameraPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -31,11 +28,11 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
     private final float BREAK_POWER = 1.5f;
-    private float drift = 0.5f;
+    private final float drift = 0.5f;
 
     private float wheelAngle = 0;
     private final float WHEEL_TURN_INCREMENT = 0.010f;
-    private float acceleration = 7200f;
+    private final float acceleration = 7200f;
     private List<? extends Entity> position;
 
 

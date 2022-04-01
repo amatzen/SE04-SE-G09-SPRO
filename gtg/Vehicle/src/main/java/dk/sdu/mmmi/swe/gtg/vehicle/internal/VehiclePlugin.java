@@ -70,7 +70,7 @@ public class VehiclePlugin implements IGamePluginService {
     }
 
     private Vehicle createVehicleBody(final Vector2 position, final Vector2 size, final float drag,
-                                      final float restitution, final float density) {;
+                                      final float restitution, final float density) {
         Vehicle vehicle = new Vehicle();
         BodyPart vehicleBody = new BodyPart(
             shapeFactory.createRectangle(

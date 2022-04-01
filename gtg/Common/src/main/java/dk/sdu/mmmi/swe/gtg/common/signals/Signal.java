@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Signal<T> implements ISignal<T> {
 
-    private List<ISignalListener<T>> listeners;
+    private final List<ISignalListener<T>> listeners;
 
     public Signal() {
         listeners = new CopyOnWriteArrayList<>();

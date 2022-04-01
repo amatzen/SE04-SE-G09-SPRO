@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.core.internal.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import org.osgi.service.component.annotations.Reference;
 
 public class MainMenuScreen implements Screen {
 

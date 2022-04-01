@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FamilyBuilder implements IFamilyBuilder {
 
-    private Family family;
+    private final Family family;
 
     public FamilyBuilder() {
         family = new Family();
