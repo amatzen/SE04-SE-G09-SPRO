@@ -6,7 +6,7 @@ public class DriveTrain implements IEntityPart {
 
     private final Wheel[] wheels;
 
-    public DriveTrain(Wheel ... wheels) {
+    public DriveTrain(Wheel... wheels) {
         this.wheels = wheels;
     }
 

@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <relativePath>../poms/compiled/</relativePath>
-    <groupId>dk.sdu.swe.gtg.build</groupId>
-    <artifactId>compiled-bundle-settings</artifactId>
+    <parent>
+        <relativePath>../poms/compiled/</relativePath>
+        <groupId>dk.sdu.swe.gtg.build</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>dk.sdu.swe.gtg</groupId>
+            <artifactId>Common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.music</bundle.symbolicName>
+        <bundle.namespace>dk.sdu.mmmi.swe.gtg.music</bundle.namespace>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dk.sdu.swe.gtg</groupId>
+    <artifactId>Music</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
-  <dependencies>
-    <dependency>
-      <groupId>dk.sdu.swe.gtg</groupId>
-      <artifactId>Common</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.service.component.annotations</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
-    </dependency>
-  </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+    <name>${bundle.symbolicName}</name>
 
-  <properties>
-    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.music</bundle.symbolicName>
-    <bundle.namespace>dk.sdu.mmmi.swe.gtg.music</bundle.namespace>
-  </properties>
-
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>dk.sdu.swe.gtg</groupId>
-  <artifactId>Music</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <name>${bundle.symbolicName}</name>
-
-  <packaging>bundle</packaging>
+    <packaging>bundle</packaging>
 
 </project>

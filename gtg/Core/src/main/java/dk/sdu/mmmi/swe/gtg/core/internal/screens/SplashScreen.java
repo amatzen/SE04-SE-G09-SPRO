@@ -15,9 +15,8 @@ public class SplashScreen implements Screen {
     private final SpriteBatch batch;
     private final Texture splashTexture;
     private final Sprite sprite;
-
-    private float count = 0.0f;
     private final float MAX_COUNT = 3f; // Seconds to display splash
+    private float count = 0.0f;
 
     public SplashScreen(Game game) {
         super();

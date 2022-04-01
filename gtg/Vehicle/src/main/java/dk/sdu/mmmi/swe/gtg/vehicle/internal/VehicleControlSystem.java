@@ -20,19 +20,16 @@ import java.util.List;
 @Component
 public class VehicleControlSystem implements IEntityProcessingService {
 
-    private IEngine engine;
-
-    @Reference(service = BulletSPI.class)
-    private BulletSPI bulletSPI;
-
-    private List<Vehicle> vehicleList;
     private final float REVERSE_POWER = 0.5f;
     private final float BREAK_POWER = 1.5f;
     private final float drift = 0.5f;
-
-    private float wheelAngle = 0;
     private final float WHEEL_TURN_INCREMENT = 0.010f;
     private final float acceleration = 7200f;
+    private IEngine engine;
+    @Reference(service = BulletSPI.class)
+    private BulletSPI bulletSPI;
+    private List<Vehicle> vehicleList;
+    private float wheelAngle = 0;
     private List<? extends Entity> position;
 
 
@@ -56,9 +53,9 @@ public class VehicleControlSystem implements IEntityProcessingService {
             for (Wheel wheel : driveTrain.getWheels()) {
                 Body wheelBody = wheel.getPart(BodyPart.class).getBody();
                 updateBody(wheelBody, vehicle);
-                }
             }
         }
+    }
 
     private void processInput(Vehicle vehicle, GameData gameData) {
         final Vector2 baseVector = new Vector2(0, 0);
@@ -69,20 +66,19 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
         if (gameData.getKeys().isDown(GameKeys.SPACE)) {
             Vector2 vehiclePosition = new Vector2(vehicleBody.getPosition());
-            Vector2 norm = vehicleBody.getWorldVector (new Vector2( 0, 1));
+            Vector2 norm = vehicleBody.getWorldVector(new Vector2(0, 1));
             norm.scl(2.5f);
             vehiclePosition.add(norm);
 
             Vector2 vehicleDirection = new Vector2(getForwardVelocity(vehicleBody));
 
-            Vector2 direction = vehicleBody.getWorldVector (new Vector2( 0, 1));
-            engine.addEntity(bulletSPI.createBullet(vehiclePosition,new Vector2(direction),vehicleDirection));
-
+            Vector2 direction = vehicleBody.getWorldVector(new Vector2(0, 1));
+            engine.addEntity(bulletSPI.createBullet(vehiclePosition, new Vector2(direction), vehicleDirection));
 
 
         }
 
-            if (gameData.getKeys().isDown(GameKeys.LEFT)|| gameData.getKeys().isDown(GameKeys.A)) {
+        if (gameData.getKeys().isDown(GameKeys.LEFT) || gameData.getKeys().isDown(GameKeys.A)) {
             if (wheelAngle < 0) {
                 wheelAngle = 0;
             }
@@ -102,7 +98,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
         if (gameData.getKeys().isDown(GameKeys.UP) || gameData.getKeys().isDown(GameKeys.W)) {
             baseVector.set(0, acceleration);
-        } else if (gameData.getKeys().isDown(GameKeys.DOWN)|| gameData.getKeys().isDown(GameKeys.S)) {
+        } else if (gameData.getKeys().isDown(GameKeys.DOWN) || gameData.getKeys().isDown(GameKeys.S)) {
             if (direction(vehicle.getPart(BodyPart.class).getBody()) == 0) {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
             } else if (direction(vehicleBody) == 1) {
@@ -148,7 +144,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
             //body.setLinearVelocity(forwardSpeed);
             wheelBody.applyLinearImpulse(
-                    lateralSpeed.scl(-(wheelBody.getMass() + vehicle.getPart(BodyPart.class).getBody().getMass()/4)),
+                    lateralSpeed.scl(-(wheelBody.getMass() + vehicle.getPart(BodyPart.class).getBody().getMass() / 4)),
                     wheelBody.getWorldCenter(),
                     true);
         }

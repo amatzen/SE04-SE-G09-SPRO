@@ -49,7 +49,7 @@ public class OrthographicCameraExample implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         cam.viewportWidth = 30f;
-        cam.viewportHeight = 30f * height/width;
+        cam.viewportHeight = 30f * height / width;
         cam.update();
     }
 
@@ -84,15 +84,15 @@ public class OrthographicCameraExample implements ApplicationListener {
 
     @Override
     public void render() {
-            handleInput();
-            cam.update();
-            batch.setProjectionMatrix(cam.combined);
+        handleInput();
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
 
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            batch.begin();
-            mapSprite.draw(batch);
-            batch.end();
+        batch.begin();
+        mapSprite.draw(batch);
+        batch.end();
     }
 
     @Override

@@ -10,11 +10,11 @@ import org.osgi.service.component.annotations.Reference;
 @Component
 public class ShapeFactory implements ShapeFactorySPI {
 
-    public ShapeFactory() {
-    }
-
     @Reference
     private IWorldManager worldManager;
+
+    public ShapeFactory() {
+    }
 
     @Override
     public Body createRectangle(Vector2 position, Vector2 size, BodyDef.BodyType bodyType, float density, boolean sensor) {
