@@ -19,8 +19,8 @@
     </build>
 
     <properties>
-        <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.Bullet</bundle.symbolicName>
-        <bundle.namespace>dk.sdu.mmmi.swe.gtg.Bullet</bundle.namespace>
+        <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.bullet</bundle.symbolicName>
+        <bundle.namespace>dk.sdu.mmmi.swe.gtg.bullet</bundle.namespace>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
