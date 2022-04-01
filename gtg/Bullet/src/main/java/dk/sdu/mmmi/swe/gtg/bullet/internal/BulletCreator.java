@@ -19,19 +19,21 @@ public class BulletCreator implements BulletSPI {
     private Body pBody;
 
     @Override
-    public Body createBullet(Vector2 bulletPosition, Vector2 baseSpeed) {
-       Vector2 bulletVelocity = new Vector2(baseSpeed.nor());
-       bulletVelocity.scl(50f);
+    public Body createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed){
+        Vector2 bulletVelocity = new Vector2(direction);
+        bulletVelocity.scl(50f).add(baseSpeed);
 
         BodyDef bulletBodyDef = new BodyDef();
         bulletBodyDef.bullet=true;
         bulletBodyDef.type=BodyDef.BodyType.DynamicBody;
         bulletBodyDef.fixedRotation=true;
+
         pBody = worldManager.createBody(bulletBodyDef);
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(0.2f / 2.0f, 0.2f /2.0f);
         pBody.createFixture(polygonShape,10.0f);
         polygonShape.dispose();
+
         pBody.setTransform(bulletPosition, pBody.getAngle());
         pBody.setLinearVelocity(bulletVelocity);
                return pBody ;

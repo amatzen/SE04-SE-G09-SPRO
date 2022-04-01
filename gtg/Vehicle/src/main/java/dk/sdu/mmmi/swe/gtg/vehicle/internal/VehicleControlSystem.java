@@ -78,7 +78,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
             Vector2 vehicleDirection = new Vector2(getForwardVelocity(vehicleBody));
 
-            bulletSPI.createBullet(vehiclePosition,new Vector2(vehicleDirection));
+            Vector2 direction = vehicleBody.getWorldVector (new Vector2( 0, 1));
+            bulletSPI.createBullet(vehiclePosition,new Vector2(direction),vehicleDirection);
 
 
 
