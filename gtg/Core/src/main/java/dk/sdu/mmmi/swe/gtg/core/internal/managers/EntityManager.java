@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 
 import java.util.*;
@@ -10,27 +11,26 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EntityManager implements IEntityManager {
 
-    private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
+    private final Map<String, Entity> entityMap;
 
-    private final List<IEntityListener> listeners = new CopyOnWriteArrayList<>();
+    private final Map<IFamily, List<IEntityListener>> listeners;
 
-    @Override
-    public void addEntityListener(IEntityListener listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void removeEntityListener(IEntityListener listener) {
-        listeners.remove(listener);
+    private EntityManager() {
+        entityMap = new ConcurrentHashMap<>();
+        listeners = new ConcurrentHashMap<>();
     }
 
     @Override
     public String addEntity(Entity entity) {
         entityMap.put(entity.getID(), entity);
 
-        listeners.forEach((listener) -> {
-            listener.onEntityAdded(entity);
-        });
+        for (IFamily family : listeners.keySet()) {
+            if (family.matches(entity)) {
+                listeners.get(family).forEach((listener) -> {
+                    listener.onEntityAdded(entity);
+                });
+            }
+        }
 
         return entity.getID();
     }
@@ -43,9 +43,13 @@ public class EntityManager implements IEntityManager {
             part.destroy();
         });
 
-        listeners.forEach((listener) -> {
-            listener.onEntityRemoved(entity);
-        });
+        for (IFamily family : listeners.keySet()) {
+            if (family.matches(entity)) {
+                listeners.get(family).forEach((listener) -> {
+                    listener.onEntityRemoved(entity);
+                });
+            }
+        }
     }
 
     @Override
@@ -71,5 +75,25 @@ public class EntityManager implements IEntityManager {
         });
 
         return res;
+    }
+
+    @Override
+    public void addEntityListener(IFamily family, IEntityListener listener) {
+        List<IEntityListener> listeners = this.listeners.get(family);
+
+        if (listeners == null) {
+            listeners = new CopyOnWriteArrayList<>();
+        }
+
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeEntityListener(IFamily family, IEntityListener listener) {
+        List<IEntityListener> listeners = this.listeners.get(family);
+
+        if (listeners != null) {
+            listeners.remove(listener);
+        }
     }
 }
