@@ -1,14 +1,12 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
-import com.badlogic.gdx.physics.box2d.Body;
-import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
 public class Wheel extends Entity {
 
-    private boolean powered;
-    private boolean turnDirection;
-    private float maxTurningAngle;
+    private final boolean powered;
+    private final boolean turnDirection;
+    private final float maxTurningAngle;
 
     public Wheel(boolean powered, float maxTurningAngle, boolean turnDirection) {
         this.powered = powered;

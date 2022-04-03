@@ -18,9 +18,9 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
     private final float PPM = 40;
 
-    private OrthographicCamera cam;
-    private Box2DDebugRenderer mB2dr;
-    private IWorldManager worldManager;
+    private final OrthographicCamera cam;
+    private final Box2DDebugRenderer mB2dr;
+    private final IWorldManager worldManager;
 
     public GameScreen(Game game) {
         this.game = game;

@@ -8,27 +8,21 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.CameraPart;
-import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.shapefactory.internal.ShapeFactory;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.util.List;
-
 @Component
 public class MapControlSystem implements IEntityProcessingService {
-    private OrthogonalTiledMapRenderer renderer;
-    private TiledMap map;
-    private float unitScale = 1 / 16f;
     private static final String MAP_WALL = "Walls";
     private static final float OBJECT_DENSITY = 1f;
+    private final float unitScale = 1 / 16f;
+    private OrthogonalTiledMapRenderer renderer;
+    private TiledMap map;
     private BodyPart collision;
 
     @Reference
@@ -36,7 +30,7 @@ public class MapControlSystem implements IEntityProcessingService {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        map = new TmxMapLoader().load("maps/GTG-Map1_new.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map1_v3.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);

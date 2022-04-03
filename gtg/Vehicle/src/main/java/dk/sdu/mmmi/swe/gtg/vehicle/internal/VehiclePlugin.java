@@ -24,15 +24,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component
 public class VehiclePlugin implements IGamePluginService {
 
-    @Reference
-    private ShapeFactorySPI shapeFactory;
-
-    @Reference
-    private IWorldManager worldManager;
-
     private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
     private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.40f;
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
+    @Reference
+    private ShapeFactorySPI shapeFactory;
+    @Reference
+    private IWorldManager worldManager;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
@@ -43,7 +41,7 @@ public class VehiclePlugin implements IGamePluginService {
 
     public Vehicle createVehicle(IEngine engine) {
         Vehicle vehicle = createVehicleBody(
-                new Vector2(126.26f,74.2f), new Vector2(1.7f, 4.0f),
+                new Vector2(126.26f, 74.2f), new Vector2(1.7f, 4.0f),
                 0.15f, 0.2f, 260f
         );
 
@@ -70,16 +68,16 @@ public class VehiclePlugin implements IGamePluginService {
     }
 
     private Vehicle createVehicleBody(final Vector2 position, final Vector2 size, final float drag,
-                                      final float restitution, final float density) {;
+                                      final float restitution, final float density) {
         Vehicle vehicle = new Vehicle();
         BodyPart vehicleBody = new BodyPart(
-            shapeFactory.createRectangle(
-                position,
-                size,
-                BodyDef.BodyType.DynamicBody,
-                density,
-                false
-            )
+                shapeFactory.createRectangle(
+                        position,
+                        size,
+                        BodyDef.BodyType.DynamicBody,
+                        density,
+                        false
+                )
         );
 
         vehicleBody.getBody().setLinearDamping(drag);
@@ -87,7 +85,7 @@ public class VehiclePlugin implements IGamePluginService {
 
         vehicle.addPart(vehicleBody);
         TransformPart transformPart = new TransformPart();
-        transformPart.setScale(1f/56f, 1f/56f);
+        transformPart.setScale(1f / 56f, 1f / 56f);
         transformPart.getPosition().z = -1;
         vehicle.addPart(transformPart);
 

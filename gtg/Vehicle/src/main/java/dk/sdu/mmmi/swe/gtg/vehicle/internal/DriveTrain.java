@@ -4,9 +4,9 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 
 public class DriveTrain implements IEntityPart {
 
-    private Wheel[] wheels;
+    private final Wheel[] wheels;
 
-    public DriveTrain(Wheel ... wheels) {
+    public DriveTrain(Wheel... wheels) {
         this.wheels = wheels;
     }
 

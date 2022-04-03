@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SystemManager implements ISystemManager {
-    private List<IEntityProcessingService> entityProcessors = new CopyOnWriteArrayList<>();
-    private List<IPostEntityProcessingService> entityPostProcessors = new CopyOnWriteArrayList<>();
+    private final List<IEntityProcessingService> entityProcessors = new CopyOnWriteArrayList<>();
+    private final List<IPostEntityProcessingService> entityPostProcessors = new CopyOnWriteArrayList<>();
 
     @Override
     public void addEntityProcessingService(IEntityProcessingService service) {

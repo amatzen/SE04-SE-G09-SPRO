@@ -12,10 +12,10 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class Demo implements ApplicationListener {
 
+    float unitScale = 1 / 32f;
     private TiledMap map;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
-    float unitScale = 1 / 32f;
 
     @Override
     public void create() {
@@ -32,7 +32,7 @@ public class Demo implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         camera.viewportWidth = 200f;
-        camera.viewportHeight = 200f * height/width;
+        camera.viewportHeight = 200f * height / width;
         camera.update();
     }
 
