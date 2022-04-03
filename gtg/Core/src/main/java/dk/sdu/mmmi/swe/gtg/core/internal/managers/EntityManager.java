@@ -15,7 +15,7 @@ public class EntityManager implements IEntityManager {
 
     private final Map<IFamily, List<IEntityListener>> listeners;
 
-    private EntityManager() {
+    public EntityManager() {
         entityMap = new ConcurrentHashMap<>();
         listeners = new ConcurrentHashMap<>();
     }
@@ -86,6 +86,8 @@ public class EntityManager implements IEntityManager {
         }
 
         listeners.add(listener);
+
+        this.listeners.put(family, listeners);
     }
 
     @Override
