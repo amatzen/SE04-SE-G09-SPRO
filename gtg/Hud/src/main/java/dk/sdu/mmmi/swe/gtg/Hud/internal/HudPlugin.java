@@ -7,7 +7,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 public class HudPlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
-        
+
     }
 
     @Override
