@@ -7,12 +7,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
+import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
+import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -24,6 +30,54 @@ public class BulletCreator implements BulletSPI {
     private IWorldManager worldManager;
 
     private Body pBody;
+
+    @Reference
+    private CollisionSPI collisionSPI;
+
+    public BulletCreator() {
+        IFamily bulletFamily = Family.builder().forEntities(
+            Bullet.class
+        ).get();
+
+        IFamily familyB = Family.builder().get();
+
+        collisionSPI.addListener(new ICollisionListener() {
+            @Override
+            public IFamily getFamilyA() {
+                return null;
+            }
+
+            @Override
+            public IFamily getFamilyB() {
+                return null;
+            }
+
+            @Override
+            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
+
+                if (entityB.hasPart(LifePart.class)) {
+                    LifePart lifePart = entityB.getPart(LifePart.class);
+                    lifePart.setLife(lifePart.getLife() - damage);
+                }
+
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+
+            }
+
+            @Override
+            public void preSolve(Contact contact) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact) {
+
+            }
+        });
+    }
 
     @Override
     public Bullet createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed) {
