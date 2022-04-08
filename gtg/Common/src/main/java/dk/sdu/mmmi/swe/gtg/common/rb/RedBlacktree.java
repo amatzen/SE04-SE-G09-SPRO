@@ -180,7 +180,101 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
         }
     }
 
-    
+    private void transplant(Node<T> u, Node<T> v) {
+        if (u.getParent() == null) {
+            setRoot(v);
+        } else if (u == u.getParent().getLeft()) {
+            u.getParent().setLeft(v);
+        } else {
+            u.getParent().setRight(v);
+        }
+
+        if (v != null) {
+            v.setParent(u.getParent());
+        }
+    }
+
+    private Node<T> treeMinimum(Node<T> node) {
+        Node<T> x = node;
+        while (x.getLeft() != null) {
+            x = x.getLeft();
+        }
+        return x;
+    }
+
+    private void deleteFixup(Node<T> node) {
+        while (node != root && node.getColor() == Color.BLACK) {
+            if (node == node.getParent().getLeft()) {
+                Node<T> w = node.getParent().getRight();
+                if (w.getColor() == Color.RED) {
+                    w.setColor(Color.BLACK);
+                    node.getParent().setColor(Color.RED);
+                    rotateLeft(node.getParent());
+                    w = node.getParent().getRight();
+                }
+                if (w.getLeft().getColor() == Color.BLACK && w.getRight().getColor() == Color.BLACK) {
+                    w.setColor(Color.RED);
+                    node = node.getParent();
+                }
+                else if (w.getRight().getColor() == Color.BLACK) {
+                    w.getLeft().setColor(Color.BLACK);
+                    w.setColor(Color.RED);
+                    rotateRight(w);
+                    w = node.getParent().getRight();
+                }
+                else {
+                    w.setColor(node.getParent().getColor());
+                    node.getParent().setColor(Color.BLACK);
+                    w.getRight().setColor(Color.BLACK);
+                    rotateLeft(node.getParent());
+                    node = root;
+                }
+            }
+        }
+        node.setColor(Color.BLACK);
+    }
+
+
+    public void delete(T value) {
+        delete(search(value));
+    }
+
+    public void delete(Node<T> node) {
+        Node<T> y = node;
+        Node<T> x = null;
+        Color yOriginalColor = y.getColor();
+
+        if (node.getLeft() == null) {
+            x = node.getRight();
+            transplant(node, node.getRight());
+        }
+        else if (node.getRight() == null) {
+            x = node.getLeft();
+            transplant(node, node.getLeft());
+        }
+        else {
+            y = treeMinimum(node.getRight());
+            yOriginalColor = y.getColor();
+            x = y.getRight();
+            if (y.getParent() == node) {
+                x.setParent(y);
+            }
+            else {
+                transplant(y, y.getRight());
+                y.setRight(node.getRight());
+            }
+
+            transplant(node, y);
+            y.setLeft(node.getLeft());
+            y.getLeft().setParent(node);
+            y.setColor(node.getColor());
+        }
+        if (yOriginalColor == Color.BLACK) {
+            deleteFixup(x);
+        }
+
+
+    }
 
 
     private void replaceNode(Node<T> node) {
