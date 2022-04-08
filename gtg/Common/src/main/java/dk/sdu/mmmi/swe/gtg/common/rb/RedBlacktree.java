@@ -173,6 +173,43 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
         return null;
     }
 
+    public void delete(T value) {
+        delete(
+            search(value)
+        );
+    }
+
+    public void delete(Node<T> node) {
+
+        if (node == null) {
+            return;
+        }
+
+        Node<T> movedUpNode;
+        Color deletedNodeColor;
+
+        if (node.getLeft() == null || node.getRight() == null) {
+            movedUpNode = deletedNodeWithZeroOrOneChild(node);
+            deletedNodeColor = node.getColor();
+        } else {
+            Node<T> inOrderSuccessor = getMinimum(node.getRight());
+
+            node.setData(inOrderSuccessor.getData());
+
+            movedUpNode = inOrderSuccessor;
+            deletedNodeColor = inOrderSuccessor.getColor();
+        }
+
+        if (deletedNodeColor == Color.BLACK) {
+            fixRedBlackPropertiesAfterDelete(movedUpNode);
+
+            if (movedUpNode.getClass() == NilNode.class) {
+                replaceParentsChild(movedUpNode.getParent(), movedUpNode, null);
+            }
+        }
+
+    }
+
     private static class NilNode extends Node {
         private NilNode(Object data) {
             super(null);
@@ -180,8 +217,82 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
         }
     }
 
-    
 
+    private void fixRedBlackPropertiesAfterDelete(Node<T> movedUpNode) {
+        while (movedUpNode != root && movedUpNode.getColor() == Color.BLACK) {
+            if (movedUpNode == movedUpNode.getParent().getLeft()) {
+                Node<T> sibling = movedUpNode.getParent().getRight();
+
+                if (sibling.getColor() == Color.RED) {
+                    sibling.setColor(Color.BLACK);
+                    movedUpNode.getParent().setColor(Color.RED);
+                    rotateLeft(movedUpNode.getParent());
+                    sibling = movedUpNode.getParent().getRight();
+                }
+
+                if (sibling.getLeft().getColor() == Color.BLACK &&
+                    sibling.getRight().getColor() == Color.BLACK) {
+                    sibling.setColor(Color.RED);
+                    movedUpNode = movedUpNode.getParent();
+                } else {
+                    if (sibling.getRight().getColor() == Color.BLACK) {
+                        sibling.getLeft().setColor(Color.BLACK);
+                        sibling.setColor(Color.RED);
+                        rotateRight(sibling);
+                        sibling = movedUpNode.getParent().getRight();
+                    }
+
+                    sibling.setColor(movedUpNode.getParent().getColor());
+                    movedUpNode.getParent().setColor(Color.BLACK);
+                    sibling.getRight().setColor(Color.BLACK);
+                    rotateLeft(movedUpNode.getParent());
+                    movedUpNode = root;
+                }
+            } else {
+                Node<T> sibling = movedUpNode.getParent().getLeft();
+
+                if (sibling.getColor() == Color.RED) {
+                    sibling.setColor(Color.BLACK);
+                    movedUpNode.getParent().setColor(Color.RED);
+                    rotateRight(movedUpNode.getParent());
+                    sibling = movedUpNode.getParent().getLeft();
+                }
+
+                if (sibling.getRight().getColor() == Color.BLACK &&
+                    sibling.getLeft().getColor() == Color.BLACK) {
+                    sibling.setColor(Color.RED);
+                    movedUpNode = movedUpNode.getParent();
+                } else {
+                    if (sibling.getLeft().getColor() == Color.BLACK) {
+                        sibling.getRight().setColor(Color.BLACK);
+                        sibling.setColor(Color.RED);
+                        rotateLeft(sibling);
+                        sibling = movedUpNode.getParent().getLeft();
+                    } else {
+                        sibling.setColor(movedUpNode.getParent().getColor());
+                        movedUpNode.getParent().setColor(Color.BLACK);
+                        sibling.getLeft().setColor(Color.BLACK);
+                        rotateRight(movedUpNode.getParent());
+                        movedUpNode = root;
+                    }
+                }
+            }
+        }
+    }
+
+    private Node<T> deletedNodeWithZeroOrOneChild(Node<T> node) {
+        if (node.getLeft() != null) {
+            replaceParentsChild(node.getParent(), node, node.getLeft());
+            return node.getLeft();
+        } else if (node.getRight() != null) {
+            replaceParentsChild(node.getParent(), node, node.getRight());
+            return node.getRight();
+        } else {
+            Node<T> newChild = node.getColor() == Color.BLACK ? new NilNode(null) : null;
+            replaceParentsChild(node.getParent(), node, newChild);
+            return newChild;
+        }
+    }
 
     private void replaceNode(Node<T> node) {
         Node<T> parent = node.getParent();
