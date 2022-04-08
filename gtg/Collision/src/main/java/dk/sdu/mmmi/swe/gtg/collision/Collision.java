@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.collision;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
@@ -11,7 +10,7 @@ import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Collision implements CollisionSPI, com.badlogic.gdx.physics.box2d.ContactListener{
+public class Collision implements CollisionSPI, com.badlogic.gdx.physics.box2d.ContactListener {
 
     private List<ICollisionListener> listeners;
 
@@ -27,13 +26,13 @@ public class Collision implements CollisionSPI, com.badlogic.gdx.physics.box2d.C
             Entity entityB = (Entity) contact.getFixtureB().getBody().getUserData();
 
             if (
-                collisionListener.getFamilyA().matches(entityA)
-                && collisionListener.getFamilyB().matches(entityB)
+                    collisionListener.getFamilyA().matches(entityA)
+                            && collisionListener.getFamilyB().matches(entityB)
             ) {
                 collisionListener.beginContact(contact, entityA, entityB);
             } else if (
-                collisionListener.getFamilyA().matches(entityB)
-                && collisionListener.getFamilyB().matches(entityA)
+                    collisionListener.getFamilyA().matches(entityB)
+                            && collisionListener.getFamilyB().matches(entityA)
             ) {
                 collisionListener.beginContact(contact, entityB, entityA);
             }

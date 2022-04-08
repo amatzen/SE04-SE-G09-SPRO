@@ -36,7 +36,7 @@ public class BulletCreator implements BulletSPI {
 
     public BulletCreator() {
         IFamily bulletFamily = Family.builder().forEntities(
-            Bullet.class
+                Bullet.class
         ).get();
 
         IFamily familyB = Family.builder().get();
