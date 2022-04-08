@@ -6,10 +6,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class Collision implements CollisionSPI, com.badlogic.gdx.physics.box2d.ContactListener {
 
     private List<ICollisionListener> listeners;
@@ -59,5 +61,10 @@ public class Collision implements CollisionSPI, com.badlogic.gdx.physics.box2d.C
     @Override
     public void addListener(ICollisionListener listener) {
         listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(ICollisionListener collisionListener) {
+        listeners.remove(collisionListener);
     }
 }

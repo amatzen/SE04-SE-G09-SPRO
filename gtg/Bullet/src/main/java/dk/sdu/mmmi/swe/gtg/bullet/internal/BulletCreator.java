@@ -10,11 +10,14 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
@@ -24,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BulletCreator implements BulletSPI {
+public class BulletCreator implements BulletSPI, IGamePluginService {
 
     @Reference
     private IWorldManager worldManager;
@@ -34,14 +37,10 @@ public class BulletCreator implements BulletSPI {
     @Reference
     private CollisionSPI collisionSPI;
 
+    private ICollisionListener collisionListener;
+
     public BulletCreator() {
-        IFamily bulletFamily = Family.builder().forEntities(
-                Bullet.class
-        ).get();
-
-        IFamily familyB = Family.builder().get();
-
-        collisionSPI.addListener(new ICollisionListener() {
+        collisionListener = new ICollisionListener() {
             @Override
             public IFamily getFamilyA() {
                 return null;
@@ -54,12 +53,12 @@ public class BulletCreator implements BulletSPI {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-
+                /*
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.setLife(lifePart.getLife() - damage);
                 }
-
+                */
             }
 
             @Override
@@ -76,7 +75,7 @@ public class BulletCreator implements BulletSPI {
             public void postSolve(Contact contact) {
 
             }
-        });
+        };
     }
 
     @Override
@@ -124,5 +123,21 @@ public class BulletCreator implements BulletSPI {
 
     private TexturePart getBulletTexture() {
         return getTexture("assets/bullet.png");
+    }
+
+    @Override
+    public void start(IEngine engine, GameData gameData) {
+        IFamily bulletFamily = Family.builder().forEntities(
+                Bullet.class
+        ).get();
+
+        IFamily familyB = Family.builder().get();
+
+        collisionSPI.addListener(collisionListener);
+    }
+
+    @Override
+    public void stop(IEngine engine, GameData gameData) {
+        collisionSPI.removeListener(collisionListener);
     }
 }
