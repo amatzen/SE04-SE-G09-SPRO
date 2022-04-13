@@ -93,6 +93,8 @@ public class FamilyManager implements IFamilyManager {
     public void addEntityListener(IFamily family, IEntityListener listener) {
         List<IEntityListener> listeners = this.listeners.get(family);
 
+        registerFamily(family);
+
         if (listeners == null) {
             listeners = new CopyOnWriteArrayList<>();
         }
