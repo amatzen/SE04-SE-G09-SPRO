@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
 
@@ -10,8 +11,15 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SystemManager implements ISystemManager {
-    private final List<IEntityProcessingService> entityProcessors = new CopyOnWriteArrayList<>();
-    private final List<IPostEntityProcessingService> entityPostProcessors = new CopyOnWriteArrayList<>();
+    private final List<IEntitySystem> systemsToBeStarted;
+    private final List<IEntityProcessingService> entityProcessors;
+    private final List<IPostEntityProcessingService> entityPostProcessors;
+
+    public SystemManager() {
+        systemsToBeStarted = new CopyOnWriteArrayList<>();
+        entityProcessors = new CopyOnWriteArrayList<>();
+        entityPostProcessors = new CopyOnWriteArrayList<>();
+    }
 
     @Override
     public void addEntityProcessingService(IEntityProcessingService service) {

@@ -10,9 +10,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EntityManager implements IEntityManager {
 
-    private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
+    private final Map<String, Entity> entityMap;
 
-    private final List<IEntityListener> listeners = new CopyOnWriteArrayList<>();
+    private final List<IEntityListener> listeners;
+
+    public EntityManager() {
+        entityMap = new ConcurrentHashMap<>();
+        listeners = new CopyOnWriteArrayList<>();
+    }
 
     @Override
     public void addEntityListener(IEntityListener listener) {
