@@ -8,10 +8,6 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IEntityManager {
-    void addEntityListener(IFamily family, IEntityListener listener);
-
-    void removeEntityListener(IFamily family, IEntityListener listener);
-
     String addEntity(Entity entity);
 
     void removeEntity(Entity entity);

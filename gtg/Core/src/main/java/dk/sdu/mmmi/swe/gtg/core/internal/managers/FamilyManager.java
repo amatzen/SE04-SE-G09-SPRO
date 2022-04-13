@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
@@ -17,11 +18,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class FamilyManager implements IFamilyManager {
 
     private final Map<IFamily, List<Entity>> families;
+    private final Map<IFamily, List<IEntityListener>> listeners;
 
     @Reference
     private IEntityManager entityManager;
 
     public FamilyManager() {
+        listeners = new ConcurrentHashMap<>();
         families = new ConcurrentHashMap<>();
     }
 
@@ -46,6 +49,21 @@ public class FamilyManager implements IFamilyManager {
                     entity.removeFromFamily(family);
                     familyEntities.remove(entity);
                 }
+                notifyListeners(entity, !matches);
+            }
+        }
+    }
+
+    private void notifyListeners(Entity entity, boolean remove) {
+        for (IFamily family : listeners.keySet()) {
+            if (family.matches(entity)) {
+                listeners.get(family).forEach((listener) -> {
+                    if (remove) {
+                        listener.onEntityRemoved(entity);
+                    } else {
+                        listener.onEntityAdded(entity);
+                    }
+                });
             }
         }
     }
@@ -71,4 +89,25 @@ public class FamilyManager implements IFamilyManager {
         return Collections.unmodifiableList(entities);
     }
 
+    @Override
+    public void addEntityListener(IFamily family, IEntityListener listener) {
+        List<IEntityListener> listeners = this.listeners.get(family);
+
+        if (listeners == null) {
+            listeners = new CopyOnWriteArrayList<>();
+        }
+
+        listeners.add(listener);
+
+        this.listeners.put(family, listeners);
+    }
+
+    @Override
+    public void removeEntityListener(IFamily family, IEntityListener listener) {
+        List<IEntityListener> listeners = this.listeners.get(family);
+
+        if (listeners != null) {
+            listeners.remove(listener);
+        }
+    }
 }
