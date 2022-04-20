@@ -82,6 +82,7 @@ public class RenderingSystem implements IPostEntityProcessingService {
 
         counter += gameData.getDelta();
         if (counter >= 5) {
+            System.out.println("Entities: " + redBlacktree.size());
             for (Entity entity : redBlacktree) {
                 System.out.println(entity);
             }

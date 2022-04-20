@@ -376,6 +376,23 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
         return node;
     }
 
+
+    public int size() {
+        return this.size(root.getRight());
+    }
+
+    public int size(Node<T> node) {
+        if (root instanceof NilNode)
+            return 0;
+        else
+        {
+            int size = 1;
+            size = size + size(node.getLeft());
+            size = size + size(node.getRight());
+            return size;
+        }
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new RBIterator<>(this);
