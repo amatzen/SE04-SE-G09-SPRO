@@ -218,7 +218,7 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
     }
 
 
-    private void fixRedBlackPropertiesAfterDelete(Node<T> movedUpNode) {
+    private void fixRedBlackPropertiesAfterDeleteX(Node<T> movedUpNode) {
         while (movedUpNode != root && movedUpNode.getColor() == Color.BLACK) {
             if (movedUpNode == movedUpNode.getParent().getLeft()) {
                 Node<T> sibling = movedUpNode.getParent().getRight();
@@ -278,6 +278,66 @@ public class RedBlacktree<T> extends BaseBinaryTree<T> implements Iterable<T> {
                 }
             }
         }
+    }
+
+    private void fixRedBlackPropertiesAfterDelete(Node<T> x) {
+        Node<T> s;
+        while (x != root && x.getColor() == Color.BLACK) {
+            if (x == x.getParent().getLeft()) {
+                s = x.getParent().getRight();
+                if (s.getColor() == Color.RED) {
+                    s.setColor(Color.BLACK);
+                    x.getParent().setColor(Color.RED);
+                    rotateLeft(x.getParent());
+                    s = x.getParent().getRight();
+                }
+
+                if (s.getLeft().getColor() == Color.BLACK && s.getRight().getColor() == Color.BLACK) {
+                    s.setColor(Color.RED);
+                    x = x.getParent();
+                } else {
+                    if (s.getRight().getColor() == Color.BLACK) {
+                        s.getLeft().setColor(Color.BLACK);
+                        s.setColor(Color.RED);
+                        rotateRight(s);
+                        s = x.getParent().getRight();
+                    }
+
+                    s.setColor(x.getParent().getColor());
+                    x.getParent().setColor(Color.BLACK);
+                    s.getRight().setColor(Color.BLACK);
+                    rotateLeft(x.getParent());
+                    x = root;
+                }
+            } else {
+                s = x.getParent().getLeft();
+                if (s.getColor() == Color.RED) {
+                    s.setColor(Color.BLACK);
+                    x.getParent().setColor(Color.RED);
+                    rotateRight(x.getParent());
+                    s = x.getParent().getLeft();
+                }
+
+                if (s.getRight().getColor() == Color.BLACK && s.getLeft().getColor() == Color.BLACK) {
+                    s.setColor(Color.RED);
+                    x = x.getParent();
+                } else {
+                    if (s.getLeft().getColor() == Color.BLACK) {
+                        s.getRight().setColor(Color.BLACK);
+                        s.setColor(Color.RED);
+                        rotateLeft(s);
+                        s = x.getParent().getLeft();
+                    }
+
+                    s.setColor(s.getParent().getColor());
+                    x.getParent().setColor(Color.BLACK);
+                    s.getLeft().setColor(Color.BLACK);
+                    rotateRight(x.getParent());
+                    x = root;
+                }
+            }
+        }
+        x.setColor(Color.BLACK);
     }
 
     private Node<T> deletedNodeWithZeroOrOneChild(Node<T> node) {
