@@ -92,7 +92,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
     @Override
     public void start(IEngine engine, GameData gameData) {
-        IFamily bulletFamily = Family.builder().forEntities(
+        IFamily familyA = Family.builder().forEntities(
                 Bullet.class
         ).get();
 
@@ -103,7 +103,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
         collisionListener = new ICollisionListener() {
             @Override
             public IFamily getFamilyA() {
-                return bulletFamily;
+                return familyA;
             }
 
             @Override
