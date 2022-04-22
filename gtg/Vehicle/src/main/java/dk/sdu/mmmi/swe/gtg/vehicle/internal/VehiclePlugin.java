@@ -35,7 +35,11 @@ public class VehiclePlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        createVehicle(engine);
+        Vehicle vehicle = createVehicle(engine);
+
+
+        engine.addEntity(vehicle);
+
 
     }
 
@@ -51,8 +55,6 @@ public class VehiclePlugin implements IGamePluginService {
 
         DriveTrain driveTrain = createDriveTrain(wheels, engine);
         vehicle.addPart(driveTrain);
-
-        engine.addEntity(vehicle);
 
         return vehicle;
     }
