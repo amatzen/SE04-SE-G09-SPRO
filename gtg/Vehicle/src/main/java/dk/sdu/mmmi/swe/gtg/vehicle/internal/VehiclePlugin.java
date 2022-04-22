@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -37,6 +38,9 @@ public class VehiclePlugin implements IGamePluginService {
 
         Vehicle vehicle = createVehicle(engine);
 
+        LifePart lifePart = new LifePart();
+
+        vehicle.addPart(lifePart);
 
         engine.addEntity(vehicle);
 
