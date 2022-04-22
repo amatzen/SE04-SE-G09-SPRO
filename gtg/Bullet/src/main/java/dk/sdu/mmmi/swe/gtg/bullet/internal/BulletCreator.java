@@ -40,42 +40,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     private ICollisionListener collisionListener;
 
     public BulletCreator() {
-        collisionListener = new ICollisionListener() {
-            @Override
-            public IFamily getFamilyA() {
-                return null;
-            }
 
-            @Override
-            public IFamily getFamilyB() {
-                return null;
-            }
-
-            @Override
-            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                /*
-                if (entityB.hasPart(LifePart.class)) {
-                    LifePart lifePart = entityB.getPart(LifePart.class);
-                    lifePart.setLife(lifePart.getLife() - damage);
-                }
-                */
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-
-            }
-
-            @Override
-            public void preSolve(Contact contact) {
-
-            }
-
-            @Override
-            public void postSolve(Contact contact) {
-
-            }
-        };
     }
 
     @Override
@@ -134,6 +99,44 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
         IFamily familyB = Family.builder().get();
 
         collisionSPI.addListener(collisionListener);
+
+        collisionListener = new ICollisionListener() {
+            @Override
+            public IFamily getFamilyA() {
+                return bulletFamily;
+            }
+
+            @Override
+            public IFamily getFamilyB() {
+                return familyB;
+            }
+
+            @Override
+            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
+                /*
+                if (entityB.hasPart(LifePart.class)) {
+                    LifePart lifePart = entityB.getPart(LifePart.class);
+                    lifePart.setLife(lifePart.getLife() - damage);
+                }
+                */
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+
+            }
+
+            @Override
+            public void preSolve(Contact contact) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact) {
+
+            }
+        };
+
     }
 
     @Override
