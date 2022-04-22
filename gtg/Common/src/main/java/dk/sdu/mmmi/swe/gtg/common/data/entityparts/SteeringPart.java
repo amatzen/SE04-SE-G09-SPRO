@@ -6,6 +6,7 @@ public class SteeringPart implements IEntityPart {
 
     private Vector2 desiredVelocity;
     private Vector2 steering;
+    private float steeringAngle;
 
     @Override
     public void destroy() {

@@ -30,7 +30,7 @@
    eJztz7EJAEAIBEFDW7X/Bp4vwFRBZmDzuwgAAAAAAAAAAAAAuCO3Bwz6X0uSJEmSmh57R0AM
   </data>
  </layer>
- <objectgroup id="6" name="Walls" visible="0">
+ <objectgroup id="6" name="Walls">
   <object id="1" x="1536" y="1920" width="320" height="832"/>
   <object id="2" x="1088" y="2368" width="448" height="384"/>
   <object id="3" x="1152" y="2752" width="192" height="64"/>

@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -35,7 +36,12 @@ public class VehiclePlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        createVehicle(engine);
+        Vehicle vehicle = createVehicle(engine);
+
+        vehicle.addPart(new SteeringPart());
+
+        engine.addEntity(vehicle);
+
 
     }
 
@@ -51,8 +57,6 @@ public class VehiclePlugin implements IGamePluginService {
 
         DriveTrain driveTrain = createDriveTrain(wheels, engine);
         vehicle.addPart(driveTrain);
-
-        engine.addEntity(vehicle);
 
         return vehicle;
     }
