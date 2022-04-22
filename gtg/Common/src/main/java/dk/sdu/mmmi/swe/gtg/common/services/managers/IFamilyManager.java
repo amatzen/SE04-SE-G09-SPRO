@@ -14,4 +14,8 @@ public interface IFamilyManager {
     List<Entity> getEntitiesFor(IFamily family);
 
     List<Entity> registerFamily(IFamily family);
+
+    void addEntityListener(IFamily family, IEntityListener listener);
+
+    void removeEntityListener(IFamily family, IEntityListener listener);
 }

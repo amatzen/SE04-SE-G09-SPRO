@@ -134,11 +134,11 @@ public class Engine implements IEngine {
 
     @Override
     public void addEntityListener(IFamily family, IEntityListener listener) {
-        entityManager.addEntityListener(family, listener);
+        familyManager.addEntityListener(family, listener);
     }
 
     @Override
     public void removeEntityListener(IFamily family, IEntityListener listener) {
-        entityManager.removeEntityListener(family, listener);
+        familyManager.removeEntityListener(family, listener);
     }
 }
