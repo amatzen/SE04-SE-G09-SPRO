@@ -62,7 +62,6 @@
     <module>ATM</module>
     <module>Map</module>
     <module>Music</module>
-    <module>Hud</module>
   </modules>
 
   <build>
