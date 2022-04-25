@@ -7,20 +7,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
-public class Hud extends Entity {
+public class Hud implements Disposable {
+
+    private FitViewport stageViewport;
 
     // Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
     private Viewport viewport;
 
     // score/time Tracking Variables
-    private float bullets;
+    private Integer bullets;
     private float life;
-    private float money;
+    private Integer money;
 
     // Scene2D widgets
     private Label showBullets;
@@ -33,7 +36,7 @@ public class Hud extends Entity {
     public static final int V_WIDTH = 1600;
     public static final int V_HEIGHT = 900;
 
-    public Hud (SpriteBatch sb){
+    public Hud(SpriteBatch sb) {
 
         // Define our tracking variables
         life = 3;
@@ -82,8 +85,15 @@ public class Hud extends Entity {
         stage.addActor(table);
     }
 
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
     public void addScore(int value){
         money += value;
         showMoney.setText(String.format("%06d", money));
     }
+
+    public Stage getStage() { return stage; }
 }

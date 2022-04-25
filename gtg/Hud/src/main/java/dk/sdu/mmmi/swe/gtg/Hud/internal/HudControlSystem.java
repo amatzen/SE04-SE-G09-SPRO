@@ -19,19 +19,21 @@ import org.osgi.service.component.annotations.Component;
 public class HudControlSystem implements IPostEntityProcessingService {
 
     private Hud hud;
+    private SpriteBatch spriteBatch;
 
     @Override
     public void addedToEngine(IEngine engine) {
-
+        spriteBatch = new SpriteBatch();
+        hud = new Hud(spriteBatch);
     }
 
     @Override
     public void process(GameData gameData) {
+        spriteBatch.setProjectionMatrix(hud.getStage().getCamera().combined);
+        hud.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
+        hud.getStage().act(gameData.getDelta());
+        hud.getStage().draw();
 
-        hud = new Hud(gameData.getSpriteBatch());
-
-        gameData.getSpriteBatch().setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
     }
 
 }
