@@ -18,15 +18,15 @@ public class Hud implements Disposable {
 
     // Tracking Variables
     private Integer bullets;
-    private Integer life;
+    private Integer health;
     private Integer money;
 
     // Scene2D widgets
     private final Label showBullets;
     private final Label showMoney;
     private final Label bulletLabel;
-    private final Label showLives;
-    private final Label lifeLabel;
+    private final Label showHealth;
+    private final Label healthLabel;
     private final Label moneyLabel;
 
     public static final int V_WIDTH = 1600;
@@ -35,7 +35,7 @@ public class Hud implements Disposable {
     public Hud(SpriteBatch sb) {
 
         // Define our default tracking variables
-        life = 3;
+        health = 3;
         money = 0;
         bullets = 0;
 
@@ -61,12 +61,12 @@ public class Hud implements Disposable {
         bulletLabel = new Label("BULLETS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showBullets = new Label(String.format("%03d", bullets), new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
-        lifeLabel = new Label("LIVES", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showLives = new Label(String.format("%01d", life), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        showHealth = new Label(String.format("%01d", health), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(moneyLabel).expandX().padTop(10);
-        table.add(lifeLabel).expandX().padTop(10);
+        table.add(healthLabel).expandX().padTop(10);
         table.add(bulletLabel).expandX().padTop(10);
 
         // Creates a row under
@@ -74,7 +74,7 @@ public class Hud implements Disposable {
 
         // Add a second row to our table
         table.add(showMoney).expandX();
-        table.add(showLives).expandX();
+        table.add(showHealth).expandX();
         table.add(showBullets).expandX();
 
         // Add our table to the stage
@@ -107,13 +107,13 @@ public class Hud implements Disposable {
     }
 
     public void gainedHealth(int value){
-        life += value;
-        showLives.setText(life);
+        health += value;
+        showHealth.setText(health);
     }
 
     public void lostHealth(int value){
-        life -= value;
-        showLives.setText(life);
+        health -= value;
+        showHealth.setText(health);
     }
 
     public Stage getStage() { return stage; }
