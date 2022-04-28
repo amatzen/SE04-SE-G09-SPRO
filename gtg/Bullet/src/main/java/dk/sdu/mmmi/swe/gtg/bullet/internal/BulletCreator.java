@@ -64,7 +64,9 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
         Bullet bullet = new Bullet();
         TransformPart transformPart = new TransformPart();
+
         BodyPart bulletBody = new BodyPart(pBody);
+        bulletBody.getBody().setUserData(bullet);
 
         transformPart.setScale(1f / 1890f, 1f / 1890f);
         bullet.addPart(getBulletTexture());
@@ -96,8 +98,6 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
         IFamily familyB = Family.builder().get();
 
-        collisionSPI.addListener(collisionListener);
-
         collisionListener = new ICollisionListener() {
             @Override
             public IFamily getFamilyA() {
@@ -117,6 +117,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                     lifePart.setLife(lifePart.getLife() - damage);
                 }
                 */
+                engine.removeEntity(entityA);
             }
 
             @Override
@@ -135,6 +136,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
             }
         };
 
+        collisionSPI.addListener(collisionListener);
     }
 
     @Override

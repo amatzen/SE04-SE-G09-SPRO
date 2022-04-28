@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
@@ -13,39 +14,26 @@ import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class Collision implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener {
+public class Collision implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener, IEntityProcessingService {
 
     private List<ICollisionListener> listeners;
 
+    private Queue<Contact> contacts;
+
     public Collision() {
         listeners = new CopyOnWriteArrayList<>();
+        contacts = new LinkedList<>();
     }
 
     @Override
     public void beginContact(Contact contact) {
-
-        listeners.forEach(collisionListener -> {
-            Entity entityA = (Entity) contact.getFixtureA().getBody().getUserData();
-            Entity entityB = (Entity) contact.getFixtureB().getBody().getUserData();
-
-            if (
-                    collisionListener.getFamilyA().matches(entityA)
-                            && collisionListener.getFamilyB().matches(entityB)
-            ) {
-                collisionListener.beginContact(contact, entityA, entityB);
-            } else if (
-                    collisionListener.getFamilyA().matches(entityB)
-                            && collisionListener.getFamilyB().matches(entityA)
-            ) {
-                collisionListener.beginContact(contact, entityB, entityA);
-            }
-
-        });
-
+        contacts.add(contact);
     }
 
     @Override
@@ -84,5 +72,39 @@ public class Collision implements CollisionSPI, IGamePluginService, com.badlogic
     @Override
     public void stop(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(null);
+    }
+
+    @Override
+    public void addedToEngine(IEngine engine) {
+
+    }
+
+    @Override
+    public void process(GameData gameData) {
+        while (!contacts.isEmpty()) {
+            Contact contact = contacts.poll();
+
+            listeners.forEach(collisionListener -> {
+                Entity entityA = (Entity) contact.getFixtureA().getBody().getUserData();
+                Entity entityB = (Entity) contact.getFixtureB().getBody().getUserData();
+
+                if (entityA == null || entityB == null) {
+                    return;
+                }
+
+                if (
+                        collisionListener.getFamilyA().matches(entityA)
+                                && collisionListener.getFamilyB().matches(entityB)
+                ) {
+                    collisionListener.beginContact(contact, entityA, entityB);
+                } else if (
+                        collisionListener.getFamilyA().matches(entityB)
+                                && collisionListener.getFamilyB().matches(entityA)
+                ) {
+                    collisionListener.beginContact(contact, entityB, entityA);
+                }
+
+            });
+        }
     }
 }

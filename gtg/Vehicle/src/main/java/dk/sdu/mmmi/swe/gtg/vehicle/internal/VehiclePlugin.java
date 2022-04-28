@@ -86,6 +86,8 @@ public class VehiclePlugin implements IGamePluginService {
                 )
         );
 
+        vehicleBody.getBody().setUserData(vehicle);
+
         vehicleBody.getBody().setLinearDamping(drag);
         vehicleBody.getBody().getFixtureList().get(0).setRestitution(restitution);
 
