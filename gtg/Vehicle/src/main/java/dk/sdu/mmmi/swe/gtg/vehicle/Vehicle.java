@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.vehicle.internal;
+package dk.sdu.mmmi.swe.gtg.vehicle;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 

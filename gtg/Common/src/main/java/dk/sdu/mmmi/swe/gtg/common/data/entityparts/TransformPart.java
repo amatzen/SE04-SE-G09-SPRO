@@ -11,11 +11,11 @@ public class TransformPart implements IEntityPart {
 
     private float rotation = 0.0f;
 
-    public void setPosition(float x, float y){
+    public void setPosition(float x, float y) {
         setPosition(x, y, this.position.z);
     }
 
-    public void setPosition(float x, float y, float z){
+    public void setPosition(float x, float y, float z) {
         this.position.set(x, y, z);
     }
 
@@ -23,7 +23,7 @@ public class TransformPart implements IEntityPart {
         return position;
     }
 
-    public void setOrigin(float x, float y){
+    public void setOrigin(float x, float y) {
         this.origin.set(x, y);
     }
 
@@ -31,19 +31,19 @@ public class TransformPart implements IEntityPart {
         return origin;
     }
 
-    public void setRotation(float rot){
-        this.rotation = rot;
-    }
-
     public float getRotation() {
         return rotation;
+    }
+
+    public void setRotation(float rot) {
+        this.rotation = rot;
     }
 
     public Vector2 getScale() {
         return scale;
     }
 
-    public void setScale(float x, float y){
+    public void setScale(float x, float y) {
         this.scale.set(x, y);
     }
 

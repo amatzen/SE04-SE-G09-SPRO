@@ -1,0 +1,88 @@
+package dk.sdu.mmmi.swe.gtg.atm.internal;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import dk.sdu.mmmi.swe.gtg.atm.ATM;
+import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SensorPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+@Component
+public class ATMPlugin implements IGamePluginService {
+
+    @Reference
+    private ShapeFactorySPI shapeFactory;
+
+    @Reference
+    private IWorldManager worldManager;
+
+    private ATM atm;
+
+    @Override
+    public void start(IEngine engine, GameData gameData) {
+
+        Vector2 atmPosition = new Vector2(129.26f, 74.2f);
+        Vector2 atmSize = new Vector2(1, 1.5f);
+        float sensorRadius = 5;
+
+        BodyPart atm = new BodyPart(shapeFactory.createRectangle(
+                atmPosition, atmSize, BodyDef.BodyType.StaticBody,
+                1,
+                false));
+
+        SensorPart sensorPart = new SensorPart(shapeFactory.createCircle(
+                atmPosition, sensorRadius, BodyDef.BodyType.StaticBody,
+                1,
+                true));
+
+        this.atm = new ATM();
+
+        this.atm.addPart(atm);
+        this.atm.addPart(sensorPart);
+
+        TransformPart transformPart = new TransformPart();
+        transformPart.setScale(1f / 184f, 1.5f / 423f);
+        this.atm.addPart(transformPart);
+        this.atm.addPart(getBodyTexture());
+
+        engine.addEntity(this.atm);
+
+        worldManager.setContactLister(new ContactListener());
+
+        sensorPart.getBody().setUserData(this.atm);
+
+    }
+
+    private TexturePart getTexture(String path) {
+        final TexturePart texturePart = new TexturePart();
+        FileHandle file = Gdx.files.internal(path);
+        Texture texture = new Texture(file);
+        TextureRegion textureRegion = new TextureRegion(texture);
+
+        texturePart.setRegion(textureRegion);
+
+        return texturePart;
+    }
+
+    private TexturePart getBodyTexture() {
+        return getTexture("assets/atm.png");
+    }
+
+    @Override
+    public void stop(IEngine engine, GameData gameData) {
+        engine.removeEntity(atm);
+    }
+
+}

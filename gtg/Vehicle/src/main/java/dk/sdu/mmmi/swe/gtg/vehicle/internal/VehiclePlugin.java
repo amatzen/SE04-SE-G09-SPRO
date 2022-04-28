@@ -16,6 +16,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -23,15 +24,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component
 public class VehiclePlugin implements IGamePluginService {
 
+    private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
+    private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.40f;
+    private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
     @Reference
     private ShapeFactorySPI shapeFactory;
-
     @Reference
     private IWorldManager worldManager;
-
-    private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
-    private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.45f;
-    private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
@@ -42,7 +41,7 @@ public class VehiclePlugin implements IGamePluginService {
 
     public Vehicle createVehicle(IEngine engine) {
         Vehicle vehicle = createVehicleBody(
-                new Vector2(102,47), new Vector2(1.7f, 4.0f),
+                new Vector2(126.26f, 74.2f), new Vector2(1.7f, 4.0f),
                 0.15f, 0.2f, 260f
         );
 
@@ -69,36 +68,49 @@ public class VehiclePlugin implements IGamePluginService {
     }
 
     private Vehicle createVehicleBody(final Vector2 position, final Vector2 size, final float drag,
-                                      final float restitution, final float density) {;
+                                      final float restitution, final float density) {
         Vehicle vehicle = new Vehicle();
         BodyPart vehicleBody = new BodyPart(
-            shapeFactory.createRectangle(
-                position,
-                size,
-                BodyDef.BodyType.DynamicBody,
-                density,
-                false
-            )
+                shapeFactory.createRectangle(
+                        position,
+                        size,
+                        BodyDef.BodyType.DynamicBody,
+                        density,
+                        false
+                )
         );
 
         vehicleBody.getBody().setLinearDamping(drag);
         vehicleBody.getBody().getFixtureList().get(0).setRestitution(restitution);
 
         vehicle.addPart(vehicleBody);
-        vehicle.addPart(new TransformPart());
+        TransformPart transformPart = new TransformPart();
+        transformPart.setScale(1f / 56f, 1f / 56f);
+        transformPart.getPosition().z = -1;
+        vehicle.addPart(transformPart);
+
+        vehicleBody.getBody().setUserData(vehicle);
 
         return vehicle;
     }
 
-    private TexturePart getBodyTexture() {
+    private TexturePart getTexture(String path) {
         final TexturePart texturePart = new TexturePart();
-        FileHandle file = Gdx.files.internal("assets/taxi.png");
+        FileHandle file = Gdx.files.internal(path);
         Texture texture = new Texture(file);
         TextureRegion textureRegion = new TextureRegion(texture);
 
         texturePart.setRegion(textureRegion);
 
         return texturePart;
+    }
+
+    private TexturePart getBodyTexture() {
+        return getTexture("assets/taxi.png");
+    }
+
+    private TexturePart getWheelTexture() {
+        return getTexture("assets/tire.png");
     }
 
     private Wheel[] createWheels(Vehicle vehicle) {
@@ -148,6 +160,12 @@ public class VehiclePlugin implements IGamePluginService {
                     60f,
                     true
             ));
+
+            TransformPart wheelTransform = new TransformPart();
+            wheelTransform.setScale(0.04f / 56f, 0.04f / 56f);
+
+            wheel.addPart(wheelTransform);
+            wheel.addPart(getWheelTexture());
 
             wheel.addPart(wheelBody);
 

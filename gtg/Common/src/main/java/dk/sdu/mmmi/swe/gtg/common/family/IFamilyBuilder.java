@@ -5,9 +5,9 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 
 public interface IFamilyBuilder {
 
-    IFamilyBuilder forEntities(Class<? extends Entity> ... entity);
+    IFamilyBuilder forEntities(Class<? extends Entity>... entity);
 
-    IFamilyBuilder with(Class<? extends IEntityPart> ... parts);
+    IFamilyBuilder with(Class<? extends IEntityPart>... parts);
 
     IFamily get();
 

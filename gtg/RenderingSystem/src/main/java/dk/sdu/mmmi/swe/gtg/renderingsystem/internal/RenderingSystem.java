@@ -48,23 +48,23 @@ public class RenderingSystem implements IPostEntityProcessingService {
             }
 
 
-            final float width = texturePart.getTexture().getRegionWidth() / 56f;
-            final float height = texturePart.getTexture().getRegionHeight() / 56f;
+            final float width = texturePart.getTexture().getRegionWidth();
+            final float height = texturePart.getTexture().getRegionHeight();
 
             final float originX = transformPart.getOrigin().x + width * 0.5f;
             final float originY = transformPart.getOrigin().y + height * 0.5f;
 
             batch.draw(
-                texturePart.getTexture(),
-                transformPart.getPosition().x - width * 0.5f,
-                transformPart.getPosition().y - height * 0.5f,
-                originX,
-                originY,
-                width,
-                height,
-                transformPart.getScale().x,
-                transformPart.getScale().y,
-                transformPart.getRotation() / ((float) Math.PI * 2f) * 360
+                    texturePart.getTexture(),
+                    transformPart.getPosition().x - width * 0.5f,
+                    transformPart.getPosition().y - height * 0.5f,
+                    originX,
+                    originY,
+                    width,
+                    height,
+                    transformPart.getScale().x,
+                    transformPart.getScale().y,
+                    transformPart.getRotation() / ((float) Math.PI * 2f) * 360
             );
         }
 

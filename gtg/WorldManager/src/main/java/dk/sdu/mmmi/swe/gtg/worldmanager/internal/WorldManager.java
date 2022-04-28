@@ -19,13 +19,10 @@ import java.util.List;
 @Component(service = {IWorldManager.class, IEntityProcessingService.class})
 public class WorldManager implements IWorldManager, IEntityProcessingService {
 
-    private World world;
-
-    private Vector2 gravity;
-
-    private float accumulator = 0f;
+    private final Vector2 gravity;
     private final float timeStep = 1 / 60f;
-
+    private World world;
+    private float accumulator = 0f;
     private List<? extends Entity> entities;
 
     public WorldManager() {
@@ -51,7 +48,15 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
 
     @Override
     public void render(Box2DDebugRenderer renderer, Matrix4 projectionMatrix) {
-        renderer.render(world, projectionMatrix);
+        /*
+         * Comment out for debugging of entities
+         */
+        //renderer.render(world, projectionMatrix);
+    }
+
+    @Override
+    public void setContactLister(ContactListener contactLister) {
+        this.world.setContactListener(contactLister);
     }
 
     @Override

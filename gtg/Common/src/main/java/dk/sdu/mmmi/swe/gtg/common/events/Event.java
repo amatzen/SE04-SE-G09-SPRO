@@ -4,7 +4,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
 import java.io.Serializable;
 
-public class Event implements Serializable{
+public class Event implements Serializable {
     private final Entity source;
 
     public Event(Entity source) {

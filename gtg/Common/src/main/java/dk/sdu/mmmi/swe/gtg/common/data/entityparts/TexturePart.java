@@ -2,7 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class TexturePart implements IEntityPart{
+public class TexturePart implements IEntityPart {
 
     private TextureRegion texture;
 
