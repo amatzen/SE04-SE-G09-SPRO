@@ -64,7 +64,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
         TransformPart position = vehicle.getPart(TransformPart.class);
 
 
-        if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+        if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
             Vector2 vehiclePosition = new Vector2(vehicleBody.getPosition());
             Vector2 norm = vehicleBody.getWorldVector(new Vector2(0, 1));
             norm.scl(2.5f);
