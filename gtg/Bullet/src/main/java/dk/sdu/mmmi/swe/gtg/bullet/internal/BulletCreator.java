@@ -96,8 +96,6 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
         IFamily familyB = Family.builder().get();
 
-        collisionSPI.addListener(collisionListener);
-
         collisionListener = new ICollisionListener() {
             @Override
             public IFamily getFamilyA() {
@@ -134,6 +132,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             }
         };
+        collisionSPI.addListener(collisionListener);
 
     }
 
