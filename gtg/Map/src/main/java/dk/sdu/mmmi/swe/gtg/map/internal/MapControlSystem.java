@@ -56,7 +56,6 @@ public class MapControlSystem implements IEntityProcessingService, MapSPI {
 
     @Override
     public void process(GameData gameData) {
-
         renderer.setView(gameData.getCamera());
         renderer.render();
     }
@@ -64,7 +63,7 @@ public class MapControlSystem implements IEntityProcessingService, MapSPI {
     @Override
     public boolean isTileAccessibly(float x, float y) {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_HOUSES);
-        return layer.getCell((int) (x * unitScale), (int) (y * unitScale)) == null;
+        return layer.getCell((int) (x * unitScale * 4f), (int) (y * unitScale * 4f)) == null;
     }
 
     @Override

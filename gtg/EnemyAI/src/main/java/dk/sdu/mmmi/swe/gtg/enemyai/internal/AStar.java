@@ -4,10 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class AStar {
 
@@ -18,27 +15,22 @@ public class AStar {
     }
 
     public List<Node> searchNodePath(Vector2 from, Vector2 to) {
-        Node start = new Node(null, from, 0);
-        Node goal = new Node(null, to, 0);
+        Node start = new Node(null, from, 1);
+        Node goal = new Node(null, to, 1);
 
         return treeSearch(start, goal);
     }
 
     public List<Node> treeSearch(final Node start, final Node goal) {
-        ArrayList<Node> fringe = new ArrayList<>();
+        Set<Node> explored = new HashSet<>();
+        PriorityQueue<Node> fringe = new PriorityQueue<>((node1, node2) -> (int) (f(node1, goal) - f(node2, goal)));
 
         fringe.add(start);
 
-        /*
-        Node current = getBest(fringe);
-
-        System.out.println(map.worldCoordinatesToMapCoordinates(current.getState()));
-        System.out.println(map.worldCoordinatesToMapCoordinates(goal.getState()));
-
-        System.out.println(map.isTileAccessibly(current.getState().x, current.getState().y));
-        */
         while (!fringe.isEmpty()) {
             Node current = getBest(fringe, goal);
+
+            explored.add(current);
 
             System.out.println("-----------");
             System.out.println("Current " + map.worldCoordinatesToMapCoordinates(current.getState()));
@@ -54,7 +46,13 @@ public class AStar {
                 return reconstructPath(current);
             }
 
-            fringe.addAll(expand(current));
+            for (Node neighbor : expand(current)) {
+                if (!explored.contains(neighbor)) {
+                    fringe.add(neighbor);
+                } else {
+                    continue;
+                }
+            }
         }
 
         return Collections.emptyList();
@@ -109,26 +107,12 @@ public class AStar {
         return path;
     }
 
-    public Node getBest(ArrayList<Node> fringe, Node goal) {
-        int bestIndex = 0;
-        Node best = fringe.get(bestIndex);
-        float min = f(best, goal);
-
-        for (int i = 1; i < fringe.size(); i++) {
-            if (f(fringe.get(i), goal) < min) {
-                best = fringe.get(i);
-                bestIndex = i;
-                min = f(best, goal);
-            }
-        }
-
-        fringe.remove(bestIndex);
-
-        return best;
+    public Node getBest(PriorityQueue<Node> fringe, Node goal) {
+        return fringe.poll();
     }
 
     private float f(Node node, Node goal) {
-        return g(node, goal) + h(node, goal);
+        return g(node, goal) + 100 * h(node, goal);
     }
 
     private float g(Node node, Node goal) {

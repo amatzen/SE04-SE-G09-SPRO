@@ -43,4 +43,9 @@ public class Node {
     public void setCost(float cost) {
         this.cost = cost;
     }
+
+    @Override
+    public int hashCode() {
+        return new Vector2(state.x, state.y).hashCode();
+    }
 }

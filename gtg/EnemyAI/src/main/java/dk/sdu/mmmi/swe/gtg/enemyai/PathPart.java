@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.enemyai;
 
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
-import dk.sdu.mmmi.swe.gtg.enemyai.internal.AStar;
 
 import java.util.List;
 
