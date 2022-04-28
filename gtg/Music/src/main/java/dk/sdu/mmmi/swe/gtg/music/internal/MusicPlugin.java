@@ -10,7 +10,7 @@ import org.osgi.service.component.annotations.Component;
 @Component
 public class MusicPlugin implements IGamePluginService {
 
-    private Music music;
+    public static Music music;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
