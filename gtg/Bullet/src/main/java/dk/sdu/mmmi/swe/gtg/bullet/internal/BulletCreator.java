@@ -135,6 +135,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             }
         };
+        collisionSPI.addListener(collisionListener);
 
         collisionSPI.addListener(collisionListener);
     }
