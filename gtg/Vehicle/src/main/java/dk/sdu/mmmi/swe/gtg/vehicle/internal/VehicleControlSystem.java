@@ -76,7 +76,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
             Vector2 direction = vehicleBody.getWorldVector(new Vector2(0, 1));
             sound =  Gdx.audio.newSound(Gdx.files.internal("sounds/Gunshot.mp3"));
-            sound.play(1.0f);
+            sound.play(0.3f);
             engine.addEntity(bulletSPI.createBullet(vehiclePosition, new Vector2(direction), vehicleDirection));
 
 
@@ -114,8 +114,6 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
         if (gameData.getKeys().isPressed(GameKeys.ENTER)) {
             System.out.println(position.getPosition());
-            System.out.println(position.getPosition().getClass());
-
         }
 
         for (final Wheel wheel : driveTrain.getWheels()) {
