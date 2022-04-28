@@ -56,13 +56,13 @@ public class Hud implements Disposable {
 
         // Define our labels using the String, and a Label style consisting of a font and color
         moneyLabel = new Label("MONEY", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showMoney = new Label(String.format("%06d", money), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        showMoney = new Label(String.format("%06d", money), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         bulletLabel = new Label("BULLETS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showBullets = new Label(String.format("%03d", bullets), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        showBullets = new Label(String.format("%03d", bullets), new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         lifeLabel = new Label("LIVES", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showLives = new Label(String.format("%01d", life), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        showLives = new Label(String.format("%01d", life), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(moneyLabel).expandX().padTop(10);
