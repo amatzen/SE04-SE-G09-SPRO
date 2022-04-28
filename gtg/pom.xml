@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!--
          | put company details here
@@ -28,13 +26,13 @@
     <artifactId>gtg</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>dk.sdu.swe.gtg (OSGi project)</name>
+  <name>dk.sdu.swe.gtg (OSGi project)</name>
 
     <!--
          | describe your project here
         -->
 
-    <description>Generated using Pax-Construct</description>
+  <description>Generated using Pax-Construct</description>
 
     <properties>
         <!--
@@ -44,7 +42,7 @@
         <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
     </properties>
 
-    <packaging>pom</packaging>
+  <packaging>pom</packaging>
 
     <modules>
         <module>poms</module>
