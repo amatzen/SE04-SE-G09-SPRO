@@ -1,9 +1,11 @@
 package dk.sdu.mmmi.swe.gtg.common.utilities;
 
+import java.util.Objects;
+
 public class Utility {
     public static boolean containsNull(Object... objects) {
         for (Object o : objects) {
-            if (o == null) {
+            if (Objects.isNull(o)) {
                 return true;
             }
         }
