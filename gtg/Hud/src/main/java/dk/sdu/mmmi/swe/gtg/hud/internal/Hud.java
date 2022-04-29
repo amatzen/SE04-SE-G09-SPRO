@@ -25,6 +25,8 @@ public class Hud implements Disposable {
     private final Label showHealth;
     private final Label healthLabel;
     private final Label moneyLabel;
+    private final Label wantedLabel;
+    private final Label showWanted;
 
     // Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
@@ -33,6 +35,7 @@ public class Hud implements Disposable {
     private Integer bullets;
     private Integer health;
     private Integer money;
+    private Integer wanted;
 
     public Hud(SpriteBatch sb) {
 
@@ -40,6 +43,7 @@ public class Hud implements Disposable {
         health = 100;
         money = 0;
         bullets = 999;
+        wanted = 0;
 
         // Set up the HUD viewport using a new camera seperate from our gamecam
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera());
@@ -66,10 +70,14 @@ public class Hud implements Disposable {
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showHealth = new Label(String.format("%01d", health), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
+        wantedLabel = new Label("WANTED LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        showWanted = new Label(String.format("%01d", wanted) + "/5", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(moneyLabel).expandX().padTop(10);
         table.add(healthLabel).expandX().padTop(10);
         table.add(bulletLabel).expandX().padTop(10);
+        table.add(wantedLabel).expandX().padTop(10);
 
         // Creates a row under
         table.row();
@@ -78,6 +86,7 @@ public class Hud implements Disposable {
         table.add(showMoney).expandX();
         table.add(showHealth).expandX();
         table.add(showBullets).expandX();
+        table.add(showWanted).expandX();
 
         // Add our table to the stage
         stage.addActor(table);
@@ -116,6 +125,16 @@ public class Hud implements Disposable {
     public void lostHealth(int value) {
         health -= value;
         showHealth.setText(health);
+    }
+
+    public void addWanted(int value) {
+        wanted += value;
+        showWanted.setText(wanted);
+    }
+
+    public void decreaseWanted(int value) {
+        wanted -= value;
+        showWanted.setText(wanted);
     }
 
     public Stage getStage() {
