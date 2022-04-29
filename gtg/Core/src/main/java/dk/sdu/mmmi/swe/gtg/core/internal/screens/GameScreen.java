@@ -54,7 +54,7 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
         this.gameData.getKeys().update();
 
-        spriteBatch.setProjectionMatrix(hud.getStage().getCamera().combined); 
+        spriteBatch.setProjectionMatrix(hud.getStage().getCamera().combined);
         hud.getStage().act(delta);
         hud.getStage().draw();
     }

@@ -59,10 +59,7 @@ public class ATMPlugin implements IGamePluginService {
 
         engine.addEntity(this.atm);
 
-        worldManager.setContactLister(new ContactListener());
-
         sensorPart.getBody().setUserData(this.atm);
-
     }
 
     private TexturePart getTexture(String path) {

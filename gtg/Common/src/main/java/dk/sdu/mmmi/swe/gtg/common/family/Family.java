@@ -56,7 +56,7 @@ public class Family implements IFamily {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (Objects.isNull(object) || getClass() != object.getClass()) return false;
         Family family = (Family) object;
         return Objects.equals(entities, family.entities) && Objects.equals(parts, family.parts);
     }

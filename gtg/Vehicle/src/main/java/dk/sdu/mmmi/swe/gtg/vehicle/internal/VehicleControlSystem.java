@@ -75,7 +75,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
             Vector2 vehicleDirection = new Vector2(getForwardVelocity(vehicleBody));
 
             Vector2 direction = vehicleBody.getWorldVector(new Vector2(0, 1));
-            sound =  Gdx.audio.newSound(Gdx.files.internal("sounds/Gunshot.mp3"));
+            sound = Gdx.audio.newSound(Gdx.files.internal("sounds/Gunshot.mp3"));
             sound.play(0.3f);
             engine.addEntity(bulletSPI.createBullet(vehiclePosition, new Vector2(direction), vehicleDirection));
 

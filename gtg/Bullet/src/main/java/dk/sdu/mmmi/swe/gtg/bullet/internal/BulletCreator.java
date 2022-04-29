@@ -7,23 +7,41 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
+import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
+import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BulletCreator implements BulletSPI {
+public class BulletCreator implements BulletSPI, IGamePluginService {
 
     @Reference
     private IWorldManager worldManager;
 
     private Body pBody;
+
+    @Reference
+    private CollisionSPI collisionSPI;
+
+    private ICollisionListener collisionListener;
+
+    public BulletCreator() {
+
+    }
 
     @Override
     public Bullet createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed) {
@@ -46,7 +64,9 @@ public class BulletCreator implements BulletSPI {
 
         Bullet bullet = new Bullet();
         TransformPart transformPart = new TransformPart();
+
         BodyPart bulletBody = new BodyPart(pBody);
+        bulletBody.getBody().setUserData(bullet);
 
         transformPart.setScale(1f / 1890f, 1f / 1890f);
         bullet.addPart(getBulletTexture());
@@ -70,5 +90,56 @@ public class BulletCreator implements BulletSPI {
 
     private TexturePart getBulletTexture() {
         return getTexture("assets/bullet.png");
+    }
+
+    @Override
+    public void start(IEngine engine, GameData gameData) {
+        IFamily familyA = Family.builder().forEntities(Bullet.class).get();
+
+        IFamily familyB = Family.builder().get();
+
+        collisionListener = new ICollisionListener() {
+            @Override
+            public IFamily getFamilyA() {
+                return familyA;
+            }
+
+            @Override
+            public IFamily getFamilyB() {
+                return familyB;
+            }
+
+            @Override
+            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
+                /*
+                if (entityB.hasPart(LifePart.class)) {
+                    LifePart lifePart = entityB.getPart(LifePart.class);
+                    lifePart.setLife(lifePart.getLife() - damage);
+                }
+                */
+                engine.removeEntity(entityA);
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+
+            }
+
+            @Override
+            public void preSolve(Contact contact) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact) {
+
+            }
+        };
+        collisionSPI.addListener(collisionListener);
+    }
+
+    @Override
+    public void stop(IEngine engine, GameData gameData) {
+        collisionSPI.removeListener(collisionListener);
     }
 }

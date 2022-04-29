@@ -41,6 +41,7 @@ public class MapControlSystem implements IEntityProcessingService {
                     new Vector2(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2).scl(unitScale), // position
                     new Vector2(rectangle.getWidth(), rectangle.getHeight()).scl(unitScale), // size
                     BodyDef.BodyType.StaticBody, OBJECT_DENSITY, false));
+            collision.getBody().setUserData(wall);
             wall.addPart(collision);
             engine.addEntity(wall);
         }
