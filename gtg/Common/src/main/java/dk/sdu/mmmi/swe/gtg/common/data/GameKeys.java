@@ -15,6 +15,7 @@ public class GameKeys {
     public static final int S = 11;
     public static final int D = 12;
     public static final int M = 13;
+    public static final int E = 33;
     private static final int NUM_KEYS = 14;
     private static boolean[] keys;
     private static boolean[] pkeys;
