@@ -64,6 +64,7 @@
     <module>Music</module>
     <module>CommonCollision</module>
     <module>Hud</module>
+    <module>CommonHud</module>
   </modules>
 
   <build>
