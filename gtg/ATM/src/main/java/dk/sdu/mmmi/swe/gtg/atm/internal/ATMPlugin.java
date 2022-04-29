@@ -93,7 +93,7 @@ public class ATMPlugin implements IGamePluginService {
             }
 
             @Override
-            public void endContact(Contact contact) {
+            public void endContact(Contact contact, Entity entityA, Entity entityB) {
                 System.out.println("Collision with ATM stopped");
 
             }

@@ -12,7 +12,7 @@ public interface ICollisionListener {
 
     public void beginContact(Contact contact, Entity entityA, Entity entityB);
 
-    public void endContact(Contact contact);
+    public void endContact(Contact contact, Entity entityA, Entity entityB);
 
     public void preSolve(Contact contact);
 

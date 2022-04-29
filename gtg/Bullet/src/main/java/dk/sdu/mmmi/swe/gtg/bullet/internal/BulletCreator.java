@@ -121,7 +121,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
             }
 
             @Override
-            public void endContact(Contact contact) {
+            public void endContact(Contact contact, Entity entityA, Entity entityB) {
 
             }
 
