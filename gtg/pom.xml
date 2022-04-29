@@ -65,6 +65,7 @@
     <module>Map</module>
     <module>Music</module>
     <module>Hud</module>
+    <module>dk.sdu.mmmi.swe.gtg.crime</module>
   </modules>
 
   <build>
