@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static dk.sdu.mmmi.swe.gtg.common.utilities.Utility.containsNull;
+
 @Component
 public class Collision implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener, IEntityProcessingService {
 
@@ -88,14 +90,14 @@ public class Collision implements CollisionSPI, IGamePluginService, com.badlogic
                 Fixture fixtureA = contact.getFixtureA();
                 Fixture fixtureB = contact.getFixtureB();
 
-                if (fixtureA == null || fixtureB == null) {
+                if (containsNull(fixtureA, fixtureB)) {
                     return;
                 }
 
                 Entity entityA = (Entity) fixtureA.getBody().getUserData();
                 Entity entityB = (Entity) fixtureB.getBody().getUserData();
 
-                if (entityA == null || entityB == null) {
+                if (containsNull(entityA, entityB)) {
                     return;
                 }
 
