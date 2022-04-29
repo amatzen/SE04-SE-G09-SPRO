@@ -48,7 +48,7 @@ public class ATMPlugin implements IGamePluginService {
         Vector2 atmSize = new Vector2(1, 1.5f);
         float sensorRadius = 5;
 
-        BodyPart atm = new BodyPart(shapeFactory.createRectangle(
+        BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
                 atmPosition, atmSize, BodyDef.BodyType.StaticBody,
                 1,
                 false));
@@ -60,7 +60,11 @@ public class ATMPlugin implements IGamePluginService {
 
         this.atm = new ATM();
 
-        this.atm.addPart(atm);
+        atmBody.getBody().setUserData(this.atm);
+
+        sensorPart.getBody().setUserData(this.atm);
+
+        this.atm.addPart(atmBody);
         this.atm.addPart(sensorPart);
 
         TransformPart transformPart = new TransformPart();
@@ -69,8 +73,6 @@ public class ATMPlugin implements IGamePluginService {
         this.atm.addPart(getBodyTexture());
 
         engine.addEntity(this.atm);
-
-        sensorPart.getBody().setUserData(this.atm);
 
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
 
