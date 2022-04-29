@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -112,17 +111,12 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-
+                /*
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
-                    lifePart.setDamage(10);
-                    System.out.println(lifePart.getLife());
-                    if (lifePart.getLife()<=0){
-                    engine.removeEntity(entityB); // Removes vehicle but not wheels, remove and replace it with hud message!
-                        System.out.println("Game over bro");
-                    }
-
+                    lifePart.setLife(lifePart.getLife() - damage);
                 }
+                */
                 engine.removeEntity(entityA);
             }
 
