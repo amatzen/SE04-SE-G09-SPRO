@@ -109,11 +109,8 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                if (entityB.hasPart(SensorPart.class)) {
-                    System.out.println("Bullet collision with Sensor");
-                } else {
-                    engine.removeEntity(entityA);
-                }
+                engine.removeEntity(entityA);
+
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
