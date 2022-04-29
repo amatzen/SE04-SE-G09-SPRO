@@ -13,6 +13,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SensorPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -112,11 +113,13 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                if (entityB.hasPart(SensorPart.class)) {
-                    System.out.println("Bullet collision with Sensor");
-                } else {
-                    engine.removeEntity(entityA);
+                /*
+                if (entityB.hasPart(LifePart.class)) {
+                    LifePart lifePart = entityB.getPart(LifePart.class);
+                    lifePart.setLife(lifePart.getLife() - damage);
                 }
+                */
+                engine.removeEntity(entityA);
             }
 
             @Override
