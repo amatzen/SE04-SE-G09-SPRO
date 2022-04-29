@@ -117,6 +117,11 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.setDamage(10);
                     System.out.println(lifePart.getLife());
+                    if (lifePart.getLife()<=0){
+                    engine.removeEntity(entityB); // Removes vehicle but not wheels, remove and replace it with hud message!
+                        System.out.println("Game over bro");
+                    }
+
                 }
                 engine.removeEntity(entityA);
             }
