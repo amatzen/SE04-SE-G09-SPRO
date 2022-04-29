@@ -9,7 +9,7 @@
   </parent>
 
   <properties>
-    <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.commoncrime</bundle.symbolicName>
+    <bundle.symbolicName>CommonCrime</bundle.symbolicName>
     <bundle.namespace>dk.sdu.mmmi.swe.gtg.commoncrime</bundle.namespace>
   </properties>
 
