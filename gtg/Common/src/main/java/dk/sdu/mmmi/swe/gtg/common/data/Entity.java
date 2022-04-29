@@ -42,7 +42,7 @@ public class Entity implements Serializable {
         return parts.values();
     }
 
-    public boolean hasPart(Class partClass) {
+    public boolean hasPart(Class<? extends IEntityPart> partClass) {
         return parts.containsKey(partClass);
     }
 

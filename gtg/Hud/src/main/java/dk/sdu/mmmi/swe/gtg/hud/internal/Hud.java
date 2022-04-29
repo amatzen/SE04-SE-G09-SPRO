@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.screens;
+package dk.sdu.mmmi.swe.gtg.hud.internal;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,11 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import org.osgi.service.component.annotations.Component;
 
+@Component
 public class Hud implements Disposable {
     public static final int V_WIDTH = 1600;
     public static final int V_HEIGHT = 900;
     private final Viewport viewport;
+
     // Scene2D widgets
     private final Label showBullets;
     private final Label showMoney;
@@ -22,8 +25,10 @@ public class Hud implements Disposable {
     private final Label showHealth;
     private final Label healthLabel;
     private final Label moneyLabel;
+
     // Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
+
     // Tracking Variables
     private Integer bullets;
     private Integer health;

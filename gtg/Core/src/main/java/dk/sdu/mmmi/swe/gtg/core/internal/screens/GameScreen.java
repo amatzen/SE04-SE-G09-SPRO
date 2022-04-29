@@ -21,13 +21,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
     private final OrthographicCamera cam;
     private final Box2DDebugRenderer mB2dr;
     private final IWorldManager worldManager;
-    private Hud hud;
-    private SpriteBatch spriteBatch;
 
     public GameScreen(Game game) {
-        spriteBatch = new SpriteBatch();
-        hud = new Hud(spriteBatch);
-
         this.game = game;
         this.gameData = game.gameData;
 
@@ -53,16 +48,11 @@ public class GameScreen extends ScreenAdapter implements Screen {
         this.game.getWorldManager().render(mB2dr, cam.combined);
 
         this.gameData.getKeys().update();
-
-        spriteBatch.setProjectionMatrix(hud.getStage().getCamera().combined);
-        hud.getStage().act(delta);
-        hud.getStage().draw();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        hud.getStage().getViewport().update(width, height);
     }
 
     @Override

@@ -3,6 +3,7 @@ package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 public class LifePart implements IEntityPart {
 
     private int life = 100;
+    
     @Override
     public void destroy() {
 
@@ -13,9 +14,10 @@ public class LifePart implements IEntityPart {
     }
 
     public void setLife(int life){
-        this.life= life;
+        this.life = life;
     }
-    public void setDamage(int damage){
-        this.life = life-damage;
+  
+    public void setDamage(int damage) {
+        this.life = life - damage;
     }
 }
