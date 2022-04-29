@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.vehicle.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
@@ -31,7 +33,7 @@ public class VehicleControlSystem implements IEntityProcessingService {
     private List<Vehicle> vehicleList;
     private float wheelAngle = 0;
     private List<? extends Entity> position;
-
+    private Sound sound;
 
     @Override
     public void addedToEngine(IEngine engine) {
@@ -73,6 +75,8 @@ public class VehicleControlSystem implements IEntityProcessingService {
             Vector2 vehicleDirection = new Vector2(getForwardVelocity(vehicleBody));
 
             Vector2 direction = vehicleBody.getWorldVector(new Vector2(0, 1));
+            sound = Gdx.audio.newSound(Gdx.files.internal("sounds/Gunshot.mp3"));
+            sound.play(0.3f);
             engine.addEntity(bulletSPI.createBullet(vehiclePosition, new Vector2(direction), vehicleDirection));
 
 
@@ -110,8 +114,6 @@ public class VehicleControlSystem implements IEntityProcessingService {
 
         if (gameData.getKeys().isPressed(GameKeys.ENTER)) {
             System.out.println(position.getPosition());
-            System.out.println(position.getPosition().getClass());
-
         }
 
         for (final Wheel wheel : driveTrain.getWheels()) {
