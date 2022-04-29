@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SensorPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -111,17 +112,15 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                /*
-                if (entityB.hasPart(LifePart.class)) {
-                    LifePart lifePart = entityB.getPart(LifePart.class);
-                    lifePart.setLife(lifePart.getLife() - damage);
+                if (entityB.hasPart(SensorPart.class)) {
+                    System.out.println("Bullet collision with Sensor");
+                } else {
+                    engine.removeEntity(entityA);
                 }
-                */
-                engine.removeEntity(entityA);
             }
 
             @Override
-            public void endContact(Contact contact) {
+            public void endContact(Contact contact, Entity entityA, Entity entityB) {
 
             }
 
