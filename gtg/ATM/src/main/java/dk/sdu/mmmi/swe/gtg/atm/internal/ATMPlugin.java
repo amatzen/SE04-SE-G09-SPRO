@@ -20,6 +20,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -38,6 +39,9 @@ public class ATMPlugin implements IGamePluginService {
 
     @Reference
     private CollisionSPI collisionSPI;
+
+    @Reference
+    private ICrimeAction crimeAction;
 
     private ICollisionListener collisionListener;
 
@@ -90,6 +94,8 @@ public class ATMPlugin implements IGamePluginService {
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
                 System.out.println("Collision with ATM");
+
+                crimeAction.commit();
             }
 
             @Override
