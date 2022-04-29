@@ -13,10 +13,10 @@ public class LifePart implements IEntityPart {
         return life;
     }
 
-    public void setLife(int life){
+    public void setLife(int life) {
         this.life = life;
     }
-  
+
     public void inflictDamage(int damage) {
         this.life = life - damage;
     }
