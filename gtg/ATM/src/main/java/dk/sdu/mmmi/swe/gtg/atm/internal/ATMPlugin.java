@@ -44,7 +44,7 @@ public class ATMPlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        Vector2 atmPosition = new Vector2(129.26f, 74.2f);
+        Vector2 atmPosition = new Vector2(137.45f, 84f);
         Vector2 atmSize = new Vector2(1, 1.5f);
         float sensorRadius = 5;
 
