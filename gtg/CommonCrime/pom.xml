@@ -11,7 +11,7 @@
     </parent>
 
     <properties>
-        <bundle.symbolicName>CommonCrime</bundle.symbolicName>
+        <bundle.symbolicName>dk.sdu.mmmi.swe.gtg.commoncrime</bundle.symbolicName>
         <bundle.namespace>dk.sdu.mmmi.swe.gtg.commoncrime</bundle.namespace>
     </properties>
 
@@ -38,15 +38,7 @@
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
