@@ -17,7 +17,7 @@ public class LifePart implements IEntityPart {
         this.life = life;
     }
   
-    public void setDamage(int damage) {
+    public void inflictDamage(int damage) {
         this.life = life - damage;
     }
 }
