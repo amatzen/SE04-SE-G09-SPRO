@@ -114,7 +114,7 @@ public class VehiclePlugin implements IGamePluginService {
     }
 
     private TexturePart getBodyTexture() {
-        return getTexture("assets/taxi.png");
+        return getTexture("assets/player.png");
     }
 
     private TexturePart getWheelTexture() {
