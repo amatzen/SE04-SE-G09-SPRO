@@ -20,7 +20,6 @@ public class OrthographicCameraExample implements ApplicationListener {
     private SpriteBatch batch;
 
     private Sprite mapSprite;
-    private Music music;
 
     @Override
     public void create() {
@@ -38,11 +37,6 @@ public class OrthographicCameraExample implements ApplicationListener {
         cam.update();
 
         batch = new SpriteBatch();
-
-        music = Gdx.audio.newMusic(Gdx.files.internal("data/gtasa.mp3"));
-        music.setLooping(true);
-        music.setVolume(0.5f);
-        music.play();
 
     }
 
@@ -109,7 +103,6 @@ public class OrthographicCameraExample implements ApplicationListener {
     public void dispose() {
         mapSprite.getTexture().dispose();
         batch.dispose();
-        music.dispose();
 
     }
 }
