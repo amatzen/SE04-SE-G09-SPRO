@@ -12,15 +12,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Hud implements Disposable {
-    // Scene2D.ui Stage and its own Viewport for HUD
-    public Stage stage;
+    public static final int V_WIDTH = 1600;
+    public static final int V_HEIGHT = 900;
     private final Viewport viewport;
-
-    // Tracking Variables
-    private Integer bullets;
-    private Integer health;
-    private Integer money;
-
     // Scene2D widgets
     private final Label showBullets;
     private final Label showMoney;
@@ -28,9 +22,12 @@ public class Hud implements Disposable {
     private final Label showHealth;
     private final Label healthLabel;
     private final Label moneyLabel;
-
-    public static final int V_WIDTH = 1600;
-    public static final int V_HEIGHT = 900;
+    // Scene2D.ui Stage and its own Viewport for HUD
+    public Stage stage;
+    // Tracking Variables
+    private Integer bullets;
+    private Integer health;
+    private Integer money;
 
     public Hud(SpriteBatch sb) {
 
@@ -59,7 +56,7 @@ public class Hud implements Disposable {
         showMoney = new Label("$" + String.format("%06d", money), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         bulletLabel = new Label("BULLETS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showBullets = new Label(String.format("%03d", bullets) + "+" , new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        showBullets = new Label(String.format("%03d", bullets) + "+", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showHealth = new Label(String.format("%01d", health), new Label.LabelStyle(new BitmapFont(), Color.RED));
@@ -86,35 +83,37 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
-    public void addMoney(int value){
+    public void addMoney(int value) {
         money += value;
         showMoney.setText(String.format("%06d", money));
     }
 
-    public void removeMoney(int value){
+    public void removeMoney(int value) {
         money -= value;
         showMoney.setText(String.format("%06d", money));
     }
 
-    public void addBullets(int value){
+    public void addBullets(int value) {
         bullets += value;
         showBullets.setText(String.format("%03d", bullets));
     }
 
-    public void removeBullets(int value){
+    public void removeBullets(int value) {
         bullets -= value;
         showBullets.setText(String.format("%03d", bullets));
     }
 
-    public void gainedHealth(int value){
+    public void gainedHealth(int value) {
         health += value;
         showHealth.setText(health);
     }
 
-    public void lostHealth(int value){
+    public void lostHealth(int value) {
         health -= value;
         showHealth.setText(health);
     }
 
-    public Stage getStage() { return stage; }
+    public Stage getStage() {
+        return stage;
+    }
 }
