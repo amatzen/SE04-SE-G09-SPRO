@@ -11,7 +11,10 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -114,8 +117,8 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
-                    System.out.println("Health: "+lifePart.getLife());
-                    if (lifePart.getLife()<=0){
+                    System.out.println("Health: " + lifePart.getLife());
+                    if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
                         engine.removeEntity(entityB); // Removes vehicle
                     }

@@ -33,12 +33,12 @@ public class Family implements IFamily {
         return parts;
     }
 
-    public Set<Class<? extends IEntityPart>> getExcludedParts() {
-        return excludedParts;
-    }
-
     protected void setParts(Set<Class<? extends IEntityPart>> parts) {
         this.parts = parts;
+    }
+
+    public Set<Class<? extends IEntityPart>> getExcludedParts() {
+        return excludedParts;
     }
 
     protected void setExcludedParts(Set<Class<? extends IEntityPart>> excludedParts) {
