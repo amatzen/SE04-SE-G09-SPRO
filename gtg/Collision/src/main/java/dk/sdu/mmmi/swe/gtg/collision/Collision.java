@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.collision;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -22,9 +23,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class Collision implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener, IEntityProcessingService {
 
-    private List<ICollisionListener> listeners;
+    private final List<ICollisionListener> listeners;
 
-    private Queue<Contact> contacts;
+    private final Queue<Contact> contacts;
+    @Reference
+    private IWorldManager worldManager;
 
     public Collision() {
         listeners = new CopyOnWriteArrayList<>();
@@ -61,9 +64,6 @@ public class Collision implements CollisionSPI, IGamePluginService, com.badlogic
         listeners.remove(collisionListener);
     }
 
-    @Reference
-    private IWorldManager worldManager;
-
     @Override
     public void start(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(this);
@@ -85,8 +85,15 @@ public class Collision implements CollisionSPI, IGamePluginService, com.badlogic
             Contact contact = contacts.poll();
 
             listeners.forEach(collisionListener -> {
-                Entity entityA = (Entity) contact.getFixtureA().getBody().getUserData();
-                Entity entityB = (Entity) contact.getFixtureB().getBody().getUserData();
+                Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+
+                if (fixtureA == null || fixtureB == null) {
+                    return;
+                }
+
+                Entity entityA = (Entity) fixtureA.getBody().getUserData();
+                Entity entityB = (Entity) fixtureB.getBody().getUserData();
 
                 if (entityA == null || entityB == null) {
                     return;
