@@ -68,7 +68,7 @@ public class Entity implements Serializable {
             return true;
         }
 
-        if (object == null || getClass() != object.getClass()) {
+        if (Objects.isNull(object) || getClass() != object.getClass()) {
             return false;
         }
 
