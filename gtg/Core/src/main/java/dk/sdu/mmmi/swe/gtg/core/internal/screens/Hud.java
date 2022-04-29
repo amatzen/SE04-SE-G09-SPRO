@@ -35,9 +35,9 @@ public class Hud implements Disposable {
     public Hud(SpriteBatch sb) {
 
         // Define our default tracking variables
-        health = 3;
+        health = 100;
         money = 0;
-        bullets = 0;
+        bullets = 999;
 
         // Set up the HUD viewport using a new camera seperate from our gamecam
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera());
@@ -59,7 +59,7 @@ public class Hud implements Disposable {
         showMoney = new Label("$" + String.format("%06d", money), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         bulletLabel = new Label("BULLETS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showBullets = new Label(String.format("%03d", bullets), new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        showBullets = new Label(String.format("%03d", bullets) + "+" , new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showHealth = new Label(String.format("%01d", health), new Label.LabelStyle(new BitmapFont(), Color.RED));
