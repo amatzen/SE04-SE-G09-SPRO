@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!--
+  <!--
          | put company details here
         <organization>
           <name>...</name>
@@ -11,7 +9,7 @@
         </organization>
         -->
 
-    <!--
+  <!--
          | put license details here
         <licenses>
           <license>
@@ -23,67 +21,68 @@
         </licenses>
         -->
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>dk.sdu.swe</groupId>
-    <artifactId>gtg</artifactId>
-    <version>1.0-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dk.sdu.swe</groupId>
+  <artifactId>gtg</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-    <name>dk.sdu.swe.gtg (OSGi project)</name>
+  <name>dk.sdu.swe.gtg (OSGi project)</name>
 
-    <!--
+  <!--
          | describe your project here
         -->
 
-    <description>Generated using Pax-Construct</description>
+  <description>Generated using Pax-Construct</description>
 
-    <properties>
-        <!--
+  <properties>
+    <!--
                  | some example OSGi runtime properties
                 -->
-        <org.osgi.service.http.port>8080</org.osgi.service.http.port>
-        <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-    </properties>
+    <org.osgi.service.http.port>8080</org.osgi.service.http.port>
+    <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
+  </properties>
 
-    <packaging>pom</packaging>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>poms</module>
-        <module>provision</module>
-        <module>Core</module>
-        <module>Common</module>
-        <module>LibGDX</module>
-        <module>Vehicle</module>
-        <module>Collision</module>
-        <module>WorldManager</module>
-        <module>ShapeFactoryCommon</module>
-        <module>ShapeFactory</module>
-        <module>CommonBullet</module>
-        <module>Pathfindings</module>
-        <module>RenderingSystem</module>
-        <module>Bullet</module>
-        <module>ATM</module>
-        <module>Map</module>
-        <module>Music</module>
-        <module>CommonCollision</module>
-    </modules>
+  <modules>
+    <module>poms</module>
+    <module>provision</module>
+    <module>Core</module>
+    <module>Common</module>
+    <module>LibGDX</module>
+    <module>Vehicle</module>
+    <module>Collision</module>
+    <module>WorldManager</module>
+    <module>ShapeFactoryCommon</module>
+    <module>ShapeFactory</module>
+    <module>CommonBullet</module>
+    <module>Pathfindings</module>
+    <module>RenderingSystem</module>
+    <module>Bullet</module>
+    <module>ATM</module>
+    <module>Map</module>
+    <module>Music</module>
+    <module>CommonCollision</module>
+    <module>dk.sdu.mmmi.swe.gtg.commoncrime</module>
+  </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.ops4j</groupId>
-                <artifactId>maven-pax-plugin</artifactId>
-                <version>1.6.0</version>
-                <configuration>
-                    <!--
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.ops4j</groupId>
+        <artifactId>maven-pax-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <!--
                                          | some example Pax-Runner settings
                                         -->
-                    <provision>
-                        <param>--platform=felix</param>
-                        <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
-                    </provision>
-                </configuration>
-                <executions>
-                    <!--
+          <provision>
+            <param>--platform=felix</param>
+            <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
+          </provision>
+        </configuration>
+        <executions>
+          <!--
                                          | uncomment to auto-generate IDE files
                                         <execution>
                                           <id>ide-support</id>
@@ -92,9 +91,9 @@
                                           </goals>
                                         </execution>
                                         -->
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
