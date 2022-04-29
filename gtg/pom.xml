@@ -66,6 +66,7 @@
     <module>Music</module>
     <module>Hud</module>
     <module>Crime</module>
+    <module>CommonHud</module>
   </modules>
 
   <build>
