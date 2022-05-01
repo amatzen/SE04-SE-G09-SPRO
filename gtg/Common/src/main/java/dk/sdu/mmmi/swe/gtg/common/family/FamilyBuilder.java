@@ -32,6 +32,14 @@ public class FamilyBuilder implements IFamilyBuilder {
     }
 
     @Override
+    public IFamilyBuilder excludeParts(Class<? extends IEntityPart>... parts) {
+        Set<Class<? extends IEntityPart>> partSet = ConcurrentHashMap.newKeySet();
+        partSet.addAll(Arrays.asList(parts));
+        family.setExcludedParts(partSet);
+        return this;
+    }
+
+    @Override
     public Family get() {
         return family;
     }

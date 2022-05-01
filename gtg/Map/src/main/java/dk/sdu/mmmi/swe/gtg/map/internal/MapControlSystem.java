@@ -38,7 +38,7 @@ public class MapControlSystem implements IEntityProcessingService, MapSPI {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        map = new TmxMapLoader().load("maps/GTG-Map1_v3.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map_v4.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);
@@ -49,6 +49,7 @@ public class MapControlSystem implements IEntityProcessingService, MapSPI {
                     new Vector2(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2).scl(unitScale), // position
                     new Vector2(rectangle.getWidth(), rectangle.getHeight()).scl(unitScale), // size
                     BodyDef.BodyType.StaticBody, OBJECT_DENSITY, false));
+            collision.getBody().setUserData(wall);
             wall.addPart(collision);
             engine.addEntity(wall);
         }

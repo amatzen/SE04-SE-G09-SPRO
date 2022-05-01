@@ -10,11 +10,11 @@ import org.osgi.service.component.annotations.Component;
 @Component
 public class MusicPlugin implements IGamePluginService {
 
-    private Music music;
+    public static Music music;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/lofi.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/GTA-SA.mp3"));
         music.setLooping(true);
         music.setVolume(0.5f);
         music.play();

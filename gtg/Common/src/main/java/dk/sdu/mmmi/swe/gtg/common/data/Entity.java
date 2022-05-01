@@ -42,7 +42,7 @@ public class Entity implements Serializable {
         return parts.values();
     }
 
-    public boolean hasPart(Class partClass) {
+    public boolean hasPart(Class<? extends IEntityPart> partClass) {
         return parts.containsKey(partClass);
     }
 
@@ -68,7 +68,7 @@ public class Entity implements Serializable {
             return true;
         }
 
-        if (object == null || getClass() != object.getClass()) {
+        if (Objects.isNull(object) || getClass() != object.getClass()) {
             return false;
         }
 

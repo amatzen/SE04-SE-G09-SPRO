@@ -3,7 +3,6 @@ package dk.sdu.mmmi.cbse;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,7 +19,6 @@ public class OrthographicCameraExample implements ApplicationListener {
     private SpriteBatch batch;
 
     private Sprite mapSprite;
-    private Music music;
 
     @Override
     public void create() {
@@ -38,11 +36,6 @@ public class OrthographicCameraExample implements ApplicationListener {
         cam.update();
 
         batch = new SpriteBatch();
-
-        music = Gdx.audio.newMusic(Gdx.files.internal("data/gtasa.mp3"));
-        music.setLooping(true);
-        music.setVolume(0.5f);
-        music.play();
 
     }
 
@@ -109,7 +102,6 @@ public class OrthographicCameraExample implements ApplicationListener {
     public void dispose() {
         mapSprite.getTexture().dispose();
         batch.dispose();
-        music.dispose();
 
     }
 }
