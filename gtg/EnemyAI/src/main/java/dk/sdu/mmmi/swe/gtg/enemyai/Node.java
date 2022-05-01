@@ -46,6 +46,17 @@ public class Node {
 
     @Override
     public int hashCode() {
-        return new Vector2(state.x, state.y).hashCode();
+        return ((int) state.y) * 1000 + ((int) state.x);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        return hashCode() == obj.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return state.toString();
     }
 }

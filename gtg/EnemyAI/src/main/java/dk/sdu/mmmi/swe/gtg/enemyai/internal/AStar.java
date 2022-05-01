@@ -14,48 +14,64 @@ public class AStar {
         this.map = map;
     }
 
+    private float resolution = 1f;
     public List<Node> searchNodePath(Vector2 from, Vector2 to) {
-        Node start = new Node(null, from, 1);
-        Node goal = new Node(null, to, 1);
+        Node start = new Node(null, from, 0);
+        Node goal = new Node(null, to, 0);
 
         return treeSearch(start, goal);
     }
 
     public List<Node> treeSearch(final Node start, final Node goal) {
         Set<Node> explored = new HashSet<>();
+        Map<String, Node> inFringe = new HashMap<>();
         PriorityQueue<Node> fringe = new PriorityQueue<>((node1, node2) -> (int) (f(node1, goal) - f(node2, goal)));
 
+        start.setState(new Vector2((int) start.getState().x, (int) start.getState().y));
+        goal.setState(new Vector2((int) goal.getState().x, (int) goal.getState().y));
         fringe.add(start);
 
-        while (!fringe.isEmpty()) {
-            Node current = getBest(fringe, goal);
+        Node last = null;
 
-            explored.add(current);
+        while (!fringe.isEmpty()) {
+            Node current = fringe.remove();
 
             System.out.println("-----------");
-            System.out.println("Current " + map.worldCoordinatesToMapCoordinates(current.getState()));
+            System.out.println("Current " + current.getState());
             System.out.println("Cost " + current.getCost());
-            System.out.println("Goal " + map.worldCoordinatesToMapCoordinates(goal.getState()));
+            System.out.println("Goal " + goal.getState());
             System.out.println("Size " + fringe.size());
 
-            if (map.worldCoordinatesToMapCoordinates(current.getState())
-                .equals(
-                    map.worldCoordinatesToMapCoordinates(goal.getState())
-            )) {
+            System.out.println("Current equals last: " + current.equals(last));
+            System.out.println("Queue contains current: " + fringe.contains(current));
+            System.out.println("Queue contains last: " + fringe.contains(last));
+            System.out.println("Explored contains current: " + explored.contains(current));
+            System.out.println("Explored contains last: " + explored.contains(last));
+
+            last = current;
+
+            if (current.equals(goal)) {
                 System.out.println("Found goal");
                 return reconstructPath(current);
             }
 
+            fringe.remove(current);
+            explored.add(current);
+
             for (Node neighbor : expand(current)) {
-                if (!explored.contains(neighbor)) {
-                    fringe.add(neighbor);
-                } else {
+                if (explored.contains(neighbor)) {
                     continue;
                 }
+
+                fringe.add(neighbor);
             }
         }
 
         return Collections.emptyList();
+    }
+
+    private String getKey(Node node) {
+        return Integer.toString((int) node.getState().x) + "," + Integer.toString((int) node.getState().y);
     }
 
     private List<Node> expand(Node current) {
@@ -69,16 +85,16 @@ public class AStar {
             Vector2 neighbor = new Vector2(current.getState());
             switch (i) {
                 case 0:
-                    neighbor.x += 1;
+                    neighbor.x += resolution;
                     break;
                 case 1:
-                    neighbor.x -= 1;
+                    neighbor.x -= resolution;
                     break;
                 case 2:
-                    neighbor.y += 1;
+                    neighbor.y += resolution;
                     break;
                 case 3:
-                    neighbor.y -= 1;
+                    neighbor.y -= resolution;
                     break;
             }
 
@@ -107,12 +123,12 @@ public class AStar {
         return path;
     }
 
-    public Node getBest(PriorityQueue<Node> fringe, Node goal) {
+    public Node getBest(Queue<Node> fringe) {
         return fringe.poll();
     }
 
     private float f(Node node, Node goal) {
-        return g(node, goal) + 100 * h(node, goal);
+        return g(node, goal) + h(node, goal);
     }
 
     private float g(Node node, Node goal) {
