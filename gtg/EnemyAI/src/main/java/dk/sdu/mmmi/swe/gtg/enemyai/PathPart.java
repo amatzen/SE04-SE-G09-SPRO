@@ -5,19 +5,19 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 import java.util.List;
 
 public class PathPart implements IEntityPart {
-    private List<Node> path;
+    private Path path;
     private int currentPathIndex;
 
-    public PathPart(List<Node> paths) {
+    public PathPart(Path paths) {
         this.path = paths;
         currentPathIndex = 0;
     }
 
-    public List<Node> getPath() {
+    public Path getPath() {
         return path;
     }
 
-    public void setPath(List<Node> path) {
+    public void setPath(Path path) {
         this.path = path;
     }
 

@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.enemyai.internal;
 
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
+import dk.sdu.mmmi.swe.gtg.enemyai.Path;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 
 import java.util.*;
@@ -14,64 +15,57 @@ public class AStar {
         this.map = map;
     }
 
-    private float resolution = 1f;
-    public List<Node> searchNodePath(Vector2 from, Vector2 to) {
+    private int resolution = 1;
+    public Path searchNodePath(Vector2 from, Vector2 to) {
         Node start = new Node(null, from, 0);
         Node goal = new Node(null, to, 0);
 
         return treeSearch(start, goal);
     }
 
-    public List<Node> treeSearch(final Node start, final Node goal) {
-        Set<Node> explored = new HashSet<>();
+    public Path treeSearch(final Node start, final Node goal) {
+        Map<String, Node> explored = new HashMap<>();
         Map<String, Node> inFringe = new HashMap<>();
-        PriorityQueue<Node> fringe = new PriorityQueue<>((node1, node2) -> (int) (f(node1, goal) - f(node2, goal)));
+        PriorityQueue<Node> fringe = new PriorityQueue<>(
+                (node1, node2) -> Float.compare(f(node1, goal), f(node2, goal))
+        );
 
         start.setState(new Vector2((int) start.getState().x, (int) start.getState().y));
         goal.setState(new Vector2((int) goal.getState().x, (int) goal.getState().y));
-        fringe.add(start);
 
-        Node last = null;
+        addToFringe(start, fringe, inFringe);
 
         while (!fringe.isEmpty()) {
-            Node current = fringe.remove();
+            Node current = fringe.poll();
 
-            System.out.println("-----------");
-            System.out.println("Current " + current.getState());
-            System.out.println("Cost " + current.getCost());
-            System.out.println("Goal " + goal.getState());
-            System.out.println("Size " + fringe.size());
-
-            System.out.println("Current equals last: " + current.equals(last));
-            System.out.println("Queue contains current: " + fringe.contains(current));
-            System.out.println("Queue contains last: " + fringe.contains(last));
-            System.out.println("Explored contains current: " + explored.contains(current));
-            System.out.println("Explored contains last: " + explored.contains(last));
-
-            last = current;
-
-            if (current.equals(goal)) {
-                System.out.println("Found goal");
+            if (current.getKey().equals(goal.getKey())) {
                 return reconstructPath(current);
             }
 
-            fringe.remove(current);
-            explored.add(current);
+            inFringe.remove(current.getKey());
+            explored.put(current.getKey(), current);
 
             for (Node neighbor : expand(current)) {
-                if (explored.contains(neighbor)) {
+                if (explored.containsKey(neighbor.getKey())) {
                     continue;
                 }
 
-                fringe.add(neighbor);
+                Node inFringeNode = inFringe.get(neighbor.getKey());
+
+                if (inFringeNode != null && neighbor.getCost() >= inFringeNode.getCost()) {
+                    continue;
+                }
+
+                addToFringe(neighbor, fringe, inFringe);
             }
         }
 
-        return Collections.emptyList();
+        return new Path();
     }
 
-    private String getKey(Node node) {
-        return Integer.toString((int) node.getState().x) + "," + Integer.toString((int) node.getState().y);
+    private void addToFringe(Node node, Queue<Node> fringe, Map<String, Node> inFringe) {
+        fringe.add(node);
+        inFringe.put(node.getKey(), node);
     }
 
     private List<Node> expand(Node current) {
@@ -82,26 +76,27 @@ public class AStar {
         ArrayList<Node> neighbors = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
-            Vector2 neighbor = new Vector2(current.getState());
+            Vector2 neighborPosition = new Vector2(current.getState());
+
+            float baseCost = current.getCost();
+
             switch (i) {
                 case 0:
-                    neighbor.x += resolution;
+                    neighborPosition.x += resolution;
                     break;
                 case 1:
-                    neighbor.x -= resolution;
+                    neighborPosition.x -= resolution;
                     break;
                 case 2:
-                    neighbor.y += resolution;
+                    neighborPosition.y += resolution;
                     break;
                 case 3:
-                    neighbor.y -= resolution;
+                    neighborPosition.y -= resolution;
                     break;
             }
 
-            if (isAccessible(neighbor)) {
-                neighbors.add(new Node(current, neighbor, current.getCost() + 1));
-            } else {
-                System.out.println("Not accessible");
+            if (isAccessible(neighborPosition)) {
+                neighbors.add(new Node(current, neighborPosition, baseCost + resolution));
             }
         }
 
@@ -112,15 +107,17 @@ public class AStar {
         return map.isTileAccessibly(pos.x, pos.y);
     }
 
-    private List<Node> reconstructPath(Node current) {
-        List<Node> path = new LinkedList<>();
+    private Path reconstructPath(Node current) {
+        List<Node> path = new ArrayList<>();
 
         while (current != null) {
-            path.add(0, current);
+            path.add(current);
             current = current.getParent();
         }
 
-        return path;
+        Collections.reverse(path);
+
+        return new Path(path);
     }
 
     public Node getBest(Queue<Node> fringe) {
@@ -136,6 +133,6 @@ public class AStar {
     }
 
     private float h(Node node, Node goal) {
-        return (float) Math.sqrt(Math.pow(node.getState().x - goal.getState().x, 2) + Math.pow(Math.abs(node.getState().y - goal.getState().y), 2));
+        return (float) Math.sqrt(Math.pow(node.getState().x - goal.getState().x, 2) + Math.pow(node.getState().y - goal.getState().y, 2));
     }
 }

@@ -7,6 +7,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
+import dk.sdu.mmmi.swe.gtg.enemyai.Path;
 import dk.sdu.mmmi.swe.gtg.enemyai.PathPart;
 import org.osgi.service.component.annotations.Component;
 
@@ -41,13 +42,17 @@ public class PathRenderer implements IPostEntityProcessingService {
         shapeRenderer.end();
     }
 
-    private void drawPath(List<Node> path, ShapeRenderer shapeRenderer) {
-        for (int i = 0; i < path.size() - 1; i++) {
+    private void drawPath(Path path, ShapeRenderer shapeRenderer) {
+        drawPath(path.getNodes(), shapeRenderer);
+    }
+
+    private void drawPath(List<Node> nodes, ShapeRenderer shapeRenderer) {
+        for (int i = 0; i < nodes.size() - 1; i++) {
             shapeRenderer.line(
-                    path.get(i).getState().x,
-                    path.get(i).getState().y,
-                    path.get((i + 1)).getState().x,
-                    path.get(i + 1).getState().y);
+                    nodes.get(i).getState().x,
+                    nodes.get(i).getState().y,
+                    nodes.get((i + 1)).getState().x,
+                    nodes.get(i + 1).getState().y);
         }
     }
 }

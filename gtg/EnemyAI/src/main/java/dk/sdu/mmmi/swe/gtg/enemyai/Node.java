@@ -52,11 +52,18 @@ public class Node {
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof Node)) return false;
+
         return hashCode() == obj.hashCode();
     }
 
     @Override
     public String toString() {
         return state.toString();
+    }
+
+    public String getKey() {
+        return (int) this.getState().x + "," + (int) this.getState().y;
     }
 }

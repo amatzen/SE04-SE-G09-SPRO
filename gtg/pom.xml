@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <!--
-       | put company details here
-      <organization>
-        <name>...</name>
-        <url>http://...</url>
-      </organization>
-      -->
-
-  <!--
-       | put license details here
-      <licenses>
-        <license>
+         | put company details here
+        <organization>
           <name>...</name>
           <url>http://...</url>
-          <comments>
-          </comments>
-        </license>
-      </licenses>
-      -->
+        </organization>
+        -->
+
+  <!--
+         | put license details here
+        <licenses>
+          <license>
+            <name>...</name>
+            <url>http://...</url>
+            <comments>
+            </comments>
+          </license>
+        </licenses>
+        -->
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.sdu.swe</groupId>
@@ -29,15 +31,15 @@
   <name>dk.sdu.swe.gtg (OSGi project)</name>
 
   <!--
-       | describe your project here
-      -->
+         | describe your project here
+        -->
 
   <description>Generated using Pax-Construct</description>
 
   <properties>
     <!--
-             | some example OSGi runtime properties
-            -->
+                 | some example OSGi runtime properties
+                -->
     <org.osgi.service.http.port>8080</org.osgi.service.http.port>
     <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
   </properties>
@@ -62,6 +64,9 @@
     <module>ATM</module>
     <module>Map</module>
     <module>Music</module>
+    <module>CommonCollision</module>
+    <module>Hud</module>
+    <module>CommonHud</module>
     <module>EnemyAI</module>
   </modules>
 
@@ -73,23 +78,23 @@
         <version>1.6.0</version>
         <configuration>
           <!--
-                               | some example Pax-Runner settings
-                              -->
+                                         | some example Pax-Runner settings
+                                        -->
           <provision>
             <param>--platform=felix</param>
-            <!--<param>-vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>-->
+            <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
           </provision>
         </configuration>
         <executions>
           <!--
-                               | uncomment to auto-generate IDE files
-                              <execution>
-                                <id>ide-support</id>
-                                <goals>
-                                  <goal>eclipse</goal>
-                                </goals>
-                              </execution>
-                              -->
+                                         | uncomment to auto-generate IDE files
+                                        <execution>
+                                          <id>ide-support</id>
+                                          <goals>
+                                            <goal>eclipse</goal>
+                                          </goals>
+                                        </execution>
+                                        -->
         </executions>
       </plugin>
     </plugins>

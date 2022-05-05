@@ -41,7 +41,47 @@ public class AStarTest {
 
         AStar aStar = new AStar(map);
 
-        List<Node> res = aStar.searchNodePath(new Vector2(5, 5), new Vector2(15, 15));
+
+        List<Node> res = aStar.searchNodePath(new Vector2(5, 5), new Vector2(15, 15)).getNodes();
+
+        assertTrue("Should have found a path", res.size() > 0);
+        assertTrue("Should have found a path", res.get(0).getState().equals(new Vector2(5, 5)));
+
+        System.out.println(res.stream().map(n -> n.getState().toString()).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void noClearPath() {
+        MapSPI map = new MapSPI() {
+            @Override
+            public boolean isTileAccessibly(float x, float y) {
+                if (x > 10 || x < -10 || y > 10 || y < -10) {
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+                return worldCoordinates;
+            }
+
+            @Override
+            public Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates) {
+                return tileCoordinates;
+            }
+
+            @Override
+            public List<Rectangle> getObstacles() {
+                return null;
+            }
+        };
+
+        AStar aStar = new AStar(map);
+
+        List<Node> res = aStar.searchNodePath(new Vector2(5, 5), new Vector2(15, 15)).getNodes();
+
+        assertTrue("No path should be found", res.isEmpty());
 
         System.out.println(res.stream().map(n -> n.getState().toString()).collect(Collectors.toList()));
     }

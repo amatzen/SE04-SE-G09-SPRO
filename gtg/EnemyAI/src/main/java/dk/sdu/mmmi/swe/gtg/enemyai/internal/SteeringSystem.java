@@ -9,6 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
+import dk.sdu.mmmi.swe.gtg.enemyai.Path;
 import dk.sdu.mmmi.swe.gtg.enemyai.PathPart;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 import org.osgi.service.component.annotations.Component;
@@ -43,22 +44,25 @@ public class SteeringSystem implements IEntityProcessingService {
     @Override
     public void process(GameData gameData) {
         if (counter > 0.5f) {
-            for (Entity entity : entities) {
-                TransformPart transformPart = entity.getPart(TransformPart.class);
-
-                List<Node> path = aStar.searchNodePath(transformPart.getPosition2(), new Vector2(126, 74));
-
-                if (entity.hasPart(PathPart.class)) {
-                    PathPart pathPart = entity.getPart(PathPart.class);
-                    pathPart.setPath(path);
-                } else {
-                    entity.addPart(new PathPart(path));
-                }
-            }
+            searchPaths(gameData);
             counter = 0;
         }
 
         counter += gameData.getDelta();
     }
 
+    private void searchPaths(GameData gameData) {
+        for (Entity entity : entities) {
+            TransformPart transformPart = entity.getPart(TransformPart.class);
+
+            Path path = aStar.searchNodePath(transformPart.getPosition2(), new Vector2(126, 74));
+
+            if (entity.hasPart(PathPart.class)) {
+                PathPart pathPart = entity.getPart(PathPart.class);
+                pathPart.setPath(path);
+            } else {
+                entity.addPart(new PathPart(path));
+            }
+        }
+    }
 }
