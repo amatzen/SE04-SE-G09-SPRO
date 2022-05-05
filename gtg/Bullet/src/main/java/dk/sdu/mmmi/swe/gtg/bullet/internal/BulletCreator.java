@@ -39,13 +39,14 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     @Reference
     private CollisionSPI collisionSPI;
 
+    @Reference
+    private HudSPI hudSPI;
+
     private ICollisionListener collisionListener;
 
     public BulletCreator() {
 
     }
-    //@Reference
-    //private HudSPI hudSPI;
 
     @Override
     public Bullet createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed) {

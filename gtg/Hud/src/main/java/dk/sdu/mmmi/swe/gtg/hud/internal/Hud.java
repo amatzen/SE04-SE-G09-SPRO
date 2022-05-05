@@ -13,8 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 
-@Component
-public class Hud implements Disposable, HudSPI {
+public class Hud implements Disposable {
     public static final int V_WIDTH = 1600;
     public static final int V_HEIGHT = 900;
     private final Viewport viewport;
