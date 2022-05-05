@@ -23,6 +23,7 @@ import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -43,6 +44,8 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     public BulletCreator() {
 
     }
+    //@Reference
+    //private HudSPI hudSPI;
 
     @Override
     public Bullet createBullet(Vector2 bulletPosition, Vector2 direction, Vector2 baseSpeed) {
@@ -118,6 +121,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
+                    //hudSPI.setHealth(lifePart.getLife());
 
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
