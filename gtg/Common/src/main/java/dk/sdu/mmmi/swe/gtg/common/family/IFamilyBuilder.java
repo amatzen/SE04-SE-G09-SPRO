@@ -9,6 +9,8 @@ public interface IFamilyBuilder {
 
     IFamilyBuilder with(Class<? extends IEntityPart>... parts);
 
+    IFamilyBuilder excludeParts(Class<? extends IEntityPart>... parts);
+
     IFamily get();
 
 }

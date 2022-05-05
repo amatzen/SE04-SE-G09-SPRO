@@ -6,14 +6,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
 import dk.sdu.mmmi.swe.gtg.atm.ATM;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SensorPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
+import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -30,14 +36,19 @@ public class ATMPlugin implements IGamePluginService {
 
     private ATM atm;
 
+    @Reference
+    private CollisionSPI collisionSPI;
+
+    private ICollisionListener collisionListener;
+
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        Vector2 atmPosition = new Vector2(129.26f, 74.2f);
+        Vector2 atmPosition = new Vector2(137.45f, 84f);
         Vector2 atmSize = new Vector2(1, 1.5f);
         float sensorRadius = 5;
 
-        BodyPart atm = new BodyPart(shapeFactory.createRectangle(
+        BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
                 atmPosition, atmSize, BodyDef.BodyType.StaticBody,
                 1,
                 false));
@@ -49,7 +60,11 @@ public class ATMPlugin implements IGamePluginService {
 
         this.atm = new ATM();
 
-        this.atm.addPart(atm);
+        atmBody.getBody().setUserData(this.atm);
+
+        sensorPart.getBody().setUserData(this.atm);
+
+        this.atm.addPart(atmBody);
         this.atm.addPart(sensorPart);
 
         TransformPart transformPart = new TransformPart();
@@ -59,10 +74,42 @@ public class ATMPlugin implements IGamePluginService {
 
         engine.addEntity(this.atm);
 
-        worldManager.setContactLister(new ContactListener());
+        IFamily familyA = Family.builder().forEntities(ATM.class).get();
 
-        sensorPart.getBody().setUserData(this.atm);
+        IFamily familyB = Family.builder().get();
 
+        collisionListener = new ICollisionListener() {
+            @Override
+            public IFamily getFamilyA() {
+                return familyA;
+            }
+
+            @Override
+            public IFamily getFamilyB() {
+                return familyB;
+            }
+
+            @Override
+            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
+                System.out.println("Collision with ATM");
+            }
+
+            @Override
+            public void endContact(Contact contact, Entity entityA, Entity entityB) {
+                System.out.println("Collision with ATM stopped");
+            }
+
+            @Override
+            public void preSolve(Contact contact) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact) {
+
+            }
+        };
+        collisionSPI.addListener(collisionListener);
     }
 
     private TexturePart getTexture(String path) {
@@ -83,6 +130,7 @@ public class ATMPlugin implements IGamePluginService {
     @Override
     public void stop(IEngine engine, GameData gameData) {
         engine.removeEntity(atm);
+        collisionSPI.removeListener(collisionListener);
     }
 
 }
