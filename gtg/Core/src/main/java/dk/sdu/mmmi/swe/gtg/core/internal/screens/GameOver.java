@@ -44,7 +44,7 @@ public class GameOver implements Screen {
         // Game over logo
         gmLogo = new Image(new Texture(Gdx.files.internal("assets/game-over-white.png")));
         gmLogo.setAlign(Align.top);
-        table.add(gmLogo).size(400,400).row();
+        table.add(gmLogo).size(400, 400).row();
 
         // Death message
         deathMessage = new Label("You got busted and lost all your money!", new Label.LabelStyle(

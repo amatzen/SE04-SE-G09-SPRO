@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -35,13 +36,20 @@ public class VehiclePlugin implements IGamePluginService {
     @Override
     public void start(IEngine engine, GameData gameData) {
 
-        createVehicle(engine);
+        Vehicle vehicle = createVehicle(engine);
+
+        LifePart lifePart = new LifePart();
+
+        vehicle.addPart(lifePart);
+
+        engine.addEntity(vehicle);
+
 
     }
 
     public Vehicle createVehicle(IEngine engine) {
         Vehicle vehicle = createVehicleBody(
-                new Vector2(126.26f, 74.2f), new Vector2(1.7f, 4.0f),
+                new Vector2(134.28f, 79.85f), new Vector2(1.7f, 4.0f),
                 0.15f, 0.2f, 260f
         );
 
@@ -51,8 +59,6 @@ public class VehiclePlugin implements IGamePluginService {
 
         DriveTrain driveTrain = createDriveTrain(wheels, engine);
         vehicle.addPart(driveTrain);
-
-        engine.addEntity(vehicle);
 
         return vehicle;
     }
@@ -80,6 +86,8 @@ public class VehiclePlugin implements IGamePluginService {
                 )
         );
 
+        vehicleBody.getBody().setUserData(vehicle);
+
         vehicleBody.getBody().setLinearDamping(drag);
         vehicleBody.getBody().getFixtureList().get(0).setRestitution(restitution);
 
@@ -106,7 +114,7 @@ public class VehiclePlugin implements IGamePluginService {
     }
 
     private TexturePart getBodyTexture() {
-        return getTexture("assets/taxi.png");
+        return getTexture("assets/player.png");
     }
 
     private TexturePart getWheelTexture() {
