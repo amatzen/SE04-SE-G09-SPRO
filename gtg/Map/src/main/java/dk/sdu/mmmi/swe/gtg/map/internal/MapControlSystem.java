@@ -51,6 +51,7 @@ public class MapControlSystem implements MapSPI, IEntityProcessingService {
         }
     }
 
+    @Override
     public List<Vector2> getAtms() {
         ArrayList<Vector2> coordinates = new ArrayList<>();
         final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
