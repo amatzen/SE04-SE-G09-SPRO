@@ -34,7 +34,7 @@ public class VehiclePlugin implements IPlugin {
     private IWorldManager worldManager;
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
 
         Vehicle vehicle = createVehicle(engine);
 
@@ -197,7 +197,7 @@ public class VehiclePlugin implements IPlugin {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         engine.getEntitiesFor(Family.builder().forEntities(Vehicle.class, Wheel.class).get()).forEach(entity -> {
             engine.removeEntity(entity);
         });

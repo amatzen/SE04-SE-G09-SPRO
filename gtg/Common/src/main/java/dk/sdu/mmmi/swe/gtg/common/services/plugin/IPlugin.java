@@ -15,7 +15,7 @@ public interface IPlugin {
      * @pre The application has been started.
      * @post The entity plugin has been initialized.
      */
-    void start(IEngine engine, GameData gameData);
+    void install(IEngine engine, GameData gameData);
 
     /**
      * Stop
@@ -27,5 +27,5 @@ public interface IPlugin {
      * @pre The plugin has been started.
      * @post The entity plugin has been taken down.
      */
-    void stop(IEngine engine, GameData gameData);
+    void uninstall(IEngine engine, GameData gameData);
 }

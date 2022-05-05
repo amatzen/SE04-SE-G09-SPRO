@@ -98,7 +98,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
         IFamily familyB = Family.builder().get();
@@ -152,7 +152,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }

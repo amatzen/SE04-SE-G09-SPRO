@@ -23,8 +23,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public final GameData gameData = new GameData();
 
     private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
-    private final List<IPlugin> pluginsToBeStarted = new CopyOnWriteArrayList<>();
-    private final List<IPlugin> pluginsToBeStopped = new CopyOnWriteArrayList<>();
+    private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
+    private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
     @Reference
     private IEngine engine;
@@ -61,11 +61,11 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void render() {
         super.render();
 
-        pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
-        pluginsToBeStarted.clear();
+        pluginsToBeInstalled.forEach(plugin -> plugin.install(engine, gameData));
+        pluginsToBeInstalled.clear();
 
-        pluginsToBeStopped.forEach(plugin -> plugin.stop(engine, gameData));
-        pluginsToBeStopped.clear();
+        pluginsToBeUninstalled.forEach(plugin -> plugin.uninstall(engine, gameData));
+        pluginsToBeUninstalled.clear();
     }
 
     @Override
@@ -92,12 +92,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     public void addGamePluginService(IPlugin plugin) {
         this.entityPlugins.add(plugin);
-        this.pluginsToBeStarted.add(plugin);
+        this.pluginsToBeInstalled.add(plugin);
     }
 
     public void removeGamePluginService(IPlugin plugin) {
         this.entityPlugins.remove(plugin);
-        this.pluginsToBeStopped.add(plugin);
+        this.pluginsToBeUninstalled.add(plugin);
     }
 
     public IEngine getEngine() {

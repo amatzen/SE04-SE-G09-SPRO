@@ -67,12 +67,12 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
     }
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(this);
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(null);
     }
 

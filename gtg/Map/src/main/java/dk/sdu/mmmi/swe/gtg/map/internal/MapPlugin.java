@@ -9,12 +9,12 @@ import org.osgi.service.component.annotations.Component;
 @Component
 public class MapPlugin implements IPlugin {
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
 
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         engine.getEntitiesFor(Family.builder().forEntities(Wall.class).get()).forEach(entity -> {
             engine.removeEntity(entity);
         });

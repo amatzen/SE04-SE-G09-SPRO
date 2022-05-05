@@ -13,7 +13,7 @@ public class MusicPlugin implements IPlugin {
     public static Music music;
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/GTA-SA.mp3"));
         music.setLooping(true);
         music.setVolume(0.5f);
@@ -21,7 +21,7 @@ public class MusicPlugin implements IPlugin {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         music.stop();
     }
 }
