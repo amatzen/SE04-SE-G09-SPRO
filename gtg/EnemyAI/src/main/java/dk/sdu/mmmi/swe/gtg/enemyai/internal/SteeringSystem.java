@@ -75,6 +75,6 @@ public class SteeringSystem implements IProcessingSystem {
         PathPart pathPart = entity.getPart(PathPart.class);
         SteeringPart steeringPart = entity.getPart(SteeringPart.class);
 
-        // Vector2 predict =
+
     }
 }
