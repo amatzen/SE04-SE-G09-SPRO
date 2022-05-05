@@ -3,9 +3,9 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
@@ -110,24 +110,24 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public void addEntityProcessingService(IEntityProcessingService service) {
+    public void addEntityProcessingService(IProcessingSystem service) {
         this.systemManager.addEntityProcessingService(service);
         this.systemsToBeStarted.add(service);
     }
 
     @Override
-    public void removeEntityProcessingService(IEntityProcessingService service) {
+    public void removeEntityProcessingService(IProcessingSystem service) {
         this.systemManager.removeEntityProcessingService(service);
     }
 
     @Override
-    public void addPostEntityProcessingService(IPostEntityProcessingService service) {
+    public void addPostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.addPostEntityProcessingService(service);
         this.systemsToBeStarted.add(service);
     }
 
     @Override
-    public void removePostEntityProcessingService(IPostEntityProcessingService service) {
+    public void removePostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.removePostEntityProcessingService(service);
     }
 }

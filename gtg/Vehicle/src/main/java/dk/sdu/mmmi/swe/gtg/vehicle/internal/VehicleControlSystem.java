@@ -10,7 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
@@ -20,7 +20,7 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.List;
 
 @Component
-public class VehicleControlSystem implements IEntityProcessingService {
+public class VehicleControlSystem implements IProcessingSystem {
 
     private final float REVERSE_POWER = 0.5f;
     private final float BREAK_POWER = 1.5f;
