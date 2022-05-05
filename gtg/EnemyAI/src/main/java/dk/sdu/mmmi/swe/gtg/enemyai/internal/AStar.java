@@ -10,12 +10,12 @@ import java.util.*;
 public class AStar {
 
     private MapSPI map;
+    private int resolution = 1;
+
 
     public AStar(MapSPI map) {
         this.map = map;
     }
-
-    private int resolution = 1;
     public Path searchNodePath(Vector2 from, Vector2 to) {
         Node start = new Node(null, from, 0);
         Node goal = new Node(null, to, 0);

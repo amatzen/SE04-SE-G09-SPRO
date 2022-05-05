@@ -65,4 +65,17 @@ public class SteeringSystem implements IEntityProcessingService {
             }
         }
     }
+
+    private void followPath(GameData gameData) {
+        for (Entity entity : entities) {
+            followPath(entity);
+        }
+    }
+
+    private void followPath(Entity entity) {
+        PathPart pathPart = entity.getPart(PathPart.class);
+        SteeringPart steeringPart = entity.getPart(SteeringPart.class);
+
+        Vector2 predict =
+    }
 }

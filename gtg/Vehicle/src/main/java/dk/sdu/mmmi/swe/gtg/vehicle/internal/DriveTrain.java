@@ -16,6 +16,5 @@ public class DriveTrain implements IEntityPart {
 
     @Override
     public void destroy() {
-
     }
 }

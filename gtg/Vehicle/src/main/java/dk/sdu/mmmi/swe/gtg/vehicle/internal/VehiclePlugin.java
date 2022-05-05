@@ -29,17 +29,16 @@ public class VehiclePlugin implements IGamePluginService {
     private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
     private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.40f;
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
+
     @Reference
     private ShapeFactorySPI shapeFactory;
+
     @Reference
     private IWorldManager worldManager;
 
     @Override
     public void start(IEngine engine, GameData gameData) {
-
         Vehicle vehicle = createVehicle(engine);
-
-        LifePart lifePart = new LifePart();
 
         vehicle.addPart(new SteeringPart());
 
