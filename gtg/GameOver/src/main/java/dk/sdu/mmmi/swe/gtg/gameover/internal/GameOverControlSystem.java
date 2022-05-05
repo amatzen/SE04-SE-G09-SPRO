@@ -16,7 +16,6 @@ public class GameOverControlSystem implements IPostEntityProcessingService {
 
     @Override
     public void addedToEngine(IEngine engine) {
-
     }
 
     @Override
@@ -24,6 +23,9 @@ public class GameOverControlSystem implements IPostEntityProcessingService {
 
         if (gameData.getKeys().isPressed(GameKeys.P)) {
             gameOver = new GameOver();
+        }
+
+        if (gameData.getKeys().isDown(GameKeys.P)) {
             gameOver.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
             gameOver.getStage().draw();
             System.out.println("Drawn");

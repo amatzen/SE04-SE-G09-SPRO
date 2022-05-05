@@ -1,18 +1,15 @@
 package dk.sdu.mmmi.swe.gtg.gameover;
 
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dk.sdu.mmmi.swe.gtg.core.internal.screens.GameScreen;
 import org.osgi.service.component.annotations.Component;
 
 @Component
@@ -29,7 +26,7 @@ public class GameOver implements Disposable {
     public GameOver() {
         this.stage = new Stage(new ScreenViewport());
 
-        Gdx.input.setInputProcessor(stage);
+        // Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.setFillParent(true);
