@@ -122,7 +122,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
-                    //hudSPI.setHealth(lifePart.getLife());
+                    hudSPI.setHealth(lifePart.getLife());
 
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
