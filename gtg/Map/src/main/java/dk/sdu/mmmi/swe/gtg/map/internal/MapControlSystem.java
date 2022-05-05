@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MapControlSystem implements IEntityProcessingService, MapSPI {
+public class MapControlSystem implements IProcessingSystem, MapSPI {
     private static final String MAP_WALL = "Walls";
     private static final String MAP_HOUSES = "Houses";
     private static final float OBJECT_DENSITY = 1f;
@@ -38,7 +38,7 @@ public class MapControlSystem implements IEntityProcessingService, MapSPI {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        map = new TmxMapLoader().load("maps/GTG-Map_v4.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map_v5.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);

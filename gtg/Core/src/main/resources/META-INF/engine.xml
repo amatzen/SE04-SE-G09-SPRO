@@ -19,10 +19,10 @@
                name="IFamilyManager" policy="dynamic" unbind="removeFamilyManager"/>
 
     <reference bind="addPostEntityProcessingService" cardinality="0..n"
-               interface="dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService"
+               interface="dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem"
                name="IPostEntityProcessingService" policy="dynamic" unbind="removePostEntityProcessingService"/>
 
     <reference bind="addEntityProcessingService" cardinality="0..n"
-               interface="dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService"
+               interface="dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem"
                name="IEntityProcessingService" policy="dynamic" unbind="removeEntityProcessingService"/>
 </component>

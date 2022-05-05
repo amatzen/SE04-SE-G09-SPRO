@@ -18,17 +18,18 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BulletCreator implements BulletSPI, IGamePluginService {
+public class BulletCreator implements BulletSPI, IPlugin {
 
     @Reference
     private IWorldManager worldManager;
@@ -37,6 +38,9 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
     @Reference
     private CollisionSPI collisionSPI;
+
+    @Reference
+    private HudSPI hudSPI;
 
     private ICollisionListener collisionListener;
 
@@ -94,7 +98,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     }
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
         IFamily familyB = Family.builder().get();
@@ -118,6 +122,8 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
+                    hudSPI.setHealth(lifePart.getLife());
+
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
                         engine.removeEntity(entityB); // Removes vehicle
@@ -146,7 +152,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }

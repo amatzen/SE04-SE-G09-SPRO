@@ -2,13 +2,13 @@ package dk.sdu.mmmi.swe.gtg.hud.internal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class HudControlSystem implements IPostEntityProcessingService {
+public class HudControlSystem implements IPostProcessingSystem, HudSPI {
 
     private Hud hud;
     private SpriteBatch spriteBatch;
@@ -26,5 +26,15 @@ public class HudControlSystem implements IPostEntityProcessingService {
         hud.getStage().draw();
 
         hud.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
+    }
+
+    @Override
+    public void setHealth(int value) {
+        hud.setHealth(value);
+    }
+
+    @Override
+    public int getHealth() {
+        return hud.getHealth();
     }
 }
