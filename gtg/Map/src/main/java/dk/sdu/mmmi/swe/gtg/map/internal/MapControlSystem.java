@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
+import dk.sdu.mmm.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
@@ -17,7 +18,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class MapControlSystem implements IEntityProcessingService {
+public class MapControlSystem implements MapSPI, IEntityProcessingService {
     private static final String MAP_WALL = "Walls";
     private static final float OBJECT_DENSITY = 1f;
     private final float unitScale = 1 / 16f;

@@ -65,7 +65,7 @@
     <module>CommonCollision</module>
     <module>Hud</module>
     <module>CommonHud</module>
-    <module>dk.sdu.mmmi.swe.gtg.commonmap</module>
+    <module>CommonMap</module>
   </modules>
 
   <build>
