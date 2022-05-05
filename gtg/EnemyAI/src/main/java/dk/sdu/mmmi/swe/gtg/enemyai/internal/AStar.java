@@ -75,28 +75,55 @@ public class AStar {
     private List<Node> getNeighbors(Node current) {
         ArrayList<Node> neighbors = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        float diagonalScalar = (float) Math.sqrt(2);
+
+        for (int i = 0; i < 8; i++) {
             Vector2 neighborPosition = new Vector2(current.getState());
 
             float baseCost = current.getCost();
 
+
             switch (i) {
                 case 0:
                     neighborPosition.x += resolution;
+                    baseCost += resolution;
                     break;
                 case 1:
                     neighborPosition.x -= resolution;
+                    baseCost += resolution;
                     break;
                 case 2:
                     neighborPosition.y += resolution;
+                    baseCost += resolution;
                     break;
                 case 3:
                     neighborPosition.y -= resolution;
+                    baseCost += resolution;
+                    break;
+                case 4:
+                    neighborPosition.x += resolution;
+                    neighborPosition.y += resolution;
+                    baseCost += resolution * diagonalScalar;
+                    break;
+                case 5:
+                    neighborPosition.x -= resolution;
+                    neighborPosition.y += resolution;
+                    baseCost += resolution * diagonalScalar;
+                    break;
+                case 6:
+                    neighborPosition.x += resolution;
+                    neighborPosition.y -= resolution;
+                    baseCost += resolution * diagonalScalar;
+                    break;
+                case 7:
+                    neighborPosition.x -= resolution;
+                    neighborPosition.y -= resolution;
+                    baseCost += resolution * diagonalScalar;
                     break;
             }
 
             if (isAccessible(neighborPosition)) {
-                neighbors.add(new Node(current, neighborPosition, baseCost + resolution));
+                neighbors.add(new Node(current, neighborPosition, baseCost));
             }
         }
 

@@ -55,7 +55,7 @@ public class SteeringSystem implements IEntityProcessingService {
         for (Entity entity : entities) {
             TransformPart transformPart = entity.getPart(TransformPart.class);
 
-            Path path = aStar.searchNodePath(transformPart.getPosition2(), new Vector2(126, 74));
+            Path path = aStar.searchNodePath(new Vector2(126, 74), transformPart.getPosition2());
 
             if (entity.hasPart(PathPart.class)) {
                 PathPart pathPart = entity.getPart(PathPart.class);
@@ -76,6 +76,6 @@ public class SteeringSystem implements IEntityProcessingService {
         PathPart pathPart = entity.getPart(PathPart.class);
         SteeringPart steeringPart = entity.getPart(SteeringPart.class);
 
-        Vector2 predict =
+        // Vector2 predict =
     }
 }
