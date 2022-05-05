@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 
-@Component
 public class Hud implements Disposable {
     public static final int V_WIDTH = 1600;
     public static final int V_HEIGHT = 900;
@@ -68,7 +68,7 @@ public class Hud implements Disposable {
         showBullets = new Label(String.format("%03d", bullets) + "+", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showHealth = new Label(String.format("%01d", health), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        showHealth = new Label(String.format("%01d", getHealth()), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
         wantedLabel = new Label("WANTED LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         showWanted = new Label(String.format("%01d", wanted) + "/5", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
@@ -97,6 +97,15 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
+
+    public void setHealth(int value){
+        showHealth.setText(value);
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
     public void addMoney(int value) {
         money += value;
         showMoney.setText(String.format("%06d", money));
@@ -117,10 +126,7 @@ public class Hud implements Disposable {
         showBullets.setText(String.format("%03d", bullets));
     }
 
-    public void gainedHealth(int value) {
-        health += value;
-        showHealth.setText(health);
-    }
+
 
     public void lostHealth(int value) {
         health -= value;
