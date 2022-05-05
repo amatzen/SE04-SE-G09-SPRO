@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
 import dk.sdu.mmmi.swe.gtg.enemyai.Path;
@@ -14,7 +14,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.List;
 
 @Component
-public class PathRenderer implements IPostEntityProcessingService {
+public class PathRenderer implements IPostProcessingSystem {
     private List<? extends Entity> entities;
     private ShapeRenderer shapeRenderer;
 

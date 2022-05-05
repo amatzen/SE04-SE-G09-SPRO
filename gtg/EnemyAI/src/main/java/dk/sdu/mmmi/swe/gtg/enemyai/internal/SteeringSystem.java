@@ -6,9 +6,8 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.enemyai.Node;
 import dk.sdu.mmmi.swe.gtg.enemyai.Path;
 import dk.sdu.mmmi.swe.gtg.enemyai.PathPart;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
@@ -18,7 +17,7 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.List;
 
 @Component
-public class SteeringSystem implements IEntityProcessingService {
+public class SteeringSystem implements IProcessingSystem {
 
     private List<? extends Entity> entities;
 
