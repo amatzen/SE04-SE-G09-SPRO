@@ -2,13 +2,13 @@ package dk.sdu.mmmi.swe.gtg.hud.internal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class HudControlSystem implements IPostEntityProcessingService, HudSPI {
+public class HudControlSystem implements IPostProcessingSystem, HudSPI {
 
     private Hud hud;
     private SpriteBatch spriteBatch;
