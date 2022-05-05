@@ -17,7 +17,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class ATMPlugin implements IGamePluginService {
+public class ATMPlugin implements IPlugin {
 
     @Reference
     private ShapeFactorySPI shapeFactory;
@@ -42,7 +42,7 @@ public class ATMPlugin implements IGamePluginService {
     private ICollisionListener collisionListener;
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
 
         Vector2 atmPosition = new Vector2(137.45f, 84f);
         Vector2 atmSize = new Vector2(1, 1.5f);
@@ -128,7 +128,7 @@ public class ATMPlugin implements IGamePluginService {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         engine.removeEntity(atm);
         collisionSPI.removeListener(collisionListener);
     }

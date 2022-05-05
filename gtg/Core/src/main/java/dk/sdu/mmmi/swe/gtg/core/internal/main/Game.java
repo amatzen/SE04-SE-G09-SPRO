@@ -6,7 +6,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -22,9 +22,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public final GameData gameData = new GameData();
 
-    private final List<IGamePluginService> entityPlugins = new CopyOnWriteArrayList<>();
-    private final List<IGamePluginService> pluginsToBeStarted = new CopyOnWriteArrayList<>();
-    private final List<IGamePluginService> pluginsToBeStopped = new CopyOnWriteArrayList<>();
+    private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
+    private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
+    private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
     @Reference
     private IEngine engine;
@@ -61,11 +61,11 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void render() {
         super.render();
 
-        pluginsToBeStarted.forEach(plugin -> plugin.start(engine, gameData));
-        pluginsToBeStarted.clear();
+        pluginsToBeInstalled.forEach(plugin -> plugin.install(engine, gameData));
+        pluginsToBeInstalled.clear();
 
-        pluginsToBeStopped.forEach(plugin -> plugin.stop(engine, gameData));
-        pluginsToBeStopped.clear();
+        pluginsToBeUninstalled.forEach(plugin -> plugin.uninstall(engine, gameData));
+        pluginsToBeUninstalled.clear();
     }
 
     @Override
@@ -85,19 +85,19 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void dispose() {
     }
 
-    private Collection<? extends IGamePluginService> getPluginServices() {
+    private Collection<? extends IPlugin> getPluginServices() {
         return entityPlugins;
     }
 
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    public void addGamePluginService(IGamePluginService plugin) {
+    public void addGamePluginService(IPlugin plugin) {
         this.entityPlugins.add(plugin);
-        this.pluginsToBeStarted.add(plugin);
+        this.pluginsToBeInstalled.add(plugin);
     }
 
-    public void removeGamePluginService(IGamePluginService plugin) {
+    public void removeGamePluginService(IPlugin plugin) {
         this.entityPlugins.remove(plugin);
-        this.pluginsToBeStopped.add(plugin);
+        this.pluginsToBeUninstalled.add(plugin);
     }
 
     public IEngine getEngine() {

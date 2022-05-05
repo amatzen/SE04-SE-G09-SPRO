@@ -2,12 +2,12 @@ package dk.sdu.mmmi.swe.gtg.music.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class MusicControlSystem implements IEntityProcessingService {
+public class MusicControlSystem implements IProcessingSystem {
 
 
     @Override
