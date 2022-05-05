@@ -1,4 +1,4 @@
-package dk.sdu.mmm.swe.gtg.commonmap;
+package dk.sdu.mmmi.swe.gtg.commonmap;
 
 import com.badlogic.gdx.math.Vector2;
 
