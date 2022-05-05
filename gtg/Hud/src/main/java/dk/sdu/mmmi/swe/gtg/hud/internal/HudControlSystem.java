@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.hud.internal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
@@ -30,12 +29,12 @@ public class HudControlSystem implements IPostEntityProcessingService, HudSPI {
     }
 
     @Override
-    public void setHealth(int value) {
-        hud.setHealth(value);
+    public int getHealth() {
+        return hud.getHealth();
     }
 
     @Override
-    public int getHealth() {
-        return hud.getHealth();
+    public void setHealth(int value) {
+        hud.setHealth(value);
     }
 }
