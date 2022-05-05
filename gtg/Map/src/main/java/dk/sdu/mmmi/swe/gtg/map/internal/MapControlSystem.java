@@ -16,10 +16,13 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class MapControlSystem implements MapSPI, IEntityProcessingService {
     private static final String MAP_WALL = "Walls";
+    private static final String ATMS = "Atm";
     private static final float OBJECT_DENSITY = 1f;
     private final float unitScale = 1 / 16f;
     private OrthogonalTiledMapRenderer renderer;
@@ -46,6 +49,16 @@ public class MapControlSystem implements MapSPI, IEntityProcessingService {
             wall.addPart(collision);
             engine.addEntity(wall);
         }
+    }
+
+    public List<Vector2> getAtms() {
+        ArrayList<Vector2> coordinates = new ArrayList<>();
+        final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
+        for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(atms)) {
+            Rectangle rectangle = rObject.getRectangle();
+            coordinates.add(rectangle.getPosition(new Vector2()));
+        }
+        return coordinates;
     }
 
     @Override
