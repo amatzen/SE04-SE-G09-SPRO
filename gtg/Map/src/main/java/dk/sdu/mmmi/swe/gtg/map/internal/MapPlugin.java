@@ -3,11 +3,11 @@ package dk.sdu.mmmi.swe.gtg.map.internal;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class MapPlugin implements IGamePluginService {
+public class MapPlugin implements IPlugin {
     @Override
     public void start(IEngine engine, GameData gameData) {
 

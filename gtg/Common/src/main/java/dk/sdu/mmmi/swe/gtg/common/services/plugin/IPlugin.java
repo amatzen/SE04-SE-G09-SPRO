@@ -4,7 +4,7 @@ package dk.sdu.mmmi.swe.gtg.common.services.plugin;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
-public interface IGamePluginService {
+public interface IPlugin {
     /**
      * Start
      * <p>

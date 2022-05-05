@@ -6,9 +6,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
@@ -23,7 +23,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static dk.sdu.mmmi.swe.gtg.common.utilities.Utility.containsNull;
 
 @Component
-public class CollisionSystem implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener, IEntityProcessingService {
+public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.physics.box2d.ContactListener, IProcessingSystem {
 
     private final List<ICollisionListener> listeners;
 

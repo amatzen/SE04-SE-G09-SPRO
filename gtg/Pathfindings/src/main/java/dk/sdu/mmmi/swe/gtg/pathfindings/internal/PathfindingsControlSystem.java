@@ -4,12 +4,12 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
 import java.util.List;
 
-public class PathfindingsControlSystem implements IEntityProcessingService {
+public class PathfindingsControlSystem implements IProcessingSystem {
 
     private List<? extends Entity> entities;
 
