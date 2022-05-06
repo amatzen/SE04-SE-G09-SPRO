@@ -123,7 +123,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
                     hudSPI.setHealth(lifePart.getLife());
-
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
                         engine.removeEntity(entityB); // Removes vehicle
