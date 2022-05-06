@@ -20,7 +20,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Component
