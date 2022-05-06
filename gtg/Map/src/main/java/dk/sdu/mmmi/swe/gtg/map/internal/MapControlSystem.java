@@ -18,6 +18,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -36,6 +37,7 @@ public class MapControlSystem implements MapSPI, IProcessingSystem {
     @Override
     public void addedToEngine(IEngine engine) {
         map = new TmxMapLoader().load("maps/GTG-Map_v5.tmx");
+
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
         final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);
@@ -54,6 +56,10 @@ public class MapControlSystem implements MapSPI, IProcessingSystem {
 
     @Override
     public List<Vector2> getAtms() {
+        if (map == null) {
+            return Collections.emptyList();
+        }
+
         ArrayList<Vector2> coordinates = new ArrayList<>();
         final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
         for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(atms)) {
