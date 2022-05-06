@@ -66,6 +66,7 @@
     <module>Hud</module>
     <module>CommonHud</module>
     <module>GameOver</module>
+    <module>CommonGameOver</module>
   </modules>
 
   <build>
