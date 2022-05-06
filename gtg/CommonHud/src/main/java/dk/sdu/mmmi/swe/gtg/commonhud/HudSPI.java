@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.commonhud;
 
 public interface HudSPI {
 
+    public void addHealth(int value);
     public void setHealth(int value);
     public int getHealth();
     public void loseHealth(int value);

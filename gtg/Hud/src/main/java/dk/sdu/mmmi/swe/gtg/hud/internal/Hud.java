@@ -102,6 +102,11 @@ public class Hud implements Disposable {
         showHealth.setText(value);
     }
 
+    public void addHealth(int value) {
+        health += value;
+        showHealth.setText(value);
+    }
+
     public int getHealth(){
         return health;
     }
@@ -134,22 +139,26 @@ public class Hud implements Disposable {
     }
 
 
-    public Integer getWanted() {
+    public int getWanted() {
         return wanted;
     }
 
-    public Integer getMoney() {
+    public int getMoney() {
         return money;
     }
 
     public void addWanted(int value) {
-        wanted += value;
-        showWanted.setText(wanted);
+        if (wanted<5){
+            wanted += value;
+        }
+        showWanted.setText(wanted+"/5");
     }
 
     public void decreaseWanted(int value) {
+        if (wanted>0){
         wanted -= value;
-        showWanted.setText(wanted);
+        }
+        showWanted.setText(wanted+"/5");
     }
 
     public Stage getStage() {

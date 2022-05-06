@@ -123,6 +123,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
                     hudSPI.setHealth(lifePart.getLife());
+                    hudSPI.addWanted(1);
 
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
