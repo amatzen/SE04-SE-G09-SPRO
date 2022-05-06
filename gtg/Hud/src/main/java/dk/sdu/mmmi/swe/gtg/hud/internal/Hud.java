@@ -95,9 +95,6 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
-    public int getHealth() {
-        return health;
-    }
 
     public void setHealth(int value) {
         showHealth.setText(value);
