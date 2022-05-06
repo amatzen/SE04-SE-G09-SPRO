@@ -33,10 +33,11 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
     public void install(IEngine engine, GameData gameData) {
         this.stage = new Stage(new ScreenViewport());
 
-        // Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.setFillParent(true);
+        stage.addActor(table);
 
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
@@ -75,9 +76,6 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
                 System.out.println("Im dead yes");
             }
         });
-        stage.getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        stage.addActor(table);
-        stage.draw();
     }
 
     @Override
