@@ -30,10 +30,10 @@ public class Hud implements Disposable {
     public Stage stage;
 
     // Tracking Variables
-    private Integer bullets;
-    private Integer health;
-    private Integer money;
-    private Integer wanted;
+    private int bullets;
+    private int health;
+    private int money;
+    private int wanted;
 
     public Hud(SpriteBatch sb) {
 
