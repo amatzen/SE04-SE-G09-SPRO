@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
-import org.osgi.service.component.annotations.Component;
 
 public class Hud implements Disposable {
     public static final int V_WIDTH = 1600;
@@ -97,8 +95,11 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
+    public int getHealth() {
+        return health;
+    }
 
-    public void setHealth(int value){
+    public void setHealth(int value) {
         showHealth.setText(value);
     }
 
