@@ -6,7 +6,7 @@ import java.util.List;
 public class Path {
 
     private List<Node> path;
-    private float radius = 20;
+    private float radius = 2;
 
     public Path(List<Node> path) {
         this.path = path;
