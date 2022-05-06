@@ -35,6 +35,8 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     public void process(GameData gameData) {
         if (playerLife != null) {
             if (playerLife.getLife() <= 0) {
+                Gdx.gl.glClearColor(0, 0, 0, 1);
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 gameOverSPI.getStage().draw();
             }
         }
