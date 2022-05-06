@@ -3,13 +3,13 @@ package dk.sdu.mmmi.swe.gtg.gameover.internal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.gameover.GameOver;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class GameOverControlSystem implements IPostEntityProcessingService {
+public class GameOverControlSystem implements IPostProcessingSystem {
 
     GameOver gameOver;
     Boolean dead = false;
