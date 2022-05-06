@@ -28,6 +28,7 @@ public class HudControlSystem implements IPostProcessingSystem, HudSPI {
         hud.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
     }
 
+
     @Override
     public void setHealth(int value) {
         hud.setHealth(value);
@@ -35,6 +36,44 @@ public class HudControlSystem implements IPostProcessingSystem, HudSPI {
 
     @Override
     public int getHealth() {
-        return hud.getHealth();
+    return hud.getHealth();
     }
+
+    @Override
+    public void loseHealth(int value) {
+    hud.loseHealth(value);
+    }
+
+    @Override
+    public void addMoney(int value) {
+    hud.addMoney(value);
+    }
+
+    @Override
+    public void removeMoney(int value) {
+    hud.removeMoney(value);
+    }
+
+    @Override
+    public int getMoney() {
+    return hud.getHealth();
+    }
+
+    @Override
+    public void addWanted(int value) {
+        hud.addWanted(value);
+    }
+
+    @Override
+    public void decreaseWanted(int value) {
+    hud.decreaseWanted(value);
+    }
+
+    @Override
+    public int getWanted() {
+        return hud.getWanted();
+
+    }
+
+
 }
