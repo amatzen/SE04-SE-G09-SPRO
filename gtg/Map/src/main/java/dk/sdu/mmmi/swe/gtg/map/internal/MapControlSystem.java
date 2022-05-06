@@ -10,8 +10,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import org.osgi.service.component.annotations.Component;
@@ -22,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-public class MapControlSystem implements MapSPI, IProcessingSystem {
+public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     private static final String MAP_WALL = "Walls";
     private static final String ATMS = "Atm";
     private static final float OBJECT_DENSITY = 1f;
@@ -36,6 +38,29 @@ public class MapControlSystem implements MapSPI, IProcessingSystem {
 
     @Override
     public void addedToEngine(IEngine engine) {
+
+    }
+
+    @Override
+    public List<Vector2> getAtms() {
+        ArrayList<Vector2> coordinates = new ArrayList<>();
+        final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
+        for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(atms)) {
+            Rectangle rectangle = rObject.getRectangle();
+            coordinates.add(rectangle.getPosition(new Vector2()).scl(unitScale));
+        }
+        return coordinates;
+    }
+
+    @Override
+    public void process(GameData gameData) {
+
+        renderer.setView(gameData.getCamera());
+        renderer.render();
+    }
+
+    @Override
+    public void install(IEngine engine, GameData gameData) {
         map = new TmxMapLoader().load("maps/GTG-Map_v5.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
@@ -55,24 +80,9 @@ public class MapControlSystem implements MapSPI, IProcessingSystem {
     }
 
     @Override
-    public List<Vector2> getAtms() {
-        if (map == null) {
-            return Collections.emptyList();
-        }
-
-        ArrayList<Vector2> coordinates = new ArrayList<>();
-        final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
-        for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(atms)) {
-            Rectangle rectangle = rObject.getRectangle();
-            coordinates.add(rectangle.getPosition(new Vector2()));
-        }
-        return coordinates;
-    }
-
-    @Override
-    public void process(GameData gameData) {
-
-        renderer.setView(gameData.getCamera());
-        renderer.render();
+    public void uninstall(IEngine engine, GameData gameData) {
+        engine.getEntitiesFor(Family.builder().forEntities(Wall.class).get()).forEach(entity -> {
+            engine.removeEntity(entity);
+        });
     }
 }
