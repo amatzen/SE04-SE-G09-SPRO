@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.gameover.internal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -29,17 +28,14 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
 
     private Image gmLogo;
 
+
     @Override
     public void install(IEngine engine, GameData gameData) {
-        this.stage = new Stage(new ScreenViewport());
-
-        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(new ScreenViewport());
 
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-
-        Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
         gmLogo = new Image(new Texture(Gdx.files.internal("assets/game-over-white.png")));
@@ -65,6 +61,7 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
         table.add(totalMoney).row();
 
         // Restart button
+        Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
         TextButton btnStart = new TextButton("Restart", skinBtn);
         btnStart.align(Align.bottom);
         table.add(btnStart).pad(75).row();
