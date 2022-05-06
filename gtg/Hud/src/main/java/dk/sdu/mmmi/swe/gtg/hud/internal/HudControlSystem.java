@@ -29,12 +29,12 @@ public class HudControlSystem implements IPostProcessingSystem, HudSPI {
     }
 
     @Override
-    public void setHealth(int value) {
-        hud.setHealth(value);
+    public int getHealth() {
+        return hud.getHealth();
     }
 
     @Override
-    public int getHealth() {
-        return hud.getHealth();
+    public void setHealth(int value) {
+        hud.setHealth(value);
     }
 }

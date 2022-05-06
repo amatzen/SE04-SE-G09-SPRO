@@ -16,17 +16,21 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.util.List;
+
 @Component
-public class ATMPlugin implements IPlugin {
+public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     @Reference
     private ShapeFactorySPI shapeFactory;
@@ -41,39 +45,14 @@ public class ATMPlugin implements IPlugin {
 
     private ICollisionListener collisionListener;
 
+    @Reference
+    private MapSPI mapSPI;
+
+    public ATMPlugin() {
+    }
+
     @Override
     public void install(IEngine engine, GameData gameData) {
-
-        Vector2 atmPosition = new Vector2(137.45f, 84f);
-        Vector2 atmSize = new Vector2(1, 1.5f);
-        float sensorRadius = 5;
-
-        BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
-                atmPosition, atmSize, BodyDef.BodyType.StaticBody,
-                1,
-                false));
-
-        SensorPart sensorPart = new SensorPart(shapeFactory.createCircle(
-                atmPosition, sensorRadius, BodyDef.BodyType.StaticBody,
-                1,
-                true));
-
-        this.atm = new ATM();
-
-        atmBody.getBody().setUserData(this.atm);
-
-        sensorPart.getBody().setUserData(this.atm);
-
-        this.atm.addPart(atmBody);
-        this.atm.addPart(sensorPart);
-
-        TransformPart transformPart = new TransformPart();
-        transformPart.setScale(1f / 184f, 1.5f / 423f);
-        this.atm.addPart(transformPart);
-        this.atm.addPart(getBodyTexture());
-
-        engine.addEntity(this.atm);
-
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
 
         IFamily familyB = Family.builder().get();
@@ -133,4 +112,52 @@ public class ATMPlugin implements IPlugin {
         collisionSPI.removeListener(collisionListener);
     }
 
+    @Override
+    public void addedToEngine(IEngine engine) {
+        List<Vector2> coordinates = mapSPI.getAtms();
+
+        Vector2 atmSize = new Vector2(1, 1.5f);
+
+        float sensorRadius = 5;
+
+        for (Vector2 coordinate : coordinates) {
+
+            Vector2 atmposition = new Vector2(coordinate);
+
+            BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
+                    atmposition, atmSize, BodyDef.BodyType.StaticBody,
+                    1,
+                    false));
+
+            SensorPart sensorPart = new SensorPart(shapeFactory.createCircle(
+                    atmposition, sensorRadius, BodyDef.BodyType.StaticBody,
+                    1,
+                    true));
+
+            this.atm = new ATM();
+
+            atmBody.getBody().setUserData(this.atm);
+
+            sensorPart.getBody().setUserData(this.atm);
+
+            this.atm.addPart(atmBody);
+
+            this.atm.addPart(sensorPart);
+
+            TransformPart transformPart = new TransformPart();
+
+            transformPart.setScale(1f / 184f, 1.5f / 423f);
+
+            this.atm.addPart(transformPart);
+
+            this.atm.addPart(getBodyTexture());
+
+            engine.addEntity(this.atm);
+        }
+    }
+
+    @Override
+    public void process(GameData gameData) {
+
+    }
 }

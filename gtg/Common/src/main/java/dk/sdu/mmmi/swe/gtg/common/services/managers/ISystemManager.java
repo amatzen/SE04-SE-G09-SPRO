@@ -1,8 +1,8 @@
 package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 
 public interface ISystemManager {
     void addEntityProcessingService(IProcessingSystem service);
