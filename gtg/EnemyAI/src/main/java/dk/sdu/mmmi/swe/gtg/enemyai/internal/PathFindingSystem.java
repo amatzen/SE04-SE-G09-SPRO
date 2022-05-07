@@ -6,6 +6,7 @@ import dk.sdu.mmmi.swe.gtg.bodycomputationcontroller.BodyComputationSPI;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -36,12 +37,18 @@ public class PathFindingSystem implements IProcessingSystem {
     public PathFindingSystem() {
     }
 
+    private List<? extends Entity> player;
+
     @Override
     public void addedToEngine(IEngine engine) {
         aStar = new AStar(mapSPI);
 
         entities = engine.getEntitiesFor(
             Family.builder().with(TransformPart.class, SteeringPart.class).get()
+        );
+
+        player = engine.getEntitiesFor(
+                Family.builder().with(PlayerPart.class).get()
         );
     }
 
@@ -62,10 +69,16 @@ public class PathFindingSystem implements IProcessingSystem {
     }
 
     private void searchPath() {
+        Entity player = this.player.get(0);
+
+        if (player == null) {
+            return;
+        }
+
         for (Entity entity : entities) {
             TransformPart transformPart = entity.getPart(TransformPart.class);
 
-            Path path = aStar.searchNodePath(new Vector2(126, 74), transformPart.getPosition2());
+            Path path = aStar.searchNodePath(player.getPart(TransformPart.class).getPosition2(), transformPart.getPosition2());
 
             if (entity.hasPart(PathPart.class)) {
                 PathPart pathPart = entity.getPart(PathPart.class);

@@ -110,15 +110,17 @@ public class SteeringSystem implements IProcessingSystem {
     }
 
     private Vector2 seek(Entity entity, Vector2 target) {
-        Vector2 desired = target.cpy().sub(entity.getPart(BodyPart.class).getBody().getPosition());
+        Body entityBody = entity.getPart(BodyPart.class).getBody();
+
+        Vector2 desired = target.cpy().sub(entityBody.getPosition());
         desired.nor();
 
-        float tmpMaxSpeed = 100f;
-        desired.scl(tmpMaxSpeed);
+        float tmpMaxSpeed = 17f;
+        desired.scl(tmpMaxSpeed * entityBody.getMass());
 
-        Vector2 steer = desired.sub(entity.getPart(BodyPart.class).getBody().getLinearVelocity());
+        Vector2 steer = desired.sub(entityBody.getLinearVelocity());
 
-        float tmpMaxForce = 100f;
+        float tmpMaxForce = 10000f;
         steer.limit(tmpMaxForce);
 
         return steer;
@@ -141,4 +143,46 @@ public class SteeringSystem implements IProcessingSystem {
         // Adds the adjacent point to the starting point a.
         return a.cpy().add(ab);
     }
+
+    private Vector2 separate(Entity entity, List<? extends Entity> entities) {
+        Body body = entity.getPart(BodyPart.class).getBody();
+
+        float separationDistance = 2;
+
+        Vector2 steering = Vector2.Zero;
+
+        int count = 0;
+
+        for (Entity e : entities) {
+            if (e == entity) {
+                continue;
+            }
+
+            Body otherBody = e.getPart(BodyPart.class).getBody();
+
+            Vector2 toOther = otherBody.getPosition().cpy().sub(body.getPosition());
+
+            float distance = toOther.len();
+
+            if (distance > 0 && distance < separationDistance) {
+                toOther.nor();
+                toOther.scl(1 / distance);
+                steering.add(toOther);
+
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            steering.scl(1 / count);
+        }
+
+        if (steering.len() > 0) {
+            steering.nor();
+            steering.scl(body.getMass() * 0.5f);
+        }
+
+        return steering;
+    }
+
 }

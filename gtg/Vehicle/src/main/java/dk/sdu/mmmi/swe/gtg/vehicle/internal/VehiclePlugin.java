@@ -9,11 +9,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
@@ -38,8 +34,9 @@ public class VehiclePlugin implements IPlugin {
 
     @Override
     public void install(IEngine engine, GameData gameData) {
-
         Vehicle vehicle = createVehicle(engine);
+
+        vehicle.addPart(new PlayerPart());
 
         engine.addEntity(vehicle);
     }
