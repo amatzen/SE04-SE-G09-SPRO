@@ -39,7 +39,6 @@ public class SteeringSystem implements IProcessingSystem {
 
     private void followPath(GameData gameData) {
         for (Entity entity : entities) {
-            System.out.println("Following path");
             Vector2 f = followPath(entity);
 
             f.scl(3f);
@@ -55,7 +54,7 @@ public class SteeringSystem implements IProcessingSystem {
 
         Vector2 predict = body.getLinearVelocity().cpy();
         predict.nor();
-        predict.scl(25f);
+        predict.scl(5f);
 
         Vector2 predictPos = body.getPosition().cpy().add(predict);
 
@@ -65,26 +64,26 @@ public class SteeringSystem implements IProcessingSystem {
 
         List<Node> nodes = pathPart.getPath().getNodes();
 
-        for (int i = 0; i < nodes.size(); i++) {
+        for (int i = 0; i < nodes.size() - 1; i++) {
 
             Vector2 a = nodes.get(i).getState();
-            Vector2 b = nodes.get((i + 1) % nodes.size()).getState();
+            Vector2 b = nodes.get(i + 1).getState();
 
             Vector2 normalPoint = getNormalPoint(a, b, predictPos);
 
-            Vector2 dir = a.cpy().sub(b);
+            Vector2 pathSegmentDir = a.cpy().sub(b);
 
             if (
                     normalPoint.x < Math.min(a.x, b.x) ||
-                            normalPoint.x > Math.max(a.x, b.x) ||
-                            normalPoint.y < Math.min(a.y, b.y) ||
-                            normalPoint.y > Math.max(a.y, b.y)
+                    normalPoint.x > Math.max(a.x, b.x) ||
+                    normalPoint.y < Math.min(a.y, b.y) ||
+                    normalPoint.y > Math.max(a.y, b.y)
             ) {
                 normalPoint = b.cpy();
 
-                a = nodes.get((i + 1) % nodes.size()).getState();
-                b = nodes.get((i + 2) % nodes.size()).getState();
-                dir = b.cpy().sub(a);
+                /*a = nodes.get(i + 1).getState();
+                b = nodes.get(i + 2).getState();
+                dir = b.cpy().sub(a);*/
             }
 
             float d = predict.dst(normalPoint);
@@ -94,16 +93,16 @@ public class SteeringSystem implements IProcessingSystem {
 
                 normal = normalPoint;
 
-                dir.nor();
+                pathSegmentDir.nor();
 
-                dir.scl(25f);
+                pathSegmentDir.scl(5f);
 
                 target = normal.cpy();
-                target.add(dir);
+                target.add(pathSegmentDir);
             }
         }
 
-        if (record > pathPart.getPath().getRadius()) {
+        if (record > pathPart.getPath().getRadius() && target != null) {
             return this.seek(entity, target);
         } else {
             return Vector2.Zero;
@@ -111,7 +110,7 @@ public class SteeringSystem implements IProcessingSystem {
     }
 
     private Vector2 seek(Entity entity, Vector2 target) {
-        Vector2 desired = target.cpy().sub(entity.getPart(TransformPart.class).getPosition2());
+        Vector2 desired = target.cpy().sub(entity.getPart(BodyPart.class).getBody().getPosition());
         desired.nor();
 
         float tmpMaxSpeed = 100f;
@@ -125,11 +124,21 @@ public class SteeringSystem implements IProcessingSystem {
         return steer;
     }
 
+    /**
+     * This method projects the prediction vector onto the the line segment defined by the two points a and b.
+     * @param a Point a.
+     * @param b Point b.
+     * @param p Prediction vector.
+     * @return The projection vector.
+     */
     private Vector2 getNormalPoint(Vector2 a, Vector2 b, Vector2 p) {
         Vector2 ap = p.cpy().sub(a);
         Vector2 ab = b.cpy().sub(a);
         ab.nor();
+        // Rotates path ab to point in the direction of the predict (i guess)
+        // Finds the adjacent point to the predict (hypothenuse)
         ab.scl(ap.dot(ab));
+        // Adds the adjacent point to the starting point a.
         return a.cpy().add(ab);
     }
 }

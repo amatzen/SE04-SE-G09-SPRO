@@ -41,8 +41,6 @@ public class VehiclePlugin implements IPlugin {
 
         Vehicle vehicle = createVehicle(engine);
 
-        vehicle.addPart(new SteeringPart());
-
         engine.addEntity(vehicle);
     }
 
