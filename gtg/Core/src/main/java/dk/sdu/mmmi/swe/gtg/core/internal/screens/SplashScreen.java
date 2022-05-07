@@ -22,7 +22,7 @@ public class SplashScreen implements Screen {
         super();
         this.game = game;
         this.batch = new SpriteBatch();
-        this.splashTexture = new Texture("assets/splash_screen.png");
+        this.splashTexture = new Texture("assets/splash_screen_new.png");
         this.sprite = new Sprite(splashTexture);
     }
 
