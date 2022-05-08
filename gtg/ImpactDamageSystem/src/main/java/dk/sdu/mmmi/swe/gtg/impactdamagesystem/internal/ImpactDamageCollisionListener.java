@@ -48,7 +48,7 @@ public class ImpactDamageCollisionListener implements ICollisionListener {
             sum += contactImpulse.getNormalImpulses()[i];
         }
 
-        System.out.println("SUM: " + sum);
+        // System.out.println("SUM: " + sum);
 
         LifePart lifePartA = entityA.getPart(LifePart.class);
         LifePart lifePartB = entityB.getPart(LifePart.class);

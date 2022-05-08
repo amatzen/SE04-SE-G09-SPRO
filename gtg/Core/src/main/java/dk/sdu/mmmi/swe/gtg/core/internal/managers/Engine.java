@@ -135,6 +135,13 @@ public class Engine implements IEngine {
     }
 
     @Override
+    public void addEntityListener(IFamily family, IEntityListener listener, boolean iterate) {
+        getEntitiesFor(family).forEach(listener::onEntityAdded);
+
+        familyManager.addEntityListener(family, listener);
+    }
+
+    @Override
     public void removeEntityListener(IFamily family, IEntityListener listener) {
         familyManager.removeEntityListener(family, listener);
     }

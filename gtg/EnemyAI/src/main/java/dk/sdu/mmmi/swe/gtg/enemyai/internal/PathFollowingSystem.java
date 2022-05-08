@@ -138,46 +138,4 @@ public class PathFollowingSystem implements IProcessingSystem {
         // Adds the adjacent point to the starting point a.
         return a.cpy().add(ab);
     }
-
-    private Vector2 separate(Entity entity, List<? extends Entity> entities) {
-        Body body = entity.getPart(BodyPart.class).getBody();
-
-        float separationDistance = 2;
-
-        Vector2 steering = Vector2.Zero;
-
-        int count = 0;
-
-        for (Entity e : entities) {
-            if (e == entity) {
-                continue;
-            }
-
-            Body otherBody = e.getPart(BodyPart.class).getBody();
-
-            Vector2 toOther = otherBody.getPosition().cpy().sub(body.getPosition());
-
-            float distance = toOther.len();
-
-            if (distance > 0 && distance < separationDistance) {
-                toOther.nor();
-                toOther.scl(1 / distance);
-                steering.add(toOther);
-
-                count++;
-            }
-        }
-
-        if (count > 0) {
-            steering.scl(1 / count);
-        }
-
-        if (steering.len() > 0) {
-            steering.nor();
-            steering.scl(body.getMass() * 0.5f);
-        }
-
-        return steering;
-    }
-
 }
