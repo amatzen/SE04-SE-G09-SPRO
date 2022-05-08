@@ -68,7 +68,8 @@
     <module>Hud</module>
     <module>CommonHud</module>
     <module>EnemyAI</module>
-      <module>BodyComputationController</module>
+    <module>BodyComputationController</module>
+    <module>ImpactDamageSystem</module>
   </modules>
 
   <build>

@@ -98,7 +98,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
-        IFamily familyB = Family.builder().get();
+        IFamily familyB = Family.ALL;
 
         collisionListener = new ICollisionListener() {
             @Override

@@ -78,7 +78,7 @@ public class ATMPlugin implements IPlugin {
 
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
 
-        IFamily familyB = Family.builder().get();
+        IFamily familyB = Family.ALL;
 
         collisionListener = new ICollisionListener() {
             @Override
