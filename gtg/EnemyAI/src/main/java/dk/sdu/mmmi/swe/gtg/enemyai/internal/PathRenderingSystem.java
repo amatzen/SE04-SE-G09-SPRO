@@ -14,7 +14,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.List;
 
 @Component
-public class PathRenderer implements IPostProcessingSystem {
+public class PathRenderingSystem implements IPostProcessingSystem {
     private List<? extends Entity> entities;
     private ShapeRenderer shapeRenderer;
 

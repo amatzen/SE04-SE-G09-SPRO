@@ -7,23 +7,29 @@ import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 
 import java.util.*;
 
-public class AStar {
+public class AStarPathFinding {
 
     private MapSPI map;
-    private int resolution = 1;
+    private int resolution;
 
-
-    public AStar(MapSPI map) {
+    public AStarPathFinding(MapSPI map) {
         this.map = map;
+        this.resolution = 1;
     }
+
+    public AStarPathFinding(MapSPI map, int resolution) {
+        this.map = map;
+        this.resolution = resolution;
+    }
+
     public Path searchNodePath(Vector2 from, Vector2 to) {
         Node start = new Node(null, from, 0);
         Node goal = new Node(null, to, 0);
 
-        return treeSearch(start, goal);
+        return bestFirstSearch(start, goal);
     }
 
-    public Path treeSearch(final Node start, final Node goal) {
+    private Path bestFirstSearch(final Node start, final Node goal) {
         Map<String, Node> explored = new HashMap<>();
         Map<String, Node> inFringe = new HashMap<>();
         PriorityQueue<Node> fringe = new PriorityQueue<>(

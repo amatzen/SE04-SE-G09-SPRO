@@ -12,7 +12,7 @@ public interface IEngine {
 
     void update(GameData gameData);
 
-    String addEntity(Entity entity);
+    void addEntity(Entity entity);
 
     void removeEntity(String entityID);
 

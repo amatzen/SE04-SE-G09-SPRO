@@ -43,15 +43,13 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public String addEntity(Entity entity) {
+    public void addEntity(Entity entity) {
         entity.onPartAdded.add(onPartAdded);
         entity.onPartRemoved.add(onPartRemoved);
 
-        final String id = entityManager.addEntity(entity);
+        entityManager.addEntity(entity);
 
         familyManager.updateFamilyMembership(entity);
-
-        return id;
     }
 
     @Override

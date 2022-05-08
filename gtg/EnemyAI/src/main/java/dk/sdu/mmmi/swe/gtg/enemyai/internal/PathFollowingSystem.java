@@ -5,8 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SeekingPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -17,7 +16,7 @@ import org.osgi.service.component.annotations.Component;
 import java.util.List;
 
 @Component
-public class SteeringSystem implements IProcessingSystem {
+public class PathFollowingSystem implements IProcessingSystem {
 
     private List<? extends Entity> entities;
 
@@ -39,22 +38,29 @@ public class SteeringSystem implements IProcessingSystem {
 
     private void followPath(GameData gameData) {
         for (Entity entity : entities) {
-            Vector2 f = followPath(entity);
+            Vector2 target = followPath(entity);
 
-            f.scl(3f);
+            if (target != null) {
+                SeekingPart seekingPart = entity.getPart(SeekingPart.class);
 
-            entity.getPart(BodyPart.class).getBody().applyForceToCenter(f, true);
+                if (seekingPart == null) {
+                    seekingPart = new SeekingPart();
+                    entity.addPart(seekingPart);
+                }
+
+                seekingPart.setTarget(target);
+            }
         }
     }
 
     private Vector2 followPath(Entity entity) {
         PathPart pathPart = entity.getPart(PathPart.class);
-        SteeringPart steeringPart = entity.getPart(SteeringPart.class);
+        SeekingPart steeringPart = entity.getPart(SeekingPart.class);
         Body body = entity.getPart(BodyPart.class).getBody();
 
         Vector2 predict = body.getLinearVelocity().cpy();
         predict.nor();
-        predict.scl(5f);
+        predict.scl(8f);
 
         Vector2 predictPos = body.getPosition().cpy().add(predict);
 
@@ -103,27 +109,10 @@ public class SteeringSystem implements IProcessingSystem {
         }
 
         if (record > pathPart.getPath().getRadius() && target != null) {
-            return this.seek(entity, target);
-        } else {
-            return Vector2.Zero;
+            return target;
         }
-    }
 
-    private Vector2 seek(Entity entity, Vector2 target) {
-        Body entityBody = entity.getPart(BodyPart.class).getBody();
-
-        Vector2 desired = target.cpy().sub(entityBody.getPosition());
-        desired.nor();
-
-        float tmpMaxSpeed = 17f;
-        desired.scl(tmpMaxSpeed * entityBody.getMass());
-
-        Vector2 steer = desired.sub(entityBody.getLinearVelocity());
-
-        float tmpMaxForce = 10000f;
-        steer.limit(tmpMaxForce);
-
-        return steer;
+        return null;
     }
 
     /**

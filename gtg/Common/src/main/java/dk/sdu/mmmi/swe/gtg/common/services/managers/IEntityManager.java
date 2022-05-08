@@ -11,7 +11,7 @@ public interface IEntityManager {
 
     void removeEntityListener(IEntityListener listener);
 
-    String addEntity(Entity entity);
+    void addEntity(Entity entity);
 
     void removeEntity(Entity entity);
 

@@ -1,7 +1,7 @@
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.enemyai.Node;
-import dk.sdu.mmmi.swe.gtg.enemyai.internal.AStar;
+import dk.sdu.mmmi.swe.gtg.enemyai.internal.AStarPathFinding;
 import dk.sdu.mmmi.swe.gtg.map.MapSPI;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
 
-public class AStarTest {
+public class AStarPathFindingTest {
 
     @Test
     public void testAStar() {
@@ -39,7 +39,7 @@ public class AStarTest {
             }
         };
 
-        AStar aStar = new AStar(map);
+        AStarPathFinding aStar = new AStarPathFinding(map);
 
 
         List<Node> res = aStar.searchNodePath(new Vector2(5, 5), new Vector2(15, 15)).getNodes();
@@ -77,7 +77,7 @@ public class AStarTest {
             }
         };
 
-        AStar aStar = new AStar(map);
+        AStarPathFinding aStar = new AStarPathFinding(map);
 
         List<Node> res = aStar.searchNodePath(new Vector2(5, 5), new Vector2(15, 15)).getNodes();
 

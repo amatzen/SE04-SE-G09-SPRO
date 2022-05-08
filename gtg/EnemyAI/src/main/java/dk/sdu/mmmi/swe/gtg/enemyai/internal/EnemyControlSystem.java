@@ -30,7 +30,7 @@ public class EnemyControlSystem implements IProcessingSystem {
             System.out.println("EnemyControlSystem");
             Body entityBody = enemy.getPart(BodyPart.class).getBody();
 
-            float velDir = entityBody.getLinearVelocity().angleRad();
+            float velDir = entityBody.getLinearVelocity().angleRad() - (float) Math.PI * 0.5f;
             float orientation = entityBody.getAngle();
 
             entityBody.setTransform(entityBody.getPosition(), velDir);

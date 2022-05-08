@@ -30,14 +30,12 @@ public class EntityManager implements IEntityManager {
     }
 
     @Override
-    public String addEntity(Entity entity) {
+    public void addEntity(Entity entity) {
         entityMap.put(entity.getID(), entity);
 
         listeners.forEach((listener) -> {
             listener.onEntityAdded(entity);
         });
-
-        return entity.getID();
     }
 
     @Override

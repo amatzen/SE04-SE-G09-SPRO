@@ -1,12 +1,17 @@
 package dk.sdu.mmmi.swe.gtg.enemyai.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SteeringPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SeekingPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -24,6 +29,10 @@ public class EnemyPlugin implements IPlugin {
 
     @Override
     public void install(IEngine engine, GameData gameData) {
+        engine.addEntity(createEnemy());
+    }
+
+    private Entity createEnemy() {
         Entity enemy = new Enemy();
 
         Vector2 position = new Vector2(134.28f, 84);
@@ -35,16 +44,32 @@ public class EnemyPlugin implements IPlugin {
                 260f,
                 false
         );
+        enemyBody.setUserData(enemy);
 
         enemyBody.setLinearDamping(0.15f);
 
         enemy.addPart(new BodyPart(enemyBody));
 
-        enemy.addPart(new TransformPart());
+        TransformPart transformPart = new TransformPart();
+        transformPart.setScale(1f / 56f, 1f / 56f);
+        enemy.addPart(transformPart);
 
-        enemy.addPart(new SteeringPart());
+        enemy.addPart(new SeekingPart());
 
-        engine.addEntity(enemy);
+        enemy.addPart(getTexture("assets/police.png"));
+
+        return enemy;
+    }
+
+    private TexturePart getTexture(String path) {
+        final TexturePart texturePart = new TexturePart();
+        FileHandle file = Gdx.files.internal(path);
+        Texture texture = new Texture(file);
+        TextureRegion textureRegion = new TextureRegion(texture);
+
+        texturePart.setRegion(textureRegion);
+
+        return texturePart;
     }
 
     @Override
