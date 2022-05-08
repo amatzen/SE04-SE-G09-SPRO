@@ -22,6 +22,7 @@ public class EnemyControlSystem implements IProcessingSystem {
         enemies = engine.getEntitiesFor(
             Family.builder().forEntities(Enemy.class).get()
         );
+
     }
 
     @Override
