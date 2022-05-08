@@ -1,12 +1,10 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EntityManager implements IEntityManager {
 
@@ -44,10 +42,6 @@ public class EntityManager implements IEntityManager {
 
         entity.getParts().forEach((part) -> {
             part.destroy();
-        });
-
-        listeners.forEach((listener) -> {
-            listener.onEntityRemoved(entity);
         });
     }
 

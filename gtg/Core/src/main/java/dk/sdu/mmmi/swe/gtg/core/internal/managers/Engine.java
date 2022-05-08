@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
@@ -127,5 +128,15 @@ public class Engine implements IEngine {
     @Override
     public void removePostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.removePostEntityProcessingService(service);
+    }
+
+    @Override
+    public void addEntityListener(IFamily family, IEntityListener listener) {
+        familyManager.addEntityListener(family, listener);
+    }
+
+    @Override
+    public void removeEntityListener(IFamily family, IEntityListener listener) {
+        familyManager.removeEntityListener(family, listener);
     }
 }
