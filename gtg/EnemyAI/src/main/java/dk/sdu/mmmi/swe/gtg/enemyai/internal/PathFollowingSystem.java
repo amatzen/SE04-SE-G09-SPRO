@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PathFollowingPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SeekingPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
@@ -24,7 +25,11 @@ public class PathFollowingSystem implements IProcessingSystem {
     public void addedToEngine(IEngine engine) {
 
         entities = engine.getEntitiesFor(
-                Family.builder().with(BodyPart.class, PathPart.class).get()
+                Family.builder().with(
+                        BodyPart.class,
+                        PathPart.class,
+                        PathFollowingPart.class
+                ).get()
         );
 
     }
@@ -32,11 +37,11 @@ public class PathFollowingSystem implements IProcessingSystem {
     @Override
     public void process(GameData gameData) {
 
-        followPath(gameData);
+        followPath();
 
     }
 
-    private void followPath(GameData gameData) {
+    private void followPath() {
         for (Entity entity : entities) {
             Vector2 target = followPath(entity);
 
@@ -54,18 +59,19 @@ public class PathFollowingSystem implements IProcessingSystem {
     }
 
     private Vector2 followPath(Entity entity) {
+        PathFollowingPart pathFollowingPart = entity.getPart(PathFollowingPart.class);
         PathPart pathPart = entity.getPart(PathPart.class);
-        SeekingPart steeringPart = entity.getPart(SeekingPart.class);
         Body body = entity.getPart(BodyPart.class).getBody();
 
         Vector2 predict = body.getLinearVelocity().cpy();
         predict.nor();
-        predict.scl(8f);
+        predict.scl(pathFollowingPart.getLookAhead());
 
         Vector2 predictPos = body.getPosition().cpy().add(predict);
 
         Vector2 normal;
         Vector2 target = null;
+
         float record = Float.MAX_VALUE;
 
         List<Node> nodes = pathPart.getPath().getNodes();

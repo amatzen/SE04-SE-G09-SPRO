@@ -9,10 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SeekingPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
@@ -55,6 +52,8 @@ public class EnemyPlugin implements IPlugin {
         enemy.addPart(transformPart);
 
         enemy.addPart(new SeekingPart());
+        enemy.addPart(new PathFollowingPart(8f));
+        enemy.addPart(new LifePart());
 
         enemy.addPart(getTexture("assets/police.png"));
 

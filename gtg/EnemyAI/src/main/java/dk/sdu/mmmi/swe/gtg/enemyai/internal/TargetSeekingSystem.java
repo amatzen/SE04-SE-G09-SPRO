@@ -51,7 +51,7 @@ public class TargetSeekingSystem implements IProcessingSystem {
 
         Vector2 steer = desired.sub(entityBody.getLinearVelocity());
 
-        float tmpMaxForce = 10000f;
+        float tmpMaxForce = 10000f * 3f;
         steer.limit(tmpMaxForce);
 
         return steer;
