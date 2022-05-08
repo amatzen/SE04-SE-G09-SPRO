@@ -53,9 +53,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        enemies = engine.getEntitiesFor(
-            Family.builder().forEntities(Enemy.class).get()
-        );
+
     }
 
     @Override
@@ -81,6 +79,10 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
 
     @Override
     public void install(IEngine engine, GameData gameData) {
+        enemies = engine.getEntitiesFor(
+                Family.builder().forEntities(Enemy.class).get()
+        );
+
         engine.addEntityListener(
             Family.builder().with(PlayerPart.class).get(),
             playerListener,
