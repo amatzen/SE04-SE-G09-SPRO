@@ -86,49 +86,4 @@ public class AStarTest {
         System.out.println(res.stream().map(n -> n.getState().toString()).collect(Collectors.toList()));
     }
 
-    @Test
-    public void testHashSet() {
-        Set<Node> nodeSet = new HashSet<>();
-
-        Node node1 = new Node(null, new Vector2(1, 1), 0);
-        Node node2 = new Node(null, new Vector2(1, 1), 0);
-
-        nodeSet.add(node1);
-
-        assertTrue(nodeSet.contains(node2));
-    }
-
-    @Test
-    public void queueTest() {
-        Queue<Node> queue = new PriorityQueue<>((o1, o2) -> {
-            return (int) (o1.getCost() - o2.getCost());
-        });
-
-        Node node1 = new Node(null, new Vector2(1, 1), 2);
-        Node node2 = new Node(null, new Vector2(1, 1), 4);
-
-        queue.add(node1);
-        queue.add(node2);
-        queue.add(node1);
-        queue.add(node1);
-
-        System.out.println(queue);
-
-        getBest(queue);
-
-        System.out.println(queue);
-
-        getBest(queue);
-
-        System.out.println(queue);
-
-        getBest(queue);
-
-        System.out.println(queue);
-    }
-
-    public Node getBest(Queue<Node> fringe) {
-        return fringe.poll();
-    }
-
 }
