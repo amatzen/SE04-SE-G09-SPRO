@@ -36,9 +36,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
     @Reference
     private CollisionSPI collisionSPI;
 
-    @Reference
-    private HudSPI hudSPI;
-
     private ICollisionListener collisionListener;
 
     public BulletCreator() {
@@ -119,7 +116,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
-                    hudSPI.setHealth(lifePart.getLife());
 
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");

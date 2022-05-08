@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.data.EntityPartPair;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
@@ -17,8 +18,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Engine implements IEngine {
-    private final ISignalListener<Entity> onPartRemoved;
-    private final ISignalListener<Entity> onPartAdded;
+    private final ISignalListener<EntityPartPair> onPartRemoved;
+    private final ISignalListener<EntityPartPair> onPartAdded;
     private final List<IEntitySystem> systemsToBeStarted;
     private ISystemManager systemManager;
     private IEntityManager entityManager;
@@ -27,8 +28,10 @@ public class Engine implements IEngine {
     public Engine() {
         systemsToBeStarted = new CopyOnWriteArrayList<>();
 
-        onPartRemoved = onPartAdded = (signal, entity) -> {
-            familyManager.updateFamilyMembership(entity);
+        onPartRemoved = onPartAdded = (signal, entityPartPair) -> {
+            familyManager.updateFamilyMembership(
+                    entityPartPair.getEntity()
+            );
         };
     }
 
