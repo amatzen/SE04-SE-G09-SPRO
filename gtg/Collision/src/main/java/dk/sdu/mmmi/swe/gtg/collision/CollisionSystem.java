@@ -48,12 +48,12 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
 
     @Override
     public void preSolve(Contact contact, Manifold manifold) {
-
+        contacts.add(new Collision(contact, manifold));
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
-
+        contacts.add(new Collision(contact, contactImpulse));
     }
 
     @Override
@@ -87,49 +87,56 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
             Collision collision = contacts.poll();
             Contact contact = collision.getContact();
 
-            listeners.forEach(collisionListener -> {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
+            Fixture fixtureA = contact.getFixtureA();
+            Fixture fixtureB = contact.getFixtureB();
 
-                if (containsNull(fixtureA, fixtureB)) {
-                    return;
-                }
+            if (containsNull(fixtureA, fixtureB)) {
+                continue;
+            }
 
-                Entity entityA = (Entity) fixtureA.getBody().getUserData();
-                Entity entityB = (Entity) fixtureB.getBody().getUserData();
+            Entity entityA = (Entity) fixtureA.getBody().getUserData();
+            Entity entityB = (Entity) fixtureB.getBody().getUserData();
 
-                if (containsNull(entityA, entityB)) {
-                    return;
-                }
+            if (containsNull(entityA, entityB)) {
+                continue;
+            }
+
+            for(ICollisionListener collisionListener : listeners) {
 
                 if (
                         collisionListener.getFamilyA().matches(entityA)
                                 && collisionListener.getFamilyB().matches(entityB)
                 ) {
-                    switch (collision.getContactType()) {
-                        case BEGIN:
-                            collisionListener.beginContact(contact, entityA, entityB);
-                            break;
-                        case END:
-                            collisionListener.endContact(contact, entityA, entityB);
-                            break;
-                    }
-
+                    // Do nothing
                 } else if (
                         collisionListener.getFamilyA().matches(entityB)
                                 && collisionListener.getFamilyB().matches(entityA)
                 ) {
-                    switch (collision.getContactType()) {
-                        case BEGIN:
-                            collisionListener.beginContact(contact, entityB, entityA);
-                            break;
-                        case END:
-                            collisionListener.endContact(contact, entityB, entityA);
-                            break;
-                    }
-
+                    // Swap entities
+                    Entity temp = entityA;
+                    entityA = entityB;
+                    entityB = temp;
+                } else {
+                    continue;
                 }
-            });
+
+                switch (collision.getContactType()) {
+                    case BEGIN:
+                        collisionListener.beginContact(contact, entityA, entityB);
+                        break;
+                    case END:
+                        collisionListener.endContact(contact, entityA, entityB);
+                        break;
+                    case PRESOLVE:
+                        collisionListener.preSolve(contact, collision.getManifold(), entityA, entityB);
+                        break;
+                    case POSTSOLVE:
+                        collisionListener.postSolve(contact, collision.getContactImpulse(), entityA, entityB);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unknown contact type: " + collision.getContactType());
+                }
+            }
         }
     }
 }

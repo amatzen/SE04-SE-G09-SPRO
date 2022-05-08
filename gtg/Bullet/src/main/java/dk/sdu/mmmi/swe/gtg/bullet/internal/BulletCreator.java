@@ -5,10 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
@@ -139,12 +136,12 @@ public class BulletCreator implements BulletSPI, IPlugin {
             }
 
             @Override
-            public void preSolve(Contact contact) {
+            public void preSolve(Contact contact, Manifold manifold, Entity entityB, Entity entityA) {
 
             }
 
             @Override
-            public void postSolve(Contact contact) {
+            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA) {
 
             }
         };
