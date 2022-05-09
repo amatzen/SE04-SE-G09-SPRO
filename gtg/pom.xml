@@ -58,7 +58,6 @@
     <module>ShapeFactoryCommon</module>
     <module>ShapeFactory</module>
     <module>CommonBullet</module>
-    <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
     <module>ATM</module>
@@ -70,6 +69,12 @@
     <module>EnemyAI</module>
     <module>BodyComputationController</module>
     <module>ImpactDamageSystem</module>
+    <module>PathFinding</module>
+    <module>PathFollowingSystem</module>
+    <module>TargetSeekingSystem</module>
+    <module>PathFindingCommon</module>
+    <module>PathRenderingSystem</module>
+    <module>PathFindingSystem</module>
   </modules>
 
   <build>
