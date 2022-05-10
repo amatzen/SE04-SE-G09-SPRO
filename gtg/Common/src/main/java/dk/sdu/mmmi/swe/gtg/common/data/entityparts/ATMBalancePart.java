@@ -11,6 +11,10 @@ public class ATMBalancePart implements IEntityPart {
         this.balance = (int) Math.floor(Math.random() * 250000);
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     @Override
     public void destroy() {
     }
