@@ -97,10 +97,6 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
             }
 
-            @Override
-            public void sensorCollision(Contact contact, Entity entityA, Entity entityB) {
-
-            }
         };
         collisionSPI.addListener(collisionListener);
     }
