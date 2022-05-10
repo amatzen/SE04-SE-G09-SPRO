@@ -6,9 +6,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
@@ -23,7 +23,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static dk.sdu.mmmi.swe.gtg.common.utilities.Utility.containsNull;
 
 @Component
-public class CollisionSystem implements CollisionSPI, IGamePluginService, com.badlogic.gdx.physics.box2d.ContactListener, IEntityProcessingService {
+public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.physics.box2d.ContactListener, IProcessingSystem {
 
     private final List<ICollisionListener> listeners;
 
@@ -48,12 +48,12 @@ public class CollisionSystem implements CollisionSPI, IGamePluginService, com.ba
 
     @Override
     public void preSolve(Contact contact, Manifold manifold) {
-
+        contacts.add(new Collision(contact, manifold));
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
-
+        contacts.add(new Collision(contact, contactImpulse, contactImpulse.getNormalImpulses()));
     }
 
     @Override
@@ -67,12 +67,12 @@ public class CollisionSystem implements CollisionSPI, IGamePluginService, com.ba
     }
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(this);
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         this.worldManager.setContactLister(null);
     }
 
@@ -87,49 +87,56 @@ public class CollisionSystem implements CollisionSPI, IGamePluginService, com.ba
             Collision collision = contacts.poll();
             Contact contact = collision.getContact();
 
-            listeners.forEach(collisionListener -> {
-                Fixture fixtureA = contact.getFixtureA();
-                Fixture fixtureB = contact.getFixtureB();
+            Fixture fixtureA = contact.getFixtureA();
+            Fixture fixtureB = contact.getFixtureB();
 
-                if (containsNull(fixtureA, fixtureB)) {
-                    return;
-                }
+            if (containsNull(fixtureA, fixtureB)) {
+                continue;
+            }
 
-                Entity entityA = (Entity) fixtureA.getBody().getUserData();
-                Entity entityB = (Entity) fixtureB.getBody().getUserData();
+            Entity entityA = (Entity) fixtureA.getBody().getUserData();
+            Entity entityB = (Entity) fixtureB.getBody().getUserData();
 
-                if (containsNull(entityA, entityB)) {
-                    return;
-                }
+            if (containsNull(entityA, entityB)) {
+                continue;
+            }
+
+            for(ICollisionListener collisionListener : listeners) {
 
                 if (
                         collisionListener.getFamilyA().matches(entityA)
                                 && collisionListener.getFamilyB().matches(entityB)
                 ) {
-                    switch (collision.getContactType()) {
-                        case BEGIN:
-                            collisionListener.beginContact(contact, entityA, entityB);
-                            break;
-                        case END:
-                            collisionListener.endContact(contact, entityA, entityB);
-                            break;
-                    }
-
+                    // Do nothing
                 } else if (
                         collisionListener.getFamilyA().matches(entityB)
                                 && collisionListener.getFamilyB().matches(entityA)
                 ) {
-                    switch (collision.getContactType()) {
-                        case BEGIN:
-                            collisionListener.beginContact(contact, entityB, entityA);
-                            break;
-                        case END:
-                            collisionListener.endContact(contact, entityB, entityA);
-                            break;
-                    }
-
+                    // Swap entities
+                    Entity temp = entityA;
+                    entityA = entityB;
+                    entityB = temp;
+                } else {
+                    continue;
                 }
-            });
+
+                switch (collision.getContactType()) {
+                    case BEGIN:
+                        collisionListener.beginContact(contact, entityA, entityB);
+                        break;
+                    case END:
+                        collisionListener.endContact(contact, entityA, entityB);
+                        break;
+                    case PRESOLVE:
+                        collisionListener.preSolve(contact, collision.getManifold(), entityA, entityB);
+                        break;
+                    case POSTSOLVE:
+                        collisionListener.postSolve(contact, collision.getContactImpulse(), entityA, entityB, collision.getNormalImpulses());
+                        break;
+                    default:
+                        throw new IllegalStateException("Unknown contact type: " + collision.getContactType());
+                }
+            }
         }
     }
 }

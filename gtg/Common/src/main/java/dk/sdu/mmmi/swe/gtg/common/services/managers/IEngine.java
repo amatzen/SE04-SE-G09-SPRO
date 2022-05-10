@@ -2,9 +2,10 @@ package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface IEngine {
 
     void update(GameData gameData);
 
-    String addEntity(Entity entity);
+    void addEntity(Entity entity);
 
     void removeEntity(String entityID);
 
@@ -24,11 +25,17 @@ public interface IEngine {
 
     <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes);
 
-    void addEntityProcessingService(IEntityProcessingService service);
+    void addEntityProcessingService(IProcessingSystem service);
 
-    void removeEntityProcessingService(IEntityProcessingService service);
+    void removeEntityProcessingService(IProcessingSystem service);
 
-    void addPostEntityProcessingService(IPostEntityProcessingService service);
+    void addPostEntityProcessingService(IPostProcessingSystem service);
 
-    void removePostEntityProcessingService(IPostEntityProcessingService service);
+    void removePostEntityProcessingService(IPostProcessingSystem service);
+
+    void addEntityListener(IFamily family, IEntityListener listener);
+
+    void addEntityListener(IFamily family, IEntityListener listener, boolean iterate);
+
+    void removeEntityListener(IFamily family, IEntityListener listener);
 }

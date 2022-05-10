@@ -1,11 +1,13 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.data.EntityPartPair;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
@@ -16,9 +18,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Engine implements IEngine {
-
-    private final ISignalListener<Entity> onPartRemoved;
-    private final ISignalListener<Entity> onPartAdded;
+    private final ISignalListener<EntityPartPair> onPartRemoved;
+    private final ISignalListener<EntityPartPair> onPartAdded;
     private final List<IEntitySystem> systemsToBeStarted;
     private ISystemManager systemManager;
     private IEntityManager entityManager;
@@ -27,8 +28,10 @@ public class Engine implements IEngine {
     public Engine() {
         systemsToBeStarted = new CopyOnWriteArrayList<>();
 
-        onPartRemoved = onPartAdded = (signal, entity) -> {
-            familyManager.updateFamilyMembership(entity);
+        onPartRemoved = onPartAdded = (signal, entityPartPair) -> {
+            familyManager.updateFamilyMembership(
+                    entityPartPair.getEntity()
+            );
         };
     }
 
@@ -43,15 +46,13 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public String addEntity(Entity entity) {
+    public void addEntity(Entity entity) {
         entity.onPartAdded.add(onPartAdded);
         entity.onPartRemoved.add(onPartRemoved);
 
-        final String id = entityManager.addEntity(entity);
+        entityManager.addEntity(entity);
 
         familyManager.updateFamilyMembership(entity);
-
-        return id;
     }
 
     @Override
@@ -110,24 +111,41 @@ public class Engine implements IEngine {
     }
 
     @Override
-    public void addEntityProcessingService(IEntityProcessingService service) {
+    public void addEntityProcessingService(IProcessingSystem service) {
         this.systemManager.addEntityProcessingService(service);
         this.systemsToBeStarted.add(service);
     }
 
     @Override
-    public void removeEntityProcessingService(IEntityProcessingService service) {
+    public void removeEntityProcessingService(IProcessingSystem service) {
         this.systemManager.removeEntityProcessingService(service);
     }
 
     @Override
-    public void addPostEntityProcessingService(IPostEntityProcessingService service) {
+    public void addPostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.addPostEntityProcessingService(service);
         this.systemsToBeStarted.add(service);
     }
 
     @Override
-    public void removePostEntityProcessingService(IPostEntityProcessingService service) {
+    public void removePostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.removePostEntityProcessingService(service);
+    }
+
+    @Override
+    public void addEntityListener(IFamily family, IEntityListener listener) {
+        familyManager.addEntityListener(family, listener);
+    }
+
+    @Override
+    public void addEntityListener(IFamily family, IEntityListener listener, boolean iterate) {
+        getEntitiesFor(family).forEach(listener::onEntityAdded);
+
+        familyManager.addEntityListener(family, listener);
+    }
+
+    @Override
+    public void removeEntityListener(IFamily family, IEntityListener listener) {
+        familyManager.removeEntityListener(family, listener);
     }
 }

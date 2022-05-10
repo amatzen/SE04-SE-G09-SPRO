@@ -8,9 +8,13 @@ import java.util.Set;
 
 public class Family implements IFamily {
 
+    public static final Family ALL = new Family();
+
     private Set<Class<? extends Entity>> entities;
 
     private Set<Class<? extends IEntityPart>> parts;
+
+    private Set<Class<? extends IEntityPart>> excludedParts;
 
     public Family() {
     }
@@ -35,7 +39,23 @@ public class Family implements IFamily {
         this.parts = parts;
     }
 
+    public Set<Class<? extends IEntityPart>> getExcludedParts() {
+        return excludedParts;
+    }
+
+    protected void setExcludedParts(Set<Class<? extends IEntityPart>> excludedParts) {
+        this.excludedParts = excludedParts;
+    }
+
     public boolean matches(Entity entity) {
+        if (this.excludedParts != null) {
+            for (Class<? extends IEntityPart> parts : this.excludedParts) {
+                if (entity.hasPart(parts)) {
+                    return false;
+                }
+            }
+        }
+
         if (this.entities != null) {
             if (!this.entities.contains(entity.getClass())) {
                 return false;
@@ -58,11 +78,13 @@ public class Family implements IFamily {
         if (this == object) return true;
         if (Objects.isNull(object) || getClass() != object.getClass()) return false;
         Family family = (Family) object;
-        return Objects.equals(entities, family.entities) && Objects.equals(parts, family.parts);
+        return Objects.equals(entities, family.entities)
+                && Objects.equals(parts, family.parts)
+                && Objects.equals(excludedParts, family.excludedParts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(entities, parts);
+        return Objects.hash(entities, parts, excludedParts);
     }
 }

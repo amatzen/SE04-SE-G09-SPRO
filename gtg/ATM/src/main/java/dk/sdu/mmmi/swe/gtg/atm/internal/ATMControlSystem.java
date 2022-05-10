@@ -6,7 +6,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMBalancePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMTimerPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ProximityPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
 import org.osgi.service.component.annotations.Component;
@@ -15,7 +15,7 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.List;
 
 @Component
-public class ATMControlSystem implements IEntityProcessingService {
+public class ATMControlSystem implements IProcessingSystem {
     private List<? extends Entity> entities;
 
     @Reference

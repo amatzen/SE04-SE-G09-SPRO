@@ -5,17 +5,17 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
@@ -25,7 +25,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BulletCreator implements BulletSPI, IGamePluginService {
+public class BulletCreator implements BulletSPI, IPlugin {
 
     @Reference
     private IWorldManager worldManager;
@@ -91,10 +91,10 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     }
 
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
-        IFamily familyB = Family.builder().get();
+        IFamily familyB = Family.ALL;
 
         collisionListener = new ICollisionListener() {
             @Override
@@ -109,16 +109,14 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                if (entityB.hasPart(SensorPart.class)) {
-                    System.out.println("Bullet collision with Sensor");
-                } else {
-                    engine.removeEntity(entityA);
-                }
+                engine.removeEntity(entityA);
+
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
-                    System.out.println("Health: "+lifePart.getLife());
-                    if (lifePart.getLife()<=0){
+                    System.out.println("Health: " + lifePart.getLife());
+
+                    if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
                         engine.removeEntity(entityB); // Removes vehicle
                     }
@@ -133,12 +131,12 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
             }
 
             @Override
-            public void preSolve(Contact contact) {
+            public void preSolve(Contact contact, Manifold manifold, Entity entityB, Entity entityA) {
 
             }
 
             @Override
-            public void postSolve(Contact contact) {
+            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA, float[] normalImpulses) {
 
             }
         };
@@ -146,7 +144,7 @@ public class BulletCreator implements BulletSPI, IGamePluginService {
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
+    public void uninstall(IEngine engine, GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }

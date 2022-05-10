@@ -1,23 +1,17 @@
 package dk.sdu.mmmi.swe.gtg.map.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IGamePluginService;
-import org.osgi.service.component.annotations.Component;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 
-@Component
-public class MapPlugin implements IGamePluginService {
+public class MapPlugin implements IPlugin {
     @Override
-    public void start(IEngine engine, GameData gameData) {
+    public void install(IEngine engine, GameData gameData) {
 
     }
 
     @Override
-    public void stop(IEngine engine, GameData gameData) {
-        engine.getEntitiesFor(Family.builder().forEntities(Wall.class).get()).forEach(entity -> {
-            engine.removeEntity(entity);
-        });
+    public void uninstall(IEngine engine, GameData gameData) {
 
     }
 }

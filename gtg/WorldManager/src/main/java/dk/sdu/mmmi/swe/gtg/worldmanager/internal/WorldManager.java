@@ -9,15 +9,15 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntityProcessingService;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
-@Component(service = {IWorldManager.class, IEntityProcessingService.class})
-public class WorldManager implements IWorldManager, IEntityProcessingService {
+@Component(service = {IWorldManager.class, IProcessingSystem.class})
+public class WorldManager implements IWorldManager, IProcessingSystem {
 
     private final Vector2 gravity;
     private final float timeStep = 1 / 60f;
@@ -51,7 +51,7 @@ public class WorldManager implements IWorldManager, IEntityProcessingService {
         /*
          * Comment out for debugging of entities
          */
-        //renderer.render(world, projectionMatrix);
+        renderer.render(world, projectionMatrix);
     }
 
     @Override
