@@ -2,16 +2,13 @@ package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
+import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 
 import java.util.Collection;
 import java.util.List;
 
 public interface IEntityManager {
-    void addEntityListener(IEntityListener listener);
-
-    void removeEntityListener(IEntityListener listener);
-
-    String addEntity(Entity entity);
+    void addEntity(Entity entity);
 
     void removeEntity(Entity entity);
 

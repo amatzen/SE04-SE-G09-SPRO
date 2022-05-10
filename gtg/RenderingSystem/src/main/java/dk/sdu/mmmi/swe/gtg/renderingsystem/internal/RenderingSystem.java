@@ -40,6 +40,7 @@ public class RenderingSystem implements IPostProcessingSystem {
         batch.begin();
 
         for (Entity entity : entities) {
+
             TransformPart transformPart = entity.getPart(TransformPart.class);
             TexturePart texturePart = entity.getPart(TexturePart.class);
 

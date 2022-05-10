@@ -29,15 +29,15 @@
   <name>dk.sdu.swe.gtg (OSGi project)</name>
 
   <!--
-           | describe your project here
-          -->
+         | describe your project here
+        -->
 
   <description>Generated using Pax-Construct</description>
 
   <properties>
     <!--
-                     | some example OSGi runtime properties
-                    -->
+                 | some example OSGi runtime properties
+                -->
     <org.osgi.service.http.port>8080</org.osgi.service.http.port>
     <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
   </properties>
@@ -47,24 +47,35 @@
   <modules>
     <module>poms</module>
     <module>provision</module>
-    <module>Core</module>
     <module>Common</module>
+    <module>CommonCollision</module>
+    <module>CommonCrime</module>
+    <module>CommonBullet</module>
+    <module>Core</module>
     <module>LibGDX</module>
     <module>Vehicle</module>
     <module>Collision</module>
     <module>WorldManager</module>
     <module>ShapeFactoryCommon</module>
     <module>ShapeFactory</module>
-    <module>CommonBullet</module>
-    <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
     <module>ATM</module>
     <module>Map</module>
     <module>Music</module>
-    <module>CommonCollision</module>
     <module>Hud</module>
+    <module>Crime</module>
     <module>CommonHud</module>
+    <module>EnemyAI</module>
+    <module>BodyComputationController</module>
+    <module>ImpactDamageSystem</module>
+    <module>PathFinding</module>
+    <module>PathFollowingSystem</module>
+    <module>TargetSeekingSystem</module>
+    <module>PathFindingCommon</module>
+    <module>PathRenderingSystem</module>
+    <module>PathFindingSystem</module>
+    <module>CommonMap</module>
     <module>GameOver</module>
     <module>CommonGameOver</module>
   </modules>
@@ -77,23 +88,22 @@
         <version>1.6.0</version>
         <configuration>
           <!--
-                                                   | some example Pax-Runner settings
-                                                  -->
+            | some example Pax-Runner settings
+          -->
           <provision>
             <param>--platform=felix</param>
-            <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
           </provision>
         </configuration>
         <executions>
           <!--
-                                                   | uncomment to auto-generate IDE files
-                                                  <execution>
-                                                    <id>ide-support</id>
-                                                    <goals>
-                                                      <goal>eclipse</goal>
-                                                    </goals>
-                                                  </execution>
-                                                  -->
+            | uncomment to auto-generate IDE files
+          <execution>
+            <id>ide-support</id>
+            <goals>
+              <goal>eclipse</goal>
+            </goals>
+          </execution>
+          -->
         </executions>
       </plugin>
     </plugins>
