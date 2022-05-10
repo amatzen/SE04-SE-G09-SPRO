@@ -20,4 +20,6 @@ public interface ICollisionListener {
 
     public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityA, Entity entityB, float[] normalImpulses);
 
+    public void sensorCollision(Contact contact, Entity entityA, Entity entityB);
+
 }
