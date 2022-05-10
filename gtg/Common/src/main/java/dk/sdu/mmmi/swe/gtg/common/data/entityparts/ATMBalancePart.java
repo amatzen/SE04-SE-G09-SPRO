@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
 public class ATMBalancePart implements IEntityPart {
     private int balance = 0;
+    private boolean robbed = false;
 
     public ATMBalancePart(int balance) {
         this.balance = balance;
@@ -13,6 +14,14 @@ public class ATMBalancePart implements IEntityPart {
 
     public int getBalance() {
         return balance;
+    }
+
+    public boolean isRobbed() {
+        return robbed;
+    }
+
+    public void setRobbed(boolean robbed) {
+        this.robbed = robbed;
     }
 
     @Override
