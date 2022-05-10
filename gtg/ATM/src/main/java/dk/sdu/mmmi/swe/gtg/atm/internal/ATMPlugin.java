@@ -12,10 +12,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.atm.ATM;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.SensorPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
@@ -23,8 +20,10 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
+import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -40,15 +39,16 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     @Reference
     private IWorldManager worldManager;
 
-    private ATM atm;
-
     @Reference
     private CollisionSPI collisionSPI;
 
-    private ICollisionListener collisionListener;
-
     @Reference
     private MapSPI mapSPI;
+
+    private ATM atm;
+
+    private ICollisionListener collisionListener;
+
 
     public ATMPlugin() {
     }
@@ -56,8 +56,10 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     @Override
     public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
-
-        IFamily familyB = Family.ALL;
+        IFamily familyB = Family.builder()
+            .forEntities(Vehicle.class)
+            .with(PlayerPart.class)
+            .get();
 
         collisionListener = new ICollisionListener() {
             @Override
@@ -72,12 +74,18 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                System.out.println("Collision with ATM");
+                entityA.getPart(ProximityPart.class)
+                    .setProximity(true);
+                entityA.getPart(ATMTimerPart.class)
+                    .startTimer();
             }
 
             @Override
             public void endContact(Contact contact, Entity entityA, Entity entityB) {
-                System.out.println("Collision with ATM stopped");
+                entityA.getPart(ProximityPart.class)
+                    .setProximity(false);
+                entityA.getPart(ATMTimerPart.class)
+                    .stopTimer();
             }
 
             @Override
@@ -139,19 +147,19 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
             this.atm = new ATM();
 
             atmBody.getBody().setUserData(this.atm);
-
             sensorPart.getBody().setUserData(this.atm);
 
             this.atm.addPart(atmBody);
-
             this.atm.addPart(sensorPart);
 
-            TransformPart transformPart = new TransformPart();
+            this.atm.addPart(new ProximityPart());
+            this.atm.addPart(new ATMBalancePart());
+            this.atm.addPart(new ATMTimerPart());
 
+            TransformPart transformPart = new TransformPart();
             transformPart.setScale(1f / 184f, 1.5f / 423f);
 
             this.atm.addPart(transformPart);
-
             this.atm.addPart(getBodyTexture());
 
             engine.addEntity(this.atm);

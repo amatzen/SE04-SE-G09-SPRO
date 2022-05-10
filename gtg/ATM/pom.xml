@@ -75,6 +75,12 @@
         </dependency>
         <dependency>
             <groupId>dk.sdu.swe.gtg</groupId>
+            <artifactId>CommonCrime</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.swe.gtg</groupId>
             <artifactId>CommonMap</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
