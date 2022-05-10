@@ -18,7 +18,6 @@ public class CrimeActionHandler implements ICrimeAction {
         if (atmBalance != null) {
             hud.addMoney(atmBalance.getBalance());
             atmBalance.setRobbed(true);
-            atmBalance.destroy();
         }
     }
 }
