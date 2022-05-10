@@ -38,48 +38,17 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     @Reference
     private IWorldManager worldManager;
-    
+
     @Reference
     private CollisionSPI collisionSPI;
-    
+
     @Reference
     private MapSPI mapSPI;
-    
+
     private ATM atm;
 
     private ICollisionListener collisionListener;
 
-    @Override
-    public void start(IEngine engine, GameData gameData) {
-
-        Vector2 atmPosition = new Vector2(129.26f, 74.2f);
-        Vector2 atmSize = new Vector2(1, 1.5f);
-        float sensorRadius = 5;
-
-        BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
-                atmPosition, atmSize, BodyDef.BodyType.StaticBody,
-                1,
-                false));
-
-        SensorPart sensorPart = new SensorPart(shapeFactory.createCircle(
-                atmPosition, sensorRadius, BodyDef.BodyType.StaticBody,
-                1,
-                true));
-
-        this.atm = new ATM();
-
-        this.atm.addPart(atmBody);
-        this.atm.addPart(sensorPart);
-        this.atm.addPart(new ProximityPart());
-        this.atm.addPart(new ATMBalancePart());
-        this.atm.addPart(new ATMTimerPart());
-
-        TransformPart transformPart = new TransformPart();
-        transformPart.setScale(1f / 184f, 1.5f / 423f);
-        this.atm.addPart(transformPart);
-        this.atm.addPart(getBodyTexture());
-
-        engine.addEntity(this.atm);
 
     public ATMPlugin() {
     }
@@ -87,7 +56,10 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     @Override
     public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
-        IFamily familyB = Family.builder().forEntities(Vehicle.class).get();
+        IFamily familyB = Family.builder()
+            .forEntities(Vehicle.class)
+            .with(PlayerPart.class)
+            .get();
 
         collisionListener = new ICollisionListener() {
             @Override
@@ -175,19 +147,19 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
             this.atm = new ATM();
 
             atmBody.getBody().setUserData(this.atm);
-
             sensorPart.getBody().setUserData(this.atm);
 
             this.atm.addPart(atmBody);
-
             this.atm.addPart(sensorPart);
 
-            TransformPart transformPart = new TransformPart();
+            this.atm.addPart(new ProximityPart());
+            this.atm.addPart(new ATMBalancePart());
+            this.atm.addPart(new ATMTimerPart());
 
+            TransformPart transformPart = new TransformPart();
             transformPart.setScale(1f / 184f, 1.5f / 423f);
 
             this.atm.addPart(transformPart);
-
             this.atm.addPart(getBodyTexture());
 
             engine.addEntity(this.atm);
