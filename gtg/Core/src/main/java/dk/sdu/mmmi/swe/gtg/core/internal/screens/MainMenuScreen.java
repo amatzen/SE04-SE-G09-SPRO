@@ -13,14 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 
 public class MainMenuScreen implements Screen {
-
-    private final Game game;
     private final Stage stage;
 
-    public MainMenuScreen(Game game) {
-        this.game = game;
+    public MainMenuScreen() {
         this.stage = new Stage(new ScreenViewport());
 
         Gdx.input.setInputProcessor(stage);
@@ -42,7 +40,7 @@ public class MainMenuScreen implements Screen {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                game.setScreen(new GameScreen(game));
+                ScreenManager.getInstance().setScreen(GameScreen.class);
             }
         });
 

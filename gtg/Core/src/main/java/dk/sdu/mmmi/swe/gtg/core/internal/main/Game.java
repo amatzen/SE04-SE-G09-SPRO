@@ -33,7 +33,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Reference
     private IWorldManager worldManager;
 
-    @Reference
+    //@Reference
     private ScreenManager screenManager;
 
     public Game() {
@@ -54,6 +54,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     @Override
     public void create() {
+        this.screenManager = ScreenManager.getInstance();
+        screenManager.setGame(this);
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 

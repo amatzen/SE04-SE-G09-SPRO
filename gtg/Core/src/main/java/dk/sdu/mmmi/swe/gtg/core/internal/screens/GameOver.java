@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 
 public class GameOver implements Screen {
 
@@ -72,7 +73,7 @@ public class GameOver implements Screen {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                game.setScreen(new GameScreen(game));
+                ScreenManager.getInstance().setScreen(GameScreen.class);
             }
         });
 
