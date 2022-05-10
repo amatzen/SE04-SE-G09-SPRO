@@ -24,6 +24,7 @@ public class CrimeActionHandler implements ICrimeAction {
             hud.addMoney(atmBalance.getBalance());
             atmBalance.setRobbed(true);
             entity.addPart(getBodyTexture());
+            atmBalance.destroy();
         }
     }
 

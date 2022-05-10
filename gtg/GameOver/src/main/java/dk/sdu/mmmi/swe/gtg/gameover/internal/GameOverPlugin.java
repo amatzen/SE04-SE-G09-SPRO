@@ -38,7 +38,7 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
         stage.addActor(table);
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/game-over-white.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 400).row();
 
