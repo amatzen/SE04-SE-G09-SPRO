@@ -49,21 +49,25 @@ public class FamilyManager implements IFamilyManager {
                     entity.removeFromFamily(family);
                     familyEntities.remove(entity);
                 }
-                notifyListeners(entity, !matches);
+                notifyListeners(family, entity, !matches);
             }
         }
     }
 
-    private void notifyListeners(Entity entity, boolean remove) {
-        for (IFamily family : listeners.keySet()) {
+    private void notifyListeners(IFamily family, Entity entity, boolean remove) {
+        List<IEntityListener> listeners = this.listeners.get(family);
+
+        if (listeners == null) {
+            return;
+        }
+
+        for (IEntityListener listener : listeners) {
             if (family.matches(entity)) {
-                listeners.get(family).forEach((listener) -> {
-                    if (remove) {
-                        listener.onEntityRemoved(entity);
-                    } else {
-                        listener.onEntityAdded(entity);
-                    }
-                });
+                if (remove) {
+                    listener.onEntityRemoved(entity);
+                } else {
+                    listener.onEntityAdded(entity);
+                }
             }
         }
     }

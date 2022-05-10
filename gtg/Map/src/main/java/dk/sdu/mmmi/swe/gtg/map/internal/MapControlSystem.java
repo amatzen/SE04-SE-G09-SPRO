@@ -82,9 +82,35 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     }
 
     @Override
-    public boolean isTileAccessibly(float x, float y) {
+    public boolean isTileAccessibly(Vector2 position) {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_HOUSES);
-        return layer.getCell((int) (x * unitScale * 4f), (int) (y * unitScale * 4f)) == null;
+        position = worldPosToMapPos(position);
+        return layer.getCell((int) position.x, (int) position.y) == null;
+    }
+
+    private Vector2 worldPosToMapPos(Vector2 position) {
+        return new Vector2(position.x * unitScale * 4f, position.y * unitScale * 4f);
+    }
+
+    @Override
+    public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
+        TiledMapTileLayer.Cell res = null;
+
+        int x = 0;
+        int y = 0;
+
+        while (res == null) {
+            x = (int) (Math.random() * layer.getWidth());
+            y = (int) (Math.random() * layer.getHeight());
+            res = layer.getCell(x, y);
+        }
+
+        return new Vector2(x, y);
+    }
+
+    @Override
+    public MapLayer getLayer(String layerName) {
+        return map.getLayers().get(layerName);
     }
 
     @Override
@@ -123,5 +149,6 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
         engine.getEntitiesFor(Family.builder().forEntities(Wall.class).get()).forEach(entity -> {
             engine.removeEntity(entity);
         });
+        map.dispose();
     }
 }

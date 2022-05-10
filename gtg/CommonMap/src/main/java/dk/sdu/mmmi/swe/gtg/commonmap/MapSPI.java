@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.commonmap;
 
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,7 +11,11 @@ public interface MapSPI {
 
     public List<Vector2> getATMPositions();
 
-    boolean isTileAccessibly(float x, float y);
+    boolean isTileAccessibly(Vector2 position);
+
+    Vector2 getRandomCellPosition(TiledMapTileLayer layer);
+
+    MapLayer getLayer(String layerName);
 
     Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates);
 

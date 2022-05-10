@@ -1,3 +1,5 @@
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
@@ -20,11 +22,21 @@ public class AStarPathFindingTest {
             }
 
             @Override
-            public boolean isTileAccessibly(float x, float y) {
-                if (x > 8 && x < 10 && y > 4 && y < 16) {
+            public boolean isTileAccessibly(Vector2 position) {
+                if (position.x > 8 && position.x < 10 && position.y > 4 && position.y < 16) {
                     return false;
                 }
                 return true;
+            }
+
+            @Override
+            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
+                return null;
+            }
+
+            @Override
+            public MapLayer getLayer(String layerName) {
+                return null;
             }
 
             @Override
@@ -66,11 +78,21 @@ public class AStarPathFindingTest {
             }
 
             @Override
-            public boolean isTileAccessibly(float x, float y) {
-                if (x > 10 || x < -10 || y > 10 || y < -10) {
+            public boolean isTileAccessibly(Vector2 position) {
+                if (position.x > 10 || position.x < -10 || position.y > 10 || position.y < -10) {
                     return false;
                 }
                 return true;
+            }
+
+            @Override
+            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
+                return null;
+            }
+
+            @Override
+            public MapLayer getLayer(String layerName) {
+                return null;
             }
 
             @Override

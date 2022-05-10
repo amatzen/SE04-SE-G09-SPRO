@@ -108,8 +108,8 @@ public class BulletCreator implements BulletSPI, IPlugin {
             }
 
             @Override
-            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                engine.removeEntity(entityA);
+            public void beginContact(Contact contact, Entity bullet, Entity entityB) {
+                engine.removeEntity(bullet);
 
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
