@@ -10,7 +10,7 @@ tileheight = "64"
 tilecount = "8"
 columns = "8">
     <image
-source = "Grass.png"
-width = "512"
-height = "64" />
-    </tileset>
+    source = "Grass.png"
+    width = "512"
+    height = "64" />
+</tileset>

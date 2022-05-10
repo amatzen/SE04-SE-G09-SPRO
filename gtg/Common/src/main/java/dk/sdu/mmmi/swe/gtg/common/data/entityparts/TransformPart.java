@@ -23,6 +23,10 @@ public class TransformPart implements IEntityPart {
         return position;
     }
 
+    public Vector2 getPosition2() {
+        return new Vector2(position.x, position.y);
+    }
+
     public void setOrigin(float x, float y) {
         this.origin.set(x, y);
     }

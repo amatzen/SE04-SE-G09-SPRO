@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class Family implements IFamily {
 
+    public static final Family ALL = new Family();
+
     private Set<Class<? extends Entity>> entities;
 
     private Set<Class<? extends IEntityPart>> parts;

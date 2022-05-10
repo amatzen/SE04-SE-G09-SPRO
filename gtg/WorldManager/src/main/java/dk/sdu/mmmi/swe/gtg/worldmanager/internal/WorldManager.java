@@ -51,7 +51,7 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
         /*
          * Comment out for debugging of entities
          */
-        //renderer.render(world, projectionMatrix);
+        renderer.render(world, projectionMatrix);
     }
 
     @Override

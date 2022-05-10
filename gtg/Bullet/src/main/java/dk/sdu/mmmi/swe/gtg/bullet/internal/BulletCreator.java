@@ -5,10 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
@@ -23,7 +20,6 @@ import dk.sdu.mmmi.swe.gtg.commonbullet.Bullet;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -38,9 +34,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
     @Reference
     private CollisionSPI collisionSPI;
-
-    @Reference
-    private HudSPI hudSPI;
 
     private ICollisionListener collisionListener;
 
@@ -101,7 +94,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     public void install(IEngine engine, GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
-        IFamily familyB = Family.builder().get();
+        IFamily familyB = Family.ALL;
 
         collisionListener = new ICollisionListener() {
             @Override
@@ -122,7 +115,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
                     LifePart lifePart = entityB.getPart(LifePart.class);
                     lifePart.inflictDamage(10);
                     System.out.println("Health: " + lifePart.getLife());
-                    hudSPI.setHealth(lifePart.getLife());
+
                     if (lifePart.getLife() <= 0) {
                         System.out.println("Game over");
                         engine.removeEntity(entityB); // Removes vehicle
@@ -138,12 +131,12 @@ public class BulletCreator implements BulletSPI, IPlugin {
             }
 
             @Override
-            public void preSolve(Contact contact) {
+            public void preSolve(Contact contact, Manifold manifold, Entity entityB, Entity entityA) {
 
             }
 
             @Override
-            public void postSolve(Contact contact) {
+            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA, float[] normalImpulses) {
 
             }
         };

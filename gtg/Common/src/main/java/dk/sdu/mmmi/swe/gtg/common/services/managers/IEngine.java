@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
@@ -12,7 +13,7 @@ public interface IEngine {
 
     void update(GameData gameData);
 
-    String addEntity(Entity entity);
+    void addEntity(Entity entity);
 
     void removeEntity(String entityID);
 
@@ -31,4 +32,10 @@ public interface IEngine {
     void addPostEntityProcessingService(IPostProcessingSystem service);
 
     void removePostEntityProcessingService(IPostProcessingSystem service);
+
+    void addEntityListener(IFamily family, IEntityListener listener);
+
+    void addEntityListener(IFamily family, IEntityListener listener, boolean iterate);
+
+    void removeEntityListener(IFamily family, IEntityListener listener);
 }

@@ -8,14 +8,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
+import dk.sdu.mmmi.swe.gtg.common.family.EntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
+import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
@@ -28,23 +29,49 @@ public class VehiclePlugin implements IPlugin {
     private final Vector2 WHEEL_SIZE = new Vector2(0.32f, 0.64f);
     private final float WHEEL_OFFSET_X = 1.7f * 0.5f - WHEEL_SIZE.x * 0.40f;
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
+
+    @Reference
+    private HudSPI hudSPI;
+
     @Reference
     private ShapeFactorySPI shapeFactory;
+
     @Reference
     private IWorldManager worldManager;
 
+    private IEntityListener vehicleListener;
+
     @Override
     public void install(IEngine engine, GameData gameData) {
+        vehicleListener = new EntityListener() {
+            @Override
+            public void onEntityRemoved(Entity entity) {
+                DriveTrain driveTrain = entity.getPart(DriveTrain.class);
+                if (driveTrain != null) {
+                    for (Wheel wheel : driveTrain.getWheels()) {
+                        engine.removeEntity(wheel);
+                    }
+                }
+            }
+        };
+
+        engine.addEntityListener(
+                Family.builder().forEntities(Vehicle.class).get(),
+                vehicleListener
+        );
 
         Vehicle vehicle = createVehicle(engine);
 
+        vehicle.addPart(new PlayerPart());
+
         LifePart lifePart = new LifePart();
+        lifePart.onDamage.add((signal, damage) -> {
+            hudSPI.setHealth(lifePart.getLife());
+        });
 
         vehicle.addPart(lifePart);
 
         engine.addEntity(vehicle);
-
-
     }
 
     public Vehicle createVehicle(IEngine engine) {
@@ -198,6 +225,11 @@ public class VehiclePlugin implements IPlugin {
 
     @Override
     public void uninstall(IEngine engine, GameData gameData) {
+        engine.removeEntityListener(
+            Family.builder().forEntities(Vehicle.class).get(),
+            vehicleListener
+        );
+
         engine.getEntitiesFor(Family.builder().forEntities(Vehicle.class, Wheel.class).get()).forEach(entity -> {
             engine.removeEntity(entity);
         });
