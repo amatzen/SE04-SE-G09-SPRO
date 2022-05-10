@@ -60,7 +60,6 @@
     <module>WorldManager</module>
     <module>ShapeFactoryCommon</module>
     <module>ShapeFactory</module>
-    <module>Pathfindings</module>
     <module>RenderingSystem</module>
     <module>Bullet</module>
     <module>ATM</module>
