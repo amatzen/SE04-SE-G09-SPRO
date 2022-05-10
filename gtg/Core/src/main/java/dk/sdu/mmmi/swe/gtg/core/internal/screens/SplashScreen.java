@@ -7,20 +7,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 
 
 public class SplashScreen implements Screen {
-    private final Game game;
-
     private final SpriteBatch batch;
     private final Texture splashTexture;
     private final Sprite sprite;
     private final float MAX_COUNT = 3f; // Seconds to display splash
     private float count = 0.0f;
 
-    public SplashScreen(Game game) {
+    public SplashScreen() {
         super();
-        this.game = game;
         this.batch = new SpriteBatch();
         this.splashTexture = new Texture("assets/splash_screen_new.png");
         this.sprite = new Sprite(splashTexture);
@@ -37,7 +35,8 @@ public class SplashScreen implements Screen {
 
         count = count + v;
         if (count > MAX_COUNT) {
-            this.game.setScreen(new MainMenuScreen(this.game));
+            ScreenManager screenManager = ScreenManager.getInstance();
+            screenManager.setScreen(MainMenuScreen.class);
             return;
         }
 
