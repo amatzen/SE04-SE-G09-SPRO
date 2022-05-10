@@ -42,9 +42,6 @@ public class ATMControlSystem implements IProcessingSystem {
             .forEach(entity -> {
                 ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
                 timerPart.update(gameData.getDelta());
-
-                System.out.println(timerPart.getTimer());
-                System.out.println(entity.getPart(ATMBalancePart.class).isRobbed());
             });
     }
 }
