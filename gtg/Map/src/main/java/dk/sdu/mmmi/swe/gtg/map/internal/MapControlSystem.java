@@ -29,6 +29,7 @@ import java.util.List;
 public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     private static final String MAP_WALLS = "Walls";
     private static final String MAP_ATMS = "Atm";
+    private static final String MAP_HOUSES = "Houses";
     private static final float OBJECT_DENSITY = 1f;
     private final float unitScale = 1 / 16f;
     private OrthogonalTiledMapRenderer renderer;
@@ -82,7 +83,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
 
     @Override
     public boolean isTileAccessibly(float x, float y) {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_WALLS);
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_HOUSES);
         return layer.getCell((int) (x * unitScale * 4f), (int) (y * unitScale * 4f)) == null;
     }
 
