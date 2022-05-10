@@ -35,7 +35,6 @@ public class ATMControlSystem implements IProcessingSystem {
         });
     }
 
-    // TODO: Fix bug: Timer stops if bullet is shot in proximity.
     @Override
     public void process(GameData gameData) {
         this.entities.stream()
