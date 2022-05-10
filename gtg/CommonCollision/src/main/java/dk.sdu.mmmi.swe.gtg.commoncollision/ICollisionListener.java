@@ -18,6 +18,6 @@ public interface ICollisionListener {
 
     public void preSolve(Contact contact, Manifold manifold, Entity entityA, Entity entityB);
 
-    public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityA, Entity entityB);
+    public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityA, Entity entityB, float[] normalImpulses);
 
 }

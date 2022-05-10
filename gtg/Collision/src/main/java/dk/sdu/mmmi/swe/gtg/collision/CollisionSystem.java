@@ -53,7 +53,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
 
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
-        contacts.add(new Collision(contact, contactImpulse));
+        contacts.add(new Collision(contact, contactImpulse, contactImpulse.getNormalImpulses()));
     }
 
     @Override
@@ -131,7 +131,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
                         collisionListener.preSolve(contact, collision.getManifold(), entityA, entityB);
                         break;
                     case POSTSOLVE:
-                        collisionListener.postSolve(contact, collision.getContactImpulse(), entityA, entityB);
+                        collisionListener.postSolve(contact, collision.getContactImpulse(), entityA, entityB, collision.getNormalImpulses());
                         break;
                     default:
                         throw new IllegalStateException("Unknown contact type: " + collision.getContactType());

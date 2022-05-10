@@ -136,7 +136,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
             }
 
             @Override
-            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA) {
+            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA, float[] normalImpulses) {
 
             }
         };
