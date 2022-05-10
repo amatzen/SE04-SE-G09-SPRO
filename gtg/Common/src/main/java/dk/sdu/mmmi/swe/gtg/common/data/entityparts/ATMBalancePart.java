@@ -21,6 +21,9 @@ public class ATMBalancePart implements IEntityPart {
     }
 
     public void setRobbed(boolean robbed) {
+        if (robbed) {
+            this.balance = 0;
+        }
         this.robbed = robbed;
     }
 
