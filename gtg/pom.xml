@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!--
-         | put company details here
-        <organization>
-          <name>...</name>
-          <url>http://...</url>
-        </organization>
-        -->
-
-  <!--
-         | put license details here
-        <licenses>
-          <license>
+           | put company details here
+          <organization>
             <name>...</name>
             <url>http://...</url>
-            <comments>
-            </comments>
-          </license>
-        </licenses>
-        -->
+          </organization>
+          -->
+
+  <!--
+           | put license details here
+          <licenses>
+            <license>
+              <name>...</name>
+              <url>http://...</url>
+              <comments>
+              </comments>
+            </license>
+          </licenses>
+          -->
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.sdu.swe</groupId>
@@ -78,6 +76,8 @@
     <module>PathRenderingSystem</module>
     <module>PathFindingSystem</module>
     <module>CommonMap</module>
+    <module>GameOver</module>
+    <module>CommonGameOver</module>
   </modules>
 
   <build>
@@ -88,8 +88,8 @@
         <version>1.6.0</version>
         <configuration>
           <!--
-                                         | some example Pax-Runner settings
-                                        -->
+            | some example Pax-Runner settings
+          -->
           <provision>
             <param>--platform=felix</param>
             <param>--vmOptions=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</param>
@@ -97,14 +97,14 @@
         </configuration>
         <executions>
           <!--
-                                         | uncomment to auto-generate IDE files
-                                        <execution>
-                                          <id>ide-support</id>
-                                          <goals>
-                                            <goal>eclipse</goal>
-                                          </goals>
-                                        </execution>
-                                        -->
+            | uncomment to auto-generate IDE files
+          <execution>
+            <id>ide-support</id>
+            <goals>
+              <goal>eclipse</goal>
+            </goals>
+          </execution>
+          -->
         </executions>
       </plugin>
     </plugins>
