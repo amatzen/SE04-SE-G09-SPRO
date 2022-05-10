@@ -141,10 +141,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
             }
 
-            @Override
-            public void sensorCollision(Contact contact, Entity entityA, Entity entityB) {
-
-            }
         };
         collisionSPI.addListener(collisionListener);
     }
