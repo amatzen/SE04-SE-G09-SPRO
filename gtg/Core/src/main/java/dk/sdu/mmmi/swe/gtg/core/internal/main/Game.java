@@ -7,6 +7,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -32,6 +33,9 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Reference
     private IWorldManager worldManager;
 
+    //@Reference
+    private ScreenManager screenManager;
+
     public Game() {
         System.out.println("Game created");
         init();
@@ -50,11 +54,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     @Override
     public void create() {
+        this.screenManager = ScreenManager.getInstance();
+        screenManager.setGame(this);
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        setScreen(new SplashScreen(this));
-
+        screenManager.setScreen(SplashScreen.class);
     }
 
     @Override
