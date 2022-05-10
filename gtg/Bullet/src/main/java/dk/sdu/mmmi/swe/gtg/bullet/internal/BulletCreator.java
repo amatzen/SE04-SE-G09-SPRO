@@ -8,10 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -109,7 +106,11 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                engine.removeEntity(entityA);
+                if (entityB.hasPart(SensorPart.class)) {
+                    return;
+                } else {
+                    engine.removeEntity(entityA);
+                }
 
                 if (entityB.hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getPart(LifePart.class);
@@ -137,6 +138,11 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
             @Override
             public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA, float[] normalImpulses) {
+
+            }
+
+            @Override
+            public void sensorCollision(Contact contact, Entity entityA, Entity entityB) {
 
             }
         };
