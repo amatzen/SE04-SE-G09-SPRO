@@ -132,7 +132,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
         Vector2 atmSize = new Vector2(1, 1.5f);
 
-        float sensorRadius = 5;
+        float sensorRadius = 10;
 
         for (Vector2 coordinate : coordinates) {
 
