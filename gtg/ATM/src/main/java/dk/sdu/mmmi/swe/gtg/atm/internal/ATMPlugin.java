@@ -116,7 +116,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        List<Vector2> coordinates = mapSPI.getAtms();
+        List<Vector2> coordinates = mapSPI.getATMPositions();
 
         Vector2 atmSize = new Vector2(1, 1.5f);
 

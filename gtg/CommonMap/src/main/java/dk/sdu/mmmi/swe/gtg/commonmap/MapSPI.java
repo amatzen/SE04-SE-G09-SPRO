@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MapSPI {
 
-    public List<Vector2> getAtms();
+    public List<Vector2> getATMPositions();
 
     boolean isTileAccessibly(float x, float y);
 

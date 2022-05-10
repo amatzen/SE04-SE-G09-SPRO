@@ -45,7 +45,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     }
 
     @Override
-    public List<Vector2> getAtms() {
+    public List<Vector2> getATMPositions() {
         ArrayList<Vector2> coordinates = new ArrayList<>();
         final Array<RectangleMapObject> atms = map.getLayers().get(MAP_ATMS).getObjects().getByType(RectangleMapObject.class);
         for (RectangleMapObject rObject : new Array.ArrayIterator<>(atms)) {

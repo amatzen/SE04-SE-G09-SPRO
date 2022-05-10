@@ -15,7 +15,7 @@ public class AStarPathFindingTest {
     public void testAStar() {
         MapSPI map = new MapSPI() {
             @Override
-            public List<Vector2> getAtms() {
+            public List<Vector2> getATMPositions() {
                 return null;
             }
 
@@ -61,7 +61,7 @@ public class AStarPathFindingTest {
     public void noClearPath() {
         MapSPI map = new MapSPI() {
             @Override
-            public List<Vector2> getAtms() {
+            public List<Vector2> getATMPositions() {
                 return null;
             }
 
