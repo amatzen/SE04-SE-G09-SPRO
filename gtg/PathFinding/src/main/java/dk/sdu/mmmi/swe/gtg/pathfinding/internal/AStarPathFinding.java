@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.pathfinding.internal;
 
 import com.badlogic.gdx.math.Vector2;
-import dk.sdu.mmmi.swe.gtg.map.MapSPI;
+import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Path;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.services.IPathFinding;

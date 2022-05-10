@@ -75,6 +75,7 @@
     <module>PathFindingCommon</module>
     <module>PathRenderingSystem</module>
     <module>PathFindingSystem</module>
+    <module>CommonMap</module>
   </modules>
 
   <build>

@@ -1,6 +1,6 @@
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import dk.sdu.mmmi.swe.gtg.map.MapSPI;
+import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfinding.internal.AStarPathFinding;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import org.junit.Assert;
@@ -14,6 +14,11 @@ public class AStarPathFindingTest {
     @Test
     public void testAStar() {
         MapSPI map = new MapSPI() {
+            @Override
+            public List<Vector2> getAtms() {
+                return null;
+            }
+
             @Override
             public boolean isTileAccessibly(float x, float y) {
                 if (x > 8 && x < 10 && y > 4 && y < 16) {
@@ -55,6 +60,11 @@ public class AStarPathFindingTest {
     @Test
     public void noClearPath() {
         MapSPI map = new MapSPI() {
+            @Override
+            public List<Vector2> getAtms() {
+                return null;
+            }
+
             @Override
             public boolean isTileAccessibly(float x, float y) {
                 if (x > 10 || x < -10 || y > 10 || y < -10) {

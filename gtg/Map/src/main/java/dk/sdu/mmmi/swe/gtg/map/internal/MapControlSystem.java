@@ -27,8 +27,8 @@ import java.util.List;
 
 @Component
 public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
-    private static final String MAP_WALL = "Walls";
-    private static final String ATMS = "Atm";
+    private static final String MAP_WALLS = "Walls";
+    private static final String MAP_ATMS = "Atm";
     private static final float OBJECT_DENSITY = 1f;
     private final float unitScale = 1 / 16f;
     private OrthogonalTiledMapRenderer renderer;
@@ -46,19 +46,12 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     @Override
     public List<Vector2> getAtms() {
         ArrayList<Vector2> coordinates = new ArrayList<>();
-        final Array<RectangleMapObject> atms = map.getLayers().get(ATMS).getObjects().getByType(RectangleMapObject.class);
-        for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(atms)) {
+        final Array<RectangleMapObject> atms = map.getLayers().get(MAP_ATMS).getObjects().getByType(RectangleMapObject.class);
+        for (RectangleMapObject rObject : new Array.ArrayIterator<>(atms)) {
             Rectangle rectangle = rObject.getRectangle();
             coordinates.add(rectangle.getPosition(new Vector2()).scl(unitScale));
         }
         return coordinates;
-    }
-
-    @Override
-    public void process(GameData gameData) {
-
-        renderer.setView(gameData.getCamera());
-        renderer.render();
     }
 
     @Override
@@ -67,7 +60,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
 
         renderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
-        final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALL).getObjects().getByType(RectangleMapObject.class);
+        final Array<RectangleMapObject> walls = map.getLayers().get(MAP_WALLS).getObjects().getByType(RectangleMapObject.class);
         for (RectangleMapObject rObject : new Array.ArrayIterator<RectangleMapObject>(walls)) {
             Rectangle rectangle = rObject.getRectangle();
             Wall wall = new Wall();
@@ -89,7 +82,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
 
     @Override
     public boolean isTileAccessibly(float x, float y) {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_HOUSES);
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_WALLS);
         return layer.getCell((int) (x * unitScale * 4f), (int) (y * unitScale * 4f)) == null;
     }
 
@@ -113,7 +106,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     public List<Rectangle> getObstacles() {
         List<Rectangle> obstacles = new ArrayList<>();
 
-        MapLayer layer = map.getLayers().get(MAP_WALL);
+        MapLayer layer = map.getLayers().get(MAP_WALLS);
 
         for (MapObject mapObject : layer.getObjects()) {
             RectangleMapObject object = (RectangleMapObject) mapObject;

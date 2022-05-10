@@ -9,7 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.map.MapSPI;
+import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Path;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.services.IPathFinding;
