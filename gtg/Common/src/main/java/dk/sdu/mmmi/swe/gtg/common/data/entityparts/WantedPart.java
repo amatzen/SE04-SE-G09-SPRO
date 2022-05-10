@@ -1,10 +1,19 @@
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-public class WantedPart {
+import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
+
+public class WantedPart implements IEntityPart {
 
     private int wantedLevel;
 
+    public final Signal<Integer> wantedLevelUpdated;
+
+    public WantedPart() {
+        wantedLevelUpdated = new Signal<>();
+    }
+
     public WantedPart(int wantedLevel) {
+        this();
         this.wantedLevel = wantedLevel;
     }
 
@@ -16,4 +25,8 @@ public class WantedPart {
         this.wantedLevel = wantedLevel;
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }

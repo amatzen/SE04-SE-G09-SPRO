@@ -32,7 +32,7 @@ public class RenderingSystem implements IPostProcessingSystem {
         entities.sort((e1, e2) -> {
             TransformPart t1 = e1.getPart(TransformPart.class);
             TransformPart t2 = e2.getPart(TransformPart.class);
-            return (int) Math.signum(t2.getPosition().z - t1.getPosition().z);
+            return (int) Math.signum(t1.getZ() - t2.getZ());
         });
 
         batch.setProjectionMatrix(gameData.getCamera().combined);

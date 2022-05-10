@@ -121,7 +121,7 @@ public class VehiclePlugin implements IPlugin {
         vehicle.addPart(vehicleBody);
         TransformPart transformPart = new TransformPart();
         transformPart.setScale(1f / 56f, 1f / 56f);
-        transformPart.getPosition().z = -1;
+        transformPart.setZ(1);
         vehicle.addPart(transformPart);
 
         vehicleBody.getBody().setUserData(vehicle);
