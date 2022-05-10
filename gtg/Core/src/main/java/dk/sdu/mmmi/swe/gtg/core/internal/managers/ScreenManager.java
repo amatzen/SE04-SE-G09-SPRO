@@ -2,8 +2,6 @@ package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import com.badlogic.gdx.Screen;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.util.HashMap;
 
