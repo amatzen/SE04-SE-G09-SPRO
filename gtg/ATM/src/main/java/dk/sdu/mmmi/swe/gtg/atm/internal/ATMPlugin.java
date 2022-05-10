@@ -20,7 +20,6 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
-import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
