@@ -9,6 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -26,6 +27,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
+
+    private final List<ScreenSPI> screens = new CopyOnWriteArrayList<>();
 
     @Reference
     private IEngine engine;
@@ -59,6 +62,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
+        screens.forEach(screen -> System.out.println(screen.getClass().getSimpleName()));
+
         screenManager.setScreen(SplashScreen.class);
     }
 
@@ -89,6 +94,24 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Override
     public void dispose() {
     }
+
+    /* Screens */
+
+    @Reference(
+        cardinality = ReferenceCardinality.MULTIPLE,
+        policy = ReferencePolicy.DYNAMIC,
+        unbind = "removeScreen"
+    )
+    public void addScreen(ScreenSPI screen) {
+        this.screens.add(screen);
+    }
+
+    public void removeScreen(ScreenSPI screen) {
+        this.screens.remove(screen);
+    }
+
+    /* End Screens */
+
 
     private Collection<? extends IPlugin> getPluginServices() {
         return entityPlugins;
