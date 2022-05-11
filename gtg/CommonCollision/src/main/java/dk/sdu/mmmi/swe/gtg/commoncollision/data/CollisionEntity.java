@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.collision;
+package dk.sdu.mmmi.swe.gtg.commoncollision.data;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 
