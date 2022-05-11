@@ -22,6 +22,7 @@ public class MusicControlSystem implements IProcessingSystem {
             if (MusicPlugin.MenuMusic.isPlaying()) {
                 MusicPlugin.MenuMusic.stop();
                 MusicPlugin.GameSound.play();
+                MusicPlugin.PoliceSound.play();
             }
         }
 
@@ -31,6 +32,12 @@ public class MusicControlSystem implements IProcessingSystem {
             } else {
                 MusicPlugin.MenuMusic.stop();
                 MusicPlugin.GameSound.play();
+            }
+            if (MusicPlugin.PoliceSound.isPlaying()) {
+                MusicPlugin.PoliceSound.pause();
+            } else {
+                MusicPlugin.MenuMusic.stop();
+                MusicPlugin.PoliceSound.play();
             }
         }
     }
