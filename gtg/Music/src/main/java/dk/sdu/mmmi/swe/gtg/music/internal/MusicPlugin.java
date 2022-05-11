@@ -47,9 +47,4 @@ public class MusicPlugin implements IPlugin {
         PoliceSound.setVolume(0.25f);
     }
 
-    public void setGameMusic() {
-        MenuMusic.stop();
-        GameSound.play();
-    }
-
 }
