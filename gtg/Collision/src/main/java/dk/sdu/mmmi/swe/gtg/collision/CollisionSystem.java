@@ -1,16 +1,13 @@
 package dk.sdu.mmmi.swe.gtg.collision;
 
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -23,10 +20,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static dk.sdu.mmmi.swe.gtg.common.utilities.Utility.containsNull;
 
 @Component
-public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.physics.box2d.ContactListener, IProcessingSystem {
+public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, IProcessingSystem {
 
     private final List<ICollisionListener> listeners;
-
     private final Queue<Collision> contacts;
     @Reference
     private IWorldManager worldManager;
@@ -85,53 +81,59 @@ public class CollisionSystem implements CollisionSPI, IPlugin, com.badlogic.gdx.
     public void process(GameData gameData) {
         while (!contacts.isEmpty()) {
             Collision collision = contacts.poll();
-            Contact contact = collision.getContact();
 
-            Fixture fixtureA = contact.getFixtureA();
-            Fixture fixtureB = contact.getFixtureB();
+            CollisionEntity collisionEntityA = collision.getCollisionEntityA();
+            CollisionEntity collisionEntityB = collision.getCollisionEntityB();
 
-            if (containsNull(fixtureA, fixtureB)) {
-                continue;
-            }
-
-            Entity entityA = (Entity) fixtureA.getBody().getUserData();
-            Entity entityB = (Entity) fixtureB.getBody().getUserData();
-
-            if (containsNull(entityA, entityB)) {
+            if (containsNull(
+                    collisionEntityA.getEntity(),
+                    collisionEntityB.getEntity())
+            ) {
                 continue;
             }
 
             for(ICollisionListener collisionListener : listeners) {
 
                 if (
-                        collisionListener.getFamilyA().matches(entityA)
-                                && collisionListener.getFamilyB().matches(entityB)
+                        collisionListener.getFamilyA().matches(collisionEntityA.getEntity())
+                                && collisionListener.getFamilyB().matches(collisionEntityB.getEntity())
                 ) {
                     // Do nothing
                 } else if (
-                        collisionListener.getFamilyA().matches(entityB)
-                                && collisionListener.getFamilyB().matches(entityA)
+                        collisionListener.getFamilyA().matches(collisionEntityB.getEntity())
+                                && collisionListener.getFamilyB().matches(collisionEntityA.getEntity())
                 ) {
                     // Swap entities
-                    Entity temp = entityA;
-                    entityA = entityB;
-                    entityB = temp;
+                    CollisionEntity temp = collisionEntityA;
+                    collisionEntityA = collisionEntityB;
+                    collisionEntityB = temp;
                 } else {
                     continue;
                 }
 
+                Contact contact = collision.getContact();
+
                 switch (collision.getContactType()) {
                     case BEGIN:
-                        collisionListener.beginContact(contact, entityA, entityB);
+                        collisionListener.beginContact(
+                                collisionEntityA, collisionEntityB
+                        );
                         break;
                     case END:
-                        collisionListener.endContact(contact, entityA, entityB);
+                        collisionListener.endContact(
+                                collisionEntityA, collisionEntityB
+                        );
                         break;
                     case PRESOLVE:
-                        collisionListener.preSolve(contact, collision.getManifold(), entityA, entityB);
+                        collisionListener.preSolve(
+                                collisionEntityA, collisionEntityB
+                        );
                         break;
                     case POSTSOLVE:
-                        collisionListener.postSolve(contact, collision.getContactImpulse(), entityA, entityB, collision.getNormalImpulses());
+                        collisionListener.postSolve(
+                                collisionEntityA, collisionEntityB,
+                                collision.getNormalImpulses()
+                        );
                         break;
                     default:
                         throw new IllegalStateException("Unknown contact type: " + collision.getContactType());

@@ -10,4 +10,6 @@ public interface ISignal<T> {
 
     void fire(T value);
 
+    void dispose();
+
 }
