@@ -44,12 +44,7 @@ public class MusicPlugin implements IPlugin {
     public void policeSound() {
         PoliceSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Police.mp3"));
         PoliceSound.setLooping(true);
-        PoliceSound.setVolume(0.05f);
-    }
-
-    public void setGameMusic() {
-        MenuMusic.stop();
-        GameSound.play();
+        PoliceSound.setVolume(0.25f);
     }
 
 }
