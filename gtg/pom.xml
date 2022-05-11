@@ -83,6 +83,7 @@
     <module>Screens/CommonScreen</module>
     <module>Screens/SplashScreen</module>
     <module>Screens/MainMenuScreen</module>
+    <module>Screens/GameOverScreen</module>
   </modules>
 
   <build>

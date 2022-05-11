@@ -17,16 +17,16 @@ import org.osgi.service.component.annotations.Component;
 
 @Component
 public class MainMenuScreen implements ScreenSPI, Screen {
-    private final Stage stage;
+    private Stage stage;
 
     public MainMenuScreen() {
-        this.stage = new Stage(new ScreenViewport());
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void show() {
+        this.stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
