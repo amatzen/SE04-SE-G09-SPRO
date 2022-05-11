@@ -16,18 +16,18 @@ import java.util.List;
 
 @Component
 public class ATMControlSystem implements IProcessingSystem {
-    private List<? extends Entity> entities;
+    private List<? extends Entity> atmEntities;
 
     @Reference
     private ICrimeAction crimeAction;
 
     @Override
     public void addedToEngine(IEngine engine) {
-        this.entities = engine.getEntitiesFor(
+        this.atmEntities = engine.getEntitiesFor(
             Family.builder().with(ATMBalancePart.class).get()
         );
 
-        this.entities.forEach(entity -> {
+        this.atmEntities.forEach(entity -> {
             ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
             timerPart.setAction(5.00,() -> {
                 crimeAction.commit(entity);
@@ -37,7 +37,7 @@ public class ATMControlSystem implements IProcessingSystem {
 
     @Override
     public void process(GameData gameData) {
-        this.entities.stream()
+        this.atmEntities.stream()
             .filter(entity -> entity.getPart(ProximityPart.class).isInProximity())
             .forEach(entity -> {
                 ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
