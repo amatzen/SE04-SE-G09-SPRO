@@ -9,6 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
+import dk.sdu.mmmi.swe.gtg.wantedlevelsystemcommon.services.IWantedLevelSystem;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -21,6 +22,9 @@ public class ATMControlSystem implements IProcessingSystem {
     @Reference
     private ICrimeAction crimeAction;
 
+    @Reference
+    private IWantedLevelSystem wantedLevelSystem;
+
     @Override
     public void addedToEngine(IEngine engine) {
         this.atmEntities = engine.getEntitiesFor(
@@ -31,6 +35,7 @@ public class ATMControlSystem implements IProcessingSystem {
             ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
             timerPart.setAction(5.00,() -> {
                 crimeAction.commit(entity);
+                wantedLevelSystem.reportCrime(10f);
             });
         });
     }
@@ -38,7 +43,7 @@ public class ATMControlSystem implements IProcessingSystem {
     @Override
     public void process(GameData gameData) {
         this.atmEntities.stream()
-            .filter(entity -> entity.getPart(ProximityPart.class).isInProximity())
+            .filter(atmEntity -> atmEntity.getPart(ProximityPart.class).isInProximity())
             .forEach(entity -> {
                 ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
                 timerPart.update(gameData.getDelta());
