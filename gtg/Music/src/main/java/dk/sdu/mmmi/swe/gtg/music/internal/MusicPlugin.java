@@ -36,7 +36,7 @@ public class MusicPlugin implements IPlugin {
     public void gameMusic() {
         GameMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/Traffic.mp3"));
         GameMusic.setLooping(true);
-        GameMusic.setVolume(0.1f);
+        GameMusic.setVolume(0.01f);
     }
 
     public void setGameMusic() {
