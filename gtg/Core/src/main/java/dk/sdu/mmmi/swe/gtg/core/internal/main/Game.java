@@ -2,13 +2,13 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
-import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
@@ -64,7 +64,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
         screens.forEach(screen -> System.out.println(screen.getClass().getSimpleName()));
 
-        screenManager.setScreen(SplashScreen.class);
+        screens.stream()
+                .filter(x -> x.getClass().getSimpleName().equals("SplashScreen"))
+                .findFirst()
+                .ifPresent(screen -> {
+                    setScreen((Screen) screen);
+                });
     }
 
     @Override
