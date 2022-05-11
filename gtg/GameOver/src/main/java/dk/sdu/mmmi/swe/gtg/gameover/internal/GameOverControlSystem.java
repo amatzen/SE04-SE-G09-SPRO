@@ -39,7 +39,7 @@ public class GameOverControlSystem implements IPostProcessingSystem {
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 Gdx.input.setInputProcessor(gameOverSPI.getStage());
 
-                // gameOverSPI.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
+                gameOverSPI.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
                 gameOverSPI.getStage().act();
                 gameOverSPI.getStage().draw();
             }
