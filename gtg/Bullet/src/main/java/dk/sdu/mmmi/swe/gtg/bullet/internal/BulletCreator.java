@@ -33,6 +33,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     @Reference
     private CollisionSPI collisionSPI;
 
+    private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
 
     public BulletCreator() {
@@ -107,7 +108,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
             @Override
             public void beginContact(CollisionEntity bullet, CollisionEntity entityB) {
-                if (entityB.getEntity().hasPart(SensorPart.class)) {
+                if (entityB.isSensorPart()) {
                     return;
                 } else {
                     engine.removeEntity(bullet.getEntity());
@@ -115,7 +116,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
                 if (entityB.getEntity().hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getEntity().getPart(LifePart.class);
-                    lifePart.inflictDamage(10);
+                    lifePart.inflictDamage(bulletDamage);
                     System.out.println("Health: " + lifePart.getLife());
 
                     if (lifePart.getLife() <= 0) {
