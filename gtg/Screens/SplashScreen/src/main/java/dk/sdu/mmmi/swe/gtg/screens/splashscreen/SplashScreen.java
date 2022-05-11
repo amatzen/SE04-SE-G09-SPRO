@@ -11,21 +11,21 @@ import org.osgi.service.component.annotations.Component;
 
 @Component(immediate = true)
 public class SplashScreen implements ScreenSPI, Screen {
-    private final SpriteBatch batch;
-    private final Texture splashTexture;
-    private final Sprite sprite;
+    private SpriteBatch batch;
+    private Texture splashTexture;
+    private Sprite sprite;
     private final float MAX_COUNT = 3f; // Seconds to display splash
     private float count = 0.0f;
 
     public SplashScreen() {
         super();
-        this.batch = new SpriteBatch();
-        this.splashTexture = new Texture("assets/splash_screen_new.png");
-        this.sprite = new Sprite(splashTexture);
     }
 
     @Override
     public void show() {
+        this.batch = new SpriteBatch();
+        this.splashTexture = new Texture("assets/splash_screen_new.png");
+        this.sprite = new Sprite(splashTexture);
     }
 
     @Override
