@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.swe.gtg.music.internal;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -12,18 +11,21 @@ import org.osgi.service.component.annotations.Component;
 public class MusicPlugin implements IPlugin {
 
     public static Music MenuMusic;
-    public static Music GameMusic;
+    public static Music GameSound;
+    public static Music PoliceSound;
 
     @Override
     public void install(IEngine engine, GameData gameData) {
         menuMusic();
-        gameMusic();
+        gameSound();
+        policeSound();
     }
 
     @Override
     public void uninstall(IEngine engine, GameData gameData) {
         MenuMusic.stop();
-        GameMusic.stop();
+        GameSound.stop();
+        PoliceSound.stop();
     }
 
     public void menuMusic() {
@@ -33,15 +35,21 @@ public class MusicPlugin implements IPlugin {
         MenuMusic.play();
     }
 
-    public void gameMusic() {
-        GameMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/Traffic.mp3"));
-        GameMusic.setLooping(true);
-        GameMusic.setVolume(0.01f);
+    public void gameSound() {
+        GameSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Traffic.mp3"));
+        GameSound.setLooping(true);
+        GameSound.setVolume(0.01f);
+    }
+
+    public void policeSound() {
+        PoliceSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Police.mp3"));
+        PoliceSound.setLooping(true);
+        PoliceSound.setVolume(0.05f);
     }
 
     public void setGameMusic() {
         MenuMusic.stop();
-        GameMusic.play();
+        GameSound.play();
     }
 
 }
