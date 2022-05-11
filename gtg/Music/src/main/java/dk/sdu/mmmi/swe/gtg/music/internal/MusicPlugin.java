@@ -10,18 +10,46 @@ import org.osgi.service.component.annotations.Component;
 @Component
 public class MusicPlugin implements IPlugin {
 
-    public static Music music;
+    public static Music MenuMusic;
+    public static Music GameSound;
+    public static Music PoliceSound;
 
     @Override
     public void install(IEngine engine, GameData gameData) {
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/GTA-SA.mp3"));
-        music.setLooping(true);
-        music.setVolume(0.5f);
-        music.play();
+        menuMusic();
+        gameSound();
+        policeSound();
     }
 
     @Override
     public void uninstall(IEngine engine, GameData gameData) {
-        music.stop();
+        MenuMusic.stop();
+        GameSound.stop();
+        PoliceSound.stop();
     }
+
+    public void menuMusic() {
+        MenuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/GTA-SA.mp3"));
+        MenuMusic.setLooping(true);
+        MenuMusic.setVolume(0.5f);
+        MenuMusic.play();
+    }
+
+    public void gameSound() {
+        GameSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Traffic.mp3"));
+        GameSound.setLooping(true);
+        GameSound.setVolume(0.01f);
+    }
+
+    public void policeSound() {
+        PoliceSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Police.mp3"));
+        PoliceSound.setLooping(true);
+        PoliceSound.setVolume(0.05f);
+    }
+
+    public void setGameMusic() {
+        MenuMusic.stop();
+        GameSound.play();
+    }
+
 }
