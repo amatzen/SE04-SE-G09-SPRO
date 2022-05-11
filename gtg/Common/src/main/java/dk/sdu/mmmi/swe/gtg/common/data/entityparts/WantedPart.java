@@ -6,7 +6,7 @@ public class WantedPart implements IEntityPart {
 
     private int wantedLevel;
 
-    public final Signal<Integer> wantedLevelUpdated;
+    public final Signal<WantedPart> wantedLevelUpdated;
 
     public WantedPart() {
         wantedLevelUpdated = new Signal<>();
@@ -23,10 +23,11 @@ public class WantedPart implements IEntityPart {
 
     public void setWantedLevel(int wantedLevel) {
         this.wantedLevel = wantedLevel;
+        wantedLevelUpdated.fire(this);
     }
 
     @Override
     public void destroy() {
-
+        wantedLevelUpdated.dispose();
     }
 }

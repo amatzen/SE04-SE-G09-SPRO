@@ -88,10 +88,6 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
         return layer.getCell((int) position.x, (int) position.y) == null;
     }
 
-    private Vector2 worldPosToMapPos(Vector2 position) {
-        return new Vector2(position.x * unitScale * 4f, position.y * unitScale * 4f);
-    }
-
     @Override
     public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
         TiledMapTileLayer.Cell res = null;
@@ -114,7 +110,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     }
 
     @Override
-    public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+    public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
         Vector2 worldPos = new Vector2(worldCoordinates);
         worldPos.scl(unitScale * 4f);
 
@@ -122,6 +118,12 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
                 (int) worldPos.x,
                 (int) worldPos.y
         );
+    }
+
+    @Override
+    public Vector2 mapPosToWorldPos(Vector2 position) {
+        Vector2 mapPos = new Vector2(position);
+        return mapPos.scl(1 / (unitScale * 4f));
     }
 
     @Override

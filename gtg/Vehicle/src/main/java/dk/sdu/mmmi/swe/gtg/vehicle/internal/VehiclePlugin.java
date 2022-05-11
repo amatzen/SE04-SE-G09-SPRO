@@ -71,6 +71,8 @@ public class VehiclePlugin implements IPlugin {
 
         vehicle.addPart(lifePart);
 
+        vehicle.addPart(new WantedPart(1));
+
         engine.addEntity(vehicle);
     }
 

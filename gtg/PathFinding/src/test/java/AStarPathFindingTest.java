@@ -40,8 +40,13 @@ public class AStarPathFindingTest {
             }
 
             @Override
-            public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
                 return worldCoordinates;
+            }
+
+            @Override
+            public Vector2 mapPosToWorldPos(Vector2 position) {
+                return null;
             }
 
             @Override
@@ -96,8 +101,13 @@ public class AStarPathFindingTest {
             }
 
             @Override
-            public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
                 return worldCoordinates;
+            }
+
+            @Override
+            public Vector2 mapPosToWorldPos(Vector2 position) {
+                return null;
             }
 
             @Override

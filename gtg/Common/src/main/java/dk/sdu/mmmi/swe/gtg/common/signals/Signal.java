@@ -35,6 +35,6 @@ public class Signal<T> implements ISignal<T> {
 
     @Override
     public void dispose() {
-        listeners.clear();
+        removeAllListeners();
     }
 }

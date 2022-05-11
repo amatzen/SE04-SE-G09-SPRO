@@ -17,7 +17,9 @@ public interface MapSPI {
 
     MapLayer getLayer(String layerName);
 
-    Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates);
+    Vector2 worldPosToMapPos(Vector2 worldCoordinates);
+
+    Vector2 mapPosToWorldPos(Vector2 position);
 
     Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates);
 
