@@ -27,6 +27,7 @@ public class AStarPathFinding implements IPathFinding {
     private Path bestFirstSearch(final Node start, final Node goal, MapSPI map, final int resolution) {
         Map<String, Node> explored = new HashMap<>();
         Map<String, Node> inFringe = new HashMap<>();
+
         PriorityQueue<Node> fringe = new PriorityQueue<>(
                 (node1, node2) -> Float.compare(f(node1, goal), f(node2, goal))
         );
