@@ -116,24 +116,22 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
                 switch (collision.getContactType()) {
                     case BEGIN:
                         collisionListener.beginContact(
-                                contact, collisionEntityA.getEntity(), collisionEntityB.getEntity()
+                                collisionEntityA, collisionEntityB
                         );
                         break;
                     case END:
                         collisionListener.endContact(
-                                contact, collisionEntityA.getEntity(), collisionEntityB.getEntity()
+                                collisionEntityA, collisionEntityB
                         );
                         break;
                     case PRESOLVE:
                         collisionListener.preSolve(
-                                contact, collision.getManifold(),
-                                collisionEntityA.getEntity(), collisionEntityB.getEntity()
+                                collisionEntityA, collisionEntityB
                         );
                         break;
                     case POSTSOLVE:
                         collisionListener.postSolve(
-                                contact, collision.getContactImpulse(),
-                                collisionEntityA.getEntity(), collisionEntityB.getEntity(),
+                                collisionEntityA, collisionEntityB,
                                 collision.getNormalImpulses()
                         );
                         break;

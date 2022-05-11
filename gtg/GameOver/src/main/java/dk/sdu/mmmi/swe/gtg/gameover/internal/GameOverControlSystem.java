@@ -15,7 +15,7 @@ import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
-
+@Component
 public class GameOverControlSystem implements IPostProcessingSystem {
 
     List<? extends Entity> entity;

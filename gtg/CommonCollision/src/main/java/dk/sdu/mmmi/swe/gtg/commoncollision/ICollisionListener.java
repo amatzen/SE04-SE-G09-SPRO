@@ -1,10 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.commoncollision;
 
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
+import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 
 public interface ICollisionListener {
 
@@ -12,12 +9,12 @@ public interface ICollisionListener {
 
     public IFamily getFamilyB();
 
-    public void beginContact(Contact contact, Entity entityA, Entity entityB);
+    public void beginContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void endContact(Contact contact, Entity entityA, Entity entityB);
+    public void endContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void preSolve(Contact contact, Manifold manifold, Entity entityA, Entity entityB);
+    public void preSolve(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityA, Entity entityB, float[] normalImpulses);
+    public void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
 
 }
