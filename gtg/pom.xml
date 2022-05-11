@@ -82,6 +82,7 @@
     <!-- Screens -->
     <module>Screens/CommonScreen</module>
     <module>Screens/SplashScreen</module>
+    <module>Screens/MainMenuScreen</module>
   </modules>
 
   <build>
