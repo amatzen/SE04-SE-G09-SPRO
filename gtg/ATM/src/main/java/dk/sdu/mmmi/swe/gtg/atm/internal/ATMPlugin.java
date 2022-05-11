@@ -73,18 +73,16 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
             @Override
             public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                entityA.getPart(ProximityPart.class)
-                    .setProximity(true);
-                entityA.getPart(ATMTimerPart.class)
-                    .startTimer();
+                System.out.println("Contact started");
+                entityA.getPart(ProximityPart.class).setProximity(true);
+                entityA.getPart(ATMTimerPart.class).startTimer();
             }
 
             @Override
             public void endContact(Contact contact, Entity entityA, Entity entityB) {
-                entityA.getPart(ProximityPart.class)
-                    .setProximity(false);
-                entityA.getPart(ATMTimerPart.class)
-                    .stopTimer();
+                System.out.println("Contact ended");
+                entityA.getPart(ProximityPart.class).setProximity(false);
+                entityA.getPart(ATMTimerPart.class).stopTimer();
             }
 
             @Override
