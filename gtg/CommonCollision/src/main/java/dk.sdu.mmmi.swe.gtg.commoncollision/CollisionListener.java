@@ -34,4 +34,5 @@ public abstract class CollisionListener implements ICollisionListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityA, Entity entityB, float[] normalImpulses) {
     }
+
 }

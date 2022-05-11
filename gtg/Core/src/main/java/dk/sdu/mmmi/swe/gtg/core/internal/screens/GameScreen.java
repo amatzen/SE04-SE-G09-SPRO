@@ -10,7 +10,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Reference;
 
 public class GameScreen extends ScreenAdapter implements Screen {
     private final Game game;
@@ -22,8 +24,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
     private final Box2DDebugRenderer mB2dr;
     private final IWorldManager worldManager;
 
-    public GameScreen(Game game) {
-        this.game = game;
+    public GameScreen() {
+        this.game = ScreenManager.getInstance().getGame();
         this.gameData = game.gameData;
 
         Gdx.input.setInputProcessor(

@@ -80,16 +80,10 @@
   <object id="45" x="384" y="448" width="64" height="2624"/>
  </objectgroup>
  <objectgroup id="7" name="Atm">
-  <object id="70" x="2274.67" y="3236.67">
+  <object id="70" x="2394.67" y="3242.67">
    <point/>
   </object>
-  <object id="71" x="3362" y="3234.67">
-   <point/>
-  </object>
-  <object id="72" x="2018" y="675">
-   <point/>
-  </object>
-  <object id="73" x="1762" y="674">
+  <object id="71" x="3234" y="3246.67">
    <point/>
   </object>
   <object id="74" x="1118" y="482">
@@ -116,19 +110,16 @@
   <object id="81" x="2208" y="2340">
    <point/>
   </object>
-  <object id="82" x="3294" y="2916">
+  <object id="82" x="3041.33" y="2664">
    <point/>
   </object>
-  <object id="83" x="997" y="2915">
+  <object id="83" x="1182" y="2918.5">
    <point/>
   </object>
-  <object id="84" x="1761" y="2915">
+  <object id="85" x="864" y="3246">
    <point/>
   </object>
-  <object id="85" x="738" y="3234">
-   <point/>
-  </object>
-  <object id="87" x="1950" y="3234">
+  <object id="87" x="1824" y="3246">
    <point/>
   </object>
   <object id="88" x="862" y="2400">
@@ -137,7 +128,7 @@
   <object id="89" x="481" y="1252">
    <point/>
   </object>
-  <object id="90" x="1441" y="1058">
+  <object id="90" x="1250.33" y="1131.33">
    <point/>
   </object>
   <object id="91" x="3615.33" y="2338.67">
