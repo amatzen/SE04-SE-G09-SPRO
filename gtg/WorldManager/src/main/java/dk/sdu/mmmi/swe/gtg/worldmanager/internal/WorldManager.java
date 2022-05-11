@@ -83,11 +83,9 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
             BodyPart bodyPart = entity.getPart(BodyPart.class);
             TransformPart transformPart = entity.getPart(TransformPart.class);
 
-            Vector3 transformPosition = transformPart.getPosition();
             Vector2 bodyPosition = bodyPart.getBody().getPosition();
+            transformPart.setPosition(bodyPosition);
 
-            transformPosition.x = bodyPosition.x;
-            transformPosition.y = bodyPosition.y;
             transformPart.setRotation(bodyPart.getBody().getAngle());
         });
     }

@@ -6,11 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.atm.ATM;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -18,8 +14,10 @@ import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
+import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionListener;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
+import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
@@ -60,7 +58,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
             .with(PlayerPart.class)
             .get();
 
-        collisionListener = new ICollisionListener() {
+        collisionListener = new CollisionListener() {
             @Override
             public IFamily getFamilyA() {
                 return familyA;
@@ -72,31 +70,24 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
             }
 
             @Override
-            public void beginContact(Contact contact, Entity entityA, Entity entityB) {
-                entityA.getPart(ProximityPart.class)
-                    .setProximity(true);
-                entityA.getPart(ATMTimerPart.class)
-                    .startTimer();
+            public void beginContact(CollisionEntity atm, CollisionEntity entityB) {
+                if (!atm.isSensorPart()) {
+                    return;
+                }
+
+                atm.getEntity().getPart(ProximityPart.class).setProximity(true);
+                atm.getEntity().getPart(ATMTimerPart.class).startTimer();
             }
 
             @Override
-            public void endContact(Contact contact, Entity entityA, Entity entityB) {
-                entityA.getPart(ProximityPart.class)
-                    .setProximity(false);
-                entityA.getPart(ATMTimerPart.class)
-                    .stopTimer();
+            public void endContact(CollisionEntity atm, CollisionEntity entityB) {
+                if (!atm.isSensorPart()) {
+                    return;
+                }
+
+                atm.getEntity().getPart(ProximityPart.class).setProximity(false);
+                atm.getEntity().getPart(ATMTimerPart.class).stopTimer();
             }
-
-            @Override
-            public void preSolve(Contact contact, Manifold manifold, Entity entityB, Entity entityA) {
-
-            }
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse contactImpulse, Entity entityB, Entity entityA, float[] normalImpulses) {
-
-            }
-
         };
         collisionSPI.addListener(collisionListener);
     }
@@ -124,7 +115,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     @Override
     public void addedToEngine(IEngine engine) {
-        List<Vector2> coordinates = mapSPI.getAtms();
+        List<Vector2> coordinates = mapSPI.getATMPositions();
 
         Vector2 atmSize = new Vector2(1, 1.5f);
 
