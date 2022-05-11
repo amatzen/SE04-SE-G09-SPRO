@@ -35,6 +35,17 @@
             <artifactId>org.osgi.service.component.annotations</artifactId>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>dk.sdu.swe.gtg</groupId>
+            <artifactId>CommonScreen</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.sdu.swe.gtg</groupId>
+            <artifactId>LibGDX</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
