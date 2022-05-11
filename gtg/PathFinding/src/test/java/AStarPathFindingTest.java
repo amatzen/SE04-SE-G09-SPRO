@@ -50,11 +50,6 @@ public class AStarPathFindingTest {
             }
 
             @Override
-            public Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates) {
-                return tileCoordinates;
-            }
-
-            @Override
             public List<Rectangle> getObstacles() {
                 return null;
             }
@@ -108,11 +103,6 @@ public class AStarPathFindingTest {
             @Override
             public Vector2 mapPosToWorldPos(Vector2 position) {
                 return null;
-            }
-
-            @Override
-            public Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates) {
-                return tileCoordinates;
             }
 
             @Override

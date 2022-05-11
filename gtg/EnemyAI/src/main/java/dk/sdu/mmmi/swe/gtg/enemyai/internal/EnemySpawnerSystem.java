@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.WantedPart;
 import dk.sdu.mmmi.swe.gtg.common.family.EntityListener;
@@ -44,6 +45,8 @@ public class EnemySpawnerSystem implements IPlugin {
 
     private IEngine engine;
 
+    private Entity player;
+
     public EnemySpawnerSystem() {
         enemyFamily = Family.builder().forEntities(Enemy.class).get();
         targetFamily = Family.builder().with(WantedPart.class, TransformPart.class).get();
@@ -65,9 +68,15 @@ public class EnemySpawnerSystem implements IPlugin {
                 WantedPart wantedPart = entity.getPart(WantedPart.class);
                 wantedPart.wantedLevelUpdated.add(wantedLevelListener);
                 onWantedLevelUpdated(wantedPart);
-                System.out.println("stfu bro");
             }
         };
+
+        engine.addEntityListener(Family.builder().with(PlayerPart.class).get(), new EntityListener() {
+            @Override
+            public void onEntityAdded(Entity entity) {
+                player = entity;
+            }
+        }, true);
 
         enemyListener = new EntityListener() {
             @Override
@@ -85,7 +94,7 @@ public class EnemySpawnerSystem implements IPlugin {
     }
 
     private void updateEnemies() {
-        if (this.enemyList.size() < maxEnemyCount) {
+        while (this.enemyList.size() < maxEnemyCount) {
             spawnEnemy();
         }
     }
@@ -99,7 +108,7 @@ public class EnemySpawnerSystem implements IPlugin {
 
     private Vector2 findRandomSpawnPoint() {
         TiledMapTileLayer roads = (TiledMapTileLayer) map.getLayer("Roads");
-        Vector2 spawnPoint = map.getRandomCellPosition(roads);
+        Vector2 spawnPoint = map.mapPosToWorldPos(map.getRandomCellPosition(roads));
 
         return spawnPoint;
     }
