@@ -19,10 +19,10 @@ public class MusicControlSystem implements IProcessingSystem {
     public void process(GameData gameData) {
 
         if (gameData.getKeys().isPressed(GameKeys.M)) {
-            if (MusicPlugin.music.isPlaying()) {
-                MusicPlugin.music.pause();
+            if (MusicPlugin.GameMusic.isPlaying()) {
+                MusicPlugin.GameMusic.pause();
             } else {
-                MusicPlugin.music.play();
+                MusicPlugin.GameMusic.play();
             }
         }
 
