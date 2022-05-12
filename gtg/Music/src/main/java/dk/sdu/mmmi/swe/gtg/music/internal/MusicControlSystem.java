@@ -16,9 +16,6 @@ import org.osgi.service.component.annotations.Component;
 public class MusicControlSystem implements IProcessingSystem {
 
     private Entity player;
-
-    private final Boolean isWanted = false;
-
     private Boolean isPaused = false;
 
     @Override
