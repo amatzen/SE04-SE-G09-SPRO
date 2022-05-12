@@ -36,7 +36,7 @@ public class BoidSeparationSystem implements IProcessingSystem {
     private Vector2 separate(Entity entity, List<? extends Entity> entities) {
         Body body = entity.getPart(BodyPart.class).getBody();
 
-        float separationDistance = 2;
+        float separationDistance = 3f;
 
         Vector2 steering = Vector2.Zero;
 
