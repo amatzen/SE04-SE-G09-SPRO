@@ -5,28 +5,38 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.List;
 
 @Component
 public class BoidSeparationSystem implements IProcessingSystem {
+
+    private List<? extends Entity> enemies;
+
     @Override
     public void addedToEngine(IEngine engine) {
-
+        enemies = engine.getEntitiesFor(
+                Family.builder().forEntities(Enemy.class).get()
+        );
     }
 
     @Override
     public void process(GameData gameData) {
-
+        for (Entity e : enemies) {
+            Vector2 steering = separate(e, enemies);
+            e.getPart(BodyPart.class).getBody().applyForceToCenter(steering, true);
+        }
     }
 
     private Vector2 separate(Entity entity, List<? extends Entity> entities) {
         Body body = entity.getPart(BodyPart.class).getBody();
 
-        float separationDistance = 2;
+        float separationDistance = 3f;
 
         Vector2 steering = Vector2.Zero;
 

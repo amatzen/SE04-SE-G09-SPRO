@@ -78,6 +78,7 @@
     <module>CommonMap</module>
     <module>GameOver</module>
     <module>CommonGameOver</module>
+    <module>WantedLevelSystemCommon</module>
 
     <!-- Screens -->
     <module>Screens/CommonScreen</module>

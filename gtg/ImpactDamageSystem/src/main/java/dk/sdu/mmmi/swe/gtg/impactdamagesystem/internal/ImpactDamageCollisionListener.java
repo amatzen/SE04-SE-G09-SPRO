@@ -1,5 +1,8 @@
 package dk.sdu.mmmi.swe.gtg.impactdamagesystem.internal;
 
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
@@ -26,21 +29,30 @@ public class ImpactDamageCollisionListener extends CollisionListener {
 
     @Override
     public void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses) {
-
         float[] impulses = normalImpulses;
 
-        float sum = 0;
+        float impulseSum = 0;
 
         for (int i = 0; i < impulses.length; i++) {
-            sum += impulses[i];
+            impulseSum += impulses[i];
         }
 
-        if (sum <= 0f) {
+        if (impulseSum <= 0f) {
             return;
         }
 
-        // Map the sum of range [0, 100000] to the range [0, 100]
-        int damage = (int) (sum / 100000f * 100f);
+        // Map the impulseSum of range [0, 50000] to the range [0, 100]
+        int damage = (int) (impulseSum / 50000f * 100f);
+
+        Body bodyA = entityA.getEntity().getPart(BodyPart.class).getBody();
+        Body bodyB = entityB.getEntity().getPart(BodyPart.class).getBody();
+
+        if (
+                bodyA.getType() == BodyDef.BodyType.StaticBody ||
+                bodyB.getType() == BodyDef.BodyType.StaticBody
+        ) {
+            damage *= 0.1f;
+        }
 
         if (damage < 5) {
             return;
