@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.pathfinding.internal;
 
 import com.badlogic.gdx.math.Vector2;
+import dk.sdu.mmmi.swe.gtg.common.heap.Heap;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Path;
@@ -28,7 +29,7 @@ public class AStarPathFinding implements IPathFinding {
         Map<String, Node> explored = new HashMap<>();
         Map<String, Node> inFringe = new HashMap<>();
 
-        Queue<Node> fringe = new MinHeap<>(
+        Queue<Node> fringe = new Heap<>(
                 (node1, node2) -> Float.compare(f(node1, goal), f(node2, goal))
         );
 
