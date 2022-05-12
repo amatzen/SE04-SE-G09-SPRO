@@ -79,6 +79,13 @@
     <module>GameOver</module>
     <module>CommonGameOver</module>
     <module>WantedLevelSystemCommon</module>
+
+    <!-- Screens -->
+    <module>Screens/CommonScreen</module>
+    <module>Screens/SplashScreen</module>
+    <module>Screens/MainMenuScreen</module>
+    <module>Screens/GameOverScreen</module>
+    <module>Screens/GameScreen</module>
   </modules>
 
   <build>

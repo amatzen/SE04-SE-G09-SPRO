@@ -2,13 +2,15 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
-import dk.sdu.mmmi.swe.gtg.core.internal.screens.SplashScreen;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -17,24 +19,24 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component(immediate = true)
-public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
+public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, ApplicationListener {
     public final GameData gameData = new GameData();
 
     private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
+    private final List<ScreenSPI> screens = new CopyOnWriteArrayList<>();
+
     @Reference
     private IEngine engine;
 
     @Reference
     private IWorldManager worldManager;
-
-    //@Reference
-    private ScreenManager screenManager;
 
     public Game() {
         System.out.println("Game created");
@@ -54,12 +56,13 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     @Override
     public void create() {
-        this.screenManager = ScreenManager.getInstance();
-        screenManager.setGame(this);
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        screenManager.setScreen(SplashScreen.class);
+        System.out.println("Loaded + " + screens.size() + " screens");
+        screens.forEach(screen -> System.out.println(screen.getClass().getSimpleName()));
+
+        changeScreen("SplashScreen");
     }
 
     @Override
@@ -90,6 +93,24 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void dispose() {
     }
 
+    /* Screens */
+
+    @Reference(
+        cardinality = ReferenceCardinality.MULTIPLE,
+        policy = ReferencePolicy.DYNAMIC,
+        unbind = "removeScreen"
+    )
+    public void addScreen(ScreenSPI screen) {
+        this.screens.add(screen);
+    }
+
+    public void removeScreen(ScreenSPI screen) {
+        this.screens.remove(screen);
+    }
+
+    /* End Screens */
+
+
     private Collection<? extends IPlugin> getPluginServices() {
         return entityPlugins;
     }
@@ -109,14 +130,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         return engine;
     }
 
-    public void setEngine(IEngine engine) {
-        this.engine = engine;
-    }
-
-    public void removeEngine(IEngine systemManager) {
-        this.engine = null;
-    }
-
     public IWorldManager getWorldManager() {
         return worldManager;
     }
@@ -127,5 +140,29 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     public void removeWorldManager() {
         this.worldManager = null;
+    }
+
+    @Override
+    public void changeScreen(String screenName) {
+        Optional<ScreenSPI> screen = screens.stream()
+                .filter(x -> x.getClass().getSimpleName().equals(screenName))
+                .findFirst();
+
+        if (!screen.isPresent()) {
+            System.out.println("No screen with name " + screenName + " found");
+            return;
+        }
+
+        setScreen((Screen) screen.get());
+    }
+
+    @Override
+    public void setGameInputProcessor() {
+        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+    }
+
+    @Override
+    public GameData getGameData() {
+        return this.gameData;
     }
 }
