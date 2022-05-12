@@ -12,12 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class MainMenuScreen implements ScreenSPI, Screen {
     private Stage stage;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     public MainMenuScreen() {
         super();
@@ -42,7 +47,7 @@ public class MainMenuScreen implements ScreenSPI, Screen {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                //ScreenManager.getInstance().setScreen(GameScreen.class);
+                screenManager.changeScreen("GameScreen");
             }
         });
 
