@@ -12,8 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
+import org.osgi.service.component.annotations.Component;
 
-public class GameOverScreen implements Screen {
+@Component
+public class GameOverScreen implements ScreenSPI, Screen {
 
     private Stage stage;
 
