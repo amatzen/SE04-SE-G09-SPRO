@@ -8,6 +8,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.sort.QuickSort;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class RenderingSystem implements IPostProcessingSystem {
 
         final List<? extends Entity> entities = new ArrayList<>(this.entities);
 
-        entities.sort((e1, e2) -> {
+        QuickSort.sort(entities, (e1, e2) -> {
             TransformPart t1 = e1.getPart(TransformPart.class);
             TransformPart t2 = e2.getPart(TransformPart.class);
             return (int) Math.signum(t1.getZ() - t2.getZ());
