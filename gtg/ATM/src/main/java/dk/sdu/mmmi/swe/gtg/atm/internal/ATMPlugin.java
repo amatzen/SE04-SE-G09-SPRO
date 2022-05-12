@@ -46,6 +46,8 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     private ICollisionListener collisionListener;
 
+    private TexturePart atmTexturePart;
+
 
     public ATMPlugin() {
     }
@@ -104,7 +106,10 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     }
 
     private TexturePart getBodyTexture() {
-        return getTexture("assets/atm.png");
+        if (this.atmTexturePart == null) {
+            this.atmTexturePart = getTexture("assets/atm.png");
+        }
+        return this.atmTexturePart;
     }
 
     @Override

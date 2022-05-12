@@ -36,6 +36,8 @@ public class BulletCreator implements BulletSPI, IPlugin {
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
 
+    private TexturePart bulletTexture;
+
     public BulletCreator() {
 
     }
@@ -86,7 +88,10 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     private TexturePart getBulletTexture() {
-        return getTexture("assets/bullet.png");
+        if (this.bulletTexture == null) {
+            this.bulletTexture = getTexture("assets/bullet.png");
+        }
+        return this.bulletTexture;
     }
 
     @Override

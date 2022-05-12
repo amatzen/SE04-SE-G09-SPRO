@@ -1,7 +1,9 @@
-package dk.sdu.mmmi.swe.gtg.gameover.internal;
+package dk.sdu.mmmi.swe.gtg.screens.gameoverscreen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,14 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
-import dk.sdu.mmmi.swe.gtg.commongameover.GameOverSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
 
 @Component
-public class GameOverPlugin implements IPlugin, GameOverSPI {
+public class GameOverScreen implements ScreenSPI, Screen {
 
     private Stage stage;
 
@@ -28,17 +27,22 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
 
     private Image gmLogo;
 
+    public GameOverScreen() {
+    }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
-        stage = new Stage(new ScreenViewport());
+    public void show() {
+        this.stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
+        Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
+
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/wasted.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 400).row();
 
@@ -61,7 +65,6 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
         table.add(totalMoney).row();
 
         // Restart button
-        Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
         TextButton btnStart = new TextButton("Restart", skinBtn);
         btnStart.align(Align.bottom);
         table.add(btnStart).pad(75).row();
@@ -69,24 +72,45 @@ public class GameOverPlugin implements IPlugin, GameOverSPI {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                //game.setScreen(new GameScreen(game));
-                System.out.println("Im dead yes");
+                //ScreenManager.getInstance().setScreen(GameScreen.class);
             }
         });
-    }
-
-    @Override
-    public void uninstall(IEngine engine, GameData gameData) {
 
     }
 
     @Override
-    public Stage getStage() {
-        return stage;
+    public void render(float v) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+
     }
 
     @Override
-    public Stage setStage() {
-        return this.stage;
+    public void resize(int i, int i1) {
+        stage.getViewport().update(i, i1, true);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
+

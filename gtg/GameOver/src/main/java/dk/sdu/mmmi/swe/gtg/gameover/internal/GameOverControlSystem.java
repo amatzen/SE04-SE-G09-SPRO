@@ -10,7 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.commongameover.GameOverSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -23,8 +23,10 @@ public class GameOverControlSystem implements IPostProcessingSystem {
 
     private LifePart playerLife;
 
+    private boolean gameOver = false;
+
     @Reference
-    private GameOverSPI gameOverSPI;
+    private ScreenManagerSPI screenManager;
 
     public static Music wastedSound;
 
@@ -39,9 +41,14 @@ public class GameOverControlSystem implements IPostProcessingSystem {
 
     @Override
     public void process(GameData gameData) {
+        if (gameOver) return;
+
         if (playerLife != null) {
             if (playerLife.getLife() <= 0) {
-                Gdx.gl.glClearColor(0, 0, 0, 1);
+                this.gameOver = true;
+                this.screenManager.changeScreen("GameOverScreen");
+
+                /*Gdx.gl.glClearColor(0, 0, 0, 1);
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 Gdx.input.setInputProcessor(gameOverSPI.getStage());
 
@@ -49,7 +56,7 @@ public class GameOverControlSystem implements IPostProcessingSystem {
 
                 // gameOverSPI.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
                 gameOverSPI.getStage().act();
-                gameOverSPI.getStage().draw();
+                gameOverSPI.getStage().draw();*/
             }
         }
 

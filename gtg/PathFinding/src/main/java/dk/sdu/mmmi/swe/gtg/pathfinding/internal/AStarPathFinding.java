@@ -28,7 +28,7 @@ public class AStarPathFinding implements IPathFinding {
         Map<String, Node> explored = new HashMap<>();
         Map<String, Node> inFringe = new HashMap<>();
 
-        PriorityQueue<Node> fringe = new PriorityQueue<>(
+        Queue<Node> fringe = new MinHeap<>(
                 (node1, node2) -> Float.compare(f(node1, goal), f(node2, goal))
         );
 

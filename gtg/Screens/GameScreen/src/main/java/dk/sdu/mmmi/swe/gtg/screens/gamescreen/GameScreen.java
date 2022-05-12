@@ -1,5 +1,6 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.screens;
+package dk.sdu.mmmi.swe.gtg.screens.gamescreen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -8,33 +9,33 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
+import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-public class GameScreen extends ScreenAdapter implements Screen {
-    private final Game game;
-    private final GameData gameData;
+@Component
+public class GameScreen extends ScreenAdapter implements ScreenSPI, Screen {
+    private GameData gameData;
 
     private final float PPM = 40;
 
-    private final OrthographicCamera cam;
-    private final Box2DDebugRenderer mB2dr;
-    private final IWorldManager worldManager;
+    private OrthographicCamera cam;
+    private Box2DDebugRenderer mB2dr;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
+
+    @Reference
+    private IEngine engine;
+
+    @Reference
+    private IWorldManager worldManager;
 
     public GameScreen() {
-        this.game = ScreenManager.getInstance().getGame();
-        this.gameData = game.gameData;
-
-        Gdx.input.setInputProcessor(
-                new GameInputProcessor(gameData)
-        );
-
-        this.mB2dr = new Box2DDebugRenderer();
-        this.cam = new OrthographicCamera(gameData.getDisplayWidth() / PPM, gameData.getDisplayHeight() / PPM);
-        this.worldManager = this.game.getWorldManager();
+        super();
     }
 
     @Override
@@ -46,8 +47,8 @@ public class GameScreen extends ScreenAdapter implements Screen {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
 
-        this.game.getEngine().update(this.gameData);
-        this.game.getWorldManager().render(mB2dr, cam.combined);
+        this.engine.update(this.gameData);
+        this.worldManager.render(mB2dr, cam.combined);
 
         this.gameData.getKeys().update();
     }
@@ -61,10 +62,17 @@ public class GameScreen extends ScreenAdapter implements Screen {
     public void show() {
         super.show();
 
+        this.gameData = this.screenManager.getGameData();
+
+        this.mB2dr = new Box2DDebugRenderer();
+        this.cam = new OrthographicCamera(gameData.getDisplayWidth() / PPM, gameData.getDisplayHeight() / PPM);
+
+        this.screenManager.setGameInputProcessor();
+
         cam.position.set(0, 0, 0);
         cam.update();
-        this.game.gameData.setCamera(cam);
-        this.game.gameData.setSpriteBatch(new SpriteBatch());
+        this.gameData.setCamera(cam);
+        this.gameData.setSpriteBatch(new SpriteBatch());
 
     }
 
