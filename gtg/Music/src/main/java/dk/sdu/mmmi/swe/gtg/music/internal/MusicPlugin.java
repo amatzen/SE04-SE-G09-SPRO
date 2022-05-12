@@ -32,13 +32,14 @@ public class MusicPlugin implements IPlugin {
         MenuMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/GTA-SA.mp3"));
         MenuMusic.setLooping(true);
         MenuMusic.setVolume(0.5f);
-        MenuMusic.play();
+        // MenuMusic.play();
     }
 
     public void gameSound() {
         GameSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Traffic.mp3"));
         GameSound.setLooping(true);
         GameSound.setVolume(0.01f);
+        GameSound.play();
     }
 
     public void policeSound() {
