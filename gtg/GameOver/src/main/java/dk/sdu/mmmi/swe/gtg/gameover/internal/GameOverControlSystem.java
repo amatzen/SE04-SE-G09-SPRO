@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.gameover.internal;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -27,9 +28,15 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     @Reference
     private ScreenManagerSPI screenManager;
 
+    public static Music wastedSound;
+
     @Override
     public void addedToEngine(IEngine engine) {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
+
+        wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
+        wastedSound.setLooping(false);
+        wastedSound.setVolume(0.3f);
     }
 
     @Override
@@ -44,6 +51,8 @@ public class GameOverControlSystem implements IPostProcessingSystem {
                 /*Gdx.gl.glClearColor(0, 0, 0, 1);
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 Gdx.input.setInputProcessor(gameOverSPI.getStage());
+
+                wastedSound.play();
 
                 // gameOverSPI.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
                 gameOverSPI.getStage().act();

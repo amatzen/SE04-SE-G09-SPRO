@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.crime;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,11 +22,17 @@ public class CrimeActionHandler implements ICrimeAction {
     @Reference
     private IEngine engine;
 
+    public static Music cashSound;
+
     public void commit(Entity entity) {
         ATMBalancePart atmBalance = entity.getPart(ATMBalancePart.class);
         if (atmBalance != null) {
             PlayerPart player = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get()).get(0).getPart(PlayerPart.class);
             player.deposit(atmBalance.getBalance());
+
+            cashSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Cash.mp3"));
+            cashSound.setVolume(0.3f);
+            cashSound.play();
 
             atmBalance.setRobbed(true);
             entity.addPart(getBodyTexture());
