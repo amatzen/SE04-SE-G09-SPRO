@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -53,14 +52,14 @@ public class GameOverScreen implements ScreenSPI, Screen {
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/wasted.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red-new-exact.png")));
         gmLogo.setAlign(Align.top);
-        table.add(gmLogo).size(400, 220).row();
+        table.add(gmLogo).size(400, 100).row();
 
         // Death message
         deathMessage = new Label("You got busted and lost all your money!", new Label.LabelStyle(
                 new BitmapFont(), Color.RED));
-        deathMessage.setFontScale(1.4f);
+        deathMessage.setFontScale(1.3f);
         table.add(deathMessage).pad(25).row();
 
         // Show statistics
