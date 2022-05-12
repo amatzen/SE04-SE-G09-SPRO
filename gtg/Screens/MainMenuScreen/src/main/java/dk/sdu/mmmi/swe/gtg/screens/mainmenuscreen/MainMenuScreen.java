@@ -20,6 +20,7 @@ public class MainMenuScreen implements ScreenSPI, Screen {
     private Stage stage;
 
     public MainMenuScreen() {
+        super();
     }
 
     @Override

@@ -38,11 +38,12 @@ public class SplashScreen implements ScreenSPI, Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*count = count + v;
+        count = count + v;
         if (count > MAX_COUNT) {
             // TODO: Go to next screen
+            this.screenManager.changeScreen("MainMenuScreen");
             return;
-        }*/
+        }
 
         batch.begin();
         sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
