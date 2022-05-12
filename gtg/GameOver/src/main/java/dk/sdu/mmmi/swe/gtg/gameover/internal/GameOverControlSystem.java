@@ -3,6 +3,7 @@ package dk.sdu.mmmi.swe.gtg.gameover.internal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
@@ -28,12 +29,12 @@ public class GameOverControlSystem implements IPostProcessingSystem {
 
     public static Music wastedSound;
 
-
     @Override
     public void addedToEngine(IEngine engine) {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
-        
+
         wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
+        wastedSound.setLooping(false);
         wastedSound.setVolume(0.3f);
     }
 
@@ -50,7 +51,6 @@ public class GameOverControlSystem implements IPostProcessingSystem {
                 // gameOverSPI.getStage().getViewport().update(gameData.getDisplayWidth(), gameData.getDisplayHeight());
                 gameOverSPI.getStage().act();
                 gameOverSPI.getStage().draw();
-
             }
         }
 
