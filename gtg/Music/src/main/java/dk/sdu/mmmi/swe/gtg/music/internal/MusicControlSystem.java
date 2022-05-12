@@ -21,6 +21,10 @@ public class MusicControlSystem implements IProcessingSystem {
 
     private float crimeLevel;
 
+    private Boolean isWanted = false;
+
+    private Boolean isPaused = false;
+
     @Override
     public void addedToEngine(IEngine engine) {
         crimeLevel = 0;
@@ -42,40 +46,25 @@ public class MusicControlSystem implements IProcessingSystem {
 
     @Override
     public void process(GameData gameData) {
-
-        if (gameData.getKeys().isPressed(GameKeys.UP)) {
-            if (MusicPlugin.MenuMusic.isPlaying()) {
-                MusicPlugin.MenuMusic.stop();
-                MusicPlugin.GameSound.play();
-                MusicPlugin.PoliceSound.play();
-            }
-        }
-
-        if (gameData.getKeys().isPressed(GameKeys.M)) {
-            if (MusicPlugin.GameSound.isPlaying()) {
-                MusicPlugin.GameSound.pause();
-            } else {
-                MusicPlugin.MenuMusic.stop();
-                MusicPlugin.GameSound.play();
-            }
-            /*
-            if (MusicPlugin.PoliceSound.isPlaying()) {
-                MusicPlugin.PoliceSound.pause();
-            } else {
-                MusicPlugin.MenuMusic.stop();
-                MusicPlugin.PoliceSound.play();
-            }
-
-             */
-        }
-
         WantedPart wantedPart = player.getPart(WantedPart.class);
         int totalWanted = wantedPart.getWantedLevel();
 
-        if (totalWanted > 0) {
+        if (totalWanted > 0 && !(isPaused)) {
             MusicPlugin.PoliceSound.play();
-        } else if (totalWanted == 0){
+        } else if (totalWanted == 0 || isPaused) {
             MusicPlugin.PoliceSound.stop();
+        }
+
+        if (gameData.getKeys().isPressed(GameKeys.M)) {
+            if (MusicPlugin.GameSound.isPlaying() || MusicPlugin.MenuMusic.isPlaying()) {
+                MusicPlugin.GameSound.pause();
+                // MusicPlugin.MenuMusic.pause();
+                isPaused = true;
+            } else {
+                MusicPlugin.GameSound.play();
+                // MusicPlugin.MenuMusic.play();
+                isPaused = false;
+            }
         }
     }
 }
