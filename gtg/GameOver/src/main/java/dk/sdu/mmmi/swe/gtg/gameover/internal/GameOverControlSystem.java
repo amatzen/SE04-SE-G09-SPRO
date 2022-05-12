@@ -33,7 +33,7 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     public void addedToEngine(IEngine engine) {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
 
-        wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
+        wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound-extended.mp3"));
         wastedSound.setLooping(false);
         wastedSound.setVolume(0.3f);
     }
