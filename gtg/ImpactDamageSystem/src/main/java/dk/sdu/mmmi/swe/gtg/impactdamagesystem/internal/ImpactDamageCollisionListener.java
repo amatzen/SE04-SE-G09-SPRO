@@ -62,6 +62,8 @@ public class ImpactDamageCollisionListener extends CollisionListener {
 
         lifePartA.inflictDamage(damage);
 
+        ImpactDamageSystem.crashSound.play();
+
         if (lifePartB != null) {
             lifePartB.inflictDamage(damage);
         }
