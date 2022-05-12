@@ -9,8 +9,8 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
-import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Component(immediate = true)
+@Component
 public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, ApplicationListener {
     public final GameData gameData = new GameData();
 
