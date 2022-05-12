@@ -8,6 +8,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
+import dk.sdu.mmmi.swe.gtg.core.internal.managers.GameInputProcessor;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
@@ -58,14 +59,10 @@ public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, App
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
+        System.out.println("Loaded + " + screens.size() + " screens");
         screens.forEach(screen -> System.out.println(screen.getClass().getSimpleName()));
 
-        screens.stream()
-                .filter(x -> x.getClass().getSimpleName().equals("SplashScreen"))
-                .findFirst()
-                .ifPresent(screen -> {
-                    setScreen((Screen) screen);
-                });
+        changeScreen("SplashScreen");
     }
 
     @Override
@@ -157,5 +154,15 @@ public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, App
         }
 
         setScreen((Screen) screen.get());
+    }
+
+    @Override
+    public void setGameInputProcessor() {
+        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+    }
+
+    @Override
+    public GameData getGameData() {
+        return this.gameData;
     }
 }
