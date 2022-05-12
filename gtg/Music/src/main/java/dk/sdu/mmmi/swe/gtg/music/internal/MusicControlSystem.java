@@ -17,19 +17,15 @@ public class MusicControlSystem implements IProcessingSystem {
 
     private Entity player;
 
-    private IEntityListener playerListener;
-
-    private float crimeLevel;
-
-    private Boolean isWanted = false;
+    private final Boolean isWanted = false;
 
     private Boolean isPaused = false;
 
     @Override
     public void addedToEngine(IEngine engine) {
-        crimeLevel = 0;
+        float crimeLevel = 0;
 
-        playerListener = new EntityListener() {
+        IEntityListener playerListener = new EntityListener() {
             @Override
             public void onEntityAdded(Entity entity) {
                 player = entity;
@@ -50,18 +46,18 @@ public class MusicControlSystem implements IProcessingSystem {
         int totalWanted = wantedPart.getWantedLevel();
 
         if (totalWanted > 0 && !(isPaused)) {
-            MusicPlugin.PoliceSound.play();
+            MusicPlugin.policeSound.play();
         } else if (totalWanted == 0 || isPaused) {
-            MusicPlugin.PoliceSound.stop();
+            MusicPlugin.policeSound.stop();
         }
 
         if (gameData.getKeys().isPressed(GameKeys.M)) {
-            if (MusicPlugin.GameSound.isPlaying() || MusicPlugin.MenuMusic.isPlaying()) {
-                MusicPlugin.GameSound.pause();
+            if (MusicPlugin.gameSound.isPlaying() || MusicPlugin.menuMusic.isPlaying()) {
+                MusicPlugin.gameSound.pause();
                 // MusicPlugin.MenuMusic.pause();
                 isPaused = true;
             } else {
-                MusicPlugin.GameSound.play();
+                MusicPlugin.gameSound.play();
                 // MusicPlugin.MenuMusic.play();
                 isPaused = false;
             }
