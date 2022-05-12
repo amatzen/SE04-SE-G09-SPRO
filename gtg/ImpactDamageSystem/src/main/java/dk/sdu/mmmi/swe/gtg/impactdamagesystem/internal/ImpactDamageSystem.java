@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.impactdamagesystem.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
@@ -16,10 +18,16 @@ public class ImpactDamageSystem implements IPlugin {
 
     private ICollisionListener collisionListener;
 
+    public static Music crashSound;
+
+
     @Override
     public void install(IEngine engine, GameData gameData) {
         collisionListener = new ImpactDamageCollisionListener();
         collisionSPI.addListener(collisionListener);
+
+        crashSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Crash.mp3"));
+        crashSound.setVolume(0.3f);
     }
 
     @Override

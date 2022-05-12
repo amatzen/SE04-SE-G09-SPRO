@@ -1,13 +1,13 @@
-package dk.sdu.mmmi.swe.gtg.pathfinding.internal;
+package dk.sdu.mmmi.swe.gtg.common.heap;
 
 import java.util.*;
 
-public class MinHeap<T> implements Queue<T> {
+public class Heap<T> implements Queue<T> {
     private Comparator<T> comparator;
 
     private ArrayList<T> heap;
 
-    public MinHeap(Comparator<T> comparator) {
+    public Heap(Comparator<T> comparator) {
         heap = new ArrayList<>();
         this.comparator = comparator;
     }
@@ -148,12 +148,15 @@ public class MinHeap<T> implements Queue<T> {
         int l = left(i);
         int r = right(i);
         int smallest = i;
+
         if (l < list.size() && comparator.compare(list.get(l), list.get(i)) < 0) {
             smallest = l;
         }
+
         if (r < list.size() && comparator.compare(list.get(r), list.get(smallest)) < 0) {
             smallest = r;
         }
+
         if (smallest != i) {
             T temp = list.get(i);
             list.set(i, list.get(smallest));
