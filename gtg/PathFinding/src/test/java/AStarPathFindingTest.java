@@ -7,6 +7,7 @@ import dk.sdu.mmmi.swe.gtg.pathfinding.internal.AStarPathFinding;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,45 +16,10 @@ public class AStarPathFindingTest {
 
     @Test
     public void testAStar() {
-        MapSPI map = new MapSPI() {
-            @Override
-            public List<Vector2> getATMPositions() {
-                return null;
-            }
+        MapSPI map = Mockito.mock(MapSPI.class);
 
-            @Override
-            public boolean isTileAccessibly(Vector2 position) {
-                if (position.x > 8 && position.x < 10 && position.y > 4 && position.y < 16) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
-                return null;
-            }
-
-            @Override
-            public MapLayer getLayer(String layerName) {
-                return null;
-            }
-
-            @Override
-            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
-                return worldCoordinates;
-            }
-
-            @Override
-            public Vector2 mapPosToWorldPos(Vector2 position) {
-                return null;
-            }
-
-            @Override
-            public List<Rectangle> getObstacles() {
-                return null;
-            }
-        };
+        Mockito.when(map.isTileAccessibly(Mockito.any(Vector2.class))).thenReturn(true);
+        Mockito.when(map.worldPosToMapPos(Mockito.any(Vector2.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArguments()[0]);
 
         AStarPathFinding aStar = new AStarPathFinding();
 
@@ -71,45 +37,17 @@ public class AStarPathFindingTest {
 
     @Test
     public void noClearPath() {
-        MapSPI map = new MapSPI() {
-            @Override
-            public List<Vector2> getATMPositions() {
-                return null;
-            }
+        MapSPI map = Mockito.mock(MapSPI.class);
 
-            @Override
-            public boolean isTileAccessibly(Vector2 position) {
-                if (position.x > 10 || position.x < -10 || position.y > 10 || position.y < -10) {
-                    return false;
-                }
-                return true;
+        Mockito.when(map.isTileAccessibly(Mockito.any(Vector2.class))).thenAnswer(invocationOnMock -> {
+            Vector2 position = (Vector2) invocationOnMock.getArguments()[0];
+            if (position.x > 10 || position.x < -10 || position.y > 10 || position.y < -10) {
+                return false;
             }
+            return true;
+        });
 
-            @Override
-            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
-                return null;
-            }
-
-            @Override
-            public MapLayer getLayer(String layerName) {
-                return null;
-            }
-
-            @Override
-            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
-                return worldCoordinates;
-            }
-
-            @Override
-            public Vector2 mapPosToWorldPos(Vector2 position) {
-                return null;
-            }
-
-            @Override
-            public List<Rectangle> getObstacles() {
-                return null;
-            }
-        };
+        Mockito.when(map.worldPosToMapPos(Mockito.any(Vector2.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArguments()[0]);
 
         AStarPathFinding aStar = new AStarPathFinding();
 
