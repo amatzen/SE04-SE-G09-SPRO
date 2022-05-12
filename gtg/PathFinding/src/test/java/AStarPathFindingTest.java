@@ -7,6 +7,7 @@ import dk.sdu.mmmi.swe.gtg.pathfinding.internal.AStarPathFinding;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ public class AStarPathFindingTest {
 
     @Test
     public void testAStar() {
+
         MapSPI map = new MapSPI() {
             @Override
             public List<Vector2> getATMPositions() {
