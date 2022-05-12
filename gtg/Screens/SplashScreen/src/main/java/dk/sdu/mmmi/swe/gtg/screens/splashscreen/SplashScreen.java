@@ -40,7 +40,6 @@ public class SplashScreen implements ScreenSPI, Screen {
 
         count = count + v;
         if (count > MAX_COUNT) {
-            // TODO: Go to next screen
             this.screenManager.changeScreen("MainMenuScreen");
             return;
         }
