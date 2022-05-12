@@ -16,7 +16,7 @@ public class ATMBalancePart implements IEntityPart {
     }
 
     public ATMBalancePart() {
-        this((int) Math.floor(Math.random() * 250000));
+        this((int) Math.floor(Math.random() * 12000));
     }
 
     public int getBalance() {
