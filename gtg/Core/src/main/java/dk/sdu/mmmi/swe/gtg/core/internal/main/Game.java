@@ -9,6 +9,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -17,10 +18,11 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component(immediate = true)
-public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
+public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, ApplicationListener {
     public final GameData gameData = new GameData();
 
     private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
@@ -141,5 +143,19 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     public void removeWorldManager() {
         this.worldManager = null;
+    }
+
+    @Override
+    public void changeScreen(String screenName) {
+        Optional<ScreenSPI> screen = screens.stream()
+                .filter(x -> x.getClass().getSimpleName().equals(screenName))
+                .findFirst();
+
+        if (!screen.isPresent()) {
+            System.out.println("No screen with name " + screenName + " found");
+            return;
+        }
+
+        setScreen((Screen) screen.get());
     }
 }

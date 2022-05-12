@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 @Component(immediate = true)
 public class SplashScreen implements ScreenSPI, Screen {
@@ -16,6 +18,9 @@ public class SplashScreen implements ScreenSPI, Screen {
     private Sprite sprite;
     private final float MAX_COUNT = 3f; // Seconds to display splash
     private float count = 0.0f;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     public SplashScreen() {
         super();
