@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.screens;
+package dk.sdu.mmmi.swe.gtg.screens.gameoverscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,13 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
 
-public class GameOver implements Screen {
+public class GameOverScreen implements Screen {
 
-    private final Game game;
-    private final Stage stage;
+    private Stage stage;
 
     private Label deathMessage;
     private Label moneyLabel;
@@ -27,15 +24,14 @@ public class GameOver implements Screen {
 
     private Image gmLogo;
 
-    public GameOver(Game game) {
-        this.game = game;
-        this.stage = new Stage(new ScreenViewport());
-
-        Gdx.input.setInputProcessor(stage);
+    public GameOverScreen() {
     }
 
     @Override
     public void show() {
+        this.stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -43,7 +39,7 @@ public class GameOver implements Screen {
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/wasted.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 400).row();
 
@@ -73,7 +69,7 @@ public class GameOver implements Screen {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                ScreenManager.getInstance().setScreen(GameScreen.class);
+                //ScreenManager.getInstance().setScreen(GameScreen.class);
             }
         });
 

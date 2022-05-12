@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.screens;
+package dk.sdu.mmmi.swe.gtg.screens.mainmenuscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,20 +12,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dk.sdu.mmmi.swe.gtg.core.internal.main.Game;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.ScreenManager;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
-public class MainMenuScreen implements Screen {
-    private final Stage stage;
+@Component
+public class MainMenuScreen implements ScreenSPI, Screen {
+    private Stage stage;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     public MainMenuScreen() {
-        this.stage = new Stage(new ScreenViewport());
-
-        Gdx.input.setInputProcessor(stage);
+        super();
     }
 
     @Override
     public void show() {
+        this.stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -40,7 +47,7 @@ public class MainMenuScreen implements Screen {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                ScreenManager.getInstance().setScreen(GameScreen.class);
+                screenManager.changeScreen("GameScreen");
             }
         });
 
