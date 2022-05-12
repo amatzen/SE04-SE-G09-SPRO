@@ -1,3 +1,5 @@
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
@@ -15,26 +17,36 @@ public class AStarPathFindingTest {
     public void testAStar() {
         MapSPI map = new MapSPI() {
             @Override
-            public List<Vector2> getAtms() {
+            public List<Vector2> getATMPositions() {
                 return null;
             }
 
             @Override
-            public boolean isTileAccessibly(float x, float y) {
-                if (x > 8 && x < 10 && y > 4 && y < 16) {
+            public boolean isTileAccessibly(Vector2 position) {
+                if (position.x > 8 && position.x < 10 && position.y > 4 && position.y < 16) {
                     return false;
                 }
                 return true;
             }
 
             @Override
-            public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
+                return null;
+            }
+
+            @Override
+            public MapLayer getLayer(String layerName) {
+                return null;
+            }
+
+            @Override
+            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
                 return worldCoordinates;
             }
 
             @Override
-            public Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates) {
-                return tileCoordinates;
+            public Vector2 mapPosToWorldPos(Vector2 position) {
+                return null;
             }
 
             @Override
@@ -61,26 +73,36 @@ public class AStarPathFindingTest {
     public void noClearPath() {
         MapSPI map = new MapSPI() {
             @Override
-            public List<Vector2> getAtms() {
+            public List<Vector2> getATMPositions() {
                 return null;
             }
 
             @Override
-            public boolean isTileAccessibly(float x, float y) {
-                if (x > 10 || x < -10 || y > 10 || y < -10) {
+            public boolean isTileAccessibly(Vector2 position) {
+                if (position.x > 10 || position.x < -10 || position.y > 10 || position.y < -10) {
                     return false;
                 }
                 return true;
             }
 
             @Override
-            public Vector2 worldCoordinatesToMapCoordinates(Vector2 worldCoordinates) {
+            public Vector2 getRandomCellPosition(TiledMapTileLayer layer) {
+                return null;
+            }
+
+            @Override
+            public MapLayer getLayer(String layerName) {
+                return null;
+            }
+
+            @Override
+            public Vector2 worldPosToMapPos(Vector2 worldCoordinates) {
                 return worldCoordinates;
             }
 
             @Override
-            public Vector2 tileCoordinatesToWorldCoordinates(Vector2 tileCoordinates) {
-                return tileCoordinates;
+            public Vector2 mapPosToWorldPos(Vector2 position) {
+                return null;
             }
 
             @Override

@@ -32,4 +32,9 @@ public class Signal<T> implements ISignal<T> {
             listener.onSignal(this, value);
         }
     }
+
+    @Override
+    public void dispose() {
+        removeAllListeners();
+    }
 }
