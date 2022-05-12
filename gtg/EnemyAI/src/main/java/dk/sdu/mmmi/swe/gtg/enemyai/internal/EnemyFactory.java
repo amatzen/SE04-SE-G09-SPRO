@@ -21,6 +21,8 @@ public class EnemyFactory implements IEnemyFactory {
     @Reference
     private ShapeFactorySPI shapeFactory;
 
+    private TexturePart policeTexture;
+
     @Override
     public Entity createEnemy(Vector2 position) {
         Entity enemy = new Enemy();
@@ -46,9 +48,16 @@ public class EnemyFactory implements IEnemyFactory {
         enemy.addPart(new PathFollowingPart(8f));
         enemy.addPart(new LifePart());
 
-        enemy.addPart(getTexture("assets/police.png"));
+        enemy.addPart(getPoliceTexture());
 
         return enemy;
+    }
+
+    private TexturePart getPoliceTexture() {
+        if (policeTexture == null) {
+            this.policeTexture = getTexture("assets/police.png");
+        }
+        return this.policeTexture;
     }
 
     private TexturePart getTexture(String path) {
