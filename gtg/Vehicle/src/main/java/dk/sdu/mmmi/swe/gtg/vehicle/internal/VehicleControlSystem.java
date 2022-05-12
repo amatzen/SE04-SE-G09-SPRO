@@ -15,6 +15,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commonbullet.BulletSPI;
 import dk.sdu.mmmi.swe.gtg.vehicle.Vehicle;
+import dk.sdu.mmmi.swe.gtg.wantedlevelsystemcommon.services.IWantedLevelSystem;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -32,6 +33,8 @@ public class VehicleControlSystem implements IProcessingSystem {
     private BulletSPI bulletSPI;
     @Reference
     private BodyComputationSPI bcc;
+    @Reference
+    private IWantedLevelSystem wantedLevelSystem;
     private List<Vehicle> vehicleList;
     private Sound sound;
 
@@ -63,7 +66,6 @@ public class VehicleControlSystem implements IProcessingSystem {
         final Vector2 baseVector = new Vector2(0, 0);
         Body vehicleBody = vehicle.getPart(BodyPart.class).getBody();
         DriveTrain driveTrain = vehicle.getPart(DriveTrain.class);
-        TransformPart position = vehicle.getPart(TransformPart.class);
 
         if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
             shoot(vehicleBody);
@@ -101,10 +103,6 @@ public class VehicleControlSystem implements IProcessingSystem {
             } else {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
             }
-        }
-
-        if (gameData.getKeys().isPressed(GameKeys.ENTER)) {
-            System.out.println(position.getPosition());
         }
 
         for (final Wheel wheel : driveTrain.getWheels()) {
@@ -152,6 +150,8 @@ public class VehicleControlSystem implements IProcessingSystem {
         sound = Gdx.audio.newSound(Gdx.files.internal("sounds/Gunshot.mp3"));
         sound.play(0.3f);
         engine.addEntity(bulletSPI.createBullet(vehiclePosition, new Vector2(direction), vehicleDirection));
+
+        wantedLevelSystem.reportCrime(1f);
     }
 
     private void turnWheel(float angle, Wheel wheel, Body vehicleBody) {
@@ -168,5 +168,4 @@ public class VehicleControlSystem implements IProcessingSystem {
         Body wheelBody = wheel.getPart(BodyPart.class).getBody();
         wheelBody.setTransform(wheelBody.getPosition(), angle + vehicleBody.getAngle());
     }
-
 }

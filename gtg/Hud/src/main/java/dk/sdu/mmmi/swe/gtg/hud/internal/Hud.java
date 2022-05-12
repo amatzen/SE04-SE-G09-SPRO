@@ -28,20 +28,12 @@ public class Hud implements Disposable {
 
     // Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
-
-    // Tracking Variables
-    private int bullets;
-    private int health;
     private int money;
-    private int wanted;
 
     public Hud(SpriteBatch sb) {
 
         // Define our default tracking variables
-        health = 100;
         money = 0;
-        bullets = 999;
-        wanted = 0;
 
         // Set up the HUD viewport using a new camera seperate from our gamecam
         viewport = new FitViewport(V_WIDTH, V_HEIGHT, new OrthographicCamera());
@@ -63,13 +55,13 @@ public class Hud implements Disposable {
         showMoney = new Label("$" + String.format("%06d", getMoney()), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         bulletLabel = new Label("BULLETS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showBullets = new Label(String.format("%03d", bullets) + "+", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
+        showBullets = new Label("INFINITE", new Label.LabelStyle(new BitmapFont(), Color.GOLD));
 
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showHealth = new Label(String.format("%01d", getHealth()), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        showHealth = new Label(String.format("%01d", 100), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
         wantedLabel = new Label("WANTED LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        showWanted = new Label(String.format("%01d", getWanted()) + "/5", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        showWanted = new Label(String.format("%01d", 0) + "/5", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
 
         // Add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(moneyLabel).expandX().padTop(10);
@@ -95,18 +87,8 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
-
     public void setHealth(int value) {
         showHealth.setText(value);
-    }
-
-    public void addHealth(int value) {
-        health += value;
-        showHealth.setText(value);
-    }
-
-    public int getHealth(){
-        return health;
     }
 
     public void addMoney(int value) {
@@ -114,49 +96,12 @@ public class Hud implements Disposable {
         showMoney.setText(String.format("%06d", money));
     }
 
-    public void removeMoney(int value) {
-        money -= value;
-        showMoney.setText(String.format("%06d", money));
-    }
-
-    public void addBullets(int value) {
-        bullets += value;
-        showBullets.setText(String.format("%03d", bullets));
-    }
-
-    public void removeBullets(int value) {
-        bullets -= value;
-        showBullets.setText(String.format("%03d", bullets));
-    }
-
-
-
-    public void loseHealth(int value) {
-        health -= value;
-        showHealth.setText(health);
-    }
-
-
-    public int getWanted() {
-        return wanted;
-    }
-
     public int getMoney() {
         return money;
     }
 
-    public void addWanted(int value) {
-        if (wanted<5){
-            wanted += value;
-        }
-        showWanted.setText(wanted+"/5");
-    }
-
-    public void decreaseWanted(int value) {
-        if (wanted>0){
-        wanted -= value;
-        }
-        showWanted.setText(wanted+"/5");
+    public void setWantedLevel(int value) {
+        showWanted.setText(value+"/5");
     }
 
     public Stage getStage() {

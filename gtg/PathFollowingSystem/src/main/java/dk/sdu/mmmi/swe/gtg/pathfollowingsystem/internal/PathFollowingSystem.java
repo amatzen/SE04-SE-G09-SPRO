@@ -92,16 +92,12 @@ public class PathFollowingSystem implements IProcessingSystem {
                     normalPoint.y > Math.max(a.y, b.y)
             ) {
                 normalPoint = b.cpy();
-
-                /*a = nodes.get(i + 1).getState();
-                b = nodes.get(i + 2).getState();
-                dir = b.cpy().sub(a);*/
             }
 
-            float d = predict.dst(normalPoint);
+            float normalLength = predict.dst(normalPoint);
 
-            if (d < record) {
-                record = d;
+            if (normalLength < record) {
+                record = normalLength;
 
                 normal = normalPoint;
 
@@ -132,8 +128,7 @@ public class PathFollowingSystem implements IProcessingSystem {
         Vector2 ap = p.cpy().sub(a);
         Vector2 ab = b.cpy().sub(a);
         ab.nor();
-        // Rotates path ab to point in the direction of the predict (i guess)
-        // Finds the adjacent point to the predict (hypothenuse)
+        // Projects the prediction vector (the hypothenuse) onto the line segment defined by the two points a and b (the adjacent).
         ab.scl(ap.dot(ab));
         // Adds the adjacent point to the starting point a.
         return a.cpy().add(ab);
