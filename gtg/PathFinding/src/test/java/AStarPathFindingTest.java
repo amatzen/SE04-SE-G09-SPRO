@@ -1,6 +1,3 @@
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfinding.internal.AStarPathFinding;
