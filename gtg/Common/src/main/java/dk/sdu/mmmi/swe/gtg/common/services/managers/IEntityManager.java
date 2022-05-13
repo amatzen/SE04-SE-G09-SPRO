@@ -17,4 +17,6 @@ public interface IEntityManager {
     Collection<Entity> getEntities();
 
     <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes);
+
+    void reset();
 }

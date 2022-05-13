@@ -54,4 +54,9 @@ public class EntityManager implements IEntityManager {
 
         return res;
     }
+
+    @Override
+    public void reset() {
+        
+    }
 }
