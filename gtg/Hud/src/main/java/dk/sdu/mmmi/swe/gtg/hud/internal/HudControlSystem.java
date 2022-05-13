@@ -12,22 +12,20 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class HudControlSystem implements IPostProcessingSystem, HudSPI {
+    private Hud hud;
+    private SpriteBatch spriteBatch;
 
     @Reference
     private IEngine engine;
 
-    private Hud hud;
-    private SpriteBatch spriteBatch;
-
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         spriteBatch = new SpriteBatch();
         hud = new Hud(spriteBatch);
     }
 
     @Override
     public void process(GameData gameData) {
-
         spriteBatch.setProjectionMatrix(hud.getStage().getCamera().combined);
         hud.getStage().act(gameData.getDelta());
         hud.getStage().draw();
