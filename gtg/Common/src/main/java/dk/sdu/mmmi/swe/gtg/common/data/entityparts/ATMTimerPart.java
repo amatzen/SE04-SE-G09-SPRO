@@ -34,7 +34,6 @@ public class ATMTimerPart implements IEntityPart {
     }
 
     public void update(float delta) {
-        System.out.println(this.isActive);
         if (this.isActive) {
             this.timer += delta;
             this.actions.stream()
