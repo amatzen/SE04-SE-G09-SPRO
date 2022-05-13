@@ -146,11 +146,11 @@ public class VehiclePlugin implements IPlugin {
     }
 
     private TexturePart getBodyTexture() {
-        return getTexture("assets/player.png");
+        return getTexture("assets/entities/player.png");
     }
 
     private TexturePart getWheelTexture() {
-        return getTexture("assets/tire.png");
+        return getTexture("assets/entities/tire.png");
     }
 
     private Wheel[] createWheels(Vehicle vehicle) {

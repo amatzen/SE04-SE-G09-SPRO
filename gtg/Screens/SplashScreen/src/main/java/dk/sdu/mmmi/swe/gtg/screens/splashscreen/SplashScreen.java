@@ -29,7 +29,7 @@ public class SplashScreen implements ScreenSPI {
     @Override
     public void show() {
         this.batch = new SpriteBatch();
-        this.splashTexture = new Texture("assets/splash_screen_new.png");
+        this.splashTexture = new Texture("assets/icons/splash_screen.png");
         this.sprite = new Sprite(splashTexture);
     }
 

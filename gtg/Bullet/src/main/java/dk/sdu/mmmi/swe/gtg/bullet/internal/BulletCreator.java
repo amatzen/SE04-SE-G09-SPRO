@@ -90,7 +90,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
     private TexturePart getBulletTexture() {
         if (this.bulletTexture == null) {
-            this.bulletTexture = getTexture("assets/bullet.png");
+            this.bulletTexture = getTexture("assets/entities/bullet.png");
         }
         return this.bulletTexture;
     }

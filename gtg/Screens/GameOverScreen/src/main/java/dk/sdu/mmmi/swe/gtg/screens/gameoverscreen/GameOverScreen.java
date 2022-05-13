@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.screens.gameoverscreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -56,7 +55,7 @@ public class GameOverScreen implements ScreenSPI {
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red-new-exact.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/icons/Wasted-red-new-exact.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 100).row();
 
