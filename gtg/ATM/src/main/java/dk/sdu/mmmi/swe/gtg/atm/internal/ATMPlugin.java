@@ -108,7 +108,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
         return texturePart;
     }
 
-    private TexturePart getBodyTexture() {
+    private TexturePart getAtmTexture() {
         if (this.atmTexturePart == null) {
             this.atmTexturePart = getTexture("assets/entities/atm/atm.png");
         }
@@ -127,7 +127,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
         Vector2 atmSize = new Vector2(1, 1.5f);
 
-        float sensorRadius = 10;
+        float sensorRadius = 5;
 
         for (Vector2 coordinate : coordinates) {
 
@@ -154,12 +154,12 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
             this.atm.addPart(new ProximityPart());
             this.atm.addPart(new ATMBalancePart());
             this.atm.addPart(new ATMTimerPart());
-
+            this.atm.addPart(new ATMRobbedTimer());
             TransformPart transformPart = new TransformPart();
             transformPart.setScale(1f / 184f, 1.5f / 423f);
 
             this.atm.addPart(transformPart);
-            this.atm.addPart(getBodyTexture());
+            this.atm.addPart(getAtmTexture());
 
             engine.addEntity(this.atm);
         }

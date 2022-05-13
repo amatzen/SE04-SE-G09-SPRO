@@ -24,12 +24,14 @@ public class ATMTimerPart implements IEntityPart {
 
     public void resetTimer() {
         this.timer = 0.00;
+        for (ExpiryAction a : this.actions) {
+            a.hasRan = false;
+        }
     }
 
     public void setTimer(double timer) {
         this.timer = timer;
     }
-
 
     public void update(float delta) {
         if (this.isActive) {

@@ -40,6 +40,7 @@ public class GTG extends Game {
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);
 
+
         if (screen == null) {
             System.out.println("No screen with name " + value + " found");
             return;
