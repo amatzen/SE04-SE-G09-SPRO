@@ -9,6 +9,8 @@
 | "M"                | Pause/play music              |
 | "K"                | Debug (Suicide)               |
 | "P"                | Debug (Increase Wanted level) |
+| "G"                | Debug (Enable god mode)       |
+| "H"                | Debug (Refill health)         |
 | "Enter"            |                               |
 
 # Create module

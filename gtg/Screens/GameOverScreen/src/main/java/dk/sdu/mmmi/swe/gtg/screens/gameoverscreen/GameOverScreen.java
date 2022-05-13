@@ -20,7 +20,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class GameOverScreen implements ScreenSPI, Screen {
+public class GameOverScreen implements ScreenSPI {
 
     @Reference
     private IEngine engine;
