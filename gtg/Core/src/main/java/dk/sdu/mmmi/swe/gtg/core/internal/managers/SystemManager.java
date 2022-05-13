@@ -50,6 +50,11 @@ public class SystemManager implements ISystemManager {
         });
     }
 
+    @Override
+    public void reset() {
+
+    }
+
     private Collection<? extends IProcessingSystem> getEntityProcessingServices() {
         return entityProcessors;
     }
