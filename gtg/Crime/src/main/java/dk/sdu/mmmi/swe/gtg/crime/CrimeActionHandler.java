@@ -53,7 +53,7 @@ public class CrimeActionHandler implements ICrimeAction {
     }
 
     public TexturePart getAtmTexture() {
-        return getTexture("assets/atm.png");
+        return getTexture("assets/entities/atm/atm.png");
 
     }
 }
