@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.github.sebhoss.warnings.CompilerWarnings;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
@@ -29,8 +30,10 @@ public class GTG extends Game {
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
     private final Map<String, ScreenSPI> screens = new HashMap<>();
+
     @Reference
     private ScreenManagerSPI screenManager;
+
     @Reference
     private IEngine engine;
 
