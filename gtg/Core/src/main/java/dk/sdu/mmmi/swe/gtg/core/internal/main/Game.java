@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Component
+@Component(immediate = true)
 public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, ApplicationListener {
     public final GameData gameData = new GameData();
 
