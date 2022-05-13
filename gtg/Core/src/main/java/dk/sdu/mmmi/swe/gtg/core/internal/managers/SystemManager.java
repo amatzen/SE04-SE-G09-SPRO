@@ -5,11 +5,13 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class SystemManager implements ISystemManager {
 
     private final List<IProcessingSystem> entityProcessors;

@@ -38,4 +38,8 @@ public class ATMBalancePart implements IEntityPart {
     public void destroy() {
         onRobbed.dispose();
     }
+    public void generateBalance (){
+        this.balance= balance+(int) Math.floor(Math.random() * 12000);
+    }
+
 }

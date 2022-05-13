@@ -33,12 +33,10 @@ public class GTG extends Game {
     @Reference
     private ScreenManagerSPI screenManager;
 
-    @Reference
-    private IEngine engine;
-
     private Screen currentScreen;
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);
+
 
         if (screen == null) {
             System.out.println("No screen with name " + value + " found");

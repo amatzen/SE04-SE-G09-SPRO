@@ -34,7 +34,7 @@ public class CrimeActionHandler implements ICrimeAction {
             cashSound.play();
 
             atmBalance.setRobbed(true);
-            entity.addPart(getBodyTexture());
+            entity.addPart(getRobbedAtmTexture());
             atmBalance.destroy();
         }
     }
@@ -48,7 +48,14 @@ public class CrimeActionHandler implements ICrimeAction {
         return texturePart;
     }
 
-    private TexturePart getBodyTexture() {
+    @Override
+    public TexturePart getAtmTexture() {
+        return getTexture("assets/entities/atm/atm.png");
+
+    }
+
+    @Override
+    public TexturePart getRobbedAtmTexture() {
         return getTexture("assets/entities/atm/atmRobbed.png");
     }
 
