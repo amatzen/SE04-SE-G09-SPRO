@@ -51,7 +51,7 @@ public class BustedScreen implements ScreenSPI, Screen {
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/busted.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/icons/busted.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 100).row();
 
