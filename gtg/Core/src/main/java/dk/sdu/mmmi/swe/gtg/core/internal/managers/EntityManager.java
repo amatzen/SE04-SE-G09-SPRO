@@ -57,6 +57,6 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public void reset() {
-        
+
     }
 }

@@ -18,4 +18,6 @@ public interface IFamilyManager {
     void addEntityListener(IFamily family, IEntityListener listener);
 
     void removeEntityListener(IFamily family, IEntityListener listener);
+
+    void reset();
 }

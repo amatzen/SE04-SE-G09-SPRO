@@ -116,4 +116,9 @@ public class FamilyManager implements IFamilyManager {
             listeners.remove(listener);
         }
     }
+
+    @Override
+    public void reset() {
+
+    }
 }
