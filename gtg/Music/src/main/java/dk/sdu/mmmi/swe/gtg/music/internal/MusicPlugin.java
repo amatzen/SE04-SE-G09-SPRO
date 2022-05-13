@@ -3,7 +3,6 @@ package dk.sdu.mmmi.swe.gtg.music.internal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import org.osgi.service.component.annotations.Component;
 
@@ -15,14 +14,14 @@ public class MusicPlugin implements IPlugin {
     public static Music policeSound;
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         menuMusic();
         gameSound();
         policeSound();
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         menuMusic.stop();
         gameSound.stop();
         policeSound.stop();

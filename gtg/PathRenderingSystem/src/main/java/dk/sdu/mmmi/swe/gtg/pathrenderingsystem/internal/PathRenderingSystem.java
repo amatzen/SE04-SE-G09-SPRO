@@ -10,6 +10,7 @@ import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Path;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public class PathRenderingSystem implements IPostProcessingSystem {
     private List<? extends Entity> entities;
     private ShapeRenderer shapeRenderer;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entities = engine.getEntitiesFor(
                 Family.builder().with(PathPart.class).get()
         );

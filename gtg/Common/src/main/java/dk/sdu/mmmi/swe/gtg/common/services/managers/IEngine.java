@@ -38,4 +38,6 @@ public interface IEngine {
     void addEntityListener(IFamily family, IEntityListener listener, boolean iterate);
 
     void removeEntityListener(IFamily family, IEntityListener listener);
+
+    void reset();
 }

@@ -42,6 +42,9 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     @Reference
     private MapSPI mapSPI;
 
+    @Reference
+    private IEngine engine;
+
     private ATM atm;
 
     private ICollisionListener collisionListener;
@@ -53,7 +56,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
         IFamily familyB = Family.builder()
             .forEntities(Vehicle.class)
@@ -113,13 +116,13 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntity(atm);
         collisionSPI.removeListener(collisionListener);
     }
 
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         List<Vector2> coordinates = mapSPI.getATMPositions();
 
         Vector2 atmSize = new Vector2(1, 1.5f);

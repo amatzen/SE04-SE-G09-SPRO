@@ -27,8 +27,11 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     @Reference
     private ScreenManagerSPI screenManager;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
 
         wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));

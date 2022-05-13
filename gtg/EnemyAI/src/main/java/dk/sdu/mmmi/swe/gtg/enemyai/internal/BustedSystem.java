@@ -36,10 +36,13 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     private final float minAverageSpeed = 2f;
     private final float maxAverageDistance = 5f;
 
-    public Music wastedSound;
+    @Reference
+    private IEngine engine;
 
     @Reference
     private ScreenManagerSPI screenManager;
+
+    public Music wastedSound;
 
     private IEntityListener playerListener = new EntityListener() {
         @Override
@@ -54,7 +57,7 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     };
 
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
         wastedSound.setLooping(false);
         wastedSound.setVolume(0.3f);
@@ -101,13 +104,13 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         engine.addEntityListener(Family.builder().with(PlayerPart.class).get(), playerListener, true);
         enemies = engine.getEntitiesFor(Family.builder().forEntities(Enemy.class).get());
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntityListener(Family.builder().with(PlayerPart.class).get(), playerListener);
     }
 }

@@ -14,4 +14,6 @@ public interface ISystemManager {
     void removePostEntityProcessingService(IPostProcessingSystem service);
 
     void update(GameData gameData);
+
+    void reset();
 }

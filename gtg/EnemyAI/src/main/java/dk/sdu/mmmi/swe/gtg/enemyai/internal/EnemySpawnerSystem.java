@@ -35,15 +35,16 @@ public class EnemySpawnerSystem implements IPlugin {
     @Reference
     private IEnemyFactory enemyFactory;
 
+    @Reference
+    private MapSPI map;
+
+    @Reference
+    private IEngine engine;
+
     private int maxEnemyCount;
     private List<? extends Entity> enemyList;
 
     private List<? extends Entity> targets;
-
-    @Reference
-    private MapSPI map;
-
-    private IEngine engine;
 
     private Entity player;
 
@@ -53,9 +54,7 @@ public class EnemySpawnerSystem implements IPlugin {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
-        this.engine = engine;
-
+    public void install(GameData gameData) {
         enemyList = engine.getEntitiesFor(enemyFamily);
 
         wantedLevelListener = (signal, wantedPart) -> {
@@ -123,7 +122,7 @@ public class EnemySpawnerSystem implements IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntityListener(enemyFamily, enemyListener);
         engine.removeEntityListener(targetFamily, targetListener);
 

@@ -10,6 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public class BoidSeparationSystem implements IProcessingSystem {
 
     private List<? extends Entity> enemies;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         enemies = engine.getEntitiesFor(
                 Family.builder().forEntities(Enemy.class).get()
         );
