@@ -130,6 +130,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
         float sensorRadius = 5;
 
         for (Vector2 coordinate : coordinates) {
+            System.out.println("Creating ATMS");
 
             Vector2 atmposition = new Vector2(coordinate);
 

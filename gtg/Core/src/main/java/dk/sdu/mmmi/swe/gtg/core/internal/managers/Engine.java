@@ -154,9 +154,8 @@ public class Engine implements IEngine {
         this.pluginManager.uninstallAll(gameData);
         this.entityManager.reset();
         this.familyManager.reset();
-        this.systemManager.reset();
         this.pluginManager.installAll(gameData);
-        //this.pluginManager.reset(gameData);
+        this.systemManager.reset();
     }
 
     @Override
