@@ -119,6 +119,7 @@ public class FamilyManager implements IFamilyManager {
 
     @Override
     public void reset() {
-
+        this.listeners.clear();
+        this.families.clear();
     }
 }

@@ -151,6 +151,10 @@ public class Engine implements IEngine {
 
     @Override
     public void reset() {
+        this.systemsToBeStarted.clear();
 
+        this.systemManager.reset();
+        this.entityManager.reset();
+        this.familyManager.reset();
     }
 }

@@ -52,7 +52,8 @@ public class SystemManager implements ISystemManager {
 
     @Override
     public void reset() {
-
+        this.entityPostProcessors.clear();
+        this.entityProcessors.clear();
     }
 
     private Collection<? extends IProcessingSystem> getEntityProcessingServices() {

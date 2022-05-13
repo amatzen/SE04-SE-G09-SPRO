@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 
@@ -24,10 +25,7 @@ public class EntityManager implements IEntityManager {
     @Override
     public void removeEntity(Entity entity) {
         entityMap.remove(entity.getID());
-
-        entity.getParts().forEach((part) -> {
-            part.destroy();
-        });
+        entity.getParts().forEach(IEntityPart::destroy);
     }
 
     @Override
@@ -57,6 +55,6 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public void reset() {
-
+        this.entityMap.clear();
     }
 }
