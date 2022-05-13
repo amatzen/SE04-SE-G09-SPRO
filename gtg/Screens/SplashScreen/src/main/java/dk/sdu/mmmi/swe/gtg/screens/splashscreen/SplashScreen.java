@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
