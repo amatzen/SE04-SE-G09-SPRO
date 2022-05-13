@@ -3,7 +3,6 @@ package dk.sdu.mmmi.swe.gtg.collision;
 import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
@@ -24,6 +23,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
 
     private final List<ICollisionListener> listeners;
     private final Queue<Collision> contacts;
+
     @Reference
     private IWorldManager worldManager;
 
@@ -63,18 +63,17 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         this.worldManager.setContactLister(this);
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         this.worldManager.setContactLister(null);
     }
 
     @Override
-    public void addedToEngine(IEngine engine) {
-
+    public void addedToEngine() {
     }
 
     @Override
