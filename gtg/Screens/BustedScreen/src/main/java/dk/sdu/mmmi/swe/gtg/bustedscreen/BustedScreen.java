@@ -20,7 +20,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BustedScreen  implements ScreenSPI, Screen {
+public class BustedScreen implements ScreenSPI, Screen {
 
     @Reference
     private IEngine engine;

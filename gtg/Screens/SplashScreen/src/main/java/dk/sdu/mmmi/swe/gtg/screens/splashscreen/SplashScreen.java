@@ -13,10 +13,10 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component(immediate = true)
 public class SplashScreen implements ScreenSPI, Screen {
+    private final float MAX_COUNT = 3f; // Seconds to display splash
     private SpriteBatch batch;
     private Texture splashTexture;
     private Sprite sprite;
-    private final float MAX_COUNT = 3f; // Seconds to display splash
     private float count = 0.0f;
 
     @Reference
