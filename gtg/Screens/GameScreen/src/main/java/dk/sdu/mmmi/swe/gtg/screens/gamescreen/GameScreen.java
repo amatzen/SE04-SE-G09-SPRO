@@ -16,9 +16,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class GameScreen extends ScreenAdapter implements ScreenSPI, Screen {
-    private final float PPM = 40;
+public class GameScreen extends ScreenAdapter implements ScreenSPI {
     private GameData gameData;
+
+    private final float PPM = 40;
     private OrthographicCamera cam;
     private Box2DDebugRenderer mB2dr;
 
