@@ -50,6 +50,7 @@ public class ATMControlSystem implements IProcessingSystem {
                 entity.getPart(ATMBalancePart.class).generateBalance();
                 entity.getPart(ATMBalancePart.class).setRobbed(false);
                 robbedTimer.resetTimer();
+                timerPart.resetTimer();
             });
         });
 
