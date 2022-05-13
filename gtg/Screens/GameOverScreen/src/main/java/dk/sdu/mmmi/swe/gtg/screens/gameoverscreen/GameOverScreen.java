@@ -57,7 +57,7 @@ public class GameOverScreen implements ScreenSPI, Screen {
         table.add(gmLogo).size(400, 100).row();
 
         // Death message
-        deathMessage = new Label("You got busted and lost all your money!", new Label.LabelStyle(
+        deathMessage = new Label("You got wasted and lost all your money!", new Label.LabelStyle(
                 new BitmapFont(), Color.RED));
         deathMessage.setFontScale(1.3f);
         table.add(deathMessage).pad(25).row();
