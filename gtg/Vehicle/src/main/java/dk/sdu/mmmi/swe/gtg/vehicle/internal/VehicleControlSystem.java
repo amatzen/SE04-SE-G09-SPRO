@@ -71,6 +71,10 @@ public class VehicleControlSystem implements IProcessingSystem {
             shoot(vehicleBody);
         }
 
+        if (gameData.getKeys().isPressed(GameKeys.P)) {
+            wantedLevelSystem.reportCrime(10f);
+        }
+
         float wheelAngle = driveTrain.getTurnAngle();
 
         if (gameData.getKeys().isDown(GameKeys.LEFT) || gameData.getKeys().isDown(GameKeys.A)) {
