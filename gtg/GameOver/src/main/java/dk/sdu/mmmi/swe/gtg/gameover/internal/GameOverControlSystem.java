@@ -5,8 +5,10 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.WantedPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -59,7 +61,13 @@ public class GameOverControlSystem implements IPostProcessingSystem {
             }
         }
 
-        for (Entity i : entity) {
+        if (gameData.getKeys().isPressed(GameKeys.K)) {
+            this.gameOver = true;
+            this.screenManager.changeScreen("GameOverScreen");
+            wastedSound.play();
+        }
+
+            for (Entity i : entity) {
             playerLife = i.getPart(LifePart.class);
         }
     }
