@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.core.internal.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
@@ -52,7 +53,13 @@ public class SystemManager implements ISystemManager {
 
     @Override
     public void reset() {
-        
+        for (IEntitySystem system : entityProcessors) {
+            system.addedToEngine();
+        }
+
+        for (IEntitySystem system : entityPostProcessors) {
+
+        }
     }
 
     private Collection<? extends IProcessingSystem> getEntityProcessingServices() {
