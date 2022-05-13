@@ -48,8 +48,8 @@ public class CrimeActionHandler implements ICrimeAction {
         return texturePart;
     }
 
-    public TexturePart getRobbedAtmTexture() {
-        return getTexture("assets/atmRobbed.png");
+    private TexturePart getBodyTexture() {
+        return getTexture("assets/entities/atm/atmRobbed.png");
     }
 
     public TexturePart getAtmTexture() {

@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.screens.mainmenuscreen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -37,7 +36,7 @@ public class MainMenuScreen implements ScreenSPI {
         table.setFillParent(true);
         stage.addActor(table);
 
-        Image logo = new Image(new Texture(Gdx.files.internal("assets/logo.png")));
+        Image logo = new Image(new Texture(Gdx.files.internal("assets/icons/logo.png")));
         table.add(logo).pad(10);
 
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));

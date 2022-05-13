@@ -55,7 +55,7 @@ public class EnemyFactory implements IEnemyFactory {
 
     private TexturePart getPoliceTexture() {
         if (policeTexture == null) {
-            this.policeTexture = getTexture("assets/police.png");
+            this.policeTexture = getTexture("assets/entities/police.png");
         }
         return this.policeTexture;
     }
