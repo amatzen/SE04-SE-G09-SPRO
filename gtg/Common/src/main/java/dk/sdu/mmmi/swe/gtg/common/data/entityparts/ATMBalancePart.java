@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.swe.gtg.common.data.entityparts;
 
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignal;
 import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 

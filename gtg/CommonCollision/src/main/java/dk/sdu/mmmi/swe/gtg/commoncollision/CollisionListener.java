@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.swe.gtg.commoncollision;
 
-import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 
 public abstract class CollisionListener implements ICollisionListener {

@@ -1,8 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.common.services.managers;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
-import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
-import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 
 import java.util.Collection;
 import java.util.List;

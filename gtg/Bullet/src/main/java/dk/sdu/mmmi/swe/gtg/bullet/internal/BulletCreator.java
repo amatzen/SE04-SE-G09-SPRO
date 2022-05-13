@@ -28,15 +28,13 @@ public class BulletCreator implements BulletSPI, IPlugin {
     @Reference
     private IWorldManager worldManager;
 
-    private Body pBody;
-
     @Reference
     private CollisionSPI collisionSPI;
 
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
-
     private TexturePart bulletTexture;
+    private Body pBody;
 
     public BulletCreator() {
 
