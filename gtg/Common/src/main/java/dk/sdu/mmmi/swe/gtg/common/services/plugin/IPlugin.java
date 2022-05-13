@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.common.services.plugin;
 
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 
 public interface IPlugin {
     /**
@@ -11,11 +10,10 @@ public interface IPlugin {
      * Called when the plugin is first created.
      *
      * @param gameData Game data.
-     * @param world    World data.
      * @pre The application has been started.
      * @post The entity plugin has been initialized.
      */
-    void install(IEngine engine, GameData gameData);
+    void install(GameData gameData);
 
     /**
      * Stop
@@ -23,9 +21,8 @@ public interface IPlugin {
      * Called when the application is stopped.
      *
      * @param gameData Game data.
-     * @param world    World data.
      * @pre The plugin has been started.
      * @post The entity plugin has been taken down.
      */
-    void uninstall(IEngine engine, GameData gameData);
+    void uninstall(GameData gameData);
 }
