@@ -31,6 +31,9 @@ public class VehiclePlugin implements IPlugin {
     private final float WHEEL_OFFSET_Y = 4.0f * 0.3f;
 
     @Reference
+    private IEngine engine;
+
+    @Reference
     private HudSPI hudSPI;
 
     @Reference
@@ -42,7 +45,7 @@ public class VehiclePlugin implements IPlugin {
     private IEntityListener vehicleListener;
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         vehicleListener = new EntityListener() {
             @Override
             public void onEntityRemoved(Entity entity) {
@@ -226,7 +229,7 @@ public class VehiclePlugin implements IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntityListener(
             Family.builder().forEntities(Vehicle.class).get(),
             vehicleListener
