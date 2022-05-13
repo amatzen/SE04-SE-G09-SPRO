@@ -1,13 +1,15 @@
 # Controls
-| Controls | Description |
-|---|---|
-| "A" or Left arrow | Turn left |
-| "D" or Right arrow | Turn right |
-| "W" or Up arrow | Accelerate |
-| "S" or Down arrow | Decelerate |
-| Space | Shoot |
-| "M" | Pause/play music |
-| Enter | Debug (Print location on map) |
+| Controls           | Description                   |
+|--------------------|-------------------------------|
+| "A" or Left arrow  | Turn left                     |
+| "D" or Right arrow | Turn right                    |
+| "W" or Up arrow    | Accelerate                    |
+| "S" or Down arrow  | Decelerate                    |
+| Space              | Shoot                         |
+| "M"                | Pause/play music              |
+| "K"                | Debug (Suicide)               |
+| "P"                | Debug (Increase Wanted level) |
+| "Enter"            |                               |
 
 # Create module
 `mvn pax:create-bundle "-Dpackage=dk.sdu.mmmi.swe.gtg.something" "-Dversion=1.0-SNAPSHOT"`
