@@ -17,9 +17,9 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
@@ -28,7 +28,8 @@ public class GTG extends Game {
     private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
-    private final Map<String, ScreenSPI> screens = new HashMap<>();
+    private final Map<String, ScreenSPI> screens = new ConcurrentHashMap<>();
+
     @Reference
     private ScreenManagerSPI screenManager;
     @Reference
@@ -40,11 +41,13 @@ public class GTG extends Game {
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);
 
+
         if (screen == null) {
             System.out.println("No screen with name " + value + " found");
             return;
         }
 
+        System.out.println("Changing to screen " + value);
         setScreen(screen);
     };
 
