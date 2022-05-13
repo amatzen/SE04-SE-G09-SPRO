@@ -12,7 +12,6 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -35,7 +34,7 @@ public class CrimeActionHandler implements ICrimeAction {
             cashSound.play();
 
             atmBalance.setRobbed(true);
-            entity.addPart(getBodyTexture());
+            entity.addPart(getRobbedAtmTexture());
             atmBalance.destroy();
         }
     }
@@ -49,8 +48,12 @@ public class CrimeActionHandler implements ICrimeAction {
         return texturePart;
     }
 
-    private TexturePart getBodyTexture() {
+    public TexturePart getRobbedAtmTexture() {
         return getTexture("assets/atmRobbed.png");
     }
 
+    public TexturePart getAtmTexture() {
+        return getTexture("assets/atm.png");
+
+    }
 }
