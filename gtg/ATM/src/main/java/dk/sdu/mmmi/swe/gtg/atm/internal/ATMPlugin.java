@@ -107,7 +107,7 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
 
     private TexturePart getBodyTexture() {
         if (this.atmTexturePart == null) {
-            this.atmTexturePart = getTexture("assets/atm.png");
+            this.atmTexturePart = getTexture("assets/entities/atm/atm.png");
         }
         return this.atmTexturePart;
     }

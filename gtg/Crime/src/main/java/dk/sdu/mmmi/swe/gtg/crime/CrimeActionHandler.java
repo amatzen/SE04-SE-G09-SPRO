@@ -12,7 +12,6 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -50,7 +49,7 @@ public class CrimeActionHandler implements ICrimeAction {
     }
 
     private TexturePart getBodyTexture() {
-        return getTexture("assets/atmRobbed.png");
+        return getTexture("assets/entities/atm/atmRobbed.png");
     }
 
 }
