@@ -55,6 +55,6 @@ public class EntityManager implements IEntityManager {
 
     @Override
     public void reset() {
-        this.entityMap.clear();
+        this.entityMap.forEach((ID, entity) -> removeEntity(entity));
     }
 }
