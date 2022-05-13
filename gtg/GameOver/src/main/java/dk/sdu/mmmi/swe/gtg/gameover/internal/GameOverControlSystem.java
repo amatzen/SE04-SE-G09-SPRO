@@ -18,8 +18,7 @@ import java.util.List;
 
 @Component
 public class GameOverControlSystem implements IPostProcessingSystem {
-
-    public static Music wastedSound;
+    public Music wastedSound;
     List<? extends Entity> entity;
     private LifePart playerLife;
     private boolean gameOver = false;
@@ -27,7 +26,6 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     @Reference
     private ScreenManagerSPI screenManager;
 
-    public static Music wastedSound;
 
     @Override
     public void addedToEngine(IEngine engine) {
