@@ -10,6 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.sort.QuickSort;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,10 @@ public class RenderingSystem implements IPostProcessingSystem {
 
     private List<? extends Entity> entities;
 
-    public void addedToEngine(IEngine engine) {
+    @Reference
+    private IEngine engine;
+
+    public void addedToEngine() {
         entities = engine.getEntitiesFor(
                 Family.builder().with(TransformPart.class, TexturePart.class).get()
         );
