@@ -26,7 +26,6 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     @Reference
     private ScreenManagerSPI screenManager;
 
-
     @Override
     public void addedToEngine(IEngine engine) {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
