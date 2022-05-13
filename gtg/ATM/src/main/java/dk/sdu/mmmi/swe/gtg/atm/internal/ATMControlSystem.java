@@ -29,6 +29,9 @@ public class ATMControlSystem implements IProcessingSystem {
     @Reference
     private IEngine engine;
 
+    public ATMControlSystem() {
+    }
+
     @Override
     public void addedToEngine() {
         this.atmEntities = engine.getEntitiesFor(

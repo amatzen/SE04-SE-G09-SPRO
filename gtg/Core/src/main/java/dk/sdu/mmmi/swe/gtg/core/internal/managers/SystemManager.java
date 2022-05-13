@@ -60,7 +60,7 @@ public class SystemManager implements ISystemManager {
         }
 
         for (IEntitySystem system : entityPostProcessors) {
-
+            system.addedToEngine();
         }
     }
 

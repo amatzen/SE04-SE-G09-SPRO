@@ -7,9 +7,12 @@ import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
+import dk.sdu.mmmi.swe.gtg.common.family.EntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
+import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -17,11 +20,10 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.List;
 
 @Component
-public class GameOverControlSystem implements IPostProcessingSystem {
+public class GameOverControlSystem implements IPostProcessingSystem, IPlugin {
 
-    List<? extends Entity> entity;
+    private Entity player;
     public Music wastedSound;
-    private LifePart playerLife;
     private boolean gameOver = false;
 
     @Reference
@@ -30,10 +32,10 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     @Reference
     private IEngine engine;
 
+    private IEntityListener playerListener;
+
     @Override
     public void addedToEngine() {
-        entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
-
         wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
         wastedSound.setLooping(false);
         wastedSound.setVolume(0.3f);
@@ -43,12 +45,13 @@ public class GameOverControlSystem implements IPostProcessingSystem {
     public void process(GameData gameData) {
         if (gameOver) return;
 
-        if (playerLife != null) {
-            if (playerLife.getLife() <= 0) {
-                this.gameOver = true;
-                this.screenManager.changeScreen("GameOverScreen");
-                wastedSound.play();
-            }
+        if (player == null) return;
+
+        LifePart playerLife = player.getPart(LifePart.class);
+        if (playerLife.getLife() <= 0) {
+            this.gameOver = true;
+            this.screenManager.changeScreen("GameOverScreen");
+            wastedSound.play();
         }
 
         if (gameData.getKeys().isPressed(GameKeys.K)) {
@@ -56,9 +59,28 @@ public class GameOverControlSystem implements IPostProcessingSystem {
             this.screenManager.changeScreen("GameOverScreen");
             wastedSound.play();
         }
+    }
 
-        for (Entity i : entity) {
-            playerLife = i.getPart(LifePart.class);
-        }
+    @Override
+    public void install(GameData gameData) {
+        gameOver = false;
+        playerListener = new EntityListener() {
+            @Override
+            public void onEntityAdded(Entity entity) {
+                player = entity;
+            }
+
+            @Override
+            public void onEntityRemoved(Entity entity) {
+                player = null;
+            }
+        };
+
+        engine.addEntityListener(Family.builder().with(PlayerPart.class).get(), playerListener, true);
+    }
+
+    @Override
+    public void uninstall(GameData gameData) {
+        engine.removeEntityListener(Family.builder().with(PlayerPart.class).get(), playerListener);
     }
 }

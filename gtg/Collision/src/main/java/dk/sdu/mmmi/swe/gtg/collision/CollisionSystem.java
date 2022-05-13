@@ -69,6 +69,8 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
 
     @Override
     public void uninstall(GameData gameData) {
+        listeners.clear();
+        contacts.clear();
         this.worldManager.setContactLister(null);
     }
 
