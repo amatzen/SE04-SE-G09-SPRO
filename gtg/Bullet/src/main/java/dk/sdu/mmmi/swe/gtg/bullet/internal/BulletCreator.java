@@ -32,8 +32,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
 
     @Reference
     private CollisionSPI collisionSPI;
-
-    private Body pBody;
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
     private TexturePart bulletTexture;
@@ -52,25 +50,25 @@ public class BulletCreator implements BulletSPI, IPlugin {
         bulletBodyDef.type = BodyDef.BodyType.DynamicBody;
         bulletBodyDef.fixedRotation = true;
 
-        pBody = worldManager.createBody(bulletBodyDef);
+        Body bulletBody = worldManager.createBody(bulletBodyDef);
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(0.2f / 2.0f, 0.2f / 2.0f);
-        pBody.createFixture(polygonShape, 10.0f);
+        bulletBody.createFixture(polygonShape, 10.0f);
         polygonShape.dispose();
 
-        pBody.setTransform(bulletPosition, pBody.getAngle());
-        pBody.setLinearVelocity(bulletVelocity);
+        bulletBody.setTransform(bulletPosition, bulletBody.getAngle());
+        bulletBody.setLinearVelocity(bulletVelocity);
 
         Bullet bullet = new Bullet();
         TransformPart transformPart = new TransformPart();
 
-        BodyPart bulletBody = new BodyPart(pBody);
-        bulletBody.getBody().setUserData(bullet);
+        BodyPart bulletBodyPart = new BodyPart(bulletBody);
+        bulletBodyPart.getBody().setUserData(bullet);
 
         transformPart.setScale(1f / 1890f, 1f / 1890f);
         bullet.addPart(getBulletTexture());
         bullet.addPart(transformPart);
-        bullet.addPart(bulletBody);
+        bullet.addPart(bulletBodyPart);
 
 
         return bullet;
