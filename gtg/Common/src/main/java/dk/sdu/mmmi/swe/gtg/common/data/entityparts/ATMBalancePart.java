@@ -40,7 +40,7 @@ public class ATMBalancePart implements IEntityPart {
         onRobbed.dispose();
     }
     public void generateBalance (){
-        this.balance+= balance+(int) Math.floor(Math.random() * 12000);
+        this.balance= balance+(int) Math.floor(Math.random() * 12000);
     }
-    
+
 }
