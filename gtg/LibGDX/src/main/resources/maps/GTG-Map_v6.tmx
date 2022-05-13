@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="95">
+ <tileset firstgid="1" source="Grass.tsx"/>
+ <tileset firstgid="9" source="Roads.tsx"/>
+ <tileset firstgid="41" source="Roof.tsx"/>
+ <tileset firstgid="73" source="Floor.tsx"/>
+ <tileset firstgid="105" source="Water.tsx"/>
+ <layer id="3" name="Water" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztz8EJACAMBMG0a/8N+PUnQpAczMB+Q64KAAAAAAAAAAAAAABgtnVpyh+vdd398aP9Wfu7/k3bn8h+SZIknW1qAkyz
+  </data>
+ </layer>
+ <layer id="1" name="Grass" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmoENgyAABMHW6EZdxx1cqKM4WrFqQilaQC0C98klRgU5FQNqJYSoAAAAAAAMpKIW4hlC7LYfQX2BNuCfpv/tm3e/kAn1jT3+quxgq8+2/qrg734O1H6djizI39UJ/zz9dRp174/P+oVGe96X4F/69S/Rf2seIAu//3Vf/PHHH//YXq7IaRz/Ma73RZ8HyJV5AQAAAAAAAAAApMVDI3ZbfEnp/dyGw+b2duZuYfxesyyflbPq1xysbr+O207frAZbnUfxj4zXX7l0vuVs/inG9O8dy13dvzdYy+Lvsq+eFPxdkqu/a0x/1+A/+Yf+83whgv3n8UPs9u9iGeME9P+s8PXPLSW7E0KILS/+LKMS
+  </data>
+ </layer>
+ <layer id="2" name="Roads" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmlEOgyAQRDmHf/0w8VgezaNwtGKIiSWsRZhFkJmENKmy5ZVdBonGUBRFURRF/erj2mzMlttc/+1phhI5BrP4z1Vq08U1x28fRijS7Jt9ehxPCcV/t46mwntRdbfzTxj+aH242tr+1VdOQ9Wddv63Xl8a+X/OzVH4Dx9Z/H9gz9+Pwr/HCeO9kT+21rt5t4tf7+zb+a/2TLH8X/y1LO8799HYa+byS31i+Y/yP429ZsH8r+EcHXXQW/7f3f9Iex0p/1vnR44vjDeB46OlzT/6/JNfXitbeAasxA/xv6t1FjVedDyt/EfFJf9vfd7dm4b3H88B0n4IJTA/vD7RdRobd4v5Xyt+T/yS/6XWW+weVF1V4h/G/2rF7yn/yT8uv9bzby/8o8+/5H85Z6DnfvQ/+h/5yd9KnNrxya9z/lHqT2Hf8DwkpU9KQ/qf9vkH/a/t/Cc/+Uvj1I5Pfiy/lv9J8QG/B+NP8efcsab6/934KP+/epej9db7u+cURVEURenoCxp160k=
+  </data>
+ </layer>
+ <layer id="5" name="Paths" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmkGOwyAMRZFmMXfpTaIsuuhitqgnm6MOWVRh2hgs/A2k/U+yVCnE8WsBJ1VCIIQQQkjONcUawi8iRru0sILyLOVrTPv99PBfKsdHkvsvxpDWRe24NWLK/Qirfyujft9b2N1jw/n037H6f6cSvtJ8fMTRGI+IYQ5/1Jiec4n+/69dQ7pf+hT/VTnuCG0P1IxrLOHQJ6+vxDXMcS+DvH7L+qd/G8ieh6K3v2bMzPufBfrrxryzP6r/ofphT38vLHXTH5NHA/q5D1H3Wfc/D39v6K8bM8o/KsK6TlH9z8u/9v+S5HhLh73v1SVm8O/xrCJxFv/Z+18P/xqj979P968F/W3+s/c/T38vUP7o/Zn+r/PfK+9Z/EvQX79m6K/PW+LZ3/IeiqZPzdz/zgr9cXm8179HXhTeObfPF1B41brtLT+gkPY/dF6k/xYRFNL8R+dF8Vxf67qU6rTml/Ki2HLes+vcw/7uqjaOzkfkL+UlhBBCCCEk5w+CkbFo
+  </data>
+ </layer>
+ <layer id="4" name="Houses" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmFFuwyAMhjlRH/rCjsPRcpQebUMJGqUmMeE3Mak/yerUEMKHMaRzzjAMY8U7F/z6CY1ZiP7Pv09k7Plrm6vkj87/TyXiNe5cjWDzjzUQkP1G13JdJP8UQvMeaqHBP3tu/O6FjG0OAhFvzx7lT0Xu79cxI6OsrWWL4f5XszktD/e/H1HENs9tnohr0559yT/fjymO/JFn30jQ/g/36Up9p82/d/1L5p9bSy21R+x/sPovPXvr/2h+PbNdMaaliNP+e2NFrHNk/tOYaucuwl/jPh/J/U/cy/Ivn6eJUf5a18BIf41n3az5l9j/sgie8U5/Zf2jz78ioP69Z31Ln2fyT6wHuL/Wd90S3/Cb9sr8SyHhn7VX650w/1P+L/mRfTwbsv8R/YrlHwni/Jvd/5vzL0Wjf7Xt0W/o1pyNAumf1xrlz63Zmf3T/zm/1V8q/0r2v6767/VXcP6x23LGf6f8M+69df0z7iX9PXFtRn/O+tyr30n8q+9/LX7K/NnvtFf6C+5/0/gLnX8wf2Sc6Z/TTsp/Vsy/zd/f0P9uTleA2vtTSPUvBbLvmr9EvyjM//3vnrV55I/s1zAMwzAMwzCMlV+TL3wC
+  </data>
+ </layer>
+ <objectgroup id="6" name="Walls">
+  <object id="1" x="1664" y="2048" width="320" height="832"/>
+  <object id="2" x="1216" y="2496" width="448" height="384"/>
+  <object id="4" x="704" y="2560" width="512" height="320"/>
+  <object id="55" x="704" y="3200" width="64" height="192"/>
+  <object id="56" x="1920" y="3200" width="64" height="192"/>
+  <object id="57" x="2240" y="3200" width="64" height="192"/>
+  <object id="58" x="3328" y="3200" width="64" height="192"/>
+  <object id="6" x="1216" y="2048" width="384" height="448"/>
+  <object id="8" x="704" y="2048" width="320" height="320"/>
+  <object id="9" x="2240" y="2688" width="576" height="192"/>
+  <object id="10" x="2880" y="2688" width="512" height="192"/>
+  <object id="13" x="2880" y="2240" width="512" height="192"/>
+  <object id="14" x="2240" y="2240" width="576" height="192"/>
+  <object id="15" x="2240" y="1792" width="576" height="192"/>
+  <object id="16" x="2880" y="1792" width="512" height="192"/>
+  <object id="17" x="2240" y="1344" width="576" height="192"/>
+  <object id="18" x="2240" y="896" width="576" height="192"/>
+  <object id="19" x="2880" y="1344" width="512" height="192"/>
+  <object id="20" x="3392" y="896" width="256" height="640"/>
+  <object id="50" x="3712" y="640" width="384" height="256"/>
+  <object id="21" x="2880" y="896" width="512" height="192"/>
+  <object id="22" x="2176" y="0" width="1920" height="640"/>
+  <object id="49" x="2048" y="0" width="128" height="512"/>
+  <object id="23" x="1664" y="0" width="384" height="640"/>
+  <object id="24" x="704" y="704" width="896" height="320"/>
+  <object id="25" x="896" y="1024" width="320" height="128"/>
+  <object id="28" x="1088" y="1152" width="64" height="64"/>
+  <object id="29" x="960" y="1216" width="320" height="192"/>
+  <object id="30" x="1088" y="1408" width="64" height="64"/>
+  <object id="31" x="896" y="1472" width="384" height="192"/>
+  <object id="32" x="1024" y="1664" width="128" height="128"/>
+  <object id="39" x="0" y="0" width="1664" height="448"/>
+  <object id="41" x="704" y="3136" width="1280" height="64"/>
+  <object id="59" x="896" y="3328" width="896" height="64"/>
+  <object id="60" x="2432" y="3328" width="768" height="64"/>
+  <object id="52" x="0" y="3648" width="3648" height="448"/>
+  <object id="46" x="2240" y="3136" width="1152" height="64"/>
+  <object id="43" x="3648" y="896" width="448" height="3200"/>
+  <object id="92" x="0" y="3072" width="448" height="576"/>
+  <object id="94" x="0" y="448" width="448" height="2624"/>
+ </objectgroup>
+ <objectgroup id="7" name="Atm">
+  <object id="70" x="2394.67" y="3242.67">
+   <point/>
+  </object>
+  <object id="71" x="3234" y="3246.67">
+   <point/>
+  </object>
+  <object id="74" x="1118" y="482">
+   <point/>
+  </object>
+  <object id="75" x="1631.67" y="778">
+   <point/>
+  </object>
+  <object id="76" x="3233" y="678">
+   <point/>
+  </object>
+  <object id="77" x="3294" y="1124">
+   <point/>
+  </object>
+  <object id="78" x="2528" y="1570">
+   <point/>
+  </object>
+  <object id="79" x="3300" y="1576">
+   <point/>
+  </object>
+  <object id="80" x="3041" y="2030.33">
+   <point/>
+  </object>
+  <object id="81" x="2208" y="2340">
+   <point/>
+  </object>
+  <object id="82" x="3041.33" y="2664">
+   <point/>
+  </object>
+  <object id="83" x="1182" y="2918.5">
+   <point/>
+  </object>
+  <object id="85" x="864" y="3246">
+   <point/>
+  </object>
+  <object id="87" x="1824" y="3246">
+   <point/>
+  </object>
+  <object id="88" x="862" y="2400">
+   <point/>
+  </object>
+  <object id="89" x="481" y="1252">
+   <point/>
+  </object>
+  <object id="90" x="1250.33" y="1131.33">
+   <point/>
+  </object>
+  <object id="91" x="3615.33" y="2338.67">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
