@@ -10,6 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -17,9 +18,9 @@ import org.osgi.service.component.annotations.Reference;
 import java.util.List;
 
 @Component
-public class WorldManager implements IWorldManager, IProcessingSystem {
+public class WorldManager implements IWorldManager, IProcessingSystem, IPlugin {
 
-    private final Vector2 gravity;
+    private Vector2 gravity;
     private final float timeStep = 1 / 60f;
     private World world;
     private float accumulator = 0f;
@@ -29,16 +30,6 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
     private IEngine engine;
 
     public WorldManager() {
-        gravity = new Vector2(0, 0);
-        world = new World(gravity, true);
-    }
-
-    public void clearWorld() {
-        if (world != null) {
-            world.dispose();
-        }
-
-        world = new World(gravity, true);
     }
 
     public Body createBody(BodyDef def) {
@@ -91,5 +82,16 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
 
             transformPart.setRotation(bodyPart.getBody().getAngle());
         });
+    }
+
+    @Override
+    public void install(GameData gameData) {
+        gravity = new Vector2(0, 0);
+        world = new World(gravity, true);
+    }
+
+    @Override
+    public void uninstall(GameData gameData) {
+        //world.dispose();
     }
 }

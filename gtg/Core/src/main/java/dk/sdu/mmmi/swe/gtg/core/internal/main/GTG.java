@@ -25,9 +25,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 public class GTG extends Game {
-    private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
-    private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
-    private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
+
     private final Map<String, ScreenSPI> screens = new ConcurrentHashMap<>();
 
     @Reference
@@ -84,11 +82,6 @@ public class GTG extends Game {
 
         GameData gameData = screenManager.getGameData();
 
-        pluginsToBeInstalled.forEach(plugin -> plugin.install(gameData));
-        pluginsToBeInstalled.clear();
-
-        pluginsToBeUninstalled.forEach(plugin -> plugin.uninstall(gameData));
-        pluginsToBeUninstalled.clear();
     }
 
     @Override
@@ -106,21 +99,6 @@ public class GTG extends Game {
 
     @Override
     public void dispose() {
-    }
-
-    private Collection<? extends IPlugin> getPluginServices() {
-        return entityPlugins;
-    }
-
-    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    public void addGamePluginService(IPlugin plugin) {
-        this.entityPlugins.add(plugin);
-        this.pluginsToBeInstalled.add(plugin);
-    }
-
-    public void removeGamePluginService(IPlugin plugin) {
-        this.entityPlugins.remove(plugin);
-        this.pluginsToBeUninstalled.add(plugin);
     }
 
     @Reference(

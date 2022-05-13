@@ -8,10 +8,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.*;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -26,6 +23,9 @@ public class Engine implements IEngine {
     private final ISignalListener<EntityPartPair> onPartRemoved;
     private final ISignalListener<EntityPartPair> onPartAdded;
     private final List<IEntitySystem> systemsToBeStarted;
+
+    @Reference
+    private IPluginManager pluginManager;
 
     @Reference
     private ISystemManager systemManager;
@@ -52,6 +52,8 @@ public class Engine implements IEngine {
 
     @Override
     public void update(GameData gameData) {
+        pluginManager.update(gameData);
+
         for (IEntitySystem system : systemsToBeStarted) {
             system.addedToEngine();
         }
@@ -60,7 +62,7 @@ public class Engine implements IEngine {
         systemManager.update(gameData);
 
         if (shouldReset) {
-            this.resetInternal();
+            this.resetInternal(gameData);
         }
     }
 
@@ -105,30 +107,6 @@ public class Engine implements IEngine {
         return entityManager.getEntities(entityTypes);
     }
 
-    public void setEntityManager(IEntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public void removeEntityManager(IEntityManager entityManager) {
-        this.entityManager = null;
-    }
-
-    public void setSystemManager(ISystemManager systemManager) {
-        this.systemManager = systemManager;
-    }
-
-    public void removeSystemManager(ISystemManager systemManager) {
-        this.systemManager = null;
-    }
-
-    public void setFamilyManager(IFamilyManager familyManager) {
-        this.familyManager = familyManager;
-    }
-
-    public void removeFamilyManager(IFamilyManager familyManager) {
-        this.familyManager = null;
-    }
-
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     @Override
     public void addEntityProcessingService(IProcessingSystem service) {
@@ -170,12 +148,15 @@ public class Engine implements IEngine {
         familyManager.removeEntityListener(family, listener);
     }
 
-    private void resetInternal() {
-        this.systemManager.reset();
+    private void resetInternal(GameData gameData) {
+        shouldReset = false;
+
+        this.pluginManager.uninstallAll(gameData);
         this.entityManager.reset();
         this.familyManager.reset();
-
-        shouldReset = false;
+        this.systemManager.reset();
+        this.pluginManager.installAll(gameData);
+        //this.pluginManager.reset(gameData);
     }
 
     @Override

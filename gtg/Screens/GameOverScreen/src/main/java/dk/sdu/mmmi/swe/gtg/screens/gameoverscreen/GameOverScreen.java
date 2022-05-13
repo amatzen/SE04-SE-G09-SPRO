@@ -87,8 +87,7 @@ public class GameOverScreen implements ScreenSPI {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 engine.reset();
-
-                //ScreenManager.getInstance().setScreen(GameScreen.class);
+                screenManager.changeScreen("GameScreen");
             }
         });
 

@@ -109,6 +109,8 @@ public class EnemySpawnerSystem implements IPlugin {
         TiledMapTileLayer roads = (TiledMapTileLayer) map.getLayer("Roads");
         Vector2 spawnPoint = map.mapPosToWorldPos(map.getRandomCellPosition(roads));
 
+        System.out.println("Spawning enemy at " + spawnPoint);
+
         return spawnPoint;
     }
 
@@ -126,7 +128,7 @@ public class EnemySpawnerSystem implements IPlugin {
         engine.removeEntityListener(enemyFamily, enemyListener);
         engine.removeEntityListener(targetFamily, targetListener);
 
-        engine.getEntitiesFor(enemyFamily).stream().map(e -> e.getPart(WantedPart.class)).forEach(wantedPart -> {
+        engine.getEntitiesFor(targetFamily).stream().map(e -> e.getPart(WantedPart.class)).forEach(wantedPart -> {
             wantedPart.wantedLevelUpdated.remove(wantedLevelListener);
         });
 
