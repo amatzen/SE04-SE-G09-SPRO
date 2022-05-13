@@ -33,8 +33,15 @@ public class AStarPathFinding implements IPathFinding {
                 (node1, node2) -> Float.compare(f(node1, goal), f(node2, goal))
         );
 
-        start.setState(new Vector2((int) start.getState().x, (int) start.getState().y));
-        goal.setState(new Vector2((int) goal.getState().x, (int) goal.getState().y));
+        start.setState(new Vector2(
+                (int) start.getState().x,
+                (int) start.getState().y)
+        );
+
+        goal.setState(new Vector2(
+                (int) goal.getState().x - (int) (goal.getState().x - start.getState().x) % resolution,
+                (int) goal.getState().y - (int) (goal.getState().y - start.getState().y) % resolution)
+        );
 
         addToFringe(start, fringe, inFringe);
 
