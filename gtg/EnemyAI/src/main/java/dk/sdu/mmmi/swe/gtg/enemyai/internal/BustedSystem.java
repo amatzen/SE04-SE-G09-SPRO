@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.enemyai.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -13,7 +15,9 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -32,6 +36,11 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     private final float minAverageSpeed = 2f;
     private final float maxAverageDistance = 5f;
 
+    public Music wastedSound;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
+
     private IEntityListener playerListener = new EntityListener() {
         @Override
         public void onEntityAdded(Entity entity) {
@@ -46,6 +55,9 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
 
     @Override
     public void addedToEngine(IEngine engine) {
+        wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
+        wastedSound.setLooping(false);
+        wastedSound.setVolume(0.3f);
     }
 
     @Override
@@ -58,7 +70,8 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
                 float averageEnemyDistance = accumulatedEnemyDistance / timer;
 
                 if (averageSpeed < minAverageSpeed && averageEnemyDistance < maxAverageDistance) {
-                    System.out.println("Busted!");
+                    wastedSound.play();
+                    screenManager.changeScreen("BustedScreen");
                 }
 
                 accumulatedDistance = 0;

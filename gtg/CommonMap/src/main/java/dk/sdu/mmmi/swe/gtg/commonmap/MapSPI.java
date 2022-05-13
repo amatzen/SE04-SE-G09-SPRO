@@ -20,7 +20,7 @@ public interface MapSPI {
     Vector2 worldPosToMapPos(Vector2 worldCoordinates);
 
     Vector2 mapPosToWorldPos(Vector2 position);
-    
+
     List<Rectangle> getObstacles();
 
 }

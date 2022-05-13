@@ -2,9 +2,9 @@ package dk.sdu.mmmi.swe.gtg.gameover.internal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.GL20;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -19,11 +19,13 @@ import java.util.List;
 @Component
 public class GameOverControlSystem implements IPostProcessingSystem {
 
+    public static Music wastedSound;
     List<? extends Entity> entity;
-
     private LifePart playerLife;
-
     private boolean gameOver = false;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     public static Music wastedSound;
 
@@ -43,8 +45,15 @@ public class GameOverControlSystem implements IPostProcessingSystem {
         if (playerLife != null) {
             if (playerLife.getLife() <= 0) {
                 this.gameOver = true;
-                System.out.println("Game Over");
+                this.screenManager.changeScreen("GameOverScreen");
+                wastedSound.play();
             }
+        }
+
+        if (gameData.getKeys().isPressed(GameKeys.K)) {
+            this.gameOver = true;
+            this.screenManager.changeScreen("GameOverScreen");
+            wastedSound.play();
         }
 
         for (Entity i : entity) {

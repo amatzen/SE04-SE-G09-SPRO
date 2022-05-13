@@ -117,8 +117,8 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
         worldPos.scl((1f / tileSize) / ppm);
 
         return new Vector2(
-            (int) worldPos.x,
-            (int) worldPos.y
+                (int) worldPos.x,
+                (int) worldPos.y
         );
     }
 

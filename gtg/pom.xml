@@ -78,13 +78,13 @@
     <module>CommonMap</module>
     <module>GameOver</module>
     <module>WantedLevelSystemCommon</module>
-
     <!-- Screens -->
     <module>Screens/CommonScreen</module>
     <module>Screens/SplashScreen</module>
     <module>Screens/MainMenuScreen</module>
     <module>Screens/GameOverScreen</module>
     <module>Screens/GameScreen</module>
+    <module>Screens/BustedScreen</module>
   </modules>
 
   <build>
