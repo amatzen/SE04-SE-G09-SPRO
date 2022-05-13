@@ -30,6 +30,7 @@ public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, App
     private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
+    @Reference(policy = ReferencePolicy.DYNAMIC)
     private final List<ScreenSPI> screens = new CopyOnWriteArrayList<>();
 
     @Reference
@@ -92,24 +93,6 @@ public class Game extends com.badlogic.gdx.Game implements ScreenManagerSPI, App
     @Override
     public void dispose() {
     }
-
-    /* Screens */
-
-    @Reference(
-        cardinality = ReferenceCardinality.MULTIPLE,
-        policy = ReferencePolicy.DYNAMIC,
-        unbind = "removeScreen"
-    )
-    public void addScreen(ScreenSPI screen) {
-        this.screens.add(screen);
-    }
-
-    public void removeScreen(ScreenSPI screen) {
-        this.screens.remove(screen);
-    }
-
-    /* End Screens */
-
 
     private Collection<? extends IPlugin> getPluginServices() {
         return entityPlugins;
