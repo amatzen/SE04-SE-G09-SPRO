@@ -13,16 +13,20 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
 @Component
 public class PathFollowingSystem implements IProcessingSystem {
 
+    @Reference
+    private IEngine engine;
+
     private List<? extends Entity> entities;
 
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
 
         entities = engine.getEntitiesFor(
                 Family.builder().with(
@@ -31,7 +35,6 @@ public class PathFollowingSystem implements IProcessingSystem {
                         PathFollowingPart.class
                 ).get()
         );
-
     }
 
     @Override
