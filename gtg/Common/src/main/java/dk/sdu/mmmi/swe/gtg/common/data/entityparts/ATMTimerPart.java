@@ -42,7 +42,7 @@ public class ATMTimerPart implements IEntityPart {
         }
     }
 
-    public void setAction(double expiry, Runnable action) {
+    public void addAction(double expiry, Runnable action) {
         this.actions.add(new ExpiryAction(expiry, action));
     }
 

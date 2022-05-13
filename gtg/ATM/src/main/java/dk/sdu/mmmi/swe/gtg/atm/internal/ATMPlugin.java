@@ -130,7 +130,6 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
         float sensorRadius = 5;
 
         for (Vector2 coordinate : coordinates) {
-
             Vector2 atmposition = new Vector2(coordinate);
 
             BodyPart atmBody = new BodyPart(shapeFactory.createRectangle(
