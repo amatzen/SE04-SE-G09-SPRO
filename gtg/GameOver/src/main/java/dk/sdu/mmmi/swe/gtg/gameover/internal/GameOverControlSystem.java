@@ -18,8 +18,9 @@ import java.util.List;
 
 @Component
 public class GameOverControlSystem implements IPostProcessingSystem {
-    public Music wastedSound;
+
     List<? extends Entity> entity;
+    public Music wastedSound;
     private LifePart playerLife;
     private boolean gameOver = false;
 

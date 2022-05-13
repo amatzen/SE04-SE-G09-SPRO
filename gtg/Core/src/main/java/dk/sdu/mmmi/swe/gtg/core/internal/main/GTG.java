@@ -32,6 +32,7 @@ public class GTG extends Game {
 
     @Reference
     private ScreenManagerSPI screenManager;
+
     @Reference
     private IEngine engine;
 

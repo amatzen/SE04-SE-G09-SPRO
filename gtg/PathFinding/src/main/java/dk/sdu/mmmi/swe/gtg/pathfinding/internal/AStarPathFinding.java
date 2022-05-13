@@ -12,6 +12,7 @@ import java.util.*;
 
 @Component
 public class AStarPathFinding implements IPathFinding {
+
     @Override
     public Path searchNodePath(final Vector2 from, final Vector2 to, MapSPI map) {
         return searchNodePath(from, to, map, 1);
