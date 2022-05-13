@@ -24,15 +24,16 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class BulletCreator implements BulletSPI, IPlugin {
-
     @Reference
     private IWorldManager worldManager;
 
-    private Body pBody;
+    @Reference
+    private IEngine engine;
 
     @Reference
     private CollisionSPI collisionSPI;
 
+    private Body pBody;
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
 
@@ -95,7 +96,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
         IFamily familyB = Family.ALL;
@@ -137,7 +138,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }
