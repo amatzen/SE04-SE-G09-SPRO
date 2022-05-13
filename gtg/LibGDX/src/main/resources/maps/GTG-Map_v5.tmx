@@ -5,12 +5,12 @@
  <tileset firstgid="41" source="Roof.tsx"/>
  <tileset firstgid="73" source="Floor.tsx"/>
  <tileset firstgid="105" source="Water.tsx"/>
- <layer id="3" name="Water" width="64" height="64" visible="0">
+ <layer id="3" name="Water" width="64" height="64">
   <data encoding="base64" compression="zlib">
    eJztz7EJADAIRUHXzf4LpLWTQBCFO3it+CMAAAAAAAAAAAAAAABmO0VT/njt192OH+23f8P+jeyXJElS7gJA+U0c
   </data>
  </layer>
- <layer id="1" name="Grass" width="64" height="64" visible="0">
+ <layer id="1" name="Grass" width="64" height="64">
   <data encoding="base64" compression="zlib">
    eJzt2lsOgjAQQNEOSmCZ7IENsRSWJk0laRqKQzXSx53k/AgYbxAiQmeM6QAAAICAbHpjlhR3f/Zf6DP4DPSX2/8wZvLZ40kKOja+6d+2XY/e7+j1XNF/ad3JJw31a5vor7PfN7hz/bIbvPN9C/2t7/9W+2PXAdL499/vpZ9++um/u0tLgt/0KfzrAIlcFwAAAAAAAAD/UtL/cycNp8vHNzvPgL1fE75WGvmwPDaju2e1nqxSxNj9v7VMV7ertX9Wbpd7/xyIzd6vWdefEvo1U2u/dsJ+7dDvnlVIfeY5F116f1WuHv+1Df3ttjMMwxzNC2wkgdU=
   </data>
@@ -20,12 +20,12 @@
    eJztmmEKhCAQhT2H//ZH4LE6WkfxaGtI0Iq6pW9M8z0YFioHv3XGmSSlKIqiKIqifvVxtii1lZobvz3NUCPHoIz/XVOmM/ccv30YoUqLN/v0PJ4Siv9uHunKZ1F5t/NrDH80P1xubf/yq8RQeScd/73nl0T8n2NzFv6jjhj/H9jz9Vn4dz+hvzfyx/Z6t+7W+P3Ovp0/1zPF4t/4e0W17zxGotcs5U+NicU/qv5J9JoV67+Ga3TkwWjxf7f/SfU6qfjvnR85v9CfBvtHS5p/9vUnf3qv7OEdsBE/pP7l9lnUfNH+pOIf5Zf8v/l5tzcNnz/eA1L9EEpgfnh+ovM0Nu8e47+V/5H4U/Xvar7FnkHlVSP+aepfK/8jxT/55+WXev8dhX/29U/Vv5Iz0PM41j/WP/KTvxc/rf2TX+b8o7Y+hWPD85ArY64Ysv5Jn3+w/vUd/+Qnf62f1v7Jz/qH4M99y9C7jf7tNUVRFEVRlIS+VhPH7w==
   </data>
  </layer>
- <layer id="5" name="Paths" width="64" height="64" visible="0">
+ <layer id="5" name="Paths" width="64" height="64">
   <data encoding="base64" compression="zlib">
    eJztmksOwjAMBXMeblIVqQsWbHM0jkqRQFSB4MR5zo83kle1nAw0dotwjhBCCCFHtj1W526IaO2iYQXVWX6v0e3nU8N/Ea63BOkfOxeLcL00rs/wjf1b8FjXHyIX+uP2EUZKDiK868MflVPzXqJ/dn60x0vM4F+yv9QZmJKn3MIHOf6b6+NZBrm+5vyfgetraO2/KddCzjwUNb//GfpfCfRPy5nZHzX/UPOwpr8VJfcL/euBfu871tUyQ/+jvx76v/GJUXJOkfPPwl/6fSnmeNkvWz+rx+jBv8a7SoxR/HuffzX8JVr3v3/3l4L+Zf69zz9Lfyuszz+qT1sxir9lXYS/hXvOPumvOzP01xP6a/5/Is2y3PqpeWj/UaE/GYETOCxA97/QH1XXyt9q9r38UXXpTwghhBBCCPnGHS0lg+Q=
   </data>
  </layer>
- <layer id="4" name="Houses" width="64" height="64" visible="0">
+ <layer id="4" name="Houses" width="64" height="64">
   <data encoding="base64" compression="zlib">
    eJztmEGOwyAMRTlRF90wm7lLjpaj9GgzqKBSFxITvolJ/SWrUkMMD2Ob1jmTyWR6yju3+Ocn1GZR4L//fyJti1/bXiV+dPx/KhaecfdqhCJ/yIEF6Tew0nOR+JMJ7ftSMw382bzhuwfS4h4sBXubexR/yXJ+/1wz0mhurdGG85+l32iRab25Vz0qKYy5x30qPJuu91H+vB6XtMeP7H0jJMV/c5+spe+08feef8n4c3OpJfcK9Q+W/5SzN//39tczx5E1rcQO82+tFXHOkfFPa6r1XQS/pjqfK+c/8C6Ln86nSaP4Nfb7oJH8mnpd0qzxl6h/mS2ecac/M//R/Y8YlF8i95HxL5wHOL+2u25NvuE37Znxl5IEfzZeLXeS8R/if8iv7GNuWP0jfsXijxSq/83MP3v8NfaDRv7q2L3f0Nld4+3+mT87Y2+Q/Hmelfi5OTszf/qf81v5peKvpP515X8vv4L+xx7LWf+V4s9499L5z3i3yE/74qz8nHO3lZeT8Ffvfy18yvjZd9ra2Nb4HuEXrH/d/GleaX6h/gfj59aA1hhx/beMQ/NztMV3lkbya1Qrv78g/9WYRgtV96lJ+UdL2ifSv/HjhTyrNZ+9/ku+TCaTyWQymUwm00t/OzeDcQ==
   </data>
@@ -74,7 +74,7 @@
   <object id="43" x="3648" y="896" width="448" height="3200"/>
   <object id="45" x="0" y="448" width="448" height="3136"/>
  </objectgroup>
- <objectgroup id="7" name="Atm" visible="0">
+ <objectgroup id="7" name="Atm">
   <object id="70" x="2394.67" y="3242.67">
    <point/>
   </object>
