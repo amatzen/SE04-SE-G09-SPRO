@@ -91,17 +91,17 @@ public class Hud implements Disposable {
         showHealth.setText(value);
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public void setMoney(int value) {
         money = value;
         showMoney.setText(String.format("%06d", money));
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     public void setWantedLevel(int value) {
-        showWanted.setText(value+"/5");
+        showWanted.setText(value + "/5");
     }
 
     public Stage getStage() {

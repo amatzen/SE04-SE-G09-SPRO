@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.screens.gameoverscreen;
+package dk.sdu.mmmi.swe.gtg.bustedscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -20,7 +20,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class GameOverScreen implements ScreenSPI, Screen {
+public class BustedScreen implements ScreenSPI, Screen {
 
     @Reference
     private IEngine engine;
@@ -34,10 +34,9 @@ public class GameOverScreen implements ScreenSPI, Screen {
 
     private Image gmLogo;
 
-    public GameOverScreen() {
+    public BustedScreen() {
     }
 
-    @Override
     public void show() {
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -52,13 +51,13 @@ public class GameOverScreen implements ScreenSPI, Screen {
         Skin skinBtn = new Skin(Gdx.files.internal("skins/craftacular/craftacular-ui.json"));
 
         // Game over logo
-        gmLogo = new Image(new Texture(Gdx.files.internal("assets/Wasted-red-new-exact.png")));
+        gmLogo = new Image(new Texture(Gdx.files.internal("assets/busted.png")));
         gmLogo.setAlign(Align.top);
         table.add(gmLogo).size(400, 100).row();
 
         // Death message
-        deathMessage = new Label("You got wasted and lost all your money!", new Label.LabelStyle(
-                new BitmapFont(), Color.RED));
+        deathMessage = new Label("You got busted and lost all your money!", new Label.LabelStyle(
+                new BitmapFont(), Color.BLUE));
         deathMessage.setFontScale(1.3f);
         table.add(deathMessage).pad(25).row();
 
@@ -89,39 +88,31 @@ public class GameOverScreen implements ScreenSPI, Screen {
 
     }
 
-    @Override
     public void render(float v) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
     }
 
-    @Override
     public void resize(int i, int i1) {
         stage.getViewport().update(i, i1, true);
     }
 
-    @Override
     public void pause() {
 
     }
 
-    @Override
     public void resume() {
 
     }
 
-    @Override
     public void hide() {
 
     }
 
-    @Override
     public void dispose() {
         stage.dispose();
     }
 }
-

@@ -13,7 +13,9 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     private final float interval = 5f;
     private final float minAverageSpeed = 2f;
     private final float maxAverageDistance = 5f;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     private IEntityListener playerListener = new EntityListener() {
         @Override
@@ -58,7 +63,7 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
                 float averageEnemyDistance = accumulatedEnemyDistance / timer;
 
                 if (averageSpeed < minAverageSpeed && averageEnemyDistance < maxAverageDistance) {
-                    System.out.println("Busted!");
+                    screenManager.changeScreen("BustedScreen");
                 }
 
                 accumulatedDistance = 0;
