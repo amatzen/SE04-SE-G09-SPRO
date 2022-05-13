@@ -29,8 +29,10 @@ public class GTG extends Game {
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
     private final Map<String, ScreenSPI> screens = new HashMap<>();
+
     @Reference
     private ScreenManagerSPI screenManager;
+
     @Reference
     private IEngine engine;
 

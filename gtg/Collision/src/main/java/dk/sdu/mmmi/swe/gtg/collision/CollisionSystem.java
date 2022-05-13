@@ -24,6 +24,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
 
     private final List<ICollisionListener> listeners;
     private final Queue<Collision> contacts;
+
     @Reference
     private IWorldManager worldManager;
 
