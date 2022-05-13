@@ -148,4 +148,9 @@ public class Engine implements IEngine {
     public void removeEntityListener(IFamily family, IEntityListener listener) {
         familyManager.removeEntityListener(family, listener);
     }
+
+    @Override
+    public void reset() {
+
+    }
 }
