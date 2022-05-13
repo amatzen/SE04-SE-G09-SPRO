@@ -20,7 +20,6 @@ public class GameScreen extends ScreenAdapter implements ScreenSPI {
     private GameData gameData;
 
     private final float PPM = 40;
-    private GameData gameData;
     private OrthographicCamera cam;
     private Box2DDebugRenderer mB2dr;
 
