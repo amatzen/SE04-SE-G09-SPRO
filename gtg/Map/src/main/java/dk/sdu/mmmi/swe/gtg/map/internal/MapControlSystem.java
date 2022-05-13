@@ -61,7 +61,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
 
     @Override
     public void install(GameData gameData) {
-        map = new TmxMapLoader().load("maps/GTG-Map_v5.tmx");
+        map = new TmxMapLoader().load("maps/GTG-Map_v6.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map, ppm);
 
