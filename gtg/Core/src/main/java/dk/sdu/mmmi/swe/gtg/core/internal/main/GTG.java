@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -16,10 +17,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
@@ -37,6 +35,7 @@ public class GTG extends Game {
     @Reference
     private IWorldManager worldManager;
 
+    private Screen currentScreen;
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);
 
@@ -45,6 +44,11 @@ public class GTG extends Game {
             return;
         }
 
+        if (Objects.nonNull(currentScreen)) {
+            currentScreen.dispose();
+        }
+
+        this.currentScreen = screen;
         setScreen(screen);
     };
 
