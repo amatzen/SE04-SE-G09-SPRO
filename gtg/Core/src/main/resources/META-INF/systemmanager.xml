@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<component xmlns="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.swe.gtg.core.internal.managers.SystemManager">
-    <implementation class="dk.sdu.mmmi.swe.gtg.core.internal.managers.SystemManager"/>
-
-    <service>
-        <provide interface="dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager"/>
-    </service>
-
-</component>

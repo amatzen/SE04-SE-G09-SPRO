@@ -13,16 +13,27 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class Engine implements IEngine {
     private final ISignalListener<EntityPartPair> onPartRemoved;
     private final ISignalListener<EntityPartPair> onPartAdded;
     private final List<IEntitySystem> systemsToBeStarted;
+
+    @Reference
     private ISystemManager systemManager;
+
+    @Reference
     private IEntityManager entityManager;
+
+    @Reference
     private IFamilyManager familyManager;
 
     private boolean shouldReset;
@@ -118,6 +129,7 @@ public class Engine implements IEngine {
         this.familyManager = null;
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     @Override
     public void addEntityProcessingService(IProcessingSystem service) {
         this.systemManager.addEntityProcessingService(service);
@@ -129,6 +141,7 @@ public class Engine implements IEngine {
         this.systemManager.removeEntityProcessingService(service);
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     @Override
     public void addPostEntityProcessingService(IPostProcessingSystem service) {
         this.systemManager.addPostEntityProcessingService(service);

@@ -91,6 +91,5 @@ public class GameScreen extends ScreenAdapter implements ScreenSPI {
 
     @Override
     public void dispose() {
-        this.worldManager.clearWorld();
     }
 }
