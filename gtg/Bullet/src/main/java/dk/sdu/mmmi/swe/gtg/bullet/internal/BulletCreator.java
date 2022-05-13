@@ -37,7 +37,6 @@ public class BulletCreator implements BulletSPI, IPlugin {
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
     private TexturePart bulletTexture;
-    private Body pBody;
 
     public BulletCreator() {
 
