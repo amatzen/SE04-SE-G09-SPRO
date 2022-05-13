@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.enemyai.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -34,6 +36,8 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     private final float minAverageSpeed = 2f;
     private final float maxAverageDistance = 5f;
 
+    public Music wastedSound;
+
     @Reference
     private ScreenManagerSPI screenManager;
 
@@ -51,6 +55,9 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
 
     @Override
     public void addedToEngine(IEngine engine) {
+        wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));
+        wastedSound.setLooping(false);
+        wastedSound.setVolume(0.3f);
     }
 
     @Override
@@ -63,6 +70,7 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
                 float averageEnemyDistance = accumulatedEnemyDistance / timer;
 
                 if (averageSpeed < minAverageSpeed && averageEnemyDistance < maxAverageDistance) {
+                    wastedSound.play();
                     screenManager.changeScreen("BustedScreen");
                 }
 
