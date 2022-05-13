@@ -18,7 +18,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class MainMenuScreen implements ScreenSPI, Screen {
+public class MainMenuScreen implements ScreenSPI {
     private Stage stage;
 
     @Reference

@@ -15,13 +15,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.commonhud.HudSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class GameOverScreen implements ScreenSPI, Screen {
+public class GameOverScreen implements ScreenSPI {
 
     @Reference
     private IEngine engine;

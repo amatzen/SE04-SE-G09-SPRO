@@ -12,7 +12,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component(immediate = true)
-public class SplashScreen implements ScreenSPI, Screen {
+public class SplashScreen implements ScreenSPI {
     private SpriteBatch batch;
     private Texture splashTexture;
     private Sprite sprite;
@@ -23,7 +23,7 @@ public class SplashScreen implements ScreenSPI, Screen {
     private ScreenManagerSPI screenManager;
 
     public SplashScreen() {
-        super();
+        System.out.println("SplashScreen created");
     }
 
     @Override

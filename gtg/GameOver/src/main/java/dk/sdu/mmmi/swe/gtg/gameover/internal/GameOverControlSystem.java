@@ -25,9 +25,6 @@ public class GameOverControlSystem implements IPostProcessingSystem {
 
     private boolean gameOver = false;
 
-    @Reference
-    private ScreenManagerSPI screenManager;
-
     public static Music wastedSound;
 
     @Override
@@ -46,7 +43,7 @@ public class GameOverControlSystem implements IPostProcessingSystem {
         if (playerLife != null) {
             if (playerLife.getLife() <= 0) {
                 this.gameOver = true;
-                this.screenManager.changeScreen("GameOverScreen");
+                System.out.println("Game Over");
             }
         }
 
