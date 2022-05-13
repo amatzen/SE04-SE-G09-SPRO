@@ -44,8 +44,7 @@ public class ATMControlSystem implements IProcessingSystem {
 
             ATMRobbedTimer robbedTimer = entity.getPart(ATMRobbedTimer.class);
             robbedTimer.startTimer();
-            robbedTimer.setAction(5.00, () -> {
-                System.out.println("Should heal now");
+            robbedTimer.setAction(30.00, () -> {
                 entity.addPart(crimeAction.getAtmTexture());
                 entity.getPart(ATMBalancePart.class).generateBalance();
                 entity.getPart(ATMBalancePart.class).setRobbed(false);
@@ -72,8 +71,5 @@ public class ATMControlSystem implements IProcessingSystem {
                     robbedTimer.update(gameData.getDelta());
                 });
     }
-
-
-
 
 }
