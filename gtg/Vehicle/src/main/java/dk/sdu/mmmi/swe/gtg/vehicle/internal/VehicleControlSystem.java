@@ -5,13 +5,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.bodycomputationcontroller.BodyComputationSPI;
-import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -26,37 +23,29 @@ import java.util.List;
 
 @Component
 public class VehicleControlSystem implements IProcessingSystem {
-
     private final float REVERSE_POWER = 0.5f;
     private final float BREAK_POWER = 1.5f;
     private final float WHEEL_TURN_INCREMENT = 0.010f;
     private final float acceleration = 7200f;
-    private IEngine engine;
-
-    private LifePart playerLife;
-    List<? extends Entity> entity;
-
 
     @Reference
     private BulletSPI bulletSPI;
-
     @Reference
     private BodyComputationSPI bcc;
-
     @Reference
     private IWantedLevelSystem wantedLevelSystem;
+
     private List<Vehicle> vehicleList;
     private Sound sound;
 
     @Reference
     private HudSPI hudSPI;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
-        this.engine = engine;
-
-        entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
-
+    public void addedToEngine() {
         vehicleList = (List<Vehicle>) engine.getEntitiesFor(
                 Family.builder().forEntities(Vehicle.class).get()
         );
@@ -90,18 +79,16 @@ public class VehicleControlSystem implements IProcessingSystem {
             wantedLevelSystem.reportCrime(10f);
         }
 
-        for (Entity i : entity) {
-            playerLife = i.getPart(LifePart.class);
-        }
-
         if (gameData.getKeys().isPressed(GameKeys.H)) {
             System.out.println("Health refilled.");
-            playerLife.setLife(100);
+            LifePart lifePart = vehicle.getPart(LifePart.class);
+            lifePart.setLife(100);
             hudSPI.setHealth(100);
         }
         if (gameData.getKeys().isPressed(GameKeys.G)) {
             System.out.println("God mode activated.");
-            playerLife.setLife(1000);
+            LifePart lifePart = vehicle.getPart(LifePart.class);
+            lifePart.setLife(1000);
             hudSPI.setHealth(1000);
         }
 
