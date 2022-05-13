@@ -15,6 +15,7 @@ import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
     private List<? extends Entity> enemies;
 
     private Entity player;
+
+    @Reference
+    private IEngine engine;
 
     private IEntityListener playerListener = new EntityListener() {
         @Override
@@ -54,8 +58,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
     };
 
     @Override
-    public void addedToEngine(IEngine engine) {
-
+    public void addedToEngine() {
     }
 
     @Override
@@ -79,7 +82,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         enemies = engine.getEntitiesFor(
                 Family.builder().forEntities(Enemy.class).get()
         );
@@ -98,7 +101,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntityListener(
             Family.builder().with(PlayerPart.class).get(),
             playerListener

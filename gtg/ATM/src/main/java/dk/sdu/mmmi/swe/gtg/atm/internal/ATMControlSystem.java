@@ -26,8 +26,11 @@ public class ATMControlSystem implements IProcessingSystem {
     @Reference
     private IWantedLevelSystem wantedLevelSystem;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         this.atmEntities = engine.getEntitiesFor(
             Family.builder().with(ATMBalancePart.class).get()
         );

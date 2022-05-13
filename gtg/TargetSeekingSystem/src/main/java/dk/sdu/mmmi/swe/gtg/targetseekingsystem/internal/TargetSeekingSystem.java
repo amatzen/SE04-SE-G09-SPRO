@@ -10,6 +10,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public class TargetSeekingSystem implements IProcessingSystem {
 
     private List<? extends Entity> entities;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entities = engine.getEntitiesFor(
             Family.builder().with(SeekingPart.class).get()
         );

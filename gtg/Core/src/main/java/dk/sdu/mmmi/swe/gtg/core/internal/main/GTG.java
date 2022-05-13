@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.core.internal.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -10,7 +11,6 @@ import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
-import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
@@ -19,6 +19,7 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -27,17 +28,15 @@ public class GTG extends Game {
     private final List<IPlugin> entityPlugins = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeInstalled = new CopyOnWriteArrayList<>();
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
-
     private final Map<String, ScreenSPI> screens = new ConcurrentHashMap<>();
 
     @Reference
     private ScreenManagerSPI screenManager;
+
     @Reference
     private IEngine engine;
 
-    @Reference
-    private IWorldManager worldManager;
-
+    private Screen currentScreen;
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);
 
@@ -47,7 +46,11 @@ public class GTG extends Game {
             return;
         }
 
-        System.out.println("Changing to screen " + value);
+        if (Objects.nonNull(currentScreen)) {
+            currentScreen.dispose();
+        }
+
+        this.currentScreen = screen;
         setScreen(screen);
     };
 
@@ -84,10 +87,10 @@ public class GTG extends Game {
 
         GameData gameData = screenManager.getGameData();
 
-        pluginsToBeInstalled.forEach(plugin -> plugin.install(engine, gameData));
+        pluginsToBeInstalled.forEach(plugin -> plugin.install(gameData));
         pluginsToBeInstalled.clear();
 
-        pluginsToBeUninstalled.forEach(plugin -> plugin.uninstall(engine, gameData));
+        pluginsToBeUninstalled.forEach(plugin -> plugin.uninstall(gameData));
         pluginsToBeUninstalled.clear();
     }
 

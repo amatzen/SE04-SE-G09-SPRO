@@ -18,16 +18,20 @@ import java.util.List;
 
 @Component
 public class GameOverControlSystem implements IPostProcessingSystem {
-    public Music wastedSound;
+
     List<? extends Entity> entity;
+    public Music wastedSound;
     private LifePart playerLife;
     private boolean gameOver = false;
 
     @Reference
     private ScreenManagerSPI screenManager;
 
+    @Reference
+    private IEngine engine;
+
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entity = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get());
 
         wastedSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Wasted-sound.mp3"));

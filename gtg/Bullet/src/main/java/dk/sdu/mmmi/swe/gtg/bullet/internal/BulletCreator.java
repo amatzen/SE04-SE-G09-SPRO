@@ -24,18 +24,16 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class BulletCreator implements BulletSPI, IPlugin {
-
     @Reference
     private IWorldManager worldManager;
 
-    private Body pBody;
+    @Reference
+    private IEngine engine;
 
     @Reference
     private CollisionSPI collisionSPI;
-
     private final int bulletDamage = 10;
     private ICollisionListener collisionListener;
-
     private TexturePart bulletTexture;
 
     public BulletCreator() {
@@ -52,25 +50,25 @@ public class BulletCreator implements BulletSPI, IPlugin {
         bulletBodyDef.type = BodyDef.BodyType.DynamicBody;
         bulletBodyDef.fixedRotation = true;
 
-        pBody = worldManager.createBody(bulletBodyDef);
+        Body bulletBody = worldManager.createBody(bulletBodyDef);
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(0.2f / 2.0f, 0.2f / 2.0f);
-        pBody.createFixture(polygonShape, 10.0f);
+        bulletBody.createFixture(polygonShape, 10.0f);
         polygonShape.dispose();
 
-        pBody.setTransform(bulletPosition, pBody.getAngle());
-        pBody.setLinearVelocity(bulletVelocity);
+        bulletBody.setTransform(bulletPosition, bulletBody.getAngle());
+        bulletBody.setLinearVelocity(bulletVelocity);
 
         Bullet bullet = new Bullet();
         TransformPart transformPart = new TransformPart();
 
-        BodyPart bulletBody = new BodyPart(pBody);
-        bulletBody.getBody().setUserData(bullet);
+        BodyPart bulletBodyPart = new BodyPart(bulletBody);
+        bulletBodyPart.getBody().setUserData(bullet);
 
         transformPart.setScale(1f / 1890f, 1f / 1890f);
         bullet.addPart(getBulletTexture());
         bullet.addPart(transformPart);
-        bullet.addPart(bulletBody);
+        bullet.addPart(bulletBodyPart);
 
 
         return bullet;
@@ -95,7 +93,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         IFamily familyA = Family.builder().forEntities(Bullet.class).get();
 
         IFamily familyB = Family.ALL;
@@ -137,7 +135,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }

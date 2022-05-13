@@ -24,12 +24,15 @@ public class WantedLevelSystem implements IPlugin, IWantedLevelSystem {
     private int maxWantedLevel = 5;
 
     @Reference
+    private IEngine engine;
+
+    @Reference
     private HudSPI hud;
 
     private IEntityListener playerListener;
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         crimeLevel = 0;
 
         playerListener = new EntityListener() {
@@ -71,7 +74,7 @@ public class WantedLevelSystem implements IPlugin, IWantedLevelSystem {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.removeEntityListener(Family.builder().with(PlayerPart.class).get(), playerListener);
     }
 }

@@ -25,6 +25,8 @@ public class Engine implements IEngine {
     private IEntityManager entityManager;
     private IFamilyManager familyManager;
 
+    private boolean shouldReset;
+
     public Engine() {
         systemsToBeStarted = new CopyOnWriteArrayList<>();
 
@@ -33,16 +35,22 @@ public class Engine implements IEngine {
                     entityPartPair.getEntity()
             );
         };
+
+        shouldReset = false;
     }
 
     @Override
     public void update(GameData gameData) {
         for (IEntitySystem system : systemsToBeStarted) {
-            system.addedToEngine(this);
+            system.addedToEngine();
         }
         systemsToBeStarted.clear();
 
         systemManager.update(gameData);
+
+        if (shouldReset) {
+            this.resetInternal();
+        }
     }
 
     @Override
@@ -147,5 +155,18 @@ public class Engine implements IEngine {
     @Override
     public void removeEntityListener(IFamily family, IEntityListener listener) {
         familyManager.removeEntityListener(family, listener);
+    }
+
+    private void resetInternal() {
+        this.systemManager.reset();
+        this.entityManager.reset();
+        this.familyManager.reset();
+
+        shouldReset = false;
+    }
+
+    @Override
+    public void reset() {
+        shouldReset = true;
     }
 }

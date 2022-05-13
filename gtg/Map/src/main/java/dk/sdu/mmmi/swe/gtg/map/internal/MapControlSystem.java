@@ -41,9 +41,11 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     @Reference
     private ShapeFactorySPI shapeFactory;
 
-    @Override
-    public void addedToEngine(IEngine engine) {
+    @Reference
+    private IEngine engine;
 
+    @Override
+    public void addedToEngine() {
     }
 
     @Override
@@ -58,7 +60,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     }
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         map = new TmxMapLoader().load("maps/GTG-Map_v5.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map, ppm);
@@ -144,7 +146,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         engine.getEntitiesFor(Family.builder().forEntities(Wall.class).get()).forEach(entity -> {
             engine.removeEntity(entity);
         });

@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: dk.swe.gtg.Bullet.service
-Bundle-Version: 1.0.0.qualifie
-Service-Component: META-INF/component.xml

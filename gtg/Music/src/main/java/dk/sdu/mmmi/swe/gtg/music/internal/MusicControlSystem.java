@@ -11,6 +11,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class MusicControlSystem implements IProcessingSystem {
@@ -18,10 +19,11 @@ public class MusicControlSystem implements IProcessingSystem {
     private Entity player;
     private Boolean isPaused = false;
 
-    @Override
-    public void addedToEngine(IEngine engine) {
-        float crimeLevel = 0;
+    @Reference
+    private IEngine engine;
 
+    @Override
+    public void addedToEngine() {
         IEntityListener playerListener = new EntityListener() {
             @Override
             public void onEntityAdded(Entity entity) {

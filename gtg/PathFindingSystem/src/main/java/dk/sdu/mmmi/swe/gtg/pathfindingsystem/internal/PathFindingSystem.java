@@ -32,6 +32,9 @@ public class PathFindingSystem implements IProcessingSystem {
     @Reference
     private IPathFinding pathFinding;
 
+    @Reference
+    private IEngine engine;
+
     private ExecutorService executorService;
 
     public PathFindingSystem() {
@@ -43,7 +46,7 @@ public class PathFindingSystem implements IProcessingSystem {
     private List<? extends Entity> player;
 
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entities = engine.getEntitiesFor(
             Family.builder().with(TransformPart.class, PathFindingPart.class).get()
         );

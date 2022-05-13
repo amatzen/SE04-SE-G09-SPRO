@@ -1,17 +1,16 @@
 package dk.sdu.mmmi.swe.gtg.map.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 
 public class MapPlugin implements IPlugin {
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
 
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
 
     }
 }

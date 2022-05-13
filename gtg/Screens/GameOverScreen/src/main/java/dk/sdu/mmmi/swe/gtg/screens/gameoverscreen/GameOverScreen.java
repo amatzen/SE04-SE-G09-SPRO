@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -23,6 +24,9 @@ public class GameOverScreen implements ScreenSPI {
 
     @Reference
     private IEngine engine;
+
+    @Reference
+    private ScreenManagerSPI screenManager;
 
     private Stage stage;
 
@@ -82,6 +86,23 @@ public class GameOverScreen implements ScreenSPI {
         btnStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                engine.reset();
+
+                //ScreenManager.getInstance().setScreen(GameScreen.class);
+            }
+        });
+
+        // Restart button
+        TextButton btnMainMenu = new TextButton("Main Menu", skinBtn);
+        btnMainMenu.align(Align.bottom);
+        table.add(btnMainMenu).pad(75).row();
+
+        btnMainMenu.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                engine.reset();
+                screenManager.changeScreen("MainMenuScreen");
+
                 //ScreenManager.getInstance().setScreen(GameScreen.class);
             }
         });

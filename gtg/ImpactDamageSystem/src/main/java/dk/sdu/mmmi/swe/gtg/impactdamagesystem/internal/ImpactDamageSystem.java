@@ -3,7 +3,6 @@ package dk.sdu.mmmi.swe.gtg.impactdamagesystem.internal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
 import dk.sdu.mmmi.swe.gtg.commoncollision.CollisionSPI;
 import dk.sdu.mmmi.swe.gtg.commoncollision.ICollisionListener;
@@ -22,7 +21,7 @@ public class ImpactDamageSystem implements IPlugin {
 
 
     @Override
-    public void install(IEngine engine, GameData gameData) {
+    public void install(GameData gameData) {
         collisionListener = new ImpactDamageCollisionListener();
         collisionSPI.addListener(collisionListener);
 
@@ -31,7 +30,7 @@ public class ImpactDamageSystem implements IPlugin {
     }
 
     @Override
-    public void uninstall(IEngine engine, GameData gameData) {
+    public void uninstall(GameData gameData) {
         collisionSPI.removeListener(collisionListener);
     }
 }

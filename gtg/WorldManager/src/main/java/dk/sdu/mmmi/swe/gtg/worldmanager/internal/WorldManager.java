@@ -2,7 +2,6 @@ package dk.sdu.mmmi.swe.gtg.worldmanager.internal;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
@@ -13,10 +12,11 @@ import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
-@Component(service = {IWorldManager.class, IProcessingSystem.class})
+@Component
 public class WorldManager implements IWorldManager, IProcessingSystem {
 
     private final Vector2 gravity;
@@ -24,6 +24,9 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
     private World world;
     private float accumulator = 0f;
     private List<? extends Entity> entities;
+
+    @Reference
+    private IEngine engine;
 
     public WorldManager() {
         gravity = new Vector2(0, 0);
@@ -60,7 +63,7 @@ public class WorldManager implements IWorldManager, IProcessingSystem {
     }
 
     @Override
-    public void addedToEngine(IEngine engine) {
+    public void addedToEngine() {
         entities = engine.getEntitiesFor(
                 Family.builder().with(BodyPart.class, TransformPart.class).get()
         );
