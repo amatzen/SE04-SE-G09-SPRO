@@ -74,7 +74,6 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
 
                 if (averageSpeed < minAverageSpeed && averageEnemyDistance < maxAverageDistance) {
                     wastedSound.play();
-                    System.out.println("BUSTED");
                     screenManager.changeScreen("BustedScreen");
                 }
 
