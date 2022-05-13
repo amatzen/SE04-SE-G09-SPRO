@@ -33,9 +33,6 @@ public class GTG extends Game {
     @Reference
     private ScreenManagerSPI screenManager;
 
-    @Reference
-    private IEngine engine;
-
     private Screen currentScreen;
     private ISignalListener<String> onScreenChangeListener = (signal, value) -> {
         ScreenSPI screen = this.screens.get(value);

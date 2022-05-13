@@ -21,12 +21,10 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class BustedScreen implements ScreenSPI, Screen {
-
     @Reference
     private IEngine engine;
 
     private Stage stage;
-
     private Label deathMessage;
     private Label moneyLabel;
     private Label totalMoney;

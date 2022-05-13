@@ -4,11 +4,13 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEntityManager;
+import org.osgi.service.component.annotations.Component;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Component
 public class EntityManager implements IEntityManager {
 
     private final Map<String, Entity> entityMap;

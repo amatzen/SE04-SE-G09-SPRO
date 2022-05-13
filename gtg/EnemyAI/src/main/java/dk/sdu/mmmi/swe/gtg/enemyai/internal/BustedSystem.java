@@ -69,6 +69,8 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
             BodyPart playerBody = player.getPart(BodyPart.class);
 
             if (timer > interval) {
+                System.out.println(enemies.size());
+                System.out.println("You're busted!");
                 float averageSpeed = accumulatedDistance / timer;
                 float averageEnemyDistance = accumulatedEnemyDistance / timer;
 
