@@ -91,7 +91,7 @@ public class GameOverScreen implements ScreenSPI {
             }
         });
 
-        // Restart button
+        // Main Menu button
         TextButton btnMainMenu = new TextButton("Main Menu", skinBtn);
         btnMainMenu.align(Align.bottom);
         table.add(btnMainMenu).pad(75).row();
