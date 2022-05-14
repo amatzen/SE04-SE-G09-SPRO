@@ -42,7 +42,7 @@ public class BustedSystem implements IPlugin, IProcessingSystem {
     @Reference
     private ScreenManagerSPI screenManager;
 
-    public Music wastedSound;
+    private Music wastedSound;
 
     private IEntityListener playerListener = new EntityListener() {
         @Override
