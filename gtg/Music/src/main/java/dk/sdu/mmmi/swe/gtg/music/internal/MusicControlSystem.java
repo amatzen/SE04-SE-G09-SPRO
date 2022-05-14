@@ -35,11 +35,10 @@ public class MusicControlSystem implements IProcessingSystem, IPlugin {
             WantedPart wantedPart = player.getPart(WantedPart.class);
             int totalWanted = wantedPart.getWantedLevel();
 
-            if (totalWanted > 0 && !(isPaused)) {
-                MusicPlugin.policeSound.play();
-            } else if (totalWanted == 0 || isPaused) {
-                MusicPlugin.policeSound.stop();
-            }
+        if (totalWanted > 0 && !(isPaused)) {
+            MusicPlugin.policeSound.play();
+        } else if (totalWanted == 0 || isPaused) {
+            MusicPlugin.policeSound.pause();
         }
 
         if (gameData.getKeys().isPressed(GameKeys.M)) {
