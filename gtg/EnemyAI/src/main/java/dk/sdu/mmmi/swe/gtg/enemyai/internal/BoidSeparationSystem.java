@@ -32,7 +32,7 @@ public class BoidSeparationSystem implements IProcessingSystem {
     @Override
     public void process(GameData gameData) {
         for (Entity e : enemies) {
-            Vector2 steering = separate(e, enemies);
+            Vector2 steering = separate(e, enemies).scl(-100f);
             e.getPart(BodyPart.class).getBody().applyForceToCenter(steering, true);
         }
     }
@@ -40,9 +40,9 @@ public class BoidSeparationSystem implements IProcessingSystem {
     private Vector2 separate(Entity entity, List<? extends Entity> entities) {
         Body body = entity.getPart(BodyPart.class).getBody();
 
-        float separationDistance = 3f;
+        float separationDistance = 5f;
 
-        Vector2 steering = Vector2.Zero;
+        Vector2 steering = new Vector2(0f, 0f);
 
         int count = 0;
 
@@ -72,7 +72,11 @@ public class BoidSeparationSystem implements IProcessingSystem {
 
         if (steering.len() > 0) {
             steering.nor();
-            steering.scl(body.getMass() * 0.5f);
+            steering.scl(body.getLinearVelocity().len());
+
+            steering.sub(body.getLinearVelocity());
+
+            steering.limit(1000f);
         }
 
         return steering;

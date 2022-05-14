@@ -3,6 +3,7 @@ package dk.sdu.mmmi.swe.gtg.impactdamagesystem.internal;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ImpactDamagePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
@@ -13,7 +14,7 @@ public class ImpactDamageCollisionListener extends CollisionListener {
     private IFamily familyA, familyB;
 
     public ImpactDamageCollisionListener() {
-        familyA = Family.builder().with(LifePart.class).get();
+        familyA = Family.builder().with(LifePart.class, ImpactDamagePart.class).get();
         familyB = Family.ALL;
     }
 
@@ -58,13 +59,14 @@ public class ImpactDamageCollisionListener extends CollisionListener {
             return;
         }
         LifePart lifePartA = entityA.getEntity().getPart(LifePart.class);
-        LifePart lifePartB = entityB.getEntity().getPart(LifePart.class);
 
         lifePartA.inflictDamage(damage);
 
+        ImpactDamageSystem.crashSound.stop();
         ImpactDamageSystem.crashSound.play();
 
-        if (lifePartB != null) {
+        if (familyA.matches(entityB.getEntity())) {
+            LifePart lifePartB = entityB.getEntity().getPart(LifePart.class);
             lifePartB.inflictDamage(damage);
         }
     }

@@ -19,12 +19,12 @@ public class PluginManager implements IPluginManager {
     private final List<IPlugin> pluginsToBeUninstalled = new CopyOnWriteArrayList<>();
 
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    public void addGamePluginService(IPlugin plugin) {
+    public void addPlugin(IPlugin plugin) {
         this.entityPlugins.add(plugin);
         this.pluginsToBeInstalled.add(plugin);
     }
 
-    public void removeGamePluginService(IPlugin plugin) {
+    public void removePlugin(IPlugin plugin) {
         this.entityPlugins.remove(plugin);
         this.pluginsToBeUninstalled.add(plugin);
     }

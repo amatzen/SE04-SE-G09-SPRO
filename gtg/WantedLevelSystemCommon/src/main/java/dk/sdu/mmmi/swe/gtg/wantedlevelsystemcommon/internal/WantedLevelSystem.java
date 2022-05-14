@@ -54,7 +54,6 @@ public class WantedLevelSystem implements IPlugin, IWantedLevelSystem {
     public void reportCrime(float weight) {
         this.crimeLevel += weight;
         if (player != null) {
-            System.out.println("Crime level: " + crimeLevel);
             WantedPart wantedPart = player.getPart(WantedPart.class);
             wantedPart.setWantedLevel(
                     mapCrimeLevelToWantedLevel(crimeLevel)

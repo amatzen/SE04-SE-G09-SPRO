@@ -80,13 +80,11 @@ public class VehicleControlSystem implements IProcessingSystem {
         }
 
         if (gameData.getKeys().isPressed(GameKeys.H)) {
-            System.out.println("Health refilled.");
             LifePart lifePart = vehicle.getPart(LifePart.class);
             lifePart.setLife(100);
             hudSPI.setHealth(100);
         }
         if (gameData.getKeys().isPressed(GameKeys.G)) {
-            System.out.println("God mode activated.");
             LifePart lifePart = vehicle.getPart(LifePart.class);
             lifePart.setLife(1000);
             hudSPI.setHealth(1000);

@@ -120,15 +120,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
                 if (entityB.getEntity().hasPart(LifePart.class)) {
                     LifePart lifePart = entityB.getEntity().getPart(LifePart.class);
                     lifePart.inflictDamage(bulletDamage);
-                    System.out.println("Health: " + lifePart.getLife());
-
-                    if (lifePart.getLife() <= 0) {
-                        System.out.println("Game over");
-                        engine.removeEntity(entityB.getEntity()); // Removes vehicle
-                    }
                 }
-
-
             }
         };
         collisionSPI.addListener(collisionListener);

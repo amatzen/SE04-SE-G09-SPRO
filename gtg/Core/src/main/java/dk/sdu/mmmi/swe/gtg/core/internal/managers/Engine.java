@@ -5,24 +5,17 @@ import dk.sdu.mmmi.swe.gtg.common.data.EntityPartPair;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IPostProcessingSystem;
-import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.*;
 import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 public class Engine implements IEngine {
     private final ISignalListener<EntityPartPair> onPartRemoved;
     private final ISignalListener<EntityPartPair> onPartAdded;
-    private final List<IEntitySystem> systemsToBeStarted;
 
     @Reference
     private IPluginManager pluginManager;
@@ -39,8 +32,6 @@ public class Engine implements IEngine {
     private boolean shouldReset;
 
     public Engine() {
-        systemsToBeStarted = new CopyOnWriteArrayList<>();
-
         onPartRemoved = onPartAdded = (signal, entityPartPair) -> {
             familyManager.updateFamilyMembership(
                     entityPartPair.getEntity()
@@ -53,11 +44,6 @@ public class Engine implements IEngine {
     @Override
     public void update(GameData gameData) {
         pluginManager.update(gameData);
-
-        for (IEntitySystem system : systemsToBeStarted) {
-            system.addedToEngine();
-        }
-        systemsToBeStarted.clear();
 
         systemManager.update(gameData);
 
@@ -105,30 +91,6 @@ public class Engine implements IEngine {
     @Override
     public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {
         return entityManager.getEntities(entityTypes);
-    }
-
-    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    @Override
-    public void addEntityProcessingService(IProcessingSystem service) {
-        this.systemManager.addEntityProcessingService(service);
-        this.systemsToBeStarted.add(service);
-    }
-
-    @Override
-    public void removeEntityProcessingService(IProcessingSystem service) {
-        this.systemManager.removeEntityProcessingService(service);
-    }
-
-    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    @Override
-    public void addPostEntityProcessingService(IPostProcessingSystem service) {
-        this.systemManager.addPostEntityProcessingService(service);
-        this.systemsToBeStarted.add(service);
-    }
-
-    @Override
-    public void removePostEntityProcessingService(IPostProcessingSystem service) {
-        this.systemManager.removePostEntityProcessingService(service);
     }
 
     @Override

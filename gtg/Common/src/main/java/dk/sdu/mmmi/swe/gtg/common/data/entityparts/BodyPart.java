@@ -6,6 +6,8 @@ public class BodyPart implements IEntityPart {
 
     private Body body;
 
+    private boolean isDestroyed = false;
+
     public BodyPart(Body body) {
         this.body = body;
     }
@@ -20,6 +22,9 @@ public class BodyPart implements IEntityPart {
 
     @Override
     public void destroy() {
+        if (isDestroyed) return;
+
         body.getWorld().destroyBody(body);
+        isDestroyed = true;
     }
 }
