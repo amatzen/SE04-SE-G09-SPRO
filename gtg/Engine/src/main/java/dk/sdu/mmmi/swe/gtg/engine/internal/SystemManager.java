@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.managers;
+package dk.sdu.mmmi.swe.gtg.engine.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IEntitySystem;

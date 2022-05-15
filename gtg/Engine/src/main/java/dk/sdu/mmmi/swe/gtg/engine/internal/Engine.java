@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.swe.gtg.core.internal.managers;
+package dk.sdu.mmmi.swe.gtg.engine.internal;
 
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.EntityPartPair;
