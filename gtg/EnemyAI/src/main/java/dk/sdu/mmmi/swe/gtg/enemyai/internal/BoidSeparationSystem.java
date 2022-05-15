@@ -72,11 +72,8 @@ public class BoidSeparationSystem implements IProcessingSystem {
 
         if (steering.len() > 0) {
             steering.nor();
-            steering.scl(body.getLinearVelocity().len());
-
-            steering.sub(body.getLinearVelocity());
-
-            steering.limit(1000f);
+            steering.scl(body.getMass());
+            //steering.limit(1000f);
         }
 
         return steering;
