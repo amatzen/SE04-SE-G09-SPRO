@@ -50,7 +50,6 @@ public class GTG extends Game {
     };
 
     public GTG() {
-        System.out.println("Game created");
         init();
     }
 
@@ -108,7 +107,6 @@ public class GTG extends Game {
     )
     public void addScreen(ScreenSPI screen) {
         this.screens.put(screen.getClass().getSimpleName(), screen);
-        System.out.println("Loaded screen: " + screen.getClass().getSimpleName());
     }
 
     public void removeScreen(ScreenSPI screen) {

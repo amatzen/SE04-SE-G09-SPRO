@@ -142,7 +142,11 @@ public class AStarPathFinding implements IPathFinding {
     }
 
     private boolean isAccessible(Vector2 pos, MapSPI map) {
-        return map.isTileAccessibly(pos);
+        return map.isTileAccessibly(pos) &&
+                map.isTileAccessibly(new Vector2(0, 1).add(pos)) &&
+                map.isTileAccessibly(new Vector2(1, 0).add(pos)) &&
+                map.isTileAccessibly(new Vector2(0, -1).add(pos)) &&
+                map.isTileAccessibly(new Vector2(-1, 0).add(pos));
     }
 
     private Path reconstructPath(Node current) {

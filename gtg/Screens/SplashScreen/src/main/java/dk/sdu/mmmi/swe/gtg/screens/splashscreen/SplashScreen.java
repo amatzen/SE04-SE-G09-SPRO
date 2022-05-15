@@ -23,7 +23,6 @@ public class SplashScreen implements ScreenSPI {
     private ScreenManagerSPI screenManager;
 
     public SplashScreen() {
-        System.out.println("SplashScreen created");
     }
 
     @Override

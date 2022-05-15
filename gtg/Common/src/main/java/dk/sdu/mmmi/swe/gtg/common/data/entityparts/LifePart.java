@@ -7,12 +7,10 @@ public class LifePart implements IEntityPart {
     private int life;
 
     public final ISignal<Integer> onDamage;
-    public final ISignal<Integer> onDeath;
 
     public LifePart(int life) {
         this.life = life;
         onDamage = new Signal<>();
-        onDeath = new Signal<>();
     }
 
     public LifePart() {
