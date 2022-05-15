@@ -59,11 +59,6 @@ public class ATMTimerPart implements IEntityPart {
             this.expiry = expiry;
         }
 
-        public ExpiryAction(Runnable runnable) {
-            this.runnable = runnable;
-            this.expiry = 3.00;
-        }
-
         public void run(double timer) {
             if (expiry <= timer) {
                 this.hasRan = true;
