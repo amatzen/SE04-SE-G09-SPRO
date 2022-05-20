@@ -31,7 +31,4 @@ wls --> crime
 crime --> atmcs
 atmcs --> player
 
-
-
-
 @enduml
