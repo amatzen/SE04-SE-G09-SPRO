@@ -13,7 +13,7 @@ public interface ICollisionListener {
 
      void endContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void preSolve(CollisionEntity entityA, CollisionEntity entityB);
+     void preSolve(CollisionEntity entityA, CollisionEntity entityB);
 
     public void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
 
