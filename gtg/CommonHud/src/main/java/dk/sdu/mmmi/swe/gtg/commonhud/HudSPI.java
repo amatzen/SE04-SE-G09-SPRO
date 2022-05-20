@@ -4,6 +4,6 @@ public interface HudSPI {
 
      void setHealth(int value);
 
-    public void setWantedLevel(int value);
+     void setWantedLevel(int value);
 
 }
