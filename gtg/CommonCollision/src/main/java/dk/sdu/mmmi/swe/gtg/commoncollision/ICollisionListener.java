@@ -15,6 +15,6 @@ public interface ICollisionListener {
 
      void preSolve(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
+     void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
 
 }
