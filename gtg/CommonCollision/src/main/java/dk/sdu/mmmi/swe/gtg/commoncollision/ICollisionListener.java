@@ -5,7 +5,7 @@ import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 
 public interface ICollisionListener {
 
-    public IFamily getFamilyA();
+     IFamily getFamilyA();
 
     public IFamily getFamilyB();
 
