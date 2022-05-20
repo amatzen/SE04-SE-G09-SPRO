@@ -9,12 +9,15 @@ import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Path;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
-import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 
-@Component
+/*
+ * Remove comment and import class to show path rendering
+ */
+
+//@Component
 public class PathRenderingSystem implements IPostProcessingSystem {
     private List<? extends Entity> entities;
     private ShapeRenderer shapeRenderer;
