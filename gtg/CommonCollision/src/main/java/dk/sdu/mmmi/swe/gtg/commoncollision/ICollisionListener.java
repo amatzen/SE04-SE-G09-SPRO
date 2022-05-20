@@ -9,7 +9,7 @@ public interface ICollisionListener {
 
      IFamily getFamilyB();
 
-    public void beginContact(CollisionEntity entityA, CollisionEntity entityB);
+     void beginContact(CollisionEntity entityA, CollisionEntity entityB);
 
     public void endContact(CollisionEntity entityA, CollisionEntity entityB);
 
