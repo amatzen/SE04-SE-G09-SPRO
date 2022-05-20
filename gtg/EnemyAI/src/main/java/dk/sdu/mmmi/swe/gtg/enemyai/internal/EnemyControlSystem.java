@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PathFindingPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
 import dk.sdu.mmmi.swe.gtg.common.family.EntityListener;
@@ -12,6 +13,7 @@ import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
+import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import org.osgi.service.component.annotations.Component;
@@ -25,6 +27,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
     private List<? extends Entity> enemies;
 
     private Entity player;
+
 
     @Reference
     private IEngine engine;
@@ -54,6 +57,13 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
             if (player != null) {
                 addPathFindingPart(enemy, player);
             }
+
+            LifePart lifePart = enemy.getPart(LifePart.class);
+            lifePart.onDamage.add(((signal, value) -> {
+                if (lifePart.getLife() <= 0) {
+                    engine.removeEntity(enemy);
+                }
+            }));
         }
     };
 

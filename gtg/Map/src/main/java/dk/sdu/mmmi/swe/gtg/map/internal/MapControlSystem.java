@@ -87,7 +87,7 @@ public class MapControlSystem implements IProcessingSystem, MapSPI, IPlugin {
 
     @Override
     public boolean isTileAccessibly(Vector2 position) {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(MAP_HOUSES);
+        TiledMapTileLayer layer = (TiledMapTileLayer) getLayer(MAP_HOUSES);
         position = worldPosToMapPos(position);
         return layer.getCell((int) position.x, (int) position.y) == null;
     }

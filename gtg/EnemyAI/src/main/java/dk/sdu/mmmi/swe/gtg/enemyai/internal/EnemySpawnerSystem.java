@@ -109,8 +109,6 @@ public class EnemySpawnerSystem implements IPlugin {
         TiledMapTileLayer roads = (TiledMapTileLayer) map.getLayer("Roads");
         Vector2 spawnPoint = map.mapPosToWorldPos(map.getRandomCellPosition(roads));
 
-        System.out.println("Spawning enemy at " + spawnPoint);
-
         return spawnPoint;
     }
 

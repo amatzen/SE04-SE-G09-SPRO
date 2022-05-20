@@ -25,14 +25,6 @@ public interface IEngine {
 
     <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes);
 
-    void addEntityProcessingService(IProcessingSystem service);
-
-    void removeEntityProcessingService(IProcessingSystem service);
-
-    void addPostEntityProcessingService(IPostProcessingSystem service);
-
-    void removePostEntityProcessingService(IPostProcessingSystem service);
-
     void addEntityListener(IFamily family, IEntityListener listener);
 
     void addEntityListener(IFamily family, IEntityListener listener, boolean iterate);

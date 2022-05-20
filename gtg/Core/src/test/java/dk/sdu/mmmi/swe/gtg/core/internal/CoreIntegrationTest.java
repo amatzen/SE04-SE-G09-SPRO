@@ -4,26 +4,22 @@ import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
-import dk.sdu.mmmi.swe.gtg.common.services.managers.ISystemManager;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.Engine;
-import dk.sdu.mmmi.swe.gtg.core.internal.managers.FamilyManager;
-import org.junit.jupiter.api.BeforeAll;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
+import dk.sdu.mmmi.swe.gtg.common.services.managers.IFamilyManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CoreIntegrationTest {
 
     @Mock
-    private FamilyManager familyManager;
+    private IFamilyManager familyManager;
 
     @Mock
-    private Engine engine;
+    private IEngine engine;
 
     @Mock
     private Family family;
