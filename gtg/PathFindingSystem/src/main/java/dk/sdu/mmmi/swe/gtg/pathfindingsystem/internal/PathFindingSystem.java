@@ -36,6 +36,8 @@ public class PathFindingSystem implements IProcessingSystem {
     private IEngine engine;
 
     private ExecutorService executorService;
+    private List<? extends Entity> player;
+    private float counter = 0;
 
     public PathFindingSystem() {
         executorService = Executors.newFixedThreadPool(
@@ -43,20 +45,16 @@ public class PathFindingSystem implements IProcessingSystem {
         );
     }
 
-    private List<? extends Entity> player;
-
     @Override
     public void addedToEngine() {
         entities = engine.getEntitiesFor(
-            Family.builder().with(TransformPart.class, PathFindingPart.class).get()
+                Family.builder().with(TransformPart.class, PathFindingPart.class).get()
         );
 
         player = engine.getEntitiesFor(
                 Family.builder().with(PlayerPart.class).get()
         );
     }
-
-    private float counter = 0;
 
     @Override
     public void process(GameData gameData) {

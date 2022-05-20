@@ -233,8 +233,8 @@ public class VehiclePlugin implements IPlugin {
     @Override
     public void uninstall(GameData gameData) {
         engine.removeEntityListener(
-            Family.builder().forEntities(Vehicle.class).get(),
-            vehicleListener
+                Family.builder().forEntities(Vehicle.class).get(),
+                vehicleListener
         );
 
         engine.getEntitiesFor(Family.builder().forEntities(Vehicle.class, Wheel.class).get()).forEach(entity -> {

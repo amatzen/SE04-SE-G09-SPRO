@@ -6,12 +6,12 @@ public class SeekingPart implements IEntityPart {
 
     private Vector2 target;
 
-    public void setTarget(Vector2 target) {
-        this.target = target;
-    }
-
     public Vector2 getTarget() {
         return target;
+    }
+
+    public void setTarget(Vector2 target) {
+        this.target = target;
     }
 
     @Override

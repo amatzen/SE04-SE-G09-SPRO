@@ -1,6 +1,9 @@
 package dk.sdu.mmmi.swe.gtg.collision;
 
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
@@ -93,7 +96,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
                 continue;
             }
 
-            for(ICollisionListener collisionListener : listeners) {
+            for (ICollisionListener collisionListener : listeners) {
 
                 if (
                         collisionListener.getFamilyA().matches(collisionEntityA.getEntity())
