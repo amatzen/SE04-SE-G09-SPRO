@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+box Shoot missiles (F03)
+    actor "Player" as player
+    participant ":Game" as game
+end box
+
+player -> game : Shoot missiles
+activate game
+game -> player
+
+
+@enduml
