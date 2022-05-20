@@ -3,6 +3,7 @@ package dk.sdu.mmmi.swe.gtg.engine.internal;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.EntityPartPair;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.*;
@@ -118,6 +119,7 @@ public class Engine implements IEngine {
         this.familyManager.reset();
         this.pluginManager.installAll(gameData);
         this.systemManager.reset();
+        gameData.setKeys(new GameKeys());
     }
 
     @Override

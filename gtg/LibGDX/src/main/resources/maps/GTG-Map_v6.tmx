@@ -27,7 +27,7 @@
  </layer>
  <layer id="4" name="Houses" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJztmFFuwyAMhjlRH/rCjsPRcpQebUMJGqUmMeE3Mak/yerUEMKHMaRzzjAMY8U7F/z6CY1ZiP7Pv09k7Plrm6vkj87/TyXiNe5cjWDzjzUQkP1G13JdJP8UQvMeaqHBP3tu/O6FjG0OAhFvzx7lT0Xu79cxI6OsrWWL4f5XszktD/e/H1HENs9tnohr0559yT/fjymO/JFn30jQ/g/36Up9p82/d/1L5p9bSy21R+x/sPovPXvr/2h+PbNdMaaliNP+e2NFrHNk/tOYaucuwl/jPh/J/U/cy/Ivn6eJUf5a18BIf41n3az5l9j/sgie8U5/Zf2jz78ioP69Z31Ln2fyT6wHuL/Wd90S3/Cb9sr8SyHhn7VX650w/1P+L/mRfTwbsv8R/YrlHwni/Jvd/5vzL0Wjf7Xt0W/o1pyNAumf1xrlz63Zmf3T/zm/1V8q/0r2v6767/VXcP6x23LGf6f8M+69df0z7iX9PXFtRn/O+tyr30n8q+9/LX7K/NnvtFf6C+5/0/gLnX8wf2Sc6Z/TTsp/Vsy/zd/f0P9uTleA2vtTSPUvBbLvmr9EvyjM//3vnrV55I/s1zAMwzAMwzCMlV+TL3wC
+   eJztmEGOwyAMRVFXc5ouumGOk21vlaP0aDNMg4oYQyB8ExP8pa9KLQUexnbamzHmNrlnlfIrf8xvjVns+xVqiUrxP35fkc7xn3lWOX50/L8Tdp+VnhVaGX6XAwtyLcca3wvP78107kvKEviDdd17L6S3M1gI/63dm59yyG/fe0Y6zq11c3f+s7UxrXfzqUcJ/vWxnVM8x8i9z/OH9fgIP7L39RSa/27+s1LvSeNvvf+c8S/NpZrcI+ofLP9jztb83ztfWzgu2tMa+TB/bq+Ie46Mv99Tqu8i+CXWeaeQP6cW/ng9SerFL/UO9OSX2OtGjT9H/Qu82OiZXlr+o/tfZCh/a6+vmfNI/In7AOeX+qwbyyZ+00qLP5c4+IPxYrm9lP8Q/6vX/oK1IfWPmJct/kgh+t/o/DPHn0uV/ORYp9z/19t3q2LWS0j+MNco/tKcHZnf/885Kz9X/IXUv6b8b+UX0P+S/Hu6evz3dPX8L1iH5LfEZyPyl9zPXP4Owp98/qvhE8ZPMknjZ6x/w/Az9T8YP9JH5i8Zx8U/qpS/jt9ekJ9icuxf52xJhBz7s2I8qvZ7c81fqqep50cpxc8xb0rKf5y/9W7u8SPnTamW/2pSfuVX/nml/Mqv/PNK+dU/pQijCg==
   </data>
  </layer>
  <objectgroup id="6" name="Walls">
