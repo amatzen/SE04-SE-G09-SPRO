@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
+skin rose
 autonumber
 
 box Shoot missiles (F03)
