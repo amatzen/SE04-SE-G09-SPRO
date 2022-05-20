@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameData {
 
-    private final GameKeys keys = new GameKeys();
+    private GameKeys keys = new GameKeys();
     private OrthographicCamera camera;
     private SpriteBatch spriteBatch;
     private float delta;
@@ -14,6 +14,10 @@ public class GameData {
 
     public GameKeys getKeys() {
         return keys;
+    }
+
+    public void setKeys(GameKeys keys) {
+        this.keys = keys;
     }
 
     public float getDelta() {
