@@ -11,7 +11,7 @@ public interface ICollisionListener {
 
      void beginContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void endContact(CollisionEntity entityA, CollisionEntity entityB);
+     void endContact(CollisionEntity entityA, CollisionEntity entityB);
 
     public void preSolve(CollisionEntity entityA, CollisionEntity entityB);
 
