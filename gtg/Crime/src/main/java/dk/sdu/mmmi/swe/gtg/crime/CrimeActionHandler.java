@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.swe.gtg.crime;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,6 +11,7 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;
+import dk.sdu.mmmi.swe.gtg.wantedlevelsystemcommon.services.IWantedLevelSystem;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -21,7 +21,8 @@ public class CrimeActionHandler implements ICrimeAction {
     @Reference
     private IEngine engine;
 
-    public static Music cashSound;
+    @Reference
+    private IWantedLevelSystem wantedLevelSystem;
 
     public void commit(Entity entity) {
         ATMBalancePart atmBalance = entity.getPart(ATMBalancePart.class);
@@ -29,34 +30,11 @@ public class CrimeActionHandler implements ICrimeAction {
             PlayerPart player = engine.getEntitiesFor(Family.builder().with(PlayerPart.class).get()).get(0).getPart(PlayerPart.class);
             player.deposit(atmBalance.getBalance());
 
-            cashSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Cash.mp3"));
-            cashSound.setVolume(0.3f);
-            cashSound.play();
-
             atmBalance.setRobbed(true);
-            entity.addPart(getRobbedAtmTexture());
             atmBalance.destroy();
+
+            wantedLevelSystem.reportCrime(10f);
         }
-    }
-
-    private TexturePart getTexture(String path) {
-        final TexturePart texturePart = new TexturePart();
-        FileHandle file = Gdx.files.internal(path);
-        Texture texture = new Texture(file);
-        TextureRegion textureRegion = new TextureRegion(texture);
-        texturePart.setRegion(textureRegion);
-        return texturePart;
-    }
-
-    @Override
-    public TexturePart getAtmTexture() {
-        return getTexture("assets/entities/atm/atm.png");
-
-    }
-
-    @Override
-    public TexturePart getRobbedAtmTexture() {
-        return getTexture("assets/entities/atm/atmRobbed.png");
     }
 
 }

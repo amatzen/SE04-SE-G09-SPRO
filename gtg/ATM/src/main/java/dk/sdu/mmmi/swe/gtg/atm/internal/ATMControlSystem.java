@@ -1,11 +1,13 @@
 package dk.sdu.mmmi.swe.gtg.atm.internal;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMBalancePart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMRobbedTimer;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMTimerPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ProximityPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
 import dk.sdu.mmmi.swe.gtg.common.family.EntityListener;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
@@ -34,6 +36,8 @@ public class ATMControlSystem implements IProcessingSystem, IPlugin {
     private IEngine engine;
 
     private final IFamily atmFamily;
+
+    private static Music cashSound;
 
     private IEntityListener atmListener;
 
@@ -75,13 +79,16 @@ public class ATMControlSystem implements IProcessingSystem, IPlugin {
                 ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
                 timerPart.addAction(5.00,() -> {
                     crimeAction.commit(entity);
-                    wantedLevelSystem.reportCrime(10f);
+                    entity.addPart(getRobbedAtmTexture());
+                    cashSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Cash.mp3"));
+                    cashSound.setVolume(0.3f);
+                    cashSound.play();
                 });
 
                 ATMRobbedTimer robbedTimer = entity.getPart(ATMRobbedTimer.class);
                 robbedTimer.startTimer();
                 robbedTimer.addAction(30.00, () -> {
-                    entity.addPart(crimeAction.getAtmTexture());
+                    entity.addPart(getAtmTexture());
                     entity.getPart(ATMBalancePart.class).generateBalance();
                     entity.getPart(ATMBalancePart.class).setRobbed(false);
                     robbedTimer.resetTimer();
@@ -100,5 +107,23 @@ public class ATMControlSystem implements IProcessingSystem, IPlugin {
     @Override
     public void uninstall(GameData gameData) {
         engine.removeEntityListener(atmFamily, atmListener);
+    }
+
+    private TexturePart getTexture(String path) {
+        final TexturePart texturePart = new TexturePart();
+        FileHandle file = Gdx.files.internal(path);
+        Texture texture = new Texture(file);
+        TextureRegion textureRegion = new TextureRegion(texture);
+        texturePart.setRegion(textureRegion);
+        return texturePart;
+    }
+
+    public TexturePart getAtmTexture() {
+        return getTexture("assets/entities/atm/atm.png");
+
+    }
+
+    public TexturePart getRobbedAtmTexture() {
+        return getTexture("assets/entities/atm/atmRobbed.png");
     }
 }
