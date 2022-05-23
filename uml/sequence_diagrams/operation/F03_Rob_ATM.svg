@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="570px" preserveAspectRatio="none" style="width:827px;height:570px;background:#FFFFFF;" version="1.1" viewBox="0 0 827 570" width="827px" zoomAndPan="magnify"><defs><filter height="300%" id="feph6jb2lk66a" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="558.3203" style="stroke:#A80036;stroke-width:1.0;" width="820" x="1" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="109" x="356.5" y="18.0669">Rob ATM (F03)</text><rect fill="#FFFFFF" filter="url(#feph6jb2lk66a)" height="300.3281" style="stroke:#A80036;stroke-width:1.0;" width="10" x="445.5" y="168.6953"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="28" x2="28" y1="108.4297" y2="478.0234"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="139" x2="139" y1="108.4297" y2="478.0234"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="293" x2="293" y1="108.4297" y2="478.0234"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="450" x2="450" y1="108.4297" y2="478.0234"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="599" x2="599" y1="108.4297" y2="478.0234"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="736" x2="736" y1="108.4297" y2="478.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="5" y="105.1279">Player</text><ellipse cx="28.5" cy="35.1328" fill="#FEFECE" filter="url(#feph6jb2lk66a)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M28.5,43.1328 L28.5,70.1328 M15.5,51.1328 L41.5,51.1328 M28.5,70.1328 L15.5,85.1328 M28.5,70.1328 L41.5,85.1328 " fill="none" filter="url(#feph6jb2lk66a)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="5" y="490.0186">Player</text><ellipse cx="28.5" cy="503.3203" fill="#FEFECE" filter="url(#feph6jb2lk66a)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M28.5,511.3203 L28.5,538.3203 M15.5,519.3203 L41.5,519.3203 M28.5,538.3203 L15.5,553.3203 M28.5,538.3203 L41.5,553.3203 " fill="none" filter="url(#feph6jb2lk66a)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="150" x="62" y="73.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="69" y="93.1279">:ATMControlSystem</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="150" x="62" y="477.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="69" y="497.0186">:ATMControlSystem</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="131" x="226" y="73.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="233" y="93.1279">:ATMBalancePart</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="131" x="226" y="477.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="233" y="497.0186">:ATMBalancePart</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="155" x="371" y="73.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="378" y="93.1279">:CrimeActionHandler</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="155" x="371" y="477.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="378" y="497.0186">:CrimeActionHandler</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="87" x="554" y="73.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="561" y="93.1279">:PlayerPart</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="87" x="554" y="477.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="561" y="497.0186">:PlayerPart</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="158" x="655" y="73.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="662" y="93.1279">:WantedLevelSystem</text><rect fill="#FEFECE" filter="url(#feph6jb2lk66a)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="158" x="655" y="477.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="662" y="497.0186">:WantedLevelSystem</text><rect fill="#FFFFFF" filter="url(#feph6jb2lk66a)" height="300.3281" style="stroke:#A80036;stroke-width:1.0;" width="10" x="445.5" y="168.6953"/><polygon fill="#A80036" points="127,135.5625,137,139.5625,127,143.5625,131,139.5625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="28.5" x2="133" y1="139.5625" y2="139.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="35.5" y="134.4966">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="48.5" y="134.4966">Rob ATM</text><polygon fill="#A80036" points="433.5,164.6953,443.5,168.6953,433.5,172.6953,437.5,168.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="139" x2="439.5" y1="168.6953" y2="168.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="146" y="163.6294">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="159" y="163.6294">commit(atm)</text><polygon fill="#A80036" points="304.5,193.8281,294.5,197.8281,304.5,201.8281,300.5,197.8281" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="298.5" x2="444.5" y1="197.8281" y2="197.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="310.5" y="192.7622">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="323.5" y="192.7622">getBalance()</text><polygon fill="#A80036" points="433.5,222.9609,443.5,226.9609,433.5,230.9609,437.5,226.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="293.5" x2="439.5" y1="226.9609" y2="226.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="300.5" y="221.895">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="93" x="313.5" y="221.895">return balance</text><polygon fill="#A80036" points="587.5,252.0938,597.5,256.0938,587.5,260.0938,591.5,256.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="455.5" x2="593.5" y1="256.0938" y2="256.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="462.5" y="251.0278">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107" x="475.5" y="251.0278">deposit(balance)</text><polygon fill="#A80036" points="466.5,281.2266,456.5,285.2266,466.5,289.2266,462.5,285.2266" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="460.5" x2="598.5" y1="285.2266" y2="285.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="472.5" y="280.1606">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="485.5" y="280.1606"> </text><polygon fill="#A80036" points="304.5,310.3594,294.5,314.3594,304.5,318.3594,300.5,314.3594" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="298.5" x2="444.5" y1="314.3594" y2="314.3594"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="310.5" y="309.2935">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104" x="323.5" y="309.2935">setRobbed(true)</text><polygon fill="#A80036" points="433.5,339.4922,443.5,343.4922,433.5,347.4922,437.5,343.4922" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="293.5" x2="439.5" y1="343.4922" y2="343.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="300.5" y="338.4263">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="313.5" y="338.4263"> </text><polygon fill="#A80036" points="724,368.625,734,372.625,724,376.625,728,372.625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="455.5" x2="730" y1="372.625" y2="372.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="462.5" y="367.5591">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="475.5" y="367.5591">reportCrime(weight)</text><polygon fill="#A80036" points="466.5,397.7578,456.5,401.7578,466.5,405.7578,462.5,401.7578" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="460.5" x2="735" y1="401.7578" y2="401.7578"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="472.5" y="396.6919">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="494.5" y="396.6919"> </text><polygon fill="#A80036" points="150,426.8906,140,430.8906,150,434.8906,146,430.8906" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="144" x2="444.5" y1="430.8906" y2="430.8906"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="156" y="425.8247">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="178" y="425.8247"> </text><polygon fill="#A80036" points="39.5,456.0234,29.5,460.0234,39.5,464.0234,35.5,460.0234" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="33.5" x2="138" y1="460.0234" y2="460.0234"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="45.5" y="454.9575">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="67.5" y="454.9575"> </text><!--MD5=[f3c26aeee7447f8808b74cfa7056694e]
+@startuml
+'https://plantuml.com/sequence-diagram
+skin rose
+autonumber
+
+box Rob ATM (F03)
+    actor "Player" as player
+    participant ":ATMControlSystem" as atmcs
+    participant ":ATMBalancePart" as atmbp
+    participant ":CrimeActionHandler" as crime
+    participant ":PlayerPart" as playerpart
+    participant ":WantedLevelSystem" as wls
+end box
+
+player -> atmcs : Rob ATM
+atmcs -> crime : commit(atm)
+activate crime
+
+crime -> atmbp : getBalance()
+atmbp - -> crime : return balance
+
+crime -> playerpart : deposit(balance)
+playerpart - -> crime
+
+crime -> atmbp : setRobbed(true)
+atmbp - -> crime
+
+crime -> wls : reportCrime(weight)
+wls - -> crime
+
+crime - -> atmcs
+atmcs - -> player
+
+@enduml
+
+@startuml
+skin rose
+autonumber
+
+box Rob ATM (F03)
+    actor "Player" as player
+    participant ":ATMControlSystem" as atmcs
+    participant ":ATMBalancePart" as atmbp
+    participant ":CrimeActionHandler" as crime
+    participant ":PlayerPart" as playerpart
+    participant ":WantedLevelSystem" as wls
+end box
+
+player -> atmcs : Rob ATM
+atmcs -> crime : commit(atm)
+activate crime
+
+crime -> atmbp : getBalance()
+atmbp - -> crime : return balance
+
+crime -> playerpart : deposit(balance)
+playerpart - -> crime
+
+crime -> atmbp : setRobbed(true)
+atmbp - -> crime
+
+crime -> wls : reportCrime(weight)
+wls - -> crime
+
+crime - -> atmcs
+atmcs - -> player
+
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 10:55:52 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

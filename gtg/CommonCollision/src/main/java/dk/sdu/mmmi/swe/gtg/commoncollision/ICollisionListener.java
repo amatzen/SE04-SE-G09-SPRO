@@ -5,16 +5,16 @@ import dk.sdu.mmmi.swe.gtg.commoncollision.data.CollisionEntity;
 
 public interface ICollisionListener {
 
-    public IFamily getFamilyA();
+     IFamily getFamilyA();
 
-    public IFamily getFamilyB();
+     IFamily getFamilyB();
 
-    public void beginContact(CollisionEntity entityA, CollisionEntity entityB);
+     void beginContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void endContact(CollisionEntity entityA, CollisionEntity entityB);
+     void endContact(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void preSolve(CollisionEntity entityA, CollisionEntity entityB);
+     void preSolve(CollisionEntity entityA, CollisionEntity entityB);
 
-    public void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
+     void postSolve(CollisionEntity entityA, CollisionEntity entityB, float[] normalImpulses);
 
 }
