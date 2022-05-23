@@ -26,7 +26,7 @@ jobs:
             -   uses: EndBug/add-and-commit@v7
                 with:
                     message: 'Generate SVG for PlantUML'
-                    add: '*.svg'
+                    add: '*'
                     push: false
                     author_name: UML Bot
                     author_email: uml@bot.ci.alexander.dk
