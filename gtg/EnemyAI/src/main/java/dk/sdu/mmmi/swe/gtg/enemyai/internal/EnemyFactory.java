@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
+import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import dk.sdu.mmmi.swe.gtg.enemyai.services.IEnemyFactory;
 import dk.sdu.mmmi.swe.gtg.shapefactorycommon.services.ShapeFactorySPI;
@@ -47,6 +48,9 @@ public class EnemyFactory implements IEnemyFactory {
         enemy.addPart(new SeekingPart());
         enemy.addPart(new PathFollowingPart(8f));
         enemy.addPart(new LifePart());
+        enemy.addPart(new BoidSeparationPart(
+                Family.builder().forEntities(Enemy.class).get())
+        );
 
         enemy.addPart(getPoliceTexture());
 
