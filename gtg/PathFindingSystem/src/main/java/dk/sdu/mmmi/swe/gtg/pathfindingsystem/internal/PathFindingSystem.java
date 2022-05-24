@@ -94,7 +94,7 @@ public class PathFindingSystem implements IProcessingSystem {
     private void searchPath(Entity entity, Vector2 target) {
         TransformPart transformPart = entity.getPart(TransformPart.class);
 
-        Path path = pathFinding.searchNodePath(target, transformPart.getPosition2(), mapSPI);
+        Path path = pathFinding.searchNodePath(transformPart.getPosition2(), target, mapSPI);
 
         if (entity.hasPart(PathPart.class)) {
             PathPart pathPart = entity.getPart(PathPart.class);

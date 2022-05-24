@@ -86,7 +86,7 @@ public class PathFollowingSystem implements IProcessingSystem {
 
             Vector2 normalPoint = getNormalPoint(a, b, predictPos);
 
-            Vector2 pathSegmentDir = a.cpy().sub(b);
+            Vector2 pathSegmentDir = b.cpy().sub(a);
 
             if (
                     normalPoint.x < Math.min(a.x, b.x) ||
