@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skin rose
+autonumber
+
+box Rob ATM (F03)
+    actor "Player" as player
+    participant ":ATMControlSystem" as atmcs
+    participant ":ATMBalancePart" as atmbp
+    participant ":CrimeActionHandler" as crime
+    participant ":PlayerPart" as playerpart
+    participant ":WantedLevelSystem" as wls
+end box
+
+player -> atmcs : Rob ATM
+activate atmcs
+atmcs -> crime : commit(atm)
+activate crime
+
+crime -> atmbp : getBalance()
+activate atmbp
+atmbp --> crime : return balance
+deactivate atmbp
+
+crime -> playerpart : deposit(balance)
+activate playerpart
+playerpart --> crime
+deactivate playerpart
+
+crime -> atmbp : setRobbed(true)
+activate atmbp
+atmbp --> crime
+deactivate atmbp
+
+crime -> wls : reportCrime(weight)
+activate wls
+wls --> crime
+deactivate wls
+
+crime --> atmcs
+deactivate crime
+atmcs --> player
+deactivate atmcs
+
+
+@enduml

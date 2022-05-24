@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skin rose
+autonumber
+
+box Rob ATM (F03)
+    actor "Player" as player
+    participant ":Game" as game
+    participant ":Crime" as crime
+end box
+
+player -> game : commit(atm)
+game -> crime : commit(atm)
+
+activate crime
+crime -> game
+deactivate crime
+
+game -> player
+
+@enduml
