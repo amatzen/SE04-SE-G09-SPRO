@@ -5,10 +5,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BoidSeparationPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
-import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -17,41 +17,46 @@ import java.util.List;
 @Component
 public class BoidSeparationSystem implements IProcessingSystem {
 
-    private List<? extends Entity> enemies;
+    private List<? extends Entity> entities;
 
     @Reference
     private IEngine engine;
 
     @Override
     public void addedToEngine() {
-        enemies = engine.getEntitiesFor(
-                Family.builder().forEntities(Enemy.class).get()
+        entities = engine.getEntitiesFor(
+                Family.builder().with(BoidSeparationPart.class).get()
         );
     }
 
     @Override
     public void process(GameData gameData) {
-        for (Entity e : enemies) {
-            Vector2 steering = separate(e, enemies);
-            e.getPart(BodyPart.class).getBody().applyForceToCenter(steering, true);
+        for (Entity entity : entities) {
+            BoidSeparationPart separationPart = entity.getPart(BoidSeparationPart.class);
+
+            Vector2 steering = separate(
+                    entity,
+                    engine.getEntitiesFor(separationPart.getBoidFamily()),
+                    separationPart.getCriticalDistance()
+            );
+
+            entity.getPart(BodyPart.class).getBody().applyForceToCenter(steering, true);
         }
     }
 
-    private Vector2 separate(Entity entity, List<? extends Entity> entities) {
+    private Vector2 separate(Entity entity, List<? extends Entity> boids, float separationDistance) {
         Body body = entity.getPart(BodyPart.class).getBody();
-
-        float separationDistance = 4f;
 
         Vector2 steering = new Vector2(0f, 0f);
 
         int count = 0;
 
-        for (Entity e : entities) {
-            if (e == entity) {
+        for (Entity boid : boids) {
+            if (boid == entity) {
                 continue;
             }
 
-            Body otherBody = e.getPart(BodyPart.class).getBody();
+            Body otherBody = boid.getPart(BodyPart.class).getBody();
 
             Vector2 toOther = body.getPosition().cpy().sub(otherBody.getPosition());
 

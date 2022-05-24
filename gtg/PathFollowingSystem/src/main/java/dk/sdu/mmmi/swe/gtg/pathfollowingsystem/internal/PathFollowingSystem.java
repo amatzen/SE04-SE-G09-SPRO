@@ -27,13 +27,12 @@ public class PathFollowingSystem implements IProcessingSystem {
 
     @Override
     public void addedToEngine() {
-
         entities = engine.getEntitiesFor(
-                Family.builder().with(
-                        BodyPart.class,
-                        PathPart.class,
-                        PathFollowingPart.class
-                ).get()
+            Family.builder().with(
+                BodyPart.class,
+                PathPart.class,
+                PathFollowingPart.class
+            ).get()
         );
     }
 
