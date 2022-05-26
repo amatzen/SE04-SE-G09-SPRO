@@ -13,18 +13,17 @@ Video tutorial: https://youtu.be/L1e14msP8IY
 
 ### Requirements
 - Eclipse Temurin JDK 8
-- IntelliJ
 - Maven
 
 ### Step by step guide
 1. Download the project 
 
-2. Open the 'gtg' folder in IntelliJ and make sure that you are using Eclipse Temurin as JDK and Java 8 as the language
+2. Open the `gtg` folder in IntelliJ and make sure that you are using Eclipse Temurin 8 as JDK and Java 8 as the language
 
 3. Run the project by opening the Maven tool window
   - Under Profile remove the checkmark from netbeans-ide
-  - Run ‘Clean’
-  - Run ‘Install’
-  - Run ‘pax:provision’
+  - Run `clean`
+  - Run `install`
+  - Run `pax:provision`
 
 4. Have fun!
