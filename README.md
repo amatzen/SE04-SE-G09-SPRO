@@ -15,17 +15,14 @@ Video tutorial: https://youtu.be/L1e14msP8IY
 - Eclipse Temurin JDK 8
 - IntelliJ
 - Maven
-- git
 
 ### Step by step guide
-1. Clone the repo
- ```git
-git clone https://github.com/amatzen/SE04-SE-G09-SPRO
-```
-2. Open the project in Intellij and make sure that you are using Eclipse Temurin as JDK and Java 8 as the language
+1. Download the project 
 
-3. Run the project by opening the Maven tool window :
-  - Remove under profile remove checkmark from netbeans-ide
+2. Open the 'gtg' folder in IntelliJ and make sure that you are using Eclipse Temurin as JDK and Java 8 as the language
+
+3. Run the project by opening the Maven tool window
+  - Under Profile remove the checkmark from netbeans-ide
   - Run ‘Clean’
   - Run ‘Install’
   - Run ‘pax:provision’
