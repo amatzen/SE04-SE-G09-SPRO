@@ -43,16 +43,10 @@ public class PathFindingSystem implements IProcessingSystem {
         );
     }
 
-    private List<? extends Entity> player;
-
     @Override
     public void addedToEngine() {
         entities = engine.getEntitiesFor(
-            Family.builder().with(TransformPart.class, PathFindingPart.class).get()
-        );
-
-        player = engine.getEntitiesFor(
-                Family.builder().with(PlayerPart.class).get()
+            Family.builder().with(PathFindingPart.class).get()
         );
     }
 
@@ -69,17 +63,11 @@ public class PathFindingSystem implements IProcessingSystem {
     }
 
     private void searchPaths() {
-        if (this.player.size() <= 0) {
-            return;
-        }
-
-        Entity player = this.player.get(0);
-
         CountDownLatch latch = new CountDownLatch(entities.size());
 
         for (Entity entity : entities) {
             executorService.execute(() -> {
-                searchPath(entity, player.getPart(TransformPart.class).getPosition2());
+                searchPath(entity);
                 latch.countDown();
             });
         }
@@ -91,10 +79,10 @@ public class PathFindingSystem implements IProcessingSystem {
         }
     }
 
-    private void searchPath(Entity entity, Vector2 target) {
-        TransformPart transformPart = entity.getPart(TransformPart.class);
+    private void searchPath(Entity entity) {
+        PathFindingPart pathFindingPart = entity.getPart(PathFindingPart.class);
 
-        Path path = pathFinding.searchNodePath(transformPart.getPosition2(), target, mapSPI);
+        Path path = pathFinding.searchNodePath(pathFindingPart.getStart(), pathFindingPart.getEnd(), mapSPI);
 
         if (entity.hasPart(PathPart.class)) {
             PathPart pathPart = entity.getPart(PathPart.class);

@@ -86,7 +86,7 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
         Body source = enemy.getPart(BodyPart.class).getBody();
         Body target = player.getPart(BodyPart.class).getBody();
 
-        PathFindingPart pathFindingPart = new PathFindingPart(target.getPosition(), source.getPosition());
+        PathFindingPart pathFindingPart = new PathFindingPart(source.getPosition(), target.getPosition());
 
         enemy.addPart(pathFindingPart);
     }
