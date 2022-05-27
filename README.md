@@ -13,27 +13,17 @@ Video tutorial: https://youtu.be/L1e14msP8IY
 
 ### Requirements
 - Eclipse Temurin JDK 8
-- IntelliJ
 - Maven
-- git
 
 ### Step by step guide
-1. Clone the repo
- ```git
-git clone https://github.com/amatzen/SE04-SE-G09-SPRO
-```
+1. Download the project 
 
-2. Change directory into the gtg directory
-```terminal
-cd SE04-SE-G09-SPRO/gtg
-```
+2. Open the `gtg` folder in IntelliJ and make sure that you are using Eclipse Temurin 8 as JDK and Java 8 as the language
 
-3. Open the project in Intellij and make sure that you are using Eclipse Temurin as JDK and Java 8 as the language
+3. Run the project by opening the Maven tool window
+  - Under Profile remove the checkmark from netbeans-ide
+  - Run `clean`
+  - Run `install`
+  - Run `pax:provision`
 
-4. Run the project by opening the Maven tool window :
-  - Remove under profile remove checkmark from netbeans-ide
-  - Run ‘Clean’
-  - Run ‘Install’
-  - Run ‘pax:provision’
-
-5. Have fun!
+4. Have fun!
