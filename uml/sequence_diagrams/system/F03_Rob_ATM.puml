@@ -6,31 +6,17 @@ autonumber
 box Rob ATM (F03)
     actor "Player" as player
     participant ":Game" as game
-    participant ":ATM" as atm
-    participant ":Crime" as crime
 end box
 
 activate player
 player -> game : beginContact(Player, ATM)
 activate game
-game -> atm : startTimer()
-activate atm
 
 opt player leaves proximity
     player -> game: endContact(Player, ATM)
-    game -> atm: stopTimer()
-    atm --> game: Timer stopped
     game --> player: Robbery not initiated
 end
 
-atm -> atm: Wait X seconds
-
-atm -> crime: commit(atm)
-activate crime
-crime --> atm : Crime successful
-deactivate crime
-atm --> game: ATM Robbed
-deactivate atm
 
 game --> player : ATM Robbed
 deactivate game
