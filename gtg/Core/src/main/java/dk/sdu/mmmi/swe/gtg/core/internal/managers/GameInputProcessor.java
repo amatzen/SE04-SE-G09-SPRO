@@ -70,6 +70,10 @@ public class GameInputProcessor extends InputAdapter {
             gameData.getKeys().setKey(GameKeys.H, true);
         }
 
+        if (k == Keys.Q) {
+            gameData.getKeys().setKey(GameKeys.Q, true);
+        }
+
         return true;
     }
 
@@ -128,6 +132,10 @@ public class GameInputProcessor extends InputAdapter {
         }
         if (k == Keys.H) {
             gameData.getKeys().setKey(GameKeys.H, false);
+        }
+
+        if (k == Keys.Q) {
+            gameData.getKeys().setKey(GameKeys.Q, false);
         }
 
         return true;

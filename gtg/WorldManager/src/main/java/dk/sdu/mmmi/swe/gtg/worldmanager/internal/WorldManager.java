@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
+import dk.sdu.mmmi.swe.gtg.common.data.GameKeys;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
@@ -26,6 +27,8 @@ public class WorldManager implements IWorldManager, IProcessingSystem, IPlugin {
     private float accumulator = 0f;
     private List<? extends Entity> entities;
 
+    private boolean debugRendering = false;
+
     @Reference
     private IEngine engine;
 
@@ -45,7 +48,10 @@ public class WorldManager implements IWorldManager, IProcessingSystem, IPlugin {
         /*
          * Remove comment for debugging of entities
          */
-        //renderer.render(world, projectionMatrix);
+
+        if (debugRendering) {
+            renderer.render(world, projectionMatrix);
+        }
     }
 
     @Override
@@ -82,6 +88,10 @@ public class WorldManager implements IWorldManager, IProcessingSystem, IPlugin {
 
             transformPart.setRotation(bodyPart.getBody().getAngle());
         });
+
+        if (gameData.getKeys().isPressed(GameKeys.Q)) {
+            this.debugRendering = !this.debugRendering;
+        }
     }
 
     @Override

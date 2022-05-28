@@ -2,6 +2,7 @@ package dk.sdu.mmmi.swe.gtg.worldmanager.services;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
+import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 
 public interface IWorldManager {
 
