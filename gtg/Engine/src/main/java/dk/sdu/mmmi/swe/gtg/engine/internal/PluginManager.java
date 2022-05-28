@@ -39,16 +39,6 @@ public class PluginManager implements IPluginManager {
     }
 
     @Override
-    public void reset(GameData gameData) {
-        for (IPlugin plugin : entityPlugins) {
-            plugin.uninstall(gameData);
-        }
-        for (IPlugin plugin : entityPlugins) {
-            plugin.install(gameData);
-        }
-    }
-
-    @Override
     public void uninstallAll(GameData gameData) {
         for (IPlugin plugin : entityPlugins) {
             plugin.uninstall(gameData);
