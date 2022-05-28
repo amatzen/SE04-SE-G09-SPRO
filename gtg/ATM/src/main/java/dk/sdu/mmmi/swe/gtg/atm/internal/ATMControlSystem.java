@@ -24,21 +24,15 @@ import java.util.List;
 
 @Component
 public class ATMControlSystem implements IProcessingSystem, IPlugin {
+    private static Music cashSound;
+    private final IFamily atmFamily;
     private List<? extends Entity> atmEntities;
-
     @Reference
     private ICrimeAction crimeAction;
-
     @Reference
     private IWantedLevelSystem wantedLevelSystem;
-
     @Reference
     private IEngine engine;
-
-    private final IFamily atmFamily;
-
-    private static Music cashSound;
-
     private IEntityListener atmListener;
 
     public ATMControlSystem() {
@@ -54,11 +48,11 @@ public class ATMControlSystem implements IProcessingSystem, IPlugin {
     public void process(GameData gameData) {
 
         this.atmEntities.stream()
-            .filter(atmEntity -> atmEntity.getPart(ProximityPart.class).isInProximity())
-            .forEach(entity -> {
-                ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
-                timerPart.update(gameData.getDelta());
-            });
+                .filter(atmEntity -> atmEntity.getPart(ProximityPart.class).isInProximity())
+                .forEach(entity -> {
+                    ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
+                    timerPart.update(gameData.getDelta());
+                });
         this.atmEntities.stream()
                 .filter(entity -> entity.getPart(ATMBalancePart.class).isRobbed())
                 .forEach(entity -> {
@@ -77,7 +71,7 @@ public class ATMControlSystem implements IProcessingSystem, IPlugin {
             @Override
             public void onEntityAdded(Entity entity) {
                 ATMTimerPart timerPart = entity.getPart(ATMTimerPart.class);
-                timerPart.addAction(5.00,() -> {
+                timerPart.addAction(5.00, () -> {
                     crimeAction.commit(entity);
                     entity.addPart(getRobbedAtmTexture());
                     cashSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/Cash.mp3"));

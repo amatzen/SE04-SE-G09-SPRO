@@ -27,13 +27,13 @@ public class Entity implements Serializable {
     public void addPart(IEntityPart part) {
         parts.put(part.getClass(), part);
         onPartAdded.fire(
-            new EntityPartPair(this, part)
+                new EntityPartPair(this, part)
         );
     }
 
     public void removePart(Class partClass) {
         onPartRemoved.fire(
-            new EntityPartPair(this, parts.remove(partClass))
+                new EntityPartPair(this, parts.remove(partClass))
         );
     }
 

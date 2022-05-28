@@ -5,17 +5,16 @@ import com.badlogic.gdx.math.Vector3;
 
 public class TransformPart implements IEntityPart {
 
+    private final Vector2 origin = new Vector2();
     private Vector2 position;
     private float z;
     private Vector2 scale = new Vector2(1, 1);
-    private final Vector2 origin = new Vector2();
+    private float rotation = 0.0f;
 
     public TransformPart() {
         this.position = new Vector2();
         this.z = 0f;
     }
-
-    private float rotation = 0.0f;
 
     public void setPosition(float x, float y) {
         this.position = new Vector2(x, y);
@@ -26,10 +25,6 @@ public class TransformPart implements IEntityPart {
         this.z = z;
     }
 
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
     public void setPosition(Vector2 position, float z) {
         this.position = position;
         this.z = z;
@@ -37,6 +32,10 @@ public class TransformPart implements IEntityPart {
 
     public Vector3 getPosition() {
         return new Vector3(position.x, position.y, z);
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 
     public Vector2 getPosition2() {

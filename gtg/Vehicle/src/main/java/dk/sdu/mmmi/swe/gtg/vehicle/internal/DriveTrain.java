@@ -4,9 +4,8 @@ import dk.sdu.mmmi.swe.gtg.common.data.entityparts.IEntityPart;
 
 public class DriveTrain implements IEntityPart {
 
-    private float turnAngle;
-
     private final Wheel[] wheels;
+    private float turnAngle;
 
     public DriveTrain(Wheel... wheels) {
         this.wheels = wheels;

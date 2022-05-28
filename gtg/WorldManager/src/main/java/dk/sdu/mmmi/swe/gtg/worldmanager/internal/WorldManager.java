@@ -21,8 +21,8 @@ import java.util.List;
 @Component
 public class WorldManager implements IWorldManager, IProcessingSystem, IPlugin {
 
-    private Vector2 gravity;
     private final float timeStep = 1 / 60f;
+    private Vector2 gravity;
     private World world;
     private float accumulator = 0f;
     private List<? extends Entity> entities;

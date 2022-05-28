@@ -69,7 +69,7 @@ public class WantedLevelSystem implements IPlugin, IWantedLevelSystem {
 
         //return (int) Math.min(Math.max(Math.log10(crimeLevel), 1), maxWantedLevel);
         //return (int) Math.pow(crimeLevel, 0.25);
-        return (int) Math.min(Math.max(Math.log(crimeLevel * 0.1f)/Math.log(2), 1), maxWantedLevel);
+        return (int) Math.min(Math.max(Math.log(crimeLevel * 0.1f) / Math.log(2), 1), maxWantedLevel);
     }
 
     @Override
