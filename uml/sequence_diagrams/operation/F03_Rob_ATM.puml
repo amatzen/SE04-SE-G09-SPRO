@@ -6,14 +6,28 @@ autonumber
 box Rob ATM (F03)
     actor "Player" as player
     participant ":ATMControlSystem" as atmcs
+    participant ":ATMTimerPart" as atmtp
     participant ":ATMBalancePart" as atmbp
     participant ":CrimeActionHandler" as crime
     participant ":PlayerPart" as playerpart
     participant ":WantedLevelSystem" as wls
 end box
 
-player -> atmcs : Rob ATM
+player -> atmcs : beginContact(atm)
 activate atmcs
+atmcs -> atmtp : startTimer()
+activate atmtp
+
+opt player leaves proximity
+    player -> atmcs: endContact(Player, ATM)
+    atmcs -> atmtp: stopTimer()
+    atmtp --> atmcs: Timer stopped
+    atmcs --> player: Robbery not initiated
+end
+
+atmtp -> atmtp : Wait X seconds
+atmtp --> atmcs : No interruptions
+
 atmcs -> crime : commit(atm)
 activate crime
 
@@ -24,22 +38,22 @@ deactivate atmbp
 
 crime -> playerpart : deposit(balance)
 activate playerpart
-playerpart --> crime
+playerpart --> crime : Player deposited
 deactivate playerpart
 
 crime -> atmbp : setRobbed(true)
 activate atmbp
-atmbp --> crime
+atmbp --> crime : ATM Robbed
 deactivate atmbp
 
 crime -> wls : reportCrime(weight)
 activate wls
-wls --> crime
+wls --> crime : WL increased
 deactivate wls
 
-crime --> atmcs
+crime --> atmcs : Crime committed
 deactivate crime
-atmcs --> player
+atmcs --> player : ATM Robbed
 deactivate atmcs
 
 
