@@ -73,7 +73,7 @@
     <module>PathFollowingSystem</module>
     <module>TargetSeekingSystem</module>
     <module>PathFindingCommon</module>
-    <module>PathRenderingSystem</module>
+    <!--<module>PathRenderingSystem</module>-->
     <module>PathFindingSystem</module>
     <module>CommonMap</module>
     <module>GameOver</module>
