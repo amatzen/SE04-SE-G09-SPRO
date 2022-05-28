@@ -111,7 +111,7 @@ public class CollisionSystem implements CollisionSPI, IPlugin, ContactListener, 
                 } else {
                     continue;
                 }
-                
+
                 switch (collision.getContactType()) {
                     case BEGIN:
                         collisionListener.beginContact(

@@ -23,7 +23,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component
-public class BulletCreator implements BulletSPI, IPlugin {
+public class BulletControlSystem implements BulletSPI, IPlugin {
     @Reference
     private IWorldManager worldManager;
 
@@ -36,7 +36,7 @@ public class BulletCreator implements BulletSPI, IPlugin {
     private ICollisionListener collisionListener;
     private TexturePart bulletTexture;
 
-    public BulletCreator() {
+    public BulletControlSystem() {
 
     }
 
