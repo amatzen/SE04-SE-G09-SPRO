@@ -22,4 +22,16 @@ public class BodyComputationController implements BodyComputationSPI {
         return new Vector2(currentNormal).scl(dotProduct);
     }
 
+    @Override
+    public int direction(Body body) {
+        final float tolerance = 0.2f;
+        if (body.getLocalVector(this.getForwardVelocity(body)).y < -tolerance) {
+            return 0;
+        } else if (body.getLocalVector(this.getForwardVelocity(body)).y > tolerance) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
 }
