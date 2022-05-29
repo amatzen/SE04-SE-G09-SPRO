@@ -115,9 +115,9 @@ public class VehicleControlSystem implements IProcessingSystem {
         if (gameData.getKeys().isDown(GameKeys.UP) || gameData.getKeys().isDown(GameKeys.W)) {
             baseVector.set(0, acceleration);
         } else if (gameData.getKeys().isDown(GameKeys.DOWN) || gameData.getKeys().isDown(GameKeys.S)) {
-            if (direction(vehicle.getPart(BodyPart.class).getBody()) == 0) {
+            if (bcc.direction(vehicle.getPart(BodyPart.class).getBody()) == 0) {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
-            } else if (direction(vehicleBody) == 1) {
+            } else if (bcc.direction(vehicleBody) == 1) {
                 baseVector.set(0, -acceleration * BREAK_POWER);
             } else {
                 baseVector.set(0, -acceleration * REVERSE_POWER);
@@ -134,17 +134,6 @@ public class VehicleControlSystem implements IProcessingSystem {
         gameData.getCamera().position.x = vehicleBody.getPosition().x;
         gameData.getCamera().position.y = vehicleBody.getPosition().y;
         gameData.getCamera().update();
-    }
-
-    public int direction(Body body) {
-        final float tolerance = 0.2f;
-        if (body.getLocalVector(bcc.getForwardVelocity(body)).y < -tolerance) {
-            return 0;
-        } else if (body.getLocalVector(bcc.getForwardVelocity(body)).y > tolerance) {
-            return 1;
-        } else {
-            return 2;
-        }
     }
 
     public void updateBody(Body wheelBody, Vehicle vehicle) {
