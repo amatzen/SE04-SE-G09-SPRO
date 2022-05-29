@@ -2,8 +2,8 @@ import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.commonmap.MapSPI;
 import dk.sdu.mmmi.swe.gtg.pathfinding.internal.AStarPathFinding;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.Node;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -26,8 +26,8 @@ public class AStarPathFindingTest {
 
         List<Node> res = aStar.searchNodePath(start, end, map, resolution).getNodes();
 
-        Assert.assertTrue("Should have found a path", res.size() > 0);
-        Assert.assertTrue("Should have found a path", res.get(0).getState().equals(new Vector2(5, 5)));
+        Assertions.assertTrue(res.size() > 0, "Should have found a path");
+        Assertions.assertTrue(res.get(0).getState().equals(new Vector2(5, 5)), "Should have found a path");
 
         System.out.println(res.stream().map(n -> n.getState().toString()).collect(Collectors.toList()));
     }
@@ -54,7 +54,7 @@ public class AStarPathFindingTest {
 
         List<Node> res = aStar.searchNodePath(start, end, map, resolution).getNodes();
 
-        Assert.assertTrue("No path should be found", res.isEmpty());
+        Assertions.assertTrue(res.isEmpty(), "No path should be found");
     }
 
 }

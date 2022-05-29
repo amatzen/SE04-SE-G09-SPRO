@@ -7,4 +7,6 @@ public interface BodyComputationSPI {
     Vector2 getForwardVelocity(Body body);
 
     Vector2 getLateralVelocity(Body body);
+
+    int direction(Body body);
 }

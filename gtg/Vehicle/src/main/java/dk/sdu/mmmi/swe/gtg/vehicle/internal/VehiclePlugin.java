@@ -23,6 +23,8 @@ import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.util.Objects;
+
 @Component
 public class VehiclePlugin implements IPlugin {
 
