@@ -173,7 +173,7 @@ public class VehicleControlSystem implements IProcessingSystem {
         wantedLevelSystem.reportCrime(1f);
     }
 
-    private void turnWheel(float angle, Wheel wheel, Body vehicleBody) {
+    protected void turnWheel(float angle, Wheel wheel, Body vehicleBody) {
         if (angle < 0) {
             angle = Math.max(angle, -wheel.getMaxAngle());
         } else {
