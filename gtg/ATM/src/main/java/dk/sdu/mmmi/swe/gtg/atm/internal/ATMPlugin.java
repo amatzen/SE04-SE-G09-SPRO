@@ -59,9 +59,9 @@ public class ATMPlugin implements IPlugin, IProcessingSystem {
     public void install(GameData gameData) {
         IFamily familyA = Family.builder().forEntities(ATM.class).get();
         IFamily familyB = Family.builder()
-            .forEntities(Vehicle.class)
-            .with(PlayerPart.class)
-            .get();
+                .forEntities(Vehicle.class)
+                .with(PlayerPart.class)
+                .get();
 
         collisionListener = new CollisionListener() {
             @Override

@@ -4,10 +4,9 @@ import dk.sdu.mmmi.swe.gtg.common.signals.ISignal;
 import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 
 public class ATMBalancePart implements IEntityPart {
+    public final ISignal<ATMBalancePart> onRobbed;
     private int balance = 0;
     private boolean robbed = false;
-
-    public final ISignal<ATMBalancePart> onRobbed;
 
     public ATMBalancePart(int balance) {
         this.balance = balance;
@@ -38,8 +37,9 @@ public class ATMBalancePart implements IEntityPart {
     public void destroy() {
         onRobbed.dispose();
     }
-    public void generateBalance (){
-        this.balance= balance+(int) Math.floor(Math.random() * 12000);
+
+    public void generateBalance() {
+        this.balance = balance + (int) Math.floor(Math.random() * 12000);
     }
 
 }

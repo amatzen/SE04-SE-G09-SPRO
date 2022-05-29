@@ -1,13 +1,8 @@
 package dk.sdu.mmmi.swe.gtg.crime;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.ATMBalancePart;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.commoncrime.ICrimeAction;

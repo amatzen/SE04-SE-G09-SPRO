@@ -13,7 +13,6 @@ import dk.sdu.mmmi.swe.gtg.common.family.IEntityListener;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
 import dk.sdu.mmmi.swe.gtg.common.services.plugin.IPlugin;
-import dk.sdu.mmmi.swe.gtg.common.signals.ISignalListener;
 import dk.sdu.mmmi.swe.gtg.enemyai.Enemy;
 import dk.sdu.mmmi.swe.gtg.pathfindingcommon.data.PathPart;
 import org.osgi.service.component.annotations.Component;
@@ -98,28 +97,28 @@ public class EnemyControlSystem implements IProcessingSystem, IPlugin {
         );
 
         engine.addEntityListener(
-            Family.builder().with(PlayerPart.class).get(),
-            playerListener,
-            true
+                Family.builder().with(PlayerPart.class).get(),
+                playerListener,
+                true
         );
 
         engine.addEntityListener(
-            Family.builder().forEntities(Enemy.class).get(),
-            enemyListener,
-            true
+                Family.builder().forEntities(Enemy.class).get(),
+                enemyListener,
+                true
         );
     }
 
     @Override
     public void uninstall(GameData gameData) {
         engine.removeEntityListener(
-            Family.builder().with(PlayerPart.class).get(),
-            playerListener
+                Family.builder().with(PlayerPart.class).get(),
+                playerListener
         );
 
         engine.removeEntityListener(
-            Family.builder().forEntities(Enemy.class).get(),
-            enemyListener
+                Family.builder().forEntities(Enemy.class).get(),
+                enemyListener
         );
     }
 }

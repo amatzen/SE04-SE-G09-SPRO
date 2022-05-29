@@ -22,6 +22,10 @@ public class ATMTimerPart implements IEntityPart {
         return timer;
     }
 
+    public void setTimer(double timer) {
+        this.timer = timer;
+    }
+
     public void resetTimer() {
         this.timer = 0.00;
         for (ExpiryAction a : this.actions) {
@@ -29,16 +33,12 @@ public class ATMTimerPart implements IEntityPart {
         }
     }
 
-    public void setTimer(double timer) {
-        this.timer = timer;
-    }
-
     public void update(float delta) {
         if (this.isActive) {
             this.timer += delta;
             this.actions.stream()
-                .filter(a -> !a.hasRan)
-                .forEach(a -> a.run(this.timer));
+                    .filter(a -> !a.hasRan)
+                    .forEach(a -> a.run(this.timer));
         }
     }
 
@@ -47,7 +47,8 @@ public class ATMTimerPart implements IEntityPart {
     }
 
     @Override
-    public void destroy() { }
+    public void destroy() {
+    }
 
     private class ExpiryAction {
         public Runnable runnable;

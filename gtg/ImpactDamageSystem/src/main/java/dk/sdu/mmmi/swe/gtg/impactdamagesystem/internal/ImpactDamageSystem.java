@@ -12,13 +12,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component
 public class ImpactDamageSystem implements IPlugin {
 
+    public static Music crashSound;
     @Reference
     private CollisionSPI collisionSPI;
-
     private ICollisionListener collisionListener;
-
-    public static Music crashSound;
-
 
     @Override
     public void install(GameData gameData) {

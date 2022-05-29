@@ -28,11 +28,11 @@ public class PathFollowingSystem implements IProcessingSystem {
     @Override
     public void addedToEngine() {
         entities = engine.getEntitiesFor(
-            Family.builder().with(
-                BodyPart.class,
-                PathPart.class,
-                PathFollowingPart.class
-            ).get()
+                Family.builder().with(
+                        BodyPart.class,
+                        PathPart.class,
+                        PathFollowingPart.class
+                ).get()
         );
     }
 
@@ -89,9 +89,9 @@ public class PathFollowingSystem implements IProcessingSystem {
 
             if (
                     normalPoint.x < Math.min(a.x, b.x) ||
-                    normalPoint.x > Math.max(a.x, b.x) ||
-                    normalPoint.y < Math.min(a.y, b.y) ||
-                    normalPoint.y > Math.max(a.y, b.y)
+                            normalPoint.x > Math.max(a.x, b.x) ||
+                            normalPoint.y < Math.min(a.y, b.y) ||
+                            normalPoint.y > Math.max(a.y, b.y)
             ) {
                 normalPoint = b.cpy();
             }
@@ -121,6 +121,7 @@ public class PathFollowingSystem implements IProcessingSystem {
 
     /**
      * This method projects the prediction vector onto the the line segment defined by the two points a and b.
+     *
      * @param a Point a.
      * @param b Point b.
      * @param p Prediction vector.

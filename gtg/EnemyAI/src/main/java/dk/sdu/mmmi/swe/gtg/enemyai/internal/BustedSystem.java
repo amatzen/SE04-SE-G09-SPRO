@@ -24,18 +24,14 @@ import java.util.List;
 @Component
 public class BustedSystem implements IPlugin, IProcessingSystem {
 
-    private List<? extends Entity> enemies;
-    private Entity player;
-
-    private float accumulatedDistance = 0;
-    private float timer = 0;
-
-    private float accumulatedEnemyDistance = 0;
-
     private final float interval = 5f;
     private final float minAverageSpeed = 2f;
     private final float maxAverageDistance = 5f;
-
+    private List<? extends Entity> enemies;
+    private Entity player;
+    private float accumulatedDistance = 0;
+    private float timer = 0;
+    private float accumulatedEnemyDistance = 0;
     @Reference
     private IEngine engine;
 

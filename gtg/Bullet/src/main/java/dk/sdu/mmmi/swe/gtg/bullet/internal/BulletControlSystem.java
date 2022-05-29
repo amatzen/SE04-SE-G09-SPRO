@@ -5,9 +5,14 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.*;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.BodyPart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.LifePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TexturePart;
+import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.family.IFamily;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -24,15 +29,13 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component
 public class BulletControlSystem implements BulletSPI, IPlugin {
+    private final int bulletDamage = 20;
     @Reference
     private IWorldManager worldManager;
-
     @Reference
     private IEngine engine;
-
     @Reference
     private CollisionSPI collisionSPI;
-    private final int bulletDamage = 20;
     private ICollisionListener collisionListener;
     private TexturePart bulletTexture;
 

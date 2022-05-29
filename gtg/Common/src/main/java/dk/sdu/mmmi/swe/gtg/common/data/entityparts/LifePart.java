@@ -4,9 +4,8 @@ import dk.sdu.mmmi.swe.gtg.common.signals.ISignal;
 import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 
 public class LifePart implements IEntityPart {
-    private int life;
-
     public final ISignal<Integer> onDamage;
+    private int life;
 
     public LifePart(int life) {
         this.life = life;

@@ -4,9 +4,8 @@ import dk.sdu.mmmi.swe.gtg.common.signals.Signal;
 
 public class WantedPart implements IEntityPart {
 
-    private int wantedLevel;
-
     public final Signal<WantedPart> wantedLevelUpdated;
+    private int wantedLevel;
 
     public WantedPart() {
         wantedLevelUpdated = new Signal<>();

@@ -101,7 +101,7 @@ public class EnemySpawnerSystem implements IPlugin {
     private void spawnEnemy() {
         // new Vector2(134.28f, 84)
         engine.addEntity(
-            enemyFactory.createEnemy(findRandomSpawnPoint())
+                enemyFactory.createEnemy(findRandomSpawnPoint())
         );
     }
 
