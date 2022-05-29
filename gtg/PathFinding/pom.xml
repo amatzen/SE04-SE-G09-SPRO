@@ -60,16 +60,16 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
-            <scope>BodyComputationControllerTest</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.9.5</version>
-            <scope>BodyComputationControllerTest</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>dk.sdu.swe.gtg</groupId>
