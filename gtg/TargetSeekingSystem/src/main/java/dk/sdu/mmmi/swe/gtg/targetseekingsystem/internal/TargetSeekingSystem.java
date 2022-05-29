@@ -25,7 +25,7 @@ public class TargetSeekingSystem implements IProcessingSystem {
     @Override
     public void addedToEngine() {
         entities = engine.getEntitiesFor(
-            Family.builder().with(SeekingPart.class, BodyPart.class).get()
+                Family.builder().with(SeekingPart.class, BodyPart.class).get()
         );
     }
 

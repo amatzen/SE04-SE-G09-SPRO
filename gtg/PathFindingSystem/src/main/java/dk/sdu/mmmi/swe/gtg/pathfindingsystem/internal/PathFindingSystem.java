@@ -1,11 +1,8 @@
 package dk.sdu.mmmi.swe.gtg.pathfindingsystem.internal;
 
-import com.badlogic.gdx.math.Vector2;
 import dk.sdu.mmmi.swe.gtg.common.data.Entity;
 import dk.sdu.mmmi.swe.gtg.common.data.GameData;
 import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PathFindingPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.PlayerPart;
-import dk.sdu.mmmi.swe.gtg.common.data.entityparts.TransformPart;
 import dk.sdu.mmmi.swe.gtg.common.family.Family;
 import dk.sdu.mmmi.swe.gtg.common.services.entity.IProcessingSystem;
 import dk.sdu.mmmi.swe.gtg.common.services.managers.IEngine;
@@ -36,6 +33,7 @@ public class PathFindingSystem implements IProcessingSystem {
     private IEngine engine;
 
     private ExecutorService executorService;
+    private float counter = 0;
 
     public PathFindingSystem() {
         executorService = Executors.newFixedThreadPool(
@@ -46,11 +44,9 @@ public class PathFindingSystem implements IProcessingSystem {
     @Override
     public void addedToEngine() {
         entities = engine.getEntitiesFor(
-            Family.builder().with(PathFindingPart.class).get()
+                Family.builder().with(PathFindingPart.class).get()
         );
     }
-
-    private float counter = 0;
 
     @Override
     public void process(GameData gameData) {

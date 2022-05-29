@@ -17,13 +17,11 @@ import dk.sdu.mmmi.swe.gtg.screens.commonscreen.ScreenManagerSPI;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.util.List;
-
 @Component
 public class GameOverControlSystem implements IPostProcessingSystem, IPlugin {
 
-    private Entity player;
     public Music wastedSound;
+    private Entity player;
     private boolean gameOver = false;
 
     @Reference

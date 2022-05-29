@@ -50,7 +50,7 @@ public class ImpactDamageCollisionListener extends CollisionListener {
 
         if (
                 bodyA.getType() == BodyDef.BodyType.StaticBody ||
-                bodyB.getType() == BodyDef.BodyType.StaticBody
+                        bodyB.getType() == BodyDef.BodyType.StaticBody
         ) {
             damage *= 0.1f;
         }

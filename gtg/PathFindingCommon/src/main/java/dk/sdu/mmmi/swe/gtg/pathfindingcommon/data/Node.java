@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.swe.gtg.pathfindingcommon.data;
 
 import com.badlogic.gdx.math.Vector2;
+
 public class Node {
 
     private Node parent;

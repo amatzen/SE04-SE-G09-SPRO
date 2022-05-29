@@ -23,8 +23,6 @@ import dk.sdu.mmmi.swe.gtg.worldmanager.services.IWorldManager;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.util.Objects;
-
 @Component
 public class VehiclePlugin implements IPlugin {
 
@@ -235,8 +233,8 @@ public class VehiclePlugin implements IPlugin {
     @Override
     public void uninstall(GameData gameData) {
         engine.removeEntityListener(
-            Family.builder().forEntities(Vehicle.class).get(),
-            vehicleListener
+                Family.builder().forEntities(Vehicle.class).get(),
+                vehicleListener
         );
 
         engine.getEntitiesFor(Family.builder().forEntities(Vehicle.class, Wheel.class).get()).forEach(entity -> {
