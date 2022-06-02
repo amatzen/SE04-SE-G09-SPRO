@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
