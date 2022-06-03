@@ -53,7 +53,7 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d-platform</artifactId>
             <classifier>natives-desktop</classifier>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
